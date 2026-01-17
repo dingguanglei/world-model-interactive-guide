@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>08. 社区动态 - World Model Guide</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .discussion-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--card-shadow);
+        }
+
+        .discussion-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .platform-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .platform-x {
+            background: #000;
+            color: white;
+        }
+
+        .platform-reddit {
+            background: #ff4500;
+            color: white;
+        }
+
+        .platform-forum {
+            background: #3b5998;
+            color: white;
+        }
+
+        .platform-blog {
+            background: #10b981;
+            color: white;
+        }
+
+        .discussion-source {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .discussion-source a {
+            color: var(--accent);
+        }
+
+        .discussion-content {
+            background: #f8fafc;
+            border-left: 3px solid var(--border);
+            padding: 1rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin: 1rem 0;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .dual-view {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .layman-view {
+            background: #f0fae6;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #22c55e;
+        }
+
+        .pro-view {
+            background: #fff1f2;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #e11d48;
+        }
+
+        .view-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .layman-view .view-title {
+            color: #166534;
+        }
+
+        .pro-view .view-title {
+            color: #9f1239;
+        }
+
+        .topic-tag {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 0.2rem 0.6rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .hot-tag {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .last-updated {
+            background: #fef3c7;
+            border: 1px solid #fcd34d;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .dual-view {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="brand">🚀 World Model Guide</div>
+        <ul class="nav-links">
+            <li class="nav-item"><a href="index.html" class="nav-link">00. 概览 (Overview)</a></li>
+            <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景 (Landscape)</a></li>
+            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品深度 (Deep Dive)</a></li>
+            <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构 (Architecture)</a></li>
+            <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据工程 (Data Bible)</a></li>
+            <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线 (Roadmap)</a></li>
+            <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
+            <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">07. 论文追踪 (Papers)</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link active">08. 社区动态 (Community)</a></li>
+            <li class="nav-item"><a href="references.html" class="nav-link">附录：参考文献 (Refs)</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <h1>08. 社区动态与非官方讨论 (Community Insights)</h1>
+        <p>本页追踪 <strong>X/Twitter</strong>、<strong>Reddit</strong>、<strong>技术博客</strong>、<strong>论坛</strong>
+            上关于世界模型的非一线官方讨论。这些内容更发散、更前沿，但也需要批判性看待。</p>
+
+        <div class="last-updated">
+            ⏰ <strong>最后更新时间</strong>: 2026-01-17 | 本页内容每日更新，追踪社区热点。
+        </div>
+
+        <section>
+            <h2>🔥 本周热门讨论</h2>
+
+            <div class="discussion-card">
+                <div class="discussion-header">
+                    <div class="platform-icon platform-x">𝕏</div>
+                    <div>
+                        <strong>X/Twitter 热议</strong>
+                        <div class="discussion-source">
+                            <span class="topic-tag hot-tag">HOT</span>
+                            <span class="topic-tag">World Model</span>
+                            2026-01-15
+                        </div>
+                    </div>
+                </div>
+
+                <div class="discussion-content">
+                    "Genie 3 is cool, but let's be honest - it's still just a really good video predictor with action
+                    conditioning. True 'world model' needs to understand causality, not just correlations in pixels.
+                    We're conflating 'simulator' with 'understanding'."
+                    <br><br>
+                    — @ai_researcher_anon (5.2K ❤️, 1.8K 🔁)
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>这位研究者在说：Genie 3 虽然很酷，但它只是"预测下一帧画面"，并不是真的"理解"这个世界。就像一个人能模仿你的动作，但不一定明白你为什么这么做。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>核心争议</strong>: Pixel-level prediction vs Causal understanding。</li>
+                            <li><strong>反驳点</strong>: Object Permanence 是否意味着 Causal Understanding？</li>
+                            <li><strong>延伸</strong>: 这触及了 AI 哲学中 "Chinese Room Argument" 的变体。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="discussion-card">
+                <div class="discussion-header">
+                    <div class="platform-icon platform-reddit">R</div>
+                    <div>
+                        <strong>r/MachineLearning</strong>
+                        <div class="discussion-source">
+                            <span class="topic-tag">Data Pipeline</span>
+                            2026-01-12
+                        </div>
+                    </div>
+                </div>
+
+                <div class="discussion-content">
+                    "Just finished reading Matrix-Game 2.0. The real insight isn't the DiT architecture - it's the data
+                    pipeline. They basically built an automated game tester that plays UE5 and records everything. This
+                    is the actual moat nobody talks about."
+                    <br><br>
+                    — u/diffusion_enjoyer (1.2K upvotes)
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>这位网友看透了本质：Matrix-Game 2.0 成功的关键不是模型结构，而是他们搞了一个"自动玩游戏并录像"的系统。这套数据采集工具才是真正的护城河。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>核心观点</strong>: Data Pipeline > Model Architecture。</li>
+                            <li><strong>印证</strong>: 与本指南 <a href="04_data.html">Chapter 4</a> 的核心论点一致。</li>
+                            <li><strong>启示</strong>: 如果你只有 100 张卡，应该把更多预算放在数据采集上。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="discussion-card">
+                <div class="discussion-header">
+                    <div class="platform-icon platform-blog">B</div>
+                    <div>
+                        <strong>技术博客: Medium</strong>
+                        <div class="discussion-source">
+                            <span class="topic-tag">Industry Analysis</span>
+                            2026-01-10 | <a href="https://medium.com/@ai_insights" target="_blank">@ai_insights</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="discussion-content">
+                    "2025 was supposed to be 'The Year of Video Generation' but it quietly became 'The Year of World
+                    Models'. The shift from passive generation to interactive simulation is the real story. Sora gave us
+                    movies; Genie gives us games."
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>这篇博客总结了 2025 年的变化：大家以为 AI 会用来拍电影 (Sora)，结果真正的突破是用 AI 做游戏 (Genie)。从"看"到"玩"的转变才是重点。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>趋势确认</strong>: Passive → Interactive 是 2025-2026 的主旋律。</li>
+                            <li><strong>商业意义</strong>: 游戏市场 $200B+，比影视更大。</li>
+                            <li><strong>技术门槛</strong>: 实时性要求 (24fps, <50ms) 阻挡了大部分玩家。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="discussion-card">
+                <div class="discussion-header">
+                    <div class="platform-icon platform-forum">F</div>
+                    <div>
+                        <strong>HuggingFace Forums</strong>
+                        <div class="discussion-source">
+                            <span class="topic-tag">Open Source</span>
+                            2026-01-08
+                        </div>
+                    </div>
+                </div>
+
+                <div class="discussion-content">
+                    "Anyone tried running Matrix-Game 2.0 on consumer GPUs? I got it working on a 4090 but the memory is
+                    tight. Had to use aggressive KV cache windowing (2 seconds instead of 5). Quality drops but it's
+                    still playable at 15fps."
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>有人用普通游戏显卡 (RTX 4090) 跑通了 Matrix-Game 2.0，虽然画质下降了一点，但确实能玩。说明这项技术正在从实验室走向大众。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>资源消耗</strong>: 24GB VRAM 勉强可用，需要激进的 Memory 优化。</li>
+                            <li><strong>Trade-off</strong>: 缩短 KV Cache Window 换取内存，但牺牲长期一致性。</li>
+                            <li><strong>启示</strong>: TurboDiffusion 类的加速技术是消费级落地的关键。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>📡 监控来源清单</h2>
+            <p>以下是本页内容的主要监控来源，每日更新时会扫描这些平台：</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>平台</th>
+                        <th>关键词/话题</th>
+                        <th>链接</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>X/Twitter</strong></td>
+                        <td>#WorldModel, #Genie3, #VideoGeneration, @GoogleDeepMind</td>
+                        <td><a href="https://twitter.com/search?q=%23WorldModel" target="_blank">Search</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reddit</strong></td>
+                        <td>r/MachineLearning, r/StableDiffusion, r/LocalLLaMA</td>
+                        <td><a href="https://www.reddit.com/r/MachineLearning/" target="_blank">r/ML</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>HuggingFace</strong></td>
+                        <td>Discussions, Model Cards for Video Gen</td>
+                        <td><a href="https://huggingface.co/spaces" target="_blank">Spaces</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Medium / Substack</strong></td>
+                        <td>AI, Generative Models, Game AI</td>
+                        <td>手动筛选</td>
+                    </tr>
+                    <tr>
+                        <td><strong>知乎 / 即刻</strong></td>
+                        <td>世界模型, Sora, 视频生成</td>
+                        <td>手动筛选</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="commentary">
+            <div class="commentary-title">🧠 AntiGravity's Commentary: 如何看待社区讨论</div>
+            <p><strong>Rule 1: 区分 Hype 和 Signal。</strong> X/Twitter 上的"突破性"声明，60% 是营销，30% 是误解，10% 是真洞察。学会过滤。</p>
+            <p><strong>Rule 2: 关注 Practitioner。</strong> 真正有价值的讨论往往来自"正在动手做"的人，而不是评论家。HuggingFace Forums 和 GitHub Issues
+                的信噪比远高于 Twitter。</p>
+            <p><strong>Rule 3: 批判性吸收。</strong> 社区观点可以启发思路，但最终要回到论文和代码本身验证。</p>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05. 落地路线图 - World Model Guide</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            gantt: {
+                titleTopMargin: 25,
+                barHeight: 30,
+                barGap: 8,
+                topPadding: 50,
+                leftPadding: 100,
+                gridLineStartPadding: 35,
+                fontSize: 14,
+                sectionFontSize: 16,
+                numberSectionStyles: 3,
+                axisFormat: '%m/%d'
+            }
+        });
+    </script>
+    <style>
+        /* Force Gantt chart to have enough width and enable horizontal scroll */
+        .gantt-container {
+            width: 100%;
+            overflow-x: auto;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .gantt-container .mermaid {
+            min-width: 900px;
+            /* Ensure enough space */
+            margin: 0;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="brand">🚀 World Model Guide</div>
+        <ul class="nav-links">
+            <li class="nav-item"><a href="index.html" class="nav-link">00. 概览 (Overview)</a></li>
+            <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景 (Landscape)</a></li>
+            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品深度 (Deep Dive)</a></li>
+            <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构 (Architecture)</a></li>
+            <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据工程 (Data Bible)</a></li>
+            <li class="nav-item"><a href="05_roadmap.html" class="nav-link active">05. 落地路线 (Roadmap)</a></li>
+            <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
+            <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">07. 论文追踪 (Papers)</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">08. 社区动态 (Community)</a></li>
+            <li class="nav-item"><a href="references.html" class="nav-link">附录：参考文献 (Refs)</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <h1>05. 落地路线图与商业化 (Roadmap)</h1>
+        <p>本章为你规划一份 <strong>"按周执行"</strong> 的工程进度表。该路线图假设你已经有了 4 张 H100/A100 和一个 6-8 人的精英团队。</p>
+
+        <section>
+            <h2>5.1 90天攻坚甘特图 (Gantt Chart)</h2>
+            <p>以下是分阶段的工程落地计划。横轴滚动可查看完整图表。</p>
+
+            <!-- FIXED: Added container with explicit scroll and min-width -->
+            <div class="gantt-container">
+                <pre class="mermaid">
+gantt
+    title 世界模型工程落地计划
+    dateFormat YYYY-MM-DD
+    axisFormat %m/%d
+    tickInterval 1week
+    
+    section Infra
+    UE Plugin Dev        :active, a1, 2026-02-01, 7d
+    QA Scripts           :        a2, after a1, 5d
+    WebDataset Conv      :        a3, after a2, 3d
+    
+    section Algorithm
+    Baseline DiT         :        b1, 2026-02-15, 14d
+    Action Injection     :        b2, after b1, 10d
+    Turbo Distill        :        b3, 2026-03-15, 14d
+    
+    section Demo
+    Overfit Room Demo    :crit,   c1, 2026-02-28, 5d
+    Action Acc Test      :        c2, 2026-03-10, 7d
+    24fps Stream Demo    :        c3, 2026-04-01, 10d
+                </pre>
+            </div>
+
+            <div class="commentary">
+                <div class="commentary-title">🧠 AntiGravity's Commentary (Risk Analysis)</div>
+                <p><strong>Risk 1</strong>: 最大的风险点在于 <strong>"Overfit Room Demo"</strong>
+                    (2月底)。如果你连只有一个房间、一种动作的简单场景都训练不好，<strong>千万不要往下走</strong>去扩数据。很多团队死在好高骛远，数据搞了
+                    100TB，模型连走直线都走不直。<strong>先 Overfit，再 Generalize。</strong></p>
+                <p style="margin-top: 1rem;"><strong>Risk 2</strong>: 不要一开始就去卷模型架构。<a
+                        href="https://arxiv.org/abs/2508.13009" target="_blank">Matrix-Game 2.0</a> 成功的核心不在于架构多先进，而在于他们从
+                    GTA5 和 UE 里"洗"出了高质量的 Action-Labelled Video。</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>5.2 阶段拆解与交付物 (Deliverables)</h2>
+
+            <div class="card">
+                <h3>Phase 1: 冷启动 (Week 1-2)</h3>
+                <p><strong>目标</strong>：跑通"UE -> 数据 -> 训练代码"的 Hello World。</p>
+                <ul>
+                    <li><code>URecorderComponent.cpp</code>: 导出 RGB 和 JSON (含 Pose/Action)。</li>
+                    <li><code>dataset_v0.tar</code>: 100 个 10 秒的视频片段（建议选简单的室内场景，如走廊）。</li>
+                    <li><code>train_debug.py</code>: 跑通 Video DiT 的 Forward Pass，Loss 能下降。</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Phase 2: 可控性验证 (Week 3-6)</h3>
+                <p><strong>目标</strong>：模型不再是随机生成视频，而是"听话"的。</p>
+                <ul>
+                    <li><strong>Action Acc 指标</strong>: 训练一个简单的分类器，判断生成的视频是否符合输入 Action (e.g. 输入 'W'，光流应该向前)。</li>
+                    <li><strong>Overfit Demo</strong>: 在单一场景下，模型能完美响应键盘操作（哪怕只能在那个房间里走）。</li>
+                </ul>
+                <p><strong>避坑</strong>: 这一阶段尽量拿掉 Text Prompt，只用 Action 和 Image Condition，逼迫模型学习物理规律。</p>
+            </div>
+
+            <div class="card">
+                <h3>Phase 3: 实时化与泛化 (Week 7-12)</h3>
+                <p><strong>目标</strong>：从"能玩"到"好玩"。</p>
+                <ul>
+                    <li><strong>Distilled Checkpoint</strong>: 经过 LCM/Turbo 蒸馏的模型，推理步数 < 4 步。参考 <a
+                            href="https://arxiv.org/abs/2512.16093" target="_blank">TurboDiffusion</a>。</li>
+                    <li><strong>Streaming Pipeline</strong>: 基于 WebSocket/WebRTC 的前端 Demo，延迟 < 100ms。</li>
+                    <li><strong>Long-term Memory</strong>: 引入 KV Cache 机制，解决"回头看"的一致性问题。</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>5.3 团队分工矩阵 (RACI)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>角色</th>
+                        <th>关键职责 (R: Responsible)</th>
+                        <th>核心指标 (KPI)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>UE 工程师</strong></td>
+                        <td>开发 Recorder 插件，优化导出性能，搭建多样化关卡</td>
+                        <td>数据吞吐量 (GB/hour), 场景丰富度</td>
+                    </tr>
+                    <tr>
+                        <td><strong>算法研究员</strong></td>
+                        <td>训练 DiT 模型，调试 Action Injection，实现蒸馏</td>
+                        <td>Action Acc, FID/FVD, Inference Steps</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Infra 工程师</strong></td>
+                        <td>搭建训练集群环境，优化 DataLoader，部署推理服务</td>
+                        <td>GPU 利用率, 端到端 Latency</td>
+                    </tr>
+                    <tr>
+                        <td><strong>数据工程师</strong></td>
+                        <td>清洗坏数据，维护 Dataset 版本</td>
+                        <td>Inlier Ratio, 数据纯净度</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="commentary">
+            <div class="commentary-title">🧠 AntiGravity's 最终建议</div>
+            <blockquote style="background: transparent; border: none; padding: 0; margin: 0; font-style: normal;">
+                <strong>"Data is the new Code."</strong>
+            </blockquote>
+            <p style="margin-top: 1rem;">不要一开始就去卷模型架构（DiT/U-Net/Transformer）。<a href="https://arxiv.org/abs/2508.13009"
+                    target="_blank">Matrix-Game 2.0</a> 成功的核心不在于架构多先进，而在于他们从 GTA5 和 UE 里"洗"出了高质量的 Action-Labelled Video。
+            </p>
+            <p><strong>请把 70% 的精力放在 UE 采集管线和数据清洗上。</strong> 模型是会迭代的，但高质量的数据资产是永恒的护城河。</p>
+            <p style="margin-top: 1rem;"><strong>如果你只有 100 张卡的预算，我会建议你买 500TB 的 SSD 和雇 10 个外包玩游戏，而不是全部买 H100。</strong>
+                记住：<a href="https://www.vidu.studio/" target="_blank">ShengShu Vidu</a> 的壁垒不是 U-ViT，而是他们积累了数年的视频对数据。</p>
+        </div>
+    </main>
+</body>
+
+</html>

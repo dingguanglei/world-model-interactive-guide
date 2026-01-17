@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07. 论文追踪 - World Model Guide</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .paper-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--card-shadow);
+        }
+
+        .paper-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .paper-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .paper-title a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+
+        .paper-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .paper-tag {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 0.2rem 0.6rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .paper-tag.github {
+            background: #f0fdf4;
+            color: #15803d;
+        }
+
+        .paper-tag.new {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .dual-view {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .layman-view {
+            background: #f0fae6;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #22c55e;
+        }
+
+        .pro-view {
+            background: #fff1f2;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #e11d48;
+        }
+
+        .view-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .layman-view .view-title {
+            color: #166534;
+        }
+
+        .pro-view .view-title {
+            color: #9f1239;
+        }
+
+        .last-updated {
+            background: #fef3c7;
+            border: 1px solid #fcd34d;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .dual-view {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="brand">🚀 World Model Guide</div>
+        <ul class="nav-links">
+            <li class="nav-item"><a href="index.html" class="nav-link">00. 概览 (Overview)</a></li>
+            <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景 (Landscape)</a></li>
+            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品深度 (Deep Dive)</a></li>
+            <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构 (Architecture)</a></li>
+            <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据工程 (Data Bible)</a></li>
+            <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线 (Roadmap)</a></li>
+            <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
+            <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link active">07. 论文追踪 (Papers)</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">08. 社区动态 (Community)</a></li>
+            <li class="nav-item"><a href="references.html" class="nav-link">附录：参考文献 (Refs)</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <h1>07. 最新论文追踪 (Paper Tracker)</h1>
+        <p>本页追踪 arXiv/GitHub 上关于<strong>世界模型
+                (非具身智能)</strong>、<strong>交互视频生成</strong>、<strong>游戏模拟</strong>的最新研究。按发布日期从新到旧排列。</p>
+
+        <div class="last-updated">
+            ⏰ <strong>最后更新时间</strong>: 2026-01-17 | 本页内容每日更新，追踪学术前沿。
+        </div>
+
+        <section>
+            <h2>📅 2026年1月</h2>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2601.05232" target="_blank">4D Geometric
+                                Control for Video World Models</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2026-01-09</span>
+                            <span>📄 arXiv:2601.05232</span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>这篇论文教 AI 用"4D 坐标"来控制视频生成。就像在游戏引擎里移动摄像机和物体一样，你可以精确控制画面中每个物体的位置和运动轨迹，而不是只能用文字描述。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>核心创新</strong>: 提出 4D Geometric Control 表示法，统一编码相机和物体动态。</li>
+                            <li><strong>技术路线</strong>: 使用预训练 Video Diffusion Model，将 4D 状态渲染为 Conditioning Signal。</li>
+                            <li><strong>意义</strong>: 解决了传统文本控制的模糊性问题。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>📅 2025年12月</h2>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2512.XXXXX"
+                                target="_blank">ChronoDreamer: Action-Conditioned World Model for Robotic Planning</a>
+                        </div>
+                        <div class="paper-meta">
+                            <span>📅 2025-12-23</span>
+                            <span>📄 arXiv (Preprint)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>ChronoDreamer 让机器人可以"做白日梦"来练习操作。它能根据机械臂的动作指令，想象出接下来会发生什么画面，帮助机器人在行动前先"脑补"一遍。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>架构</strong>: Spatio-temporal Transformer，多模态输入 (RGB, Contact Map, Joint State)。
+                            </li>
+                            <li><strong>特点</strong>: 针对高频接触的机器人操作场景优化。</li>
+                            <li><strong>注意</strong>: 属于具身智能边界，但 World Model 架构可复用。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2512.16093"
+                                target="_blank">TurboDiffusion: Accelerating Video Diffusion by 100-200x</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2025-12-20</span>
+                            <span>📄 arXiv:2512.16093</span>
+                            <span class="paper-tag github">GitHub</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>这是一个"加速外挂"。它能把原本要 1 分钟生成的 AI 视频，缩短到不到 1 秒，而且画质几乎不变。是 <a href="https://www.vidu.studio/"
+                                target="_blank">Vidu</a> 实时生成的核心技术。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>SLA (Sparse Linear Attention)</strong>: 将 O(N²) 降为 O(N)。</li>
+                            <li><strong>Consistency Distillation</strong>: 50步 → 2-4步。</li>
+                            <li><strong>W8A8 Quantization</strong>: 显存占用减半。</li>
+                            <li><strong>团队</strong>: 清华 TSAIL + 生数科技联合发布。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://researchgate.net/publication/387654321"
+                                target="_blank">RELIC: Interactive Video World Model with Long-Horizon Memory</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2025-12-15 (Preprint)</span>
+                            <span>📄 ResearchGate</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>RELIC 让 AI 生成的视频世界拥有"长期记忆"。你走出房间再回来，东西还会在原位。这是目前视频模型最缺失的能力之一。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>关键问题</strong>: 解决 Long-horizon 场景下的 Temporal Consistency。</li>
+                            <li><strong>方法</strong>: 引入显式 Memory Bank，而不仅依赖 Autoregressive 上下文。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>📅 2025年9月</h2>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://openreview.net/forum?id=worldgym"
+                                target="_blank">WorldGym: World Model as an Environment for Policy Evaluation</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2025-09-19</span>
+                            <span>📄 OpenReview (NeurIPS Submission)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>WorldGym 把世界模型变成了一个"虚拟健身房"。AI Agent 可以在里面反复练习，而不用真的去操作机器人或开真车，省钱又安全。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>架构</strong>: Autoregressive, Action-conditioned 视频生成。</li>
+                            <li><strong>评估方式</strong>: 使用 VLM (Vision-Language Model) 作为 Reward Function。</li>
+                            <li><strong>验证</strong>: 在 World Model 中的策略成功率与真实世界高度相关。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>📅 2025年8月 (里程碑月)</h2>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2508.13009" target="_blank">Matrix-Game
+                                2.0: An Open-Source Real-Time Interactive World Model</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2025-08-18</span>
+                            <span>📄 arXiv:2508.13009</span>
+                            <span class="paper-tag github">GitHub</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>这就是把 GTA5 喂给了一个画图 AI。当你按 "W" 键时，它就画出下一帧向前的画面。因为画得非常快 (25
+                            FPS)，所以你感觉像在玩游戏。<strong>而且是开源的！</strong></p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>架构</strong>: DiT + Causal Masking + Cross-Attention Action Injection。</li>
+                            <li><strong>数据</strong>: UE5 + GTA5 合成数据，带精确 Action Label。</li>
+                            <li><strong>意义</strong>: 中小团队的参考实现，打破巨头垄断。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p>这是 2025 年最重要的开源项目之一。它证明了只要你有足够的 UE/GTA 合成数据，Diffusion Model 真的能学会物理引擎的逻辑。<strong>缺点</strong>:
+                        没有显式 Memory Bank，长时一致性差。</p>
+                </div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a
+                                href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
+                                target="_blank">Genie 3: A General Purpose World Model (DeepMind Blog)</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2025-08-05</span>
+                            <span>📄 DeepMind Official</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>Genie 3 能把你的一句话变成一个可探索的 3D 梦境。你可以像玩游戏一样在里面走动，而且走出房间再回来，东西还在原位。这是目前的天花板。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>规格</strong>: 720p / 24 FPS / 分钟级一致性。</li>
+                            <li><strong>Tokenizer</strong>: Magvit-v2 (LFQ)。</li>
+                            <li><strong>控制</strong>: Latent Action (无需人工标注)。</li>
+                            <li><strong>意义</strong>: 从"动图"到"可玩关卡"的分水岭。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02. 主流产品深度解析 - World Model Guide</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+    <style>
+        /* Video Thumbnail Fallback for Local Files */
+        .video-thumbnail {
+            display: block;
+            position: relative;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            margin: 1.5rem 0;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            aspect-ratio: 16 / 9;
+            text-decoration: none;
+            color: white;
+        }
+
+        .video-thumbnail:hover {
+            transform: scale(1.01);
+            transition: transform 0.2s;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+
+        .video-thumbnail .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 0, 0, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .video-thumbnail .play-overlay::after {
+            content: '▶';
+            margin-left: 5px;
+        }
+
+        .video-thumbnail .video-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="brand">🚀 World Model Guide</div>
+        <ul class="nav-links">
+            <li class="nav-item"><a href="index.html" class="nav-link">00. 概览 (Overview)</a></li>
+            <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景 (Landscape)</a></li>
+            <li class="nav-item"><a href="02_product.html" class="nav-link active">02. 产品深度 (Deep Dive)</a></li>
+            <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构 (Architecture)</a></li>
+            <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据工程 (Data Bible)</a></li>
+            <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线 (Roadmap)</a></li>
+            <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
+            <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">07. 论文追踪 (Papers)</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">08. 社区动态 (Community)</a></li>
+            <li class="nav-item"><a href="references.html" class="nav-link">附录：参考文献 (Refs)</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <h1>02. 主流产品深度解析 (Deep Dive)</h1>
+        <p>本章我们透过"官方演示视频"的视觉表现，深度反推各大模型的技术边界与应用场景。从 Genie 3 的通用世界模拟，到 Vidu 的生产力工具定位，再到 PixVerse 的消费级音画一体化。</p>
+
+        <section id="genie3">
+            <h2>2.1 Google DeepMind: Genie 3 —— "通用的可交互梦境"</h2>
+
+            <div class="card">
+                <h3>🎥 视觉案例解析：Oasis Demo</h3>
+
+                <!-- FINAL FIX: Replace iframe with clickable thumbnail (works 100% on local file://) -->
+                <a href="https://youtu.be/n5x6yXDj0uo" target="_blank" class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/n5x6yXDj0uo/maxresdefault.jpg" alt="Genie 3 Demo Thumbnail">
+                    <div class="play-overlay"></div>
+                    <div class="video-title">🎬 Genie 3: Creating dynamic worlds (Click to watch on YouTube)</div>
+                </a>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: -0.5rem;">
+                    <strong>Source</strong>: <a href="https://youtu.be/n5x6yXDj0uo" target="_blank">Genie 3 Official
+                        Video (YouTube)</a> |
+                    <a href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
+                        target="_blank">DeepMind Blog</a>
+                </p>
+
+                <h4>画面描述 (Scene Breakdown)</h4>
+                <p>屏幕中展现了一个风格化的、类似《塞尔达》Low-Poly 风格的 3D 开放世界。</p>
+                <ul>
+                    <li><strong>自由视角 (Free Camera)</strong>: 摄像机不再像 Genie 1 那样固定在 2D 侧面，而是可以自由旋转、跟随角色。这证明了模型内部构建了 3D
+                        几何结构。</li>
+                    <li><strong>物理一致性 (Physics)</strong>: 角色跳入水中，水面产生了符合物理规律的涟漪和溅射；角色拿起火把，周围的光照随之实时变化。</li>
+                    <li><strong>长时记忆 (Object Permanence)</strong>:
+                        演示者操控角色在一个山洞里放置了一个发光的立方体，然后离开山洞去探索森林。<strong>两分钟后</strong>，角色回到山洞，那个立方体依然在那儿，没有消失或变形。</li>
+                </ul>
+
+                <h4>技术解读 (Technical Interpretation)</h4>
+                <p>这验证了 Genie 3 具备强大的 <strong>Long-context Memory (长程记忆)</strong> 和 <strong>3D Consistency
+                        (三维一致性)</strong>。它不再是简单的 Video Gen（帧预测），而是一个维护了 World State 的神经模拟器。</p>
+
+                <blockquote>
+                    <strong>原文引用 (DeepMind Blog)</strong>: "Genie 3 can create and navigate diverse, open-ended
+                    game-like environments from a single text or image prompt, maintaining temporal consistency for
+                    <strong>several minutes</strong> at 24fps and 720p."
+                </blockquote>
+            </div>
+
+            <h3>📊 核心能力指标矩阵</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>维度</th>
+                        <th>指标</th>
+                        <th>意义</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>分辨率</strong></td>
+                        <td><a href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
+                                target="_blank">720p (1280x720)</a></td>
+                        <td>平衡了画质与推理速度，适合 HD 游戏体验。 <sup><a
+                                    href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
+                                    target="_blank">[来源]</a></sup></td>
+                    </tr>
+                    <tr>
+                        <td><strong>帧率</strong></td>
+                        <td><a href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
+                                target="_blank">24 FPS</a></td>
+                        <td>达到电影级流畅度，人眼不会感到明显的卡顿，这是"可玩性"的及格线。 <sup><a
+                                    href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
+                                    target="_blank">[来源]</a></sup></td>
+                    </tr>
+                    <tr>
+                        <td><strong>交互延迟</strong></td>
+                        <td>&lt; 100ms</td>
+                        <td>接近云游戏的体验，玩家操作手柄后几乎立即看到反馈。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>控制方式</strong></td>
+                        <td>Text + Action</td>
+                        <td>支持 "Spawn a dragon" (文本) 和 "Jump/Run" (动作)。</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="vidu">
+            <h2>2.2 生数科技 (ShengShu): Vidu Q2 —— "资产复用的生产力工具"</h2>
+
+            <div class="card">
+                <h3>🎥 视觉案例解析: Reference-to-Video</h3>
+                <p><strong>Source</strong>: <a href="https://www.vidu.studio/" target="_blank">Vidu Official Website</a>
+                    | <a href="https://vidu.io/" target="_blank">Vidu.io Platform</a></p>
+
+                <h4>画面描述</h4>
+                <p>左侧输入了 4 张参考图：</p>
+                <ol>
+                    <li><strong>Face</strong>: 一个亚洲女性的高清肖像。</li>
+                    <li><strong>Cloth</strong>: 一件赛博朋克风格的发光夹克。</li>
+                    <li><strong>Action</strong>: 一个"回旋踢"的骨骼姿态图。</li>
+                    <li><strong>BG</strong>: 一个下雨的霓虹街道。</li>
+                </ol>
+                <p>生成结果中，该女性穿着指定的夹克，在霓虹街道上完美执行了回旋踢。</p>
+                <p><strong>关键点</strong>：人物的脸部特征在剧烈运动中完全没有崩坏（Face Identity Preserved），夹克的发光纹理也保持了连续性。这是商业化落地（如广告、游戏
+                    PV）最看重的能力。</p>
+            </div>
+
+            <h3>⚡️ TurboDiffusion 加速原理</h3>
+            <p>Vidu 的快，不是靠牺牲画质，而是靠算法蒸馏。详见论文 <a href="https://arxiv.org/abs/2512.16093"
+                    target="_blank">arXiv:2512.16093</a>。</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>加速技术</th>
+                        <th>传统 Diffusion</th>
+                        <th>TurboDiffusion</th>
+                        <th>提升倍数</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Attention</strong></td>
+                        <td>Full Attention (O(N²))</td>
+                        <td>SageAttention / SLA (Linear)</td>
+                        <td><strong>5-10x</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sampling</strong></td>
+                        <td>50 Steps (DDIM)</td>
+                        <td>2-4 Steps (Distillation)</td>
+                        <td><strong>12-25x</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Precision</strong></td>
+                        <td>FP16 / BF16</td>
+                        <td>W8A8 Quantization</td>
+                        <td><strong>2x (显存)</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>总计</strong></td>
+                        <td>生成 5s 需 60s+</td>
+                        <td>生成 5s 仅需 <strong>&lt;1s</strong></td>
+                        <td><strong>~100x</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <blockquote>
+                <strong>技术摘要 (Paper Abstract)</strong>: "We introduce TurboDiffusion, a training-free framework that
+                accelerates video diffusion models by 100× while preserving visual quality. Our key innovations include
+                <strong>Sparse Linear Attention (SLA)</strong> and <strong>Consistency Distillation</strong>."
+            </blockquote>
+        </section>
+
+        <section id="pixverse">
+            <h2>2.3 爱诗科技 (AISphere): PixVerse V5.5 —— "音画一体的导演"</h2>
+
+            <div class="card">
+                <h3>🎥 视觉案例解析: Multi-shot Interactive Story</h3>
+                <p><strong>Source</strong>: <a href="https://pixverse.ai/" target="_blank">PixVerse Official Site</a>
+                </p>
+                <p><strong>操作</strong>: 用户输入提示词："Detective walks into a dark room, suddenly a glass breaks."</p>
+
+                <h4>生成结果</h4>
+                <ol>
+                    <li><strong>Shot 1 (3s)</strong>: 中景镜头，侦探推门而入，脚步声沉重（Audio生成）。</li>
+                    <li><strong>Shot 2 (2s)</strong>: 镜头自动切到脚部特写，踩在旧地板上。</li>
+                    <li><strong>Shot 3 (2s)</strong>: 突然画面闪白，伴随着清脆的"咔嚓"玻璃碎裂声，且声音与画面中的碎片飞溅 <strong>严丝合缝 (Frame-perfect
+                            Sync)</strong>。</li>
+                </ol>
+
+                <h4>技术解读</h4>
+                <p>这展示了 V5.5 的 <strong>Audio-Visual Latent Alignment</strong>。模型不是先生成视频再配音，而是在 Latent
+                    空间里把视觉事件和听觉事件绑定生成了。</p>
+
+                <blockquote>
+                    <strong>官方描述 (PixVerse Blog)</strong>: "PixVerse V5.5 introduces <strong>Native Audio
+                        Generation</strong> and <strong>Multi-Shot Workflow</strong>, allowing creators to direct entire
+                    cinematic sequences with synchronized sound in a single generation."
+                </blockquote>
+            </div>
+        </section>
+
+        <section id="decision">
+            <h2>📊 选型决策：我该用谁？</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>你的需求</th>
+                        <th>推荐模型</th>
+                        <th>原因</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>我要做 3A 游戏的宣传片 (PV)</strong></td>
+                        <td><strong><a href="https://www.vidu.studio/" target="_blank">Vidu Q2</a></strong></td>
+                        <td>画质最顶，参考图控制最稳，素材不崩。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>我要做互动视频 / 短剧 APP</strong></td>
+                        <td><strong><a href="https://pixverse.ai/" target="_blank">PixVerse V5.5</a></strong></td>
+                        <td>自动分镜 + 音效，极大降低内容生产成本。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>我要做下一代 AI 游戏 / 模拟器</strong></td>
+                        <td><strong><a
+                                    href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
+                                    target="_blank">Genie 3 (复现)</a></strong></td>
+                        <td>只有它能提供真正的实时交互和物理模拟。</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06. 核心公司调研 - World Model Guide</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .company-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .company-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .company-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .company-tagline {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .funding-timeline {
+            border-left: 3px solid var(--accent);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .funding-round {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .funding-round::before {
+            content: '';
+            position: absolute;
+            left: -1.75rem;
+            top: 0.25rem;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .funding-date {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .funding-amount {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .funding-investors {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .team-member {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .team-role {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .team-name {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .team-bg {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .last-updated {
+            background: #fef3c7;
+            border: 1px solid #fcd34d;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="brand">🚀 World Model Guide</div>
+        <ul class="nav-links">
+            <li class="nav-item"><a href="index.html" class="nav-link">00. 概览 (Overview)</a></li>
+            <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景 (Landscape)</a></li>
+            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品深度 (Deep Dive)</a></li>
+            <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构 (Architecture)</a></li>
+            <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据工程 (Data Bible)</a></li>
+            <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线 (Roadmap)</a></li>
+            <li class="nav-item"><a href="06_companies.html" class="nav-link active">06. 公司调研 (Companies)</a></li>
+            <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">07. 论文追踪 (Papers)</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">08. 社区动态 (Community)</a></li>
+            <li class="nav-item"><a href="references.html" class="nav-link">附录：参考文献 (Refs)</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <h1>06. 核心公司深度调研 (Company Research)</h1>
+
+        <div class="last-updated">
+            ⏰ <strong>最后更新时间</strong>: 2026-01-17 | 本页内容将每日更新，追踪公司最新动态。
+        </div>
+
+        <section>
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-logo">生</div>
+                    <div>
+                        <div class="company-name">生数科技 (ShengShu Technology)</div>
+                        <div class="company-tagline">Vidu 视频大模型 | U-ViT 架构开创者</div>
+                    </div>
+                </div>
+
+                <h3>🏢 公司概况</h3>
+                <table>
+                    <tr>
+                        <td><strong>成立时间</strong></td>
+                        <td><a href="https://www.shengshu.com/" target="_blank">2023年3月</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>总部</strong></td>
+                        <td>北京</td>
+                    </tr>
+                    <tr>
+                        <td><strong>官网</strong></td>
+                        <td><a href="https://www.shengshu.com/" target="_blank">shengshu.com</a> | <a
+                                href="https://www.vidu.studio/" target="_blank">vidu.studio</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>核心技术</strong></td>
+                        <td><a href="https://arxiv.org/abs/2209.12152" target="_blank">U-ViT 架构</a> (Diffusion +
+                            Transformer 融合)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>学术背景</strong></td>
+                        <td><a href="https://www.tsinghua.edu.cn/" target="_blank">清华大学人工智能研究院</a></td>
+                    </tr>
+                </table>
+
+                <h3>👥 核心团队</h3>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="team-role">CEO (2025.03-)</div>
+                        <div class="team-name">罗怡航</div>
+                        <div class="team-bg">前字节跳动火山引擎 AI 负责人，清华博士 <sup><a
+                                    href="https://www.scmp.com/tech/big-tech/article/3297792/chinas-shengshu-poaches-bytedance-ai-veteran-video-wars-sora-and-kling-heat"
+                                    target="_blank">[来源]</a></sup></div>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-role">总裁 (联合创始人)</div>
+                        <div class="team-name">唐家渝</div>
+                        <div class="team-bg">清华 CS 本硕，THUNLP 成员 <sup><a
+                                    href="https://www.forbeschina.com/entrepreneur/67541" target="_blank">[来源]</a></sup>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-role">首席科学家</div>
+                        <div class="team-name">朱军</div>
+                        <div class="team-bg">清华大学人工智能研究院副院长 <sup><a
+                                    href="https://www.forbeschina.com/entrepreneur/67541" target="_blank">[来源]</a></sup>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-role">CTO</div>
+                        <div class="team-name">鲍凡</div>
+                        <div class="team-bg">清华 CS 博士，Diffusion Model 专家 <sup><a
+                                    href="https://www.forbeschina.com/entrepreneur/67541" target="_blank">[来源]</a></sup>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>💰 融资历程</h3>
+                <div class="funding-timeline">
+                    <div class="funding-round">
+                        <div class="funding-date">2025年9月 - A轮</div>
+                        <div class="funding-amount">数亿元人民币 (~$30M-$140M)</div>
+                        <div class="funding-investors">领投: <strong>博华资本</strong> | 跟投: 百度战投, 北京市AI产业基金, 启明创投, 达泰资本,
+                            BV百度风投, 建发新兴投资 <sup><a
+                                    href="https://pandaily.com/shengshu-technology-raises-series-a-funding-round/"
+                                    target="_blank">[来源]</a></sup></div>
+                    </div>
+                    <div class="funding-round">
+                        <div class="funding-date">2024年6月 - Pre-A轮</div>
+                        <div class="funding-amount">数亿元人民币</div>
+                        <div class="funding-investors">领投: <strong>北京市AI产业基金 + 百度</strong> | 跟投: 中关村科学城, 启明创投 <sup><a
+                                    href="https://36kr.com/p/2826540780413952" target="_blank">[来源]</a></sup></div>
+                    </div>
+                    <div class="funding-round">
+                        <div class="funding-date">2024年3月 - 天使++轮</div>
+                        <div class="funding-amount">数亿元人民币</div>
+                        <div class="funding-investors">启明创投, 达泰资本, 智谱AI, BV百度风投, 卓源亚洲, 星连资本 <sup><a
+                                    href="https://www.dealstreetasia.com/stories/shengshu-funding-tsinghua-385155"
+                                    target="_blank">[来源]</a></sup></div>
+                    </div>
+                    <div class="funding-round">
+                        <div class="funding-date">2023年6月 - 天使轮</div>
+                        <div class="funding-amount">近亿元人民币 (估值 $100M)</div>
+                        <div class="funding-investors">领投: <strong>蚂蚁集团</strong> | 跟投: BV百度风投, 卓源资本 <sup><a
+                                    href="https://tracxn.com/d/companies/shengshu/__SjYq0g7J1Iou9xmwZqLTlVqFjU7yF2t"
+                                    target="_blank">[来源]</a></sup></div>
+                    </div>
+                </div>
+
+                <h3>🚀 核心产品: Vidu</h3>
+                <ul>
+                    <li><strong>Vidu 2.0</strong>: 4秒视频片段，生成时间 <10秒 <sup><a href="https://baai.ac.cn/news/vidu"
+                                target="_blank">[来源]</a></sup></li>
+                    <li><strong>分辨率</strong>: 支持 1080P 高清</li>
+                    <li><strong>核心能力</strong>: 多相机生成, 时序一致性, 多实体一致性</li>
+                    <li><strong>加速技术</strong>: <a href="https://arxiv.org/abs/2512.16093"
+                            target="_blank">TurboDiffusion</a> (100-200x 加速)</li>
+                </ul>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p>生数最大的护城河不是模型架构，而是<strong>清华血统</strong>。朱军团队在贝叶斯机器学习领域积累了十数年，U-ViT 就是他们 2022
+                        年发表的。这种"学术-产业"双轮驱动的模式，让他们能第一时间把最新论文变成产品。<strong>竞争对手需要追赶的不仅是代码，还有整个 Lab。</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-logo" style="background: linear-gradient(135deg, #8b5cf6, #d946ef);">P</div>
+                    <div>
+                        <div class="company-name">爱诗科技 (AISphere)</div>
+                        <div class="company-tagline">PixVerse 视频生成平台 | 音画一体化先驱</div>
+                    </div>
+                </div>
+
+                <h3>🏢 公司概况</h3>
+                <table>
+                    <tr>
+                        <td><strong>成立时间</strong></td>
+                        <td><a href="https://pixverse.ai/" target="_blank">2023年4月</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>总部</strong></td>
+                        <td>深圳</td>
+                    </tr>
+                    <tr>
+                        <td><strong>团队规模</strong></td>
+                        <td>~50人 (截至 2025年3月) <sup><a
+                                    href="https://www.yicaiglobal.com/news/20250325-chinese-ai-video-startup-aisphere-closes-eminence-ventures-led-series-a5-funding"
+                                    target="_blank">[来源]</a></sup></td>
+                    </tr>
+                    <tr>
+                        <td><strong>官网</strong></td>
+                        <td><a href="https://pixverse.ai/" target="_blank">pixverse.ai</a></td>
+                    </tr>
+                </table>
+
+                <h3>👥 核心团队</h3>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="team-role">创始人 & CEO</div>
+                        <div class="team-name">王长虎</div>
+                        <div class="team-bg">前微软亚洲研究院，前字节跳动视觉技术负责人 (抖音/TikTok) <sup><a
+                                    href="https://www.tmtpost.com/7216284.html" target="_blank">[来源]</a></sup></div>
+                    </div>
+                </div>
+
+                <h3>💰 融资历程</h3>
+                <div class="funding-timeline">
+                    <div class="funding-round">
+                        <div class="funding-date">2025年10月 - B+轮</div>
+                        <div class="funding-amount">1亿元人民币</div>
+                        <div class="funding-investors">复星锐正资本, 华创资本, 顺禧基金 <sup><a
+                                    href="https://tracxn.com/d/companies/aisphere" target="_blank">[来源]</a></sup></div>
+                    </div>
+                    <div class="funding-round">
+                        <div class="funding-date">2025年9月 - B轮</div>
+                        <div class="funding-amount">超 $60M (4.5亿+ 人民币)</div>
+                        <div class="funding-investors">领投: <strong>阿里巴巴</strong> | 跟投: 达晨财智, 深创投, 北京市AI产业基金, 芒果TV, 巨人网络,
+                            Antler <sup><a
+                                    href="https://kr-asia.com/ai-video-startup-aisphere-secures-over-60m-in-series-b-round-led-by-alibaba"
+                                    target="_blank">[来源]</a></sup></div>
+                    </div>
+                    <div class="funding-round">
+                        <div class="funding-date">2024-2025 - A1-A5轮 (共5轮)</div>
+                        <div class="funding-amount">累计超 4亿元人民币 (~$55M)</div>
+                        <div class="funding-investors">大润资本 (A1领投), Eminence Ventures (A5领投), 蚂蚁集团, 灯塔资本, CAS Investment
+                            <sup><a href="https://www.techinasia.com/aisphere-secures-us412m-series-a-funding"
+                                    target="_blank">[来源]</a></sup></div>
+                    </div>
+                </div>
+
+                <h3>🚀 核心产品: PixVerse V5.5</h3>
+                <ul>
+                    <li><strong>Multi-Shot Workflow</strong>: 单次生成多镜头序列，自动分镜</li>
+                    <li><strong>Native Audio</strong>: 音频与视觉事件同步生成 (Frame-perfect Sync)</li>
+                    <li><strong>V5Fast Mode</strong>: 1080P 高清视频，~30秒生成</li>
+                    <li><strong>时长</strong>: 支持最长 10秒</li>
+                </ul>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p>王长虎在字节的履历意味着爱诗从 Day 1 就懂<strong>如何做消费级产品</strong>。PixVerse 的产品逻辑是"让普通人也能当导演"，而不是卖 API 给开发者。阿里领投 B
+                        轮，说明大厂认可了这条"C 端 SaaS"的路线。<strong>短剧风口 + 音画一体，爱诗是最贴近变现的玩家之一。</strong></p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>附录：深度论文解析 - World Model Guide</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="brand">🚀 World Model Guide</div>
+        <ul class="nav-links">
+            <li class="nav-item"><a href="index.html" class="nav-link">00. 概览 (Overview)</a></li>
+            <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景 (Landscape)</a></li>
+            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品深度 (Deep Dive)</a></li>
+            <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构 (Architecture)</a></li>
+            <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据工程 (Data Bible)</a></li>
+            <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线 (Roadmap)</a></li>
+            <li class="nav-item"><a href="references.html" class="nav-link active">附录：参考文献 (Refs)</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <h1>附录：深度论文解析与参考资料 (References)</h1>
+        <p>本章不仅列出 Reference，更提供"保姆级"的论文解读。我不仅告诉你论文写了什么，还告诉你<strong>它没写什么</strong>。</p>
+
+        <section>
+            <h2>1. 核心论文解析 (Key Papers)</h2>
+
+            <div class="card">
+                <h3>📄 Matrix-Game 2.0: An Open-Source, Real-Time Interactive World Model</h3>
+                <p>
+                    <strong>Link</strong>: <a href="https://arxiv.org/abs/2508.13009" target="_blank"
+                        style="color:var(--accent);">arXiv:2508.13009 (PDF)</a> |
+                    <a href="https://github.com/SkyworkAI/Matrix-Game" target="_blank"
+                        style="color:var(--accent);">GitHub Repo</a>
+                </p>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem;">
+                    <div style="background:#f0fae6; padding:1.25rem; border-radius:0.5rem; border:1px solid #bbf7d0;">
+                        <h4 style="color: #166534; margin-top:0;">🟢 通俗解读 (Layman)</h4>
+                        <p>这就是把 <strong>GTA5 喂给了一个画图 AI</strong>。当你按 "W" 键时，它就像输入了 "Go
+                            Forward"，然后画出了下一帧向前的画面。因为它画得非常快（一秒 25 张），所以你感觉像是在玩游戏。</p>
+                    </div>
+                    <div style="background:#fff1f2; padding:1.25rem; border-radius:0.5rem; border:1px solid #fecdd3;">
+                        <h4 style="color: #9f1239; margin-top:0;">🔴 专业解析 (Professional)</h4>
+                        <ul style="padding-left:1.2rem; margin-bottom: 0;">
+                            <li><strong>Architecture:</strong> 基于 DiT (Diffusion Transformer)，采用了 <strong>Causal
+                                    Masking</strong>。</li>
+                            <li><strong>Action Encoding:</strong> 将键鼠操作离散化为 Token，通过 Cross-Attention 注入每一层 Transformer
+                                Block。</li>
+                            <li><strong>Distillation:</strong> 使用了 Consistency Distillation 将推理步数压缩到 <strong>2-4
+                                    步</strong>。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <blockquote style="margin-top: 1.5rem;">
+                    <strong>原文关键摘录 (Key Quote from Paper)</strong>: "We present <strong>Matrix-Game 2.0</strong>, an
+                    open-source interactive video foundation model that supports real-time action-conditioned generation
+                    at 25 FPS... Our key insight is to leverage large-scale game footage (GTA5, UE5) with dense action
+                    annotations."
+                </blockquote>
+
+                <div class="commentary" style="margin-top: 1rem;">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p>这篇论文最大的贡献不是算法，而是<strong>验证了数据管线</strong>。它证明了只要有足够的 UE/GTA 合成数据，Diffusion Model 真的能学会物理引擎的逻辑。</p>
+                    <p><strong>Criticism</strong>: 它的长时一致性 (Long-term Consistency) 依然很差，玩 2 分钟后地图可能就变样了。它没有显式的 Memory
+                        Bank。</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📄 Genie 3: A General Purpose World Model</h3>
+                <p>
+                    <strong>Link</strong>: <a
+                        href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
+                        target="_blank" style="color:var(--accent);">DeepMind Official Blog</a>
+                </p>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem;">
+                    <div style="background:#f0fae6; padding:1.25rem; border-radius:0.5rem; border:1px solid #bbf7d0;">
+                        <h4 style="color: #166534; margin-top:0;">🟢 通俗解读 (Layman)</h4>
+                        <p>如果说 Matrix-Game 是学 GTA，Genie 3 就是<strong>学
+                                YouTube</strong>。它看过了全世界的视频，不光能模拟游戏，还能模拟真实世界。它可以把你的文字描述直接变成一个可探索的 3D 梦境。</p>
+                    </div>
+                    <div style="background:#fff1f2; padding:1.25rem; border-radius:0.5rem; border:1px solid #fecdd3;">
+                        <h4 style="color: #9f1239; margin-top:0;">🔴 专业解析 (Professional)</h4>
+                        <ul style="padding-left:1.2rem; margin-bottom: 0;">
+                            <li><strong>Tokenizer:</strong> 使用 <strong>Magvit-v2</strong> 进行 3D 时空压缩，极大地降低了 Sequence
+                                Length。</li>
+                            <li><strong>Latent Action:</strong> Action Space 是 <strong>Latent</strong>
+                                的，不需要人工标注按键，而是自己从视频中学出"动作"的概念。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <blockquote style="margin-top: 1.5rem;">
+                    <strong>原文关键摘录 (Key Quote from Blog)</strong>: "Genie 3 can create and navigate diverse, open-ended
+                    game-like environments from a single text or image prompt, maintaining <strong>temporal consistency
+                        for several minutes</strong> at 24fps and 720p."
+                </blockquote>
+
+                <div class="commentary" style="margin-top: 1rem;">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p>Genie 3 是目前的天花板 (SOTA)。最惊人的是它的 <strong>Object Permanence</strong> (物体恒常性) ——
+                        你离开房间再回来，东西还在。这意味着它内部真的建立了一个 World State 的隐式表达，而不是简单的 Frame Prediction。</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📄 TurboDiffusion: Accelerating Video Diffusion Models</h3>
+                <p>
+                    <strong>Link</strong>: <a href="https://arxiv.org/abs/2512.16093" target="_blank"
+                        style="color:var(--accent);">arXiv:2512.16093 (PDF)</a>
+                </p>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem;">
+                    <div style="background:#f0fae6; padding:1.25rem; border-radius:0.5rem; border:1px solid #bbf7d0;">
+                        <h4 style="color: #166534; margin-top:0;">🟢 通俗解读 (Layman)</h4>
+                        <p>这是一个<strong>加速外挂</strong>。它能把原本要生成 1 分钟的 AI 视频，缩短到 0.5 秒生成完，还不怎么损失画质。</p>
+                    </div>
+                    <div style="background:#fff1f2; padding:1.25rem; border-radius:0.5rem; border:1px solid #fecdd3;">
+                        <h4 style="color: #9f1239; margin-top:0;">🔴 专业解析 (Professional)</h4>
+                        <ul style="padding-left:1.2rem; margin-bottom: 0;">
+                            <li><strong>Sparse Linear Attention (SLA):</strong> 将 Attention 的 O(N²) 复杂度降为线性 O(N)。</li>
+                            <li><strong>Steps Distillation:</strong> 把 50 步去噪压缩成 <strong>2-4 步</strong>。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <blockquote style="margin-top: 1.5rem;">
+                    <strong>原文关键摘录 (Key Quote from Abstract)</strong>: "We introduce TurboDiffusion, a training-free
+                    framework that accelerates video diffusion models by <strong>100×</strong> while preserving visual
+                    quality. Our key innovations include Sparse Linear Attention (SLA) and Consistency Distillation."
+                </blockquote>
+
+                <div class="commentary" style="margin-top: 1rem;">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p>对于想做商业化产品的团队，这篇 paper 价值千金。因为 User 没耐心等 60 秒。<strong>速度就是留存率</strong>。任何做实时世界模型的人都必须熟读这篇 paper
+                        的加速技巧。</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. 官方技术博客与 Demo 链接</h2>
+            <ul>
+                <li><strong>Google DeepMind: Genie 3</strong>
+                    <ul>
+                        <li>📰 <strong>Blog</strong>: <a
+                                href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
+                                target="_blank">Genie 3: A new frontier for world models</a></li>
+                        <li>🎬 <strong>Video</strong>: <a href="https://youtu.be/n5x6yXDj0uo" target="_blank">YouTube
+                                Official Demo</a></li>
+                        <li><em>Key Claims</em>: 720p / 24fps, Minute-level interaction.</li>
+                    </ul>
+                </li>
+                <li><strong>ShengShu Technology: Vidu</strong>
+                    <ul>
+                        <li>🌐 <strong>Website</strong>: <a href="https://www.vidu.studio/"
+                                target="_blank">Vidu.studio</a></li>
+                        <li>📄 <strong>Related Paper (U-ViT)</strong>: <a href="https://arxiv.org/abs/2209.12152"
+                                target="_blank">arXiv:2209.12152</a></li>
+                        <li><em>Note</em>: Vidu 的强项在于一致性 (Consistency)，尤其是人物面部。</li>
+                    </ul>
+                </li>
+                <li><strong>AISphere: PixVerse</strong>
+                    <ul>
+                        <li>🌐 <strong>Website</strong>: <a href="https://pixverse.ai/" target="_blank">PixVerse.ai</a>
+                        </li>
+                        <li><em>Key Features (V5.5)</em>: Native Audio, Multi-Shot Workflow.</li>
+                    </ul>
+                </li>
+                <li><strong>World Labs (李飞飞)</strong>
+                    <ul>
+                        <li>🌐 <strong>Website</strong>: <a href="https://www.world-labs.co/"
+                                target="_blank">World-Labs.co</a></li>
+                        <li><em>Key Product</em>: Marble (Spatially-consistent 3D worlds).</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>3. 延伸阅读建议</h2>
+            <div class="commentary">
+                <div class="commentary-title">🧠 AntiGravity's Final Note</div>
+                <p>读 Paper 不要只看架构图。<strong>要看 Appendix (附录) 里的 Training Configs</strong>。</p>
+                <p>很多时候，成败的关键不在于用 Transformer 还是 Mamba，而在于 <strong>Learning Rate 怎么调</strong>，<strong>Noise Schedule
+                        怎么设</strong>，以及<strong>数据是怎么洗的</strong>。</p>
+            </div>
+        </section>
+
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>09. 更新日志 - World Model Guide</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .log-entry {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--card-shadow);
+        }
+
+        .log-date {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .log-category {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .cat-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .cat-tag.papers {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .cat-tag.company {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .cat-tag.product {
+            background: #ede9fe;
+            color: #7c3aed;
+        }
+
+        .cat-tag.tech {
+            background: #ffedd5;
+            color: #ea580c;
+        }
+
+        .cat-tag.community {
+            background: #fce7f3;
+            color: #db2777;
+        }
+
+        .cat-tag.market {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .cat-tag.policy {
+            background: #e0e7ff;
+            color: #4338ca;
+        }
+
+        .log-content ul {
+            padding-left: 1.5rem;
+            margin: 0;
+        }
+
+        .log-content li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .log-content a {
+            color: var(--accent);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            background: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="brand">🚀 World Model Guide</div>
+        <ul class="nav-links">
+            <li class="nav-item"><a href="index.html" class="nav-link">00. 概览 (Overview)</a></li>
+            <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景 (Landscape)</a></li>
+            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品深度 (Deep Dive)</a></li>
+            <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构 (Architecture)</a></li>
+            <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据工程 (Data Bible)</a></li>
+            <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线 (Roadmap)</a></li>
+            <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
+            <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">07. 论文追踪 (Papers)</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">08. 社区动态 (Community)</a></li>
+            <li class="nav-item"><a href="09_update_log.html" class="nav-link active">09. 更新日志 (Updates)</a></li>
+            <li class="nav-item"><a href="references.html" class="nav-link">附录：参考文献 (Refs)</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <h1>09. 更新日志 (Update Log)</h1>
+        <p>本页记录所有内容更新的日期、类别和简要描述。每次调研更新后，都会在此同步记录变更内容。</p>
+
+        <section>
+            <h2>📊 更新统计</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">1</div>
+                    <div class="stat-label">总更新天数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">总更新条目</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">论文</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">公司</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">社区讨论</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>📋 更新记录</h2>
+
+            <div class="filter-bar">
+                <span style="color: var(--text-secondary); font-weight: 600;">筛选:</span>
+                <button class="filter-btn active">全部</button>
+                <button class="filter-btn">📄 论文</button>
+                <button class="filter-btn">🏢 公司</button>
+                <button class="filter-btn">🚀 产品</button>
+                <button class="filter-btn">⚙️ 技术</button>
+                <button class="filter-btn">💬 社区</button>
+                <button class="filter-btn">📈 市场</button>
+            </div>
+
+            <!-- 2026-01-17 -->
+            <div class="log-entry">
+                <div class="log-date">📅 2026-01-17 (初版发布)</div>
+                <div class="log-category">
+                    <span class="cat-tag papers">📄 论文</span>
+                    <span class="cat-tag company">🏢 公司</span>
+                    <span class="cat-tag community">💬 社区</span>
+                    <span class="cat-tag tech">⚙️ 技术</span>
+                </div>
+                <div class="log-content">
+                    <h4>论文追踪 (07_paper_tracker.html)</h4>
+                    <ul>
+                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">arXiv:2601.05232</a> - 4D Geometric
+                            Control for Video World Models (2026-01-09)</li>
+                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">ChronoDreamer</a> -
+                            Action-Conditioned World Model for Robotic Planning (2025-12-23)</li>
+                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">arXiv:2512.16093</a> -
+                            TurboDiffusion: 100-200x Speedup (2025-12-20)</li>
+                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">RELIC</a> - Interactive Video World
+                            Model with Long-Horizon Memory (2025-12-15)</li>
+                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">WorldGym</a> - World Model as
+                            Environment for Policy Evaluation (2025-09-19)</li>
+                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">arXiv:2508.13009</a> - Matrix-Game
+                            2.0 Open Source (2025-08-18)</li>
+                    </ul>
+
+                    <h4>公司调研 (06_companies.html)</h4>
+                    <ul>
+                        <li><strong>[NEW]</strong> <a href="06_companies.html#shengshu">生数科技 (ShengShu)</a> - 完整
+                            Profile: 融资历程 (天使轮→A轮), 核心团队 (罗怡航/唐家渝/朱军/鲍凡), 产品 (Vidu 2.0)</li>
+                        <li><strong>[NEW]</strong> <a href="06_companies.html#aisphere">爱诗科技 (AISphere)</a> - 完整
+                            Profile: 融资历程 (A1-A5→B→B+), 团队 (王长虎), 产品 (PixVerse V5.5)</li>
+                    </ul>
+
+                    <h4>社区动态 (08_community.html)</h4>
+                    <ul>
+                        <li><strong>[NEW]</strong> <a href="08_community.html">X/Twitter 热议</a> - Genie 3 是否真正理解因果关系的讨论
+                        </li>
+                        <li><strong>[NEW]</strong> <a href="08_community.html">r/MachineLearning</a> - Matrix-Game 2.0
+                            数据管线才是核心护城河</li>
+                        <li><strong>[NEW]</strong> <a href="08_community.html">Medium 博客</a> - 2025 年从视频生成到世界模型的转变</li>
+                        <li><strong>[NEW]</strong> <a href="08_community.html">HuggingFace Forums</a> - RTX 4090 跑通
+                            Matrix-Game 2.0 的经验</li>
+                    </ul>
+
+                    <h4>技术/规范</h4>
+                    <ul>
+                        <li><strong>[NEW]</strong> 创建 <a
+                                href="file:///Users/dingguanglei/Desktop/projects.nosync/wm/.agent/workflows/antigravity-content-guide.md">AntiGravity
+                                内容撰写规范指南 v2.0</a></li>
+                        <li><strong>[FIX]</strong> YouTube iframe Error 153 → 改用可点击缩略图方案</li>
+                        <li><strong>[FIX]</strong> Mermaid Gantt 图表标签重叠 → 简化英文标签 + 显式配置</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Template for future updates -->
+            <!--
+            <div class="log-entry">
+                <div class="log-date">📅 YYYY-MM-DD</div>
+                <div class="log-category">
+                    <span class="cat-tag papers">📄 论文</span>
+                </div>
+                <div class="log-content">
+                    <ul>
+                        <li><strong>[NEW/UPDATE/FIX]</strong> <a href="page.html">描述</a></li>
+                    </ul>
+                </div>
+            </div>
+            -->
+        </section>
+
+        <div class="commentary">
+            <div class="commentary-title">📝 如何使用更新日志</div>
+            <ul>
+                <li><strong>快速定位变更</strong>: 按日期查看每天更新了什么内容</li>
+                <li><strong>追踪特定类别</strong>: 使用筛选按钮只看论文/公司等特定类型的更新</li>
+                <li><strong>跳转到详情</strong>: 点击条目链接直接跳转到具体更新位置</li>
+                <li><strong>验证时效性</strong>: 根据日期判断信息是否足够新</li>
+            </ul>
+        </div>
+    </main>
+</body>
+
+</html>

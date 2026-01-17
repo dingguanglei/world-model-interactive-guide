@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统性学习指南 - World Model Guide</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .hero {
+            text-align: center;
+            padding: 5rem 0 3rem;
+            background: linear-gradient(180deg, #f0f9ff 0%, transparent 100%);
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #0f172a;
+            letter-spacing: -0.05em;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .module-card {
+            background-color: #ffffff;
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .module-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .module-desc {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tag-blue {
+            background-color: #e0f2fe;
+            color: #0284c7;
+        }
+
+        .goals-section {
+            background-color: #f8fafc;
+            padding: 3rem;
+            border-radius: 1rem;
+            margin-top: 4rem;
+            border: 1px solid var(--border);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-content" style="margin: 0 auto; max-width: 1200px; padding: 0 2rem;">
+
+        <header class="hero">
+            <h1>World Model Learning Guide</h1>
+            <p>2026 可交互视频生成与神经游戏引擎系统性学习指南</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: #64748b;">Version 1.0 • Authored by Antigravity</p>
+        </header>
+
+        <section>
+            <h2>📖 指南简介</h2>
+            <p>本指南旨在帮助技术负责人、研究员及产品决策者深度理解 <strong>可交互世界模型 (Interactive World Model)</strong> 这一新兴赛道。这不仅仅是一份资讯汇总，而是基于
+                <strong>“如何构建下一代神经游戏引擎”</strong> 这一核心命题整理的实战与架构手册。
+            </p>
+        </section>
+
+        <section>
+            <h2>📚 章节目录</h2>
+            <div class="module-grid">
+                <a href="01_industry.html" class="module-card">
+                    <span class="tag tag-blue">Chapter 01</span>
+                    <div class="module-title">行业全景 (Landscape)</div>
+                    <div class="module-desc">辨析“生成视频”与“生成世界”的本质区别，洞察 2026 市场竞争格局。</div>
+                    <ul style="padding-left: 1.2rem; color: #64748b; font-size: 0.9rem;">
+                        <li>L1-L3 能力分级标准</li>
+                        <li>Sora vs Genie 技术鸿沟</li>
+                    </ul>
+                </a>
+
+                <a href="02_product.html" class="module-card">
+                    <span class="tag tag-blue">Chapter 02</span>
+                    <div class="module-title">产品深度 (Deep Dive)</div>
+                    <div class="module-desc">透过官方演示视频，反推 Genie 3 和 Matrix-Game 2.0 的技术边界。</div>
+                    <ul style="padding-left: 1.2rem; color: #64748b; font-size: 0.9rem;">
+                        <li>Genie 3 长时记忆解析</li>
+                        <li>TurboDiffusion 加速原理</li>
+                    </ul>
+                </a>
+
+                <a href="03_architecture.html" class="module-card">
+                    <span class="tag tag-blue">Chapter 03</span>
+                    <div class="module-title">技术架构 (Architecture)</div>
+                    <div class="module-desc">拆解“听懂键盘指令”与“实时推理”的底层实现。</div>
+                    <ul style="padding-left: 1.2rem; color: #64748b; font-size: 0.9rem;">
+                        <li>Magvit-v2 3D Tokenizer</li>
+                        <li>Action Injection 机制</li>
+                    </ul>
+                </a>
+
+                <a href="04_data.html" class="module-card">
+                    <span class="tag tag-blue">Chapter 04</span>
+                    <div class="module-title">数据工程 (Data Bible)</div>
+                    <div class="module-desc">从 0 到 1 构建高质量的 UE5 合成数据采集管线。</div>
+                    <ul style="padding-left: 1.2rem; color: #64748b; font-size: 0.9rem;">
+                        <li>VLM 自动标注脚本</li>
+                        <li>WebDataset 分片规范</li>
+                    </ul>
+                </a>
+
+                <a href="05_roadmap.html" class="module-card">
+                    <span class="tag tag-blue">Chapter 05</span>
+                    <div class="module-title">落地路线 (Roadmap)</div>
+                    <div class="module-desc">90天攻坚甘特图与阶段性交付物定义。</div>
+                    <ul style="padding-left: 1.2rem; color: #64748b; font-size: 0.9rem;">
+                        <li>周级执行计划</li>
+                        <li>团队分工矩阵 (RACI)</li>
+                    </ul>
+                </a>
+
+                <a href="references.html" class="module-card">
+                    <span class="tag tag-blue">References</span>
+                    <div class="module-title">附录与论文 (Papers)</div>
+                    <div class="module-desc">核心论文的通俗与专业双重视角解读。</div>
+                    <ul style="padding-left: 1.2rem; color: #64748b; font-size: 0.9rem;">
+                        <li>Layman vs Professional 解读</li>
+                        <li>AntiGravity's Commentary</li>
+                    </ul>
+                </a>
+
+                <a href="06_companies.html" class="module-card" style="border-left: 4px solid #10b981;">
+                    <span class="tag" style="background:#d1fae5; color:#059669;">NEW</span>
+                    <div class="module-title">公司调研 (Companies)</div>
+                    <div class="module-desc">生数科技、爱诗科技等核心公司的全面调研。</div>
+                    <ul style="padding-left: 1.2rem; color: #64748b; font-size: 0.9rem;">
+                        <li>融资历程与估值</li>
+                        <li>核心团队背景</li>
+                    </ul>
+                </a>
+
+                <a href="07_paper_tracker.html" class="module-card" style="border-left: 4px solid #f59e0b;">
+                    <span class="tag" style="background:#fef3c7; color:#b45309;">DAILY</span>
+                    <div class="module-title">论文追踪 (Papers)</div>
+                    <div class="module-desc">arXiv/GitHub 最新论文，按日期从新到旧排列。</div>
+                    <ul style="padding-left: 1.2rem; color: #64748b; font-size: 0.9rem;">
+                        <li>双视角论文解读</li>
+                        <li>每日更新</li>
+                    </ul>
+                </a>
+
+                <a href="08_community.html" class="module-card" style="border-left: 4px solid #8b5cf6;">
+                    <span class="tag" style="background:#ede9fe; color:#7c3aed;">SOCIAL</span>
+                    <div class="module-title">社区动态 (Community)</div>
+                    <div class="module-desc">X/Twitter、Reddit、论坛、博客的非官方讨论。</div>
+                    <ul style="padding-left: 1.2rem; color: #64748b; font-size: 0.9rem;">
+                        <li>热门讨论精选</li>
+                        <li>批判性解读</li>
+                    </ul>
+                </a>
+
+                <a href="09_update_log.html" class="module-card" style="border-left: 4px solid #ef4444;">
+                    <span class="tag" style="background:#fee2e2; color:#dc2626;">LOG</span>
+                    <div class="module-title">更新日志 (Updates)</div>
+                    <div class="module-desc">记录所有内容变更的日期、类别和简要描述。</div>
+                    <ul style="padding-left: 1.2rem; color: #64748b; font-size: 0.9rem;">
+                        <li>按日期追踪变更</li>
+                        <li>分类筛选</li>
+                    </ul>
+                </a>
+            </div>
+        </section>
+
+        <section class="goals-section">
+            <h2>🎯 学习目标</h2>
+            <ol style="font-size: 1.1rem; color: var(--text-secondary); line-height: 1.8;">
+                <li><strong>区分</strong> “生成视频”与“生成世界”的本质技术差异。</li>
+                <li><strong>掌握</strong> 交互世界模型的三大支柱：流式推理 (Streaming)、动作注入 (Action Injection)、长时记忆 (Long-term Memory)。
+                </li>
+                <li><strong>理解</strong> 如何利用 Unreal Engine 构建高质量的合成数据管线。</li>
+            </ol>
+        </section>
+
+    </div>
+</body>
+
+</html>

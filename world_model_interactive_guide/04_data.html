@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04. 深度数据工程 - World Model Guide</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="brand">🚀 World Model Guide</div>
+        <ul class="nav-links">
+            <li class="nav-item"><a href="index.html" class="nav-link">00. 概览 (Overview)</a></li>
+            <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景 (Landscape)</a></li>
+            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品深度 (Deep Dive)</a></li>
+            <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构 (Architecture)</a></li>
+            <li class="nav-item"><a href="04_data.html" class="nav-link active">04. 数据工程 (Data Bible)</a></li>
+            <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线 (Roadmap)</a></li>
+            <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
+            <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">07. 论文追踪 (Papers)</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">08. 社区动态 (Community)</a></li>
+            <li class="nav-item"><a href="references.html" class="nav-link">附录：参考文献 (Refs)</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <h1>04. 深度数据工程：合成数据与自动标注 (The Data Bible)</h1>
+        <blockquote>
+            <strong>"Data is the new Code."</strong> 本章将数据工程提升到战略高度，详细拆解如何构建一个"自生长"的数据闭环。
+        </blockquote>
+
+        <section>
+            <h2>4.1 数据管线全景图 (Data Pipeline Overview)</h2>
+            <p>从 UE 引擎到 WebDataset 分片，我们需要经过三个核心阶段：<strong>采集 (Recording)</strong> -> <strong>标注
+                    (Re-captioning)</strong> -> <strong>打包 (Sharding)</strong>。</p>
+
+            <pre class="mermaid">
+flowchart TD
+    subgraph UE5 [Phase 1: 虚拟仿真]
+        Engine[Unreal Engine 5]
+        Agent[RL Agent / Script]
+        Engine -->|Raw Video + Action| RawData[Raw MP4 + JSON]
+    end
+    
+    subgraph VLM [Phase 2: 语义增强 Crucial]
+        RawData -->|Sample Frames| Frames[Key Frames]
+        Frames -->|Prompt: Describe this scene| GPT4V[VLM - GPT4o / Gemini]
+        GPT4V -->|Dense Caption| Caption[Detailed Text Description]
+    end
+    
+    subgraph ETL [Phase 3: 清洗与分片]
+        RawData -->|Merge| Caption
+        Caption -->|Filter| CleanData
+        CleanData -->|WebDataset| Shards[Tar Shards 000.tar]
+    end
+            </pre>
+        </section>
+
+        <section>
+            <h2>4.2 核心策略 1：VLM 自动标注 (Re-captioning)</h2>
+            <p><a href="https://openai.com/sora" target="_blank">OpenAI Sora</a> 的核心秘密在于训练数据使用了极高质量的
+                <strong>Machine-Generated Captions</strong>。我们必须复刻这一过程。</p>
+
+            <h3>为什么需要?</h3>
+            <p>UE 导出的 JSON 只有 <code>Jump</code>, <code>Run</code> 等离散动作，缺乏语义（如 "A cyberpunk city in
+                rain"）。没有文本语义，模型就无法响应 Text Prompt。</p>
+
+            <h3>自动标注脚本 (Auto-Labeling Pipeline)</h3>
+            <pre><code class="language-python"># auto_caption.py
+def generate_dense_caption(video_path):
+    """
+    使用 VLM 生成 Sora 级别的详细描述。
+    """
+    frames = sample_frames(video_path, num=5) # 抽5帧
+    
+    prompt = """
+    Describe this video clip in extreme detail. Focus on:
+    1. The environment (lighting, textures, weather).
+    2. The main character (apparel, movement).
+    3. The camera movement (pan, tilt, zoom).
+    4. The physics interactions (fluids, particles).
+    
+    Output format: A single dense paragraph.
+    """
+    
+    # 模拟调用 Gemini Vision / GPT-4V
+    caption = call_vlm_api(frames, prompt)
+    return caption
+
+# 示例输出：
+# "A first-person view navigating a dimly lit cavern. The walls are covered in 
+# bio-luminescent moss emitting a faint blue glow. The camera shakes violently 
+# as the character sprints forward, jumping over a chasm..."
+</code></pre>
+        </section>
+
+        <section>
+            <h2>4.3 核心策略 2：WebDataset 高性能分片</h2>
+            <p><strong>痛点</strong>: 100 万个 MP4 文件会导致文件系统索引崩溃（Inode Exhaustion）。<br>
+                <strong>解法</strong>: 使用
+                <code><a href="https://github.com/webdataset/webdataset" target="_blank">WebDataset</a></code> 将数据打包成
+                1GB 左右的 <code>.tar</code> 包。
+            </p>
+
+            <h3>目录结构规范</h3>
+            <pre><code>dataset_optimized/
+├── shard_00000.tar   # 包含 1000 个视频 (video_0.mp4, video_0.json, video_0.txt)
+├── shard_00001.tar
+└── ...
+</code></pre>
+
+            <h3>JSON Schema (Metadata)</h3>
+            <p>每个视频伴随的 <code>.json</code> 文件必须严格定义：</p>
+            <pre><code class="language-json">{
+  "clip_id": "ue_level3_run05_001",
+  "duration": 5.0,
+  "fps": 24,
+  "resolution": [1280, 720],
+  "camera": {
+    "fov": 90,
+    "intrinsics": [ [500, 0, 640], [0, 500, 360], [0, 0, 1] ]
+  },
+  "controls": {
+    "input_type": "keyboard_mouse",
+    "action_sequence": [
+      {"frame": 0, "keys": ["W"], "mouse_delta": [0, 0]},
+      {"frame": 1, "keys": ["W", "Space"], "mouse_delta": [10, -5]}
+    ]
+  },
+  "caption": "A detailed description generated by VLM...",
+  "quality_score": 0.95
+}</code></pre>
+        </section>
+
+        <section>
+            <h2>4.4 核心策略 3：基于状态机的样本平衡 (Balancing)</h2>
+            <p>在 UE 采集端，不要随机乱跑。编写一个 <strong>State Machine Bot</strong> 来保证样本多样性。</p>
+            <p><strong>建议分布</strong>:</p>
+            <ul>
+                <li><strong>Exploration (50%)</strong>: 走路、跑步、看风景。这是构建世界观的基础。</li>
+                <li><strong>Interaction (30%)</strong>: 开门、捡东西、破坏物体。学习物理规律。</li>
+                <li><strong>Idle (10%)</strong>: 站立不动，观察环境动态（云的飘动、水的流动）。</li>
+                <li><strong>Combat/Extreme (10%)</strong>: 剧烈运动、特效爆炸。防止模型在动态场景崩坏。</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>4.5 核心代码逻辑：C++ Recorder 插件更新</h2>
+            <pre><code class="language-cpp">// URecorderComponent.cpp (Enhanced)
+
+void URecorderComponent::TickComponent(...) {
+    // ... [RGB & Depth Capture 代码同上] ...
+    
+    // 获取当前 Bot 状态 (用于数据集平衡分析)
+    FString CurrentState = BotAIController->GetStateName(); // e.g., "Combat"
+    
+    // 序列化，增加语义标签
+    FString MetaJson = FString::Printf(TEXT(
+        "{\"t\": %.3f, \"state\": \"%s\", \"action\": ...}"
+    ), Timestamp, *CurrentState);
+    
+    // 只有当画面变化幅度 > 阈值 OR 处于关键交互时才保存
+    // 避免存储大量无意义的静止画面 (Dedup)
+    if (IsSignificantFrame(RGB_Data)) {
+        DiskWriter->Write(RGB_Data, MetaJson);
+    }
+}</code></pre>
+        </section>
+
+        <section>
+            <h2>4.6 避坑指南 (Best Practices)</h2>
+            <ol>
+                <li><strong>VLM 成本控制</strong>: 跑一遍 1200 小时视频的 VLM 标注非常贵。建议：<strong>关键帧标注</strong> (每 2 秒抽 1 帧做
+                    VLM)，中间帧沿用上一关键帧的 Caption (<strong>插值</strong>)。</li>
+                <li><strong>Gamma 校正陷阱</strong>: UE RenderTarget 默认是 Linear Space。导出 JPG/PNG 时务必手动做 Gamma 2.2
+                    Correction，否则视频会<strong>惨白</strong>。</li>
+                <li><strong>FOV 锁定</strong>: 训练时尽量固定 FOV (e.g., 90度)。如果 FOV 乱变，模型很难学得会空间透视。</li>
+            </ol>
+
+            <div class="commentary">
+                <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                <p><strong>严正警告：</strong> 不要用 Screen Capture！因为录屏会录到 Windows 弹窗、鼠标光标、Steam 帧数显示，这些都是"污染"。一定要用 Unreal
+                    Engine 的 <code>USceneCaptureComponent2D</code> 进行纯净的 Off-screen Rendering。</p>
+            </div>
+        </section>
+
+    </main>
+</body>
+
+</html>
