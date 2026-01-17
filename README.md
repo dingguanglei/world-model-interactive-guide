@@ -33,7 +33,7 @@
 ## 作者 (Author)
 
 **丁光磊**
-*   Email: dingguanglei@qq.com
+*   Email: dingguanglei.bupt@qq.com
 
 ## 版权说明
 
