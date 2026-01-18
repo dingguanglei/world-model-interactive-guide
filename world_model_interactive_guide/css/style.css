@@ -1,67 +1,236 @@
-/* Liquid Glass Theme - Dark Mode Redesign */
-:root {
-    /* Colors */
-    --bg-primary: #030712;
-    /* Very dark slate/black */
-    --text-primary: #f8fafc;
-    /* White-ish */
-    --text-secondary: #94a3b8;
-    /* Slate-400 */
-    --text-tertiary: #64748b;
-    /* Slate-500 */
+/* =============================================
+   LIQUID GLASS THEME - Aurora Edition
+   Based on: atlaspuplabs.com/blog/liquid-glass-but-in-css
+   ============================================= */
 
+:root {
+    /* Color Palette - Light Theme */
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-tertiary: #64748b;
     --accent-blue: #3b82f6;
-    --accent-purple: #a855f7;
+    --accent-purple: #8b5cf6;
     --accent-pink: #ec4899;
 
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-hover: rgba(255, 255, 255, 0.08);
-    --glass-highlight: rgba(255, 255, 255, 0.2);
+    /* Liquid Glass Variables */
+    --glass-bg: rgba(255, 255, 255, 0.35);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --glass-shadow-light: rgba(153, 192, 255, 0.15);
+    --glass-shadow-warm: rgba(229, 253, 190, 0.12);
+    --glass-highlight: rgba(255, 255, 255, 0.8);
 
+    /* Layout */
     --sidebar-width: 280px;
     --border-radius-lg: 1.5rem;
     --border-radius-md: 1rem;
+    --border-radius-sm: 0.5rem;
 
-    --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* =============================================
+   BASE STYLES
+   ============================================= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background-color: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.7;
     margin: 0;
     min-height: 100vh;
     display: flex;
-    /* CSS-only Nebula Background */
-    background-image:
-        radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.15), transparent 25%),
-        radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.15), transparent 25%),
-        radial-gradient(circle at 50% 80%, rgba(236, 72, 153, 0.12), transparent 40%);
-    background-attachment: fixed;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
+    overflow-x: hidden;
     background: transparent;
 }
 
-::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
+/* =============================================
+   DYNAMIC AURORA BACKGROUND
+   ============================================= */
+.aurora-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -10;
+    background: linear-gradient(135deg, #f8fafc 0%, #f0f4ff 50%, #fdf4ff 100%);
+    overflow: hidden;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.2);
+.aurora-blob {
+    position: absolute;
+    filter: blur(60px);
+    opacity: 0.7;
+    /* Removed mix-blend-mode: screen - invisible on light backgrounds */
+    border-radius: 40% 60% 60% 40% / 50% 40% 60% 50%;
+    will-change: transform;
 }
 
-/* Sidebar Navigation */
+/* Blob 1: Lavender/Purple */
+.aurora-blob-1 {
+    top: -15%;
+    right: -10%;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle at 30% 30%, #c4b5fd, #a78bfa);
+    animation: aurora-drift-1 12s ease-in-out infinite alternate, hue-shift 8s ease-in-out infinite;
+}
+
+/* Blob 2: Cyan/Teal */
+.aurora-blob-2 {
+    bottom: -15%;
+    left: -10%;
+    width: 55vw;
+    height: 55vw;
+    background: radial-gradient(circle at 70% 70%, #67e8f9, #5eead4);
+    animation: aurora-drift-2 15s ease-in-out infinite alternate, hue-shift 10s ease-in-out infinite reverse;
+}
+
+/* Blob 3: Pink/Rose */
+.aurora-blob-3 {
+    top: 30%;
+    left: 25%;
+    width: 45vw;
+    height: 45vw;
+    background: radial-gradient(circle at 50% 50%, #f9a8d4, #f472b6);
+    animation: aurora-drift-3 10s ease-in-out infinite alternate, hue-shift 6s ease-in-out infinite;
+}
+
+/* Blob 4: Amber/Orange */
+.aurora-blob-4 {
+    top: 60%;
+    right: 20%;
+    width: 35vw;
+    height: 35vw;
+    background: radial-gradient(circle at 40% 60%, #fcd34d, #fbbf24);
+    opacity: 0.5;
+    animation: aurora-drift-4 18s ease-in-out infinite alternate, hue-shift 12s ease-in-out infinite reverse;
+}
+
+/* Aurora Animation Keyframes - Large visible movements */
+@keyframes aurora-drift-1 {
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(-8%, 12%) scale(1.15) rotate(15deg);
+    }
+
+    100% {
+        transform: translate(15%, -8%) scale(0.9) rotate(-10deg);
+    }
+}
+
+@keyframes aurora-drift-2 {
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(12%, -10%) scale(0.85) rotate(-20deg);
+    }
+
+    100% {
+        transform: translate(-10%, 15%) scale(1.2) rotate(15deg);
+    }
+}
+
+@keyframes aurora-drift-3 {
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(20%, 10%) scale(1.1) rotate(25deg);
+    }
+
+    100% {
+        transform: translate(-15%, -12%) scale(0.95) rotate(-15deg);
+    }
+}
+
+@keyframes aurora-drift-4 {
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(-18%, 8%) scale(1.25) rotate(-12deg);
+    }
+
+    100% {
+        transform: translate(10%, -15%) scale(0.8) rotate(20deg);
+    }
+}
+
+/* Hue shift animation for dynamic color changes - faster, non-linear */
+@keyframes hue-shift {
+    0% {
+        filter: blur(60px) hue-rotate(0deg);
+    }
+
+    25% {
+        filter: blur(60px) hue-rotate(45deg);
+    }
+
+    50% {
+        filter: blur(60px) hue-rotate(0deg);
+    }
+
+    75% {
+        filter: blur(60px) hue-rotate(-45deg);
+    }
+
+    100% {
+        filter: blur(60px) hue-rotate(0deg);
+    }
+}
+
+/* =============================================
+   LIQUID GLASS MIXIN (via class)
+   ============================================= */
+.liquid-glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) contrast(85%) saturate(120%);
+    -webkit-backdrop-filter: blur(20px) contrast(85%) saturate(120%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-lg);
+
+    /* Inset shadows for edge refraction effect */
+    box-shadow:
+        inset 8px 8px 16px var(--glass-shadow-light),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.3),
+        inset -8px -8px 16px var(--glass-shadow-warm),
+        inset -2px -2px 4px rgba(255, 255, 255, 0.2),
+        0 8px 32px rgba(0, 0, 0, 0.06);
+
+    transition: var(--transition-smooth);
+}
+
+.liquid-glass:hover {
+    box-shadow:
+        inset 10px 10px 20px var(--glass-shadow-light),
+        inset 3px 3px 6px rgba(255, 255, 255, 0.4),
+        inset -10px -10px 20px var(--glass-shadow-warm),
+        inset -3px -3px 6px rgba(255, 255, 255, 0.25),
+        0 16px 48px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+/* =============================================
+   SIDEBAR NAVIGATION
+   ============================================= */
 .sidebar {
     width: var(--sidebar-width);
     height: 100vh;
@@ -72,83 +241,128 @@ body {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    z-index: 100;
 
-    /* Glass Effect */
-    background: rgba(3, 7, 18, 0.4);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    /* Liquid Glass Sidebar */
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
     border-right: 1px solid var(--glass-border);
-    z-index: 50;
+    box-shadow:
+        inset -8px 0 20px rgba(153, 192, 255, 0.08),
+        4px 0 24px rgba(0, 0, 0, 0.04);
 }
 
 .brand {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     font-weight: 800;
-    color: #fff;
     margin-bottom: 2.5rem;
-    letter-spacing: -0.025em;
-    background: linear-gradient(to right, #60a5fa, #c084fc);
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.brand:hover {
+    text-decoration: none;
+    opacity: 0.85;
+}
+
+@keyframes gradient-shift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
 }
 
 .nav-links {
     list-style: none;
     padding: 0;
     margin: 0;
-}
-
-.nav-item {
-    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
 }
 
 .nav-link {
     display: block;
-    padding: 0.75rem 1rem;
+    padding: 0.85rem 1.25rem;
     color: var(--text-secondary);
     text-decoration: none;
-    border-radius: 0.75rem;
-    transition: var(--transition-base);
+    border-radius: var(--border-radius-md);
+    transition: var(--transition-smooth);
     font-size: 0.95rem;
     font-weight: 500;
+    position: relative;
     border: 1px solid transparent;
 }
 
 .nav-link:hover {
-    color: #fff;
-    background: var(--glass-hover);
-    border-color: var(--glass-border);
+    color: var(--accent-blue);
+    background: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.8);
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
 }
 
 .nav-link.active {
-    background: rgba(59, 130, 246, 0.15);
-    color: #93c5fd;
-    border: 1px solid rgba(59, 130, 246, 0.3);
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.1);
+    background: rgba(255, 255, 255, 0.6);
+    color: var(--accent-blue);
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow:
+        inset 4px 4px 8px rgba(153, 192, 255, 0.15),
+        inset -4px -4px 8px rgba(229, 253, 190, 0.1),
+        0 4px 16px rgba(59, 130, 246, 0.12);
 }
 
-/* Main Content */
+.nav-link.active::before {
+    content: '';
+    position: absolute;
+    left: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 50%;
+    background: linear-gradient(180deg, var(--accent-blue), var(--accent-purple));
+    border-radius: 2px;
+}
+
+/* =============================================
+   MAIN CONTENT
+   ============================================= */
 .main-content {
     margin-left: var(--sidebar-width);
-    padding: 4rem 6rem;
+    padding: 4rem 5rem;
     max-width: 1000px;
     width: 100%;
 }
 
-/* Typography */
+/* =============================================
+   TYPOGRAPHY
+   ============================================= */
 h1 {
     font-size: 3.5rem;
     font-weight: 800;
     margin-bottom: 1.5rem;
-    color: #fff;
+    color: var(--text-primary);
     letter-spacing: -0.03em;
     line-height: 1.1;
-    /* Gradient Text */
-    background: linear-gradient(to bottom right, #ffffff, #cbd5e1);
+    background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #db2777 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 h2 {
@@ -156,13 +370,10 @@ h2 {
     font-weight: 700;
     margin-top: 4rem;
     margin-bottom: 1.5rem;
-    color: #fff;
+    color: var(--text-primary);
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    position: relative;
-    padding-left: 1rem;
-    border-left: 4px solid var(--accent-purple);
 }
 
 h3 {
@@ -170,53 +381,87 @@ h3 {
     font-weight: 600;
     margin-top: 2.5rem;
     margin-bottom: 1rem;
-    color: #e2e8f0;
+    color: #334155;
+}
+
+h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: #475569;
 }
 
 p {
     margin-bottom: 1.5rem;
     color: var(--text-secondary);
-    font-size: 1.1rem;
-    max-width: 75ch;
+    font-size: 1.05rem;
+    max-width: 70ch;
+    line-height: 1.8;
 }
 
 a {
-    color: #60a5fa;
+    color: var(--accent-blue);
     text-decoration: none;
-    transition: all 0.2s;
+    font-weight: 500;
+    transition: color 0.2s;
 }
 
 a:hover {
-    color: #93c5fd;
-    text-decoration: underline;
+    color: #2563eb;
 }
 
-/* Cards & Modules (Glassmorphism) */
-.glass,
-.module-card,
-.card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--border-radius-lg);
-    padding: 2rem;
-    transition: var(--transition-base);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+strong {
+    font-weight: 600;
+    color: var(--text-primary);
 }
 
-/* Hero Section (Specific overwrite for index.html mainly) */
+/* =============================================
+   INTRO SECTION - matches regular section layout
+   ============================================= */
+.intro-section {
+    text-align: left;
+    margin: 2rem 0 3rem 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.intro-section h2 {
+    margin-top: 0;
+}
+
+.intro-section p {
+    text-indent: 2em;
+    max-width: 100%;
+}
+
+/* =============================================
+   HERO SECTION
+   ============================================= */
 .hero {
     text-align: center;
-    padding: 6rem 1rem 4rem;
+    padding: 5rem 3rem 4rem;
     margin-bottom: 4rem;
-    background: radial-gradient(circle at center, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
-    border: 1px solid var(--glass-border);
+
+    /* Liquid Glass Hero */
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(24px) contrast(90%) saturate(130%);
+    -webkit-backdrop-filter: blur(24px) contrast(90%) saturate(130%);
+    border: 1px solid rgba(255, 255, 255, 0.7);
     border-radius: 2rem;
-    backdrop-filter: blur(8px);
+    box-shadow:
+        inset 12px 12px 24px var(--glass-shadow-light),
+        inset 4px 4px 8px rgba(255, 255, 255, 0.4),
+        inset -12px -12px 24px var(--glass-shadow-warm),
+        inset -4px -4px 8px rgba(255, 255, 255, 0.3),
+        0 20px 60px rgba(0, 0, 0, 0.08);
 }
 
-/* Module Grid */
+/* =============================================
+   MODULE GRID & CARDS
+   ============================================= */
 .module-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -225,25 +470,43 @@ a:hover {
 }
 
 .module-card {
-    display: block;
+    display: flex;
+    flex-direction: column;
     text-decoration: none;
+    padding: 2rem;
+
+    /* Liquid Glass Card */
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(16px) contrast(88%) saturate(115%);
+    -webkit-backdrop-filter: blur(16px) contrast(88%) saturate(115%);
     border: 1px solid var(--glass-border);
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+    border-radius: var(--border-radius-lg);
+    box-shadow:
+        inset 6px 6px 14px var(--glass-shadow-light),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.35),
+        inset -6px -6px 14px var(--glass-shadow-warm),
+        inset -2px -2px 4px rgba(255, 255, 255, 0.2),
+        0 8px 24px rgba(0, 0, 0, 0.05);
+
+    transition: var(--transition-smooth);
 }
 
 .module-card:hover {
-    transform: translateY(-4px) scale(1.01);
-    background: rgba(255, 255, 255, 0.05);
-    border-color: var(--glass-highlight);
-    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5),
-        0 0 20px rgba(96, 165, 250, 0.1);
-    /* Glow */
+    transform: translateY(-6px) scale(1.01);
+    background: rgba(255, 255, 255, 0.55);
+    border-color: rgba(255, 255, 255, 0.9);
+    box-shadow:
+        inset 8px 8px 18px var(--glass-shadow-light),
+        inset 3px 3px 6px rgba(255, 255, 255, 0.45),
+        inset -8px -8px 18px var(--glass-shadow-warm),
+        inset -3px -3px 6px rgba(255, 255, 255, 0.3),
+        0 20px 50px rgba(0, 0, 0, 0.1);
 }
 
 .module-title {
     font-size: 1.35rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--text-primary);
     margin-bottom: 0.75rem;
 }
 
@@ -253,133 +516,308 @@ a:hover {
     line-height: 1.6;
 }
 
-/* Tags */
+/* =============================================
+   TAGS
+   ============================================= */
 .tag {
-    display: inline-flex;
-    padding: 0.35rem 0.85rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
+    align-self: flex-start;
+    padding: 0.35rem 0.9rem;
+    border-radius: 10px;
+    font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     margin-bottom: 1.25rem;
-    border: 1px solid transparent;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    color: var(--accent-blue);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
 }
 
-.tag-blue {
-    background: rgba(59, 130, 246, 0.1);
-    color: #60a5fa;
-    border-color: rgba(59, 130, 246, 0.2);
-}
-
-/* Tables */
+/* =============================================
+   TABLES
+   ============================================= */
 table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    margin: 2rem 0;
+    margin: 2.5rem 0;
     border-radius: var(--border-radius-md);
     overflow: hidden;
+
+    /* Liquid Glass Table */
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(12px) saturate(110%);
+    -webkit-backdrop-filter: blur(12px) saturate(110%);
     border: 1px solid var(--glass-border);
-    background: rgba(0, 0, 0, 0.2);
+    box-shadow:
+        inset 4px 4px 10px var(--glass-shadow-light),
+        inset -4px -4px 10px var(--glass-shadow-warm),
+        0 6px 20px rgba(0, 0, 0, 0.04);
 }
 
 th,
 td {
-    padding: 1.25rem;
-    border-bottom: 1px solid var(--glass-border);
-    color: var(--text-secondary);
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    text-align: left;
 }
 
 th {
-    background: rgba(255, 255, 255, 0.03);
-    color: #fff;
+    background: rgba(255, 255, 255, 0.5);
+    color: var(--text-primary);
     font-weight: 600;
-    text-align: left;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
 }
 
 tr:last-child td {
     border-bottom: none;
 }
 
-/* Code Blocks */
-pre,
-code {
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+tr:hover td {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* =============================================
+   CODE BLOCKS
+   ============================================= */
+pre {
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    padding: 1.75rem;
+    border-radius: var(--border-radius-md);
+    overflow-x: auto;
+    margin: 2rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 code {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 0.2rem 0.4rem;
-    border-radius: 0.375rem;
-    color: #e2e8f0;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
     font-size: 0.9em;
 }
 
-pre {
-    background: #0f172a;
-    /* Darker bg for code */
-    padding: 1.5rem;
-    border-radius: var(--border-radius-md);
-    overflow-x: auto;
-    border: 1px solid var(--glass-border);
-    margin: 2rem 0;
-}
-
-/* Blockquotes */
-blockquote {
-    border-left: 4px solid var(--accent-blue);
-    margin: 2.5rem 0;
-    padding: 1.5rem 2rem;
-    background: linear-gradient(to right, rgba(59, 130, 246, 0.05), transparent);
-    border-radius: 0 0.75rem 0.75rem 0;
+pre code {
     color: #e2e8f0;
-    font-style: italic;
-    font-size: 1.15rem;
 }
 
-/* Mermaid / Diagrams */
-.mermaid {
-    background: rgba(255, 255, 255, 0.9);
-    /* Mermaid usually needs light bg for visibility */
-    padding: 2rem;
-    border-radius: var(--border-radius-md);
-    margin: 2rem 0;
-    overflow-x: auto;
-    filter: invert(1) hue-rotate(180deg);
-    /* Dark mode hack for mermaid if needed, or keeping it light */
-    /* Let's try keeping it light but contained, or invert it. Inverting is risky. 
-       Let's stick to a slightly dim white for contrast or just white. 
-       Actually, standard mermaid is black lines on white. 
-       To make it look cool in dark mode: */
-    filter: invert(0.9) hue-rotate(200deg) contrast(1.2);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    border: 1px solid transparent;
+:not(pre)>code {
+    background: rgba(59, 130, 246, 0.1);
+    color: #2563eb;
+    padding: 0.2em 0.5em;
+    border-radius: 0.3em;
+    font-size: 0.9em;
 }
 
-/* Goals / Commentary Sections */
-.goals-section,
-.commentary {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--glass-border);
-    padding: 3rem;
+/* =============================================
+   BLOCKQUOTES & COMMENTARY
+   ============================================= */
+blockquote {
+    margin: 2.5rem 0;
+    padding: 2rem 2.5rem;
+    border: none;
     border-radius: var(--border-radius-lg);
-    margin-top: 4rem;
+
+    /* Liquid Glass Blockquote */
+    background: linear-gradient(135deg, rgba(224, 242, 254, 0.5), rgba(255, 255, 255, 0.4));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-left: 4px solid var(--accent-blue);
+    box-shadow:
+        inset 4px 4px 10px rgba(153, 192, 255, 0.12),
+        inset -4px -4px 10px rgba(255, 255, 255, 0.15),
+        0 6px 16px rgba(0, 0, 0, 0.04);
+
+    font-style: italic;
+    color: #0c4a6e;
+    font-size: 1.1rem;
 }
 
 .commentary {
-    background: linear-gradient(to bottom right, rgba(236, 72, 153, 0.05), transparent);
-    border-color: rgba(236, 72, 153, 0.2);
+    background: linear-gradient(135deg, rgba(253, 242, 248, 0.6), rgba(255, 255, 255, 0.5));
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid rgba(252, 231, 243, 0.6);
+    border-left: 4px solid var(--accent-pink);
+    border-radius: var(--border-radius-lg);
+    padding: 1.75rem 2rem;
+    margin: 2rem 0;
+    color: #831843;
+    font-style: normal;
+    box-shadow:
+        inset 4px 4px 10px rgba(244, 114, 182, 0.08),
+        inset -4px -4px 10px rgba(255, 255, 255, 0.2),
+        0 6px 16px rgba(0, 0, 0, 0.04);
+}
+
+.commentary p {
+    margin: 0;
+    font-style: normal;
+    line-height: 1.8;
 }
 
 .commentary-title {
-    color: #f472b6;
+    color: var(--accent-pink);
     font-weight: 700;
+    font-style: normal;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+}
+
+/* =============================================
+   GOALS SECTION
+   ============================================= */
+.goals-section {
+    margin: 2.5rem 0;
+    padding: 2rem;
+
+    /* Liquid Glass */
+    background: linear-gradient(135deg, rgba(240, 253, 244, 0.5), rgba(255, 255, 255, 0.4));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(187, 247, 208, 0.5);
+    border-radius: var(--border-radius-lg);
+    box-shadow:
+        inset 4px 4px 10px rgba(134, 239, 172, 0.1),
+        inset -4px -4px 10px rgba(255, 255, 255, 0.15),
+        0 6px 16px rgba(0, 0, 0, 0.03);
+}
+
+/* =============================================
+   MERMAID DIAGRAMS
+   ============================================= */
+.mermaid {
+    padding: 2rem;
+    margin: 2.5rem 0;
+    border-radius: var(--border-radius-md);
+
+    /* Liquid Glass */
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+        inset 4px 4px 10px var(--glass-shadow-light),
+        inset -4px -4px 10px var(--glass-shadow-warm),
+        0 6px 16px rgba(0, 0, 0, 0.04);
+}
+
+/* =============================================
+   LISTS
+   ============================================= */
+ul,
+ol {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+}
+
+li {
+    margin-bottom: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+li::marker {
+    color: var(--accent-blue);
+}
+
+/* =============================================
+   SCROLLBAR
+   ============================================= */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.25);
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 1024px) {
+    .main-content {
+        padding: 3rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 1.5rem;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 2rem;
+    }
+
+    .module-grid {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+/* =============================================
+   UTILITY CLASSES
+   ============================================= */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-lg);
+    box-shadow:
+        inset 6px 6px 12px var(--glass-shadow-light),
+        inset -6px -6px 12px var(--glass-shadow-warm),
+        0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.card {
+    padding: 2rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-lg);
+    box-shadow:
+        inset 6px 6px 12px var(--glass-shadow-light),
+        inset -6px -6px 12px var(--glass-shadow-warm),
+        0 8px 24px rgba(0, 0, 0, 0.05);
+    transition: var(--transition-smooth);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        inset 8px 8px 16px var(--glass-shadow-light),
+        inset -8px -8px 16px var(--glass-shadow-warm),
+        0 16px 40px rgba(0, 0, 0, 0.08);
 }

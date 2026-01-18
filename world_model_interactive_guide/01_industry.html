@@ -9,8 +9,14 @@
 </head>
 
 <body>
+    <div class="aurora-bg">
+        <div class="aurora-blob aurora-blob-1"></div>
+        <div class="aurora-blob aurora-blob-2"></div>
+        <div class="aurora-blob aurora-blob-3"></div>
+        <div class="aurora-blob aurora-blob-4"></div>
+    </div>
     <nav class="sidebar">
-        <div class="brand">🚀 World Model Guide</div>
+        <a href="index.html" class="brand">🚀 World Model Guide</a>
         <ul class="nav-links">
             <li class="nav-item"><a href="index.html" class="nav-link">00. 概览 (Overview)</a></li>
             <li class="nav-item"><a href="01_industry.html" class="nav-link active">01. 行业全景 (Landscape)</a></li>
@@ -89,6 +95,13 @@
                 </tbody>
             </table>
         </section>
+
+        <div class="commentary">
+            <div class="commentary-title">🧠 ANTIGRAVITY'S COMMENTARY</div>
+            <p>很多人误以为 Sora 和 Genie 3 是"同类产品"，这是最致命的认知误区。Sora 是<strong>电影级素材生成器</strong>，它的目标是做出"好看的视频"供剪辑师使用；而 Genie 3
+                是<strong>神经游戏引擎</strong>，它的目标是让你"进入视频里玩"。二者的技术路线、数据需求、商业化路径完全不同。如果你的业务需求是"生成 10 秒特效素材"，Sora
+                是最优解；如果你想做"能玩的 AI 游戏"，Sora 从第一行代码就是错的。</p>
+        </div>
 
         <section>
             <h2>2. 2026 Q1 关键技术规格对比 (Technical Specs)</h2>
@@ -175,37 +188,44 @@
             </p>
         </section>
 
-        <section>
-            <h2>3. 市场格局与新晋玩家 (Market Landscape)</h2>
-            <p>全球游戏市场在 2025 年预计达到 <strong><a
-                        href="https://newzoo.com/resources/blog/games-market-estimates-and-forecasts-2024"
-                        target="_blank">$188B</a> - <a
-                        href="https://www.mordorintelligence.com/industry-reports/global-gaming-market"
-                        target="_blank">$269B</a></strong> 规模 (来源: Newzoo, Mordor
-                Intelligence)。世界模型正在切入其中最核心的"引擎与内容生产"环节。</p>
+        <div class="commentary">
+            <div class="commentary-title">🧠 ANTIGRAVITY'S COMMENTARY</div>
+            <p><strong>帧率是生死线，分辨率是奢侈品。</strong>从这张表可以看出，Genie 3 和 Matrix-Game 2.0 都选择了 720p/25fps，而非
+                1080p/5s。这不是技术落后，而是深思熟虑的工程决策：人眼对"卡顿"的容忍度远低于对"糊"的容忍度。一个流畅但模糊的游戏是可玩的，一个清晰但卡成 PPT
+                的"游戏"只是幻灯片。记住这个公式：<strong>Latency &lt; 50ms OR Die</strong>。未来谁能在保持 24fps 的同时把分辨率拉到 1080p，谁就是下一个王者。</p>
+        </div>
 
-            <h3>3.1 巨头阵营 (The Giants)</h3>
-            <ul>
-                <li><strong><a href="https://deepmind.google/" target="_blank">Google DeepMind</a></strong>: 全栈布局。从
-                    Genie 到 <a href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
-                        target="_blank">Genie 3</a>，目标是 AGI 训练场。</li>
-                <li><strong><a href="https://www.nvidia.com/en-us/ai/" target="_blank">Nvidia</a></strong>: <a
-                        href="https://developer.nvidia.com/cosmos" target="_blank">Cosmos</a> 平台，结合 Omniverse，主攻
-                    Physical AI 物理仿真底座。</li>
-                <li><strong><a href="https://ai.meta.com/" target="_blank">Meta</a></strong>: 重注 <a
-                        href="https://ai.meta.com/blog/v-jepa-yann-lecun-ai-model-video-joint-embedding-predictive-architecture/"
-                        target="_blank">V-JEPA</a>，强调非生成式的"特征预测"，理解力强但生成克制。</li>
-            </ul>
+        <p>全球游戏市场在 2025 年预计达到 <strong><a
+                    href="https://newzoo.com/resources/blog/games-market-estimates-and-forecasts-2024"
+                    target="_blank">$188B</a> - <a
+                    href="https://www.mordorintelligence.com/industry-reports/global-gaming-market"
+                    target="_blank">$269B</a></strong> 规模 (来源: Newzoo, Mordor
+            Intelligence)。世界模型正在切入其中最核心的"引擎与内容生产"环节。</p>
 
-            <h3>3.2 独角兽与新星 (Emerging Players)</h3>
-            <ul>
-                <li><strong><a href="https://www.world-labs.co/" target="_blank">World Labs (李飞飞)</a></strong>: 主打
-                    <strong>Marble</strong>。侧重于生成静态且空间一致的 3D 世界，是连接 GenAI 与 3D 工作流的桥梁。</li>
-                <li><strong><a href="https://www.kunlun.com/" target="_blank">Skywork AI (昆仑万维)</a></strong>: 主打
-                    <strong><a href="https://arxiv.org/abs/2508.13009" target="_blank">Matrix-Game
-                            2.0</a></strong>。开源、工程化极强，给出了 UE 训练的参考答案。</li>
-                <li><strong>Iconic</strong>: 主打 AI-Native Game Engine。愿景 "Living, adaptive worlds"。</li>
-            </ul>
+        <h3>3.1 巨头阵营 (The Giants)</h3>
+        <ul>
+            <li><strong><a href="https://deepmind.google/" target="_blank">Google DeepMind</a></strong>: 全栈布局。从
+                Genie 到 <a href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
+                    target="_blank">Genie 3</a>，目标是 AGI 训练场。</li>
+            <li><strong><a href="https://www.nvidia.com/en-us/ai/" target="_blank">Nvidia</a></strong>: <a
+                    href="https://developer.nvidia.com/cosmos" target="_blank">Cosmos</a> 平台，结合 Omniverse，主攻
+                Physical AI 物理仿真底座。</li>
+            <li><strong><a href="https://ai.meta.com/" target="_blank">Meta</a></strong>: 重注 <a
+                    href="https://ai.meta.com/blog/v-jepa-yann-lecun-ai-model-video-joint-embedding-predictive-architecture/"
+                    target="_blank">V-JEPA</a>，强调非生成式的"特征预测"，理解力强但生成克制。</li>
+        </ul>
+
+        <h3>3.2 独角兽与新星 (Emerging Players)</h3>
+        <ul>
+            <li><strong><a href="https://www.world-labs.co/" target="_blank">World Labs (李飞飞)</a></strong>: 主打
+                <strong>Marble</strong>。侧重于生成静态且空间一致的 3D 世界，是连接 GenAI 与 3D 工作流的桥梁。
+            </li>
+            <li><strong><a href="https://www.kunlun.com/" target="_blank">Skywork AI (昆仑万维)</a></strong>: 主打
+                <strong><a href="https://arxiv.org/abs/2508.13009" target="_blank">Matrix-Game
+                        2.0</a></strong>。开源、工程化极强，给出了 UE 训练的参考答案。
+            </li>
+            <li><strong>Iconic</strong>: 主打 AI-Native Game Engine。愿景 "Living, adaptive worlds"。</li>
+        </ul>
         </section>
 
         <section>
