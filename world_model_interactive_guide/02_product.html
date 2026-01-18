@@ -176,74 +176,84 @@
             </table>
         </section>
 
-        <section id="vidu">
-            <h2>2.2 生数科技 (ShengShu): Vidu Q2 —— "资产复用的生产力工具"</h2>
+        <div class="commentary">
+            <div class="commentary-title">🧠 ANTIGRAVITY'S COMMENTARY</div>
+            <p>Genie 3 的 Demo 里最让我震惊的不是画质，而是那个<strong>"放下火把两分钟后还在原地"的细节</strong>。这意味着 DeepMind 在模型内部维护了某种形式的 World
+                State（世界状态）。传统视频模型每一帧都是"从头算"，而 Genie 3 似乎有了"记忆"。这是从"帧预测器"到"世界模拟器"的质变。不过要注意：目前 Genie 3 还没有公开 API，所以它更像是
+                DeepMind 的研究成果展示，而非可商用的产品。如果你想做商业项目，现阶段别指望它。</p>
+        </div>
 
-            <div class="card">
-                <h3>🎥 视觉案例解析: Reference-to-Video</h3>
-                <p><strong>Source</strong>: <a href="https://www.vidu.studio/" target="_blank">Vidu Official Website</a>
-                    | <a href="https://vidu.io/" target="_blank">Vidu.io Platform</a></p>
+        <h2>2.2 生数科技 (ShengShu): Vidu Q2 —— "资产复用的生产力工具"</h2>
 
-                <h4>画面描述</h4>
-                <p>左侧输入了 4 张参考图：</p>
-                <ol>
-                    <li><strong>Face</strong>: 一个亚洲女性的高清肖像。</li>
-                    <li><strong>Cloth</strong>: 一件赛博朋克风格的发光夹克。</li>
-                    <li><strong>Action</strong>: 一个"回旋踢"的骨骼姿态图。</li>
-                    <li><strong>BG</strong>: 一个下雨的霓虹街道。</li>
-                </ol>
-                <p>生成结果中，该女性穿着指定的夹克，在霓虹街道上完美执行了回旋踢。</p>
-                <p><strong>关键点</strong>：人物的脸部特征在剧烈运动中完全没有崩坏（Face Identity Preserved），夹克的发光纹理也保持了连续性。这是商业化落地（如广告、游戏
-                    PV）最看重的能力。</p>
-            </div>
+        <div class="card">
+            <h3>🎥 视觉案例解析: Reference-to-Video</h3>
+            <p><strong>Source</strong>: <a href="https://www.vidu.studio/" target="_blank">Vidu Official Website</a>
+                | <a href="https://vidu.io/" target="_blank">Vidu.io Platform</a></p>
 
-            <h3>⚡️ TurboDiffusion 加速原理</h3>
-            <p>Vidu 的快，不是靠牺牲画质，而是靠算法蒸馏。详见论文 <a href="https://arxiv.org/abs/2512.16093"
-                    target="_blank">arXiv:2512.16093</a>。</p>
+            <h4>画面描述</h4>
+            <p>左侧输入了 4 张参考图：</p>
+            <ol>
+                <li><strong>Face</strong>: 一个亚洲女性的高清肖像。</li>
+                <li><strong>Cloth</strong>: 一件赛博朋克风格的发光夹克。</li>
+                <li><strong>Action</strong>: 一个"回旋踢"的骨骼姿态图。</li>
+                <li><strong>BG</strong>: 一个下雨的霓虹街道。</li>
+            </ol>
+            <p>生成结果中，该女性穿着指定的夹克，在霓虹街道上完美执行了回旋踢。</p>
+            <p><strong>关键点</strong>：人物的脸部特征在剧烈运动中完全没有崩坏（Face Identity Preserved），夹克的发光纹理也保持了连续性。这是商业化落地（如广告、游戏
+                PV）最看重的能力。</p>
+        </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>加速技术</th>
-                        <th>传统 Diffusion</th>
-                        <th>TurboDiffusion</th>
-                        <th>提升倍数</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Attention</strong></td>
-                        <td>Full Attention (O(N²))</td>
-                        <td>SageAttention / SLA (Linear)</td>
-                        <td><strong>5-10x</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Sampling</strong></td>
-                        <td>50 Steps (DDIM)</td>
-                        <td>2-4 Steps (Distillation)</td>
-                        <td><strong>12-25x</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Precision</strong></td>
-                        <td>FP16 / BF16</td>
-                        <td>W8A8 Quantization</td>
-                        <td><strong>2x (显存)</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>总计</strong></td>
-                        <td>生成 5s 需 60s+</td>
-                        <td>生成 5s 仅需 <strong>&lt;1s</strong></td>
-                        <td><strong>~100x</strong></td>
-                    </tr>
-                </tbody>
-            </table>
+        <h3>⚡️ TurboDiffusion 加速原理</h3>
+        <p>Vidu 的快，不是靠牺牲画质，而是靠算法蒸馏。详见论文 <a href="https://arxiv.org/abs/2512.16093" target="_blank">arXiv:2512.16093</a>。
+        </p>
 
-            <blockquote>
-                <strong>技术摘要 (Paper Abstract)</strong>: "We introduce TurboDiffusion, a training-free framework that
-                accelerates video diffusion models by 100× while preserving visual quality. Our key innovations include
-                <strong>Sparse Linear Attention (SLA)</strong> and <strong>Consistency Distillation</strong>."
-            </blockquote>
+        <table>
+            <thead>
+                <tr>
+                    <th>加速技术</th>
+                    <th>传统 Diffusion</th>
+                    <th>TurboDiffusion</th>
+                    <th>提升倍数</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Attention</strong></td>
+                    <td>Full Attention (O(N²))</td>
+                    <td>SageAttention / SLA (Linear)</td>
+                    <td><strong>5-10x</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Sampling</strong></td>
+                    <td>50 Steps (DDIM)</td>
+                    <td>2-4 Steps (Distillation)</td>
+                    <td><strong>12-25x</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Precision</strong></td>
+                    <td>FP16 / BF16</td>
+                    <td>W8A8 Quantization</td>
+                    <td><strong>2x (显存)</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>总计</strong></td>
+                    <td>生成 5s 需 60s+</td>
+                    <td>生成 5s 仅需 <strong>&lt;1s</strong></td>
+                    <td><strong>~100x</strong></td>
+                </tr>
+            </tbody>
+        </table>
+        accelerates video diffusion models by 100× while preserving visual quality. Our key innovations include
+        <strong>Sparse Linear Attention (SLA)</strong> and <strong>Consistency Distillation</strong>."
+        </blockquote>
         </section>
+
+        <div class="commentary">
+            <div class="commentary-title">🧠 ANTIGRAVITY'S COMMENTARY</div>
+            <p>Vidu 的定位非常清晰：<strong>它不想做"游戏引擎"，它想做"影视生产线"</strong>。从技术上看，TurboDiffusion 那个 100 倍加速是实打实的工程突破——2-4 步采样 +
+                线性注意力 + 量化，三板斧把 Diffusion 的推理成本砍到了可商用的程度。对于广告公司、游戏宣传片团队来说，Vidu 是真正能用的工具。但要注意：它生成的是"视频素材"，不是"可玩的游戏"。你不能用
+                Vidu 做一个玩家能操控的角色。它是"内容工厂"，不是"世界模拟器"。</p>
+        </div>
 
         <section id="pixverse">
             <h2>2.3 爱诗科技 (AISphere): PixVerse V5.5 —— "音画一体的导演"</h2>
@@ -273,6 +283,14 @@
                 </blockquote>
             </div>
         </section>
+
+        <div class="commentary">
+            <div class="commentary-title">🧠 ANTIGRAVITY'S COMMENTARY</div>
+            <p>PixVerse 打的是"降维竞争"——<strong>别人还在卷画质，它已经在卷"生产效率"了</strong>。自动分镜 +
+                原生音效生成，直接把"短视频/短剧"的生产成本砍掉一半。对于抖音、快手生态的内容创作者来说，这才是最有吸引力的 feature。技术上，Audio-Visual Latent Alignment
+                是一个非常聪明的设计，它避免了传统"先生成视频再配音"的割裂感。不过代价是：你很难精细控制每一帧的节奏。如果你需要做电影级的精剪，PixVerse 不是最佳选择；如果你需要批量生产 15 秒短视频，它是王者。
+            </p>
+        </div>
 
         <section id="decision">
             <h2>📊 选型决策：我该用谁？</h2>
