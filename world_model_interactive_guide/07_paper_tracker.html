@@ -68,6 +68,15 @@
             color: #b45309;
         }
 
+        .paper-tag a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .paper-tag a:hover {
+            text-decoration: underline;
+        }
+
         .dual-view {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -101,6 +110,27 @@
 
         .pro-view .view-title {
             color: #9f1239;
+        }
+
+        .paper-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .paper-figure {
+            margin: 0.75rem 0 0;
+            background: rgba(255, 255, 255, 0.65);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+        }
+
+        .paper-figure figcaption {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
         }
 
         .last-updated {
@@ -149,7 +179,7 @@
                 (非具身智能)</strong>、<strong>交互视频生成</strong>、<strong>游戏模拟</strong>的最新研究。按发布日期从新到旧排列。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-01-20 | 本页内容每日更新，追踪学术前沿。
+            ⏰ <strong>最后更新时间</strong>: 2026-01-20 | 本页内容将每日更新「世界模型（非具身）/交互视频生成/神经游戏引擎方向的最新论文与项目」。
         </div>
 
         <section>
@@ -158,28 +188,35 @@
             <div class="paper-card">
                 <div class="paper-header">
                     <div>
-                        <div class="paper-title">LongLive: Real-time Interactive Long Video Generation</div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2503.20314" target="_blank">Wan（论文）:
+                                Open and Advanced Large-Scale Video Generative Models</a> — Wan 2.2（模型版本）</div>
                         <div class="paper-meta">
                             <span>📅 2026-01-20</span>
-                            <span>📄 arXiv/Project: <strong>待核实</strong></span>
+                            <span>📄 arXiv:2503.20314</span>
+                            <span class="paper-tag github"><a href="https://github.com/Wan-Video/Wan2.2"
+                                    target="_blank">GitHub: Wan2.2</a></span>
                             <span class="paper-tag new">NEW</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="dual-view">
+                <div class="paper-sections">
                     <div class="layman-view">
                         <div class="view-title">🟢 通俗解读</div>
-                        <p>关键词是<strong>“长视频 + 可交互 + 实时”</strong>。它想解决的是：你不只是生成一段 10 秒短片，而是像玩游戏一样，在一个持续很久的“可播放视频世界”里边操作边生成，而且几乎不卡顿。</p>
+                        <p>把 Wan 2.2 理解为“更好用的版本”更准确：你更希望它<strong>更快</strong>、<strong>更稳</strong>、<strong>更可控</strong>，而不是只在“更清晰一点”上做文章。对交互/长视频方向来说，“不卡 + 不漂 + 能控”是产品化底线。</p>
                     </div>
                     <div class="pro-view">
-                        <div class="view-title">🔴 专业解析</div>
+                        <div class="view-title">🔴 专业解读</div>
                         <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>问题定义</strong>: 长时生成的漂移 (drift) + 交互控制的一致性 + 实时延迟预算的三重约束。</li>
-                            <li><strong>常见技术路线</strong>: 流式/分块生成 (chunked streaming) + 显式/隐式状态缓存 (state cache) + 锚点/关键帧对齐 (anchors) 抑制长期漂移。</li>
-                            <li><strong>交互接口</strong>: 将动作/编辑意图编码成离散 token 或连续向量，通过 cross-attention / adapter 注入到生成器的每层或关键层。</li>
-                            <li><strong>评估重点</strong>: 延迟 (latency)、长时一致性 (object permanence / map stability)、交互可控性 (响应与可逆性)、错误累积的鲁棒性。</li>
+                            <li><strong>Problem / Setup</strong>: 大规模视频生成模型的核心矛盾是：高质量通常意味着高算力与长采样链路，而交互/长视频要求低延迟与稳定状态。</li>
+                            <li><strong>Method（论文层面）</strong>: 详见 Wan 论文（arXiv:2503.20314）对模型与训练配方的系统描述；模型版本（2.1/2.2）通常体现为工程与推理侧迭代。</li>
+                            <li><strong>Evaluation</strong>: 除传统视频质量指标外，建议额外关注长段一致性、控制可复现性与推理速度（端到端 latency）。</li>
+                            <li><strong>Limitations</strong>: 若缺少显式状态读写/记忆机制，长交互下仍会出现不可逆漂移；需要系统级失败恢复策略。</li>
                         </ul>
+                    </div>
+                    <div class="commentary">
+                        <div class="commentary-title">🧠 ntiGravity's Commentary</div>
+                        <p>对 Wan 这类“强基座视频模型”，我更看重它是否给出<strong>可复现的工程路径</strong>（推理加速、缓存、量化、流式接口）以及能否与“世界状态/记忆”模块对接。否则它更像“更强的摄像机”，而不是“更可玩的世界”。</p>
                     </div>
                 </div>
             </div>
@@ -187,56 +224,34 @@
             <div class="paper-card">
                 <div class="paper-header">
                     <div>
-                        <div class="paper-title">WAN 2.2（交互/长视频方向）</div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2503.20314" target="_blank">Wan（论文）:
+                                Open and Advanced Large-Scale Video Generative Models</a> — Wan 2.1（模型版本）</div>
                         <div class="paper-meta">
                             <span>📅 2026-01-20</span>
-                            <span>📄 arXiv/Tech Report: <strong>待核实</strong></span>
+                            <span>📄 arXiv:2503.20314</span>
+                            <span class="paper-tag github"><a href="https://github.com/Wan-Video/Wan2.1"
+                                    target="_blank">GitHub: Wan2.1</a></span>
                             <span class="paper-tag new">NEW</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="dual-view">
+                <div class="paper-sections">
                     <div class="layman-view">
                         <div class="view-title">🟢 通俗解读</div>
-                        <p>可以把 WAN 2.2 当作对 2.1 的“工程化升级”：更像产品可用的版本，重点通常会落在<strong>更稳的长时一致性</strong>与<strong>更低的生成延迟</strong>，以及更完整的控制能力。</p>
+                        <p>Wan 2.1 可以理解成“基础可用版本”：质量与基本能力到位，但如果把它直接拿来做长时交互世界模型，很可能会遇到“玩久了就跑偏、越玩越不可控”的老问题。</p>
                     </div>
                     <div class="pro-view">
-                        <div class="view-title">🔴 专业解析</div>
+                        <div class="view-title">🔴 专业解读</div>
                         <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>目标</strong>: 在不显著损失质量的前提下，提升长跨度时空一致性，并把推理速度推向可交互门槛。</li>
-                            <li><strong>可能改进点</strong>: 更强的时序建模（更长上下文/更稳的 conditioning）、记忆机制（显式 memory bank 或状态递推）、推理加速（蒸馏/稀疏注意力/量化）。</li>
-                            <li><strong>控制维度</strong>: 文本/参考图/运动轨迹/镜头运动等控制通常会更体系化，便于“可复现地调参”。</li>
-                            <li><strong>验证方式</strong>: 长视频分段一致性评测 + 交互动作响应评测（例如动作延迟、控制偏差与漂移率）。</li>
+                            <li><strong>定位</strong>: 作为版本迭代基线，便于对比 2.2 在速度、稳定性、控制接口上的增量。</li>
+                            <li><strong>可迁移点</strong>: 基座视频生成的 tokenizer/conditioning/训练 recipe 往往可复用到交互世界模型，但“状态/记忆/可恢复”通常需要额外模块。</li>
+                            <li><strong>评估建议</strong>: 做长视频分段一致性评测（跨 chunk 的物体恒常性）与控制误差评测，而不是只看短视频质量。</li>
                         </ul>
                     </div>
-                </div>
-            </div>
-
-            <div class="paper-card">
-                <div class="paper-header">
-                    <div>
-                        <div class="paper-title">WAN 2.1（基础版本/对照组）</div>
-                        <div class="paper-meta">
-                            <span>📅 2026-01-20</span>
-                            <span>📄 arXiv/Tech Report: <strong>待核实</strong></span>
-                            <span class="paper-tag new">NEW</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dual-view">
-                    <div class="layman-view">
-                        <div class="view-title">🟢 通俗解读</div>
-                        <p>WAN 2.1 更像“打底版本”：先把画面质量与基础可控性做上去，但在长视频和强交互场景里，通常还会遇到“玩久了就跑偏”的问题。</p>
-                    </div>
-                    <div class="pro-view">
-                        <div class="view-title">🔴 专业解析</div>
-                        <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>角色定位</strong>: 作为 2.2 的对照组，用于观察“加了哪些机制后，长时与实时能力提升了多少”。</li>
-                            <li><strong>常见短板</strong>: 长跨度一致性不足、状态不可显式读写导致的不可控漂移、推理延迟偏高。</li>
-                            <li><strong>可迁移价值</strong>: 可用于复用 tokenizer/conditioning 设计与训练配方，为 2.2 或 LongLive 类方向提供基线。</li>
-                        </ul>
+                    <div class="commentary">
+                        <div class="commentary-title">🧠 ntiGravity's Commentary</div>
+                        <p>把 2.1/2.2 当作“版本号玄学”很危险：真正重要的是它们是否带来<strong>可交互门槛</strong>所需的端到端工程指标改善（latency、可复现控制、失败恢复），以及是否暴露出可对接的接口（action/state）。</p>
                     </div>
                 </div>
             </div>
@@ -254,18 +269,23 @@
                     </div>
                 </div>
 
-                <div class="dual-view">
+                <div class="paper-sections">
                     <div class="layman-view">
                         <div class="view-title">🟢 通俗解读</div>
-                        <p>这篇论文教 AI 用"4D 坐标"来控制视频生成。就像在游戏引擎里移动摄像机和物体一样，你可以精确控制画面中每个物体的位置和运动轨迹，而不是只能用文字描述。</p>
+                        <p>这篇论文的核心是：用更“像游戏引擎”的方式控制视频。你不是只写一句话让模型自由发挥，而是给出<strong>相机与物体在时间维度上的几何轨迹</strong>（可理解为 4D：3D 空间 + 时间），让生成结果更可控、更可复现。</p>
                     </div>
                     <div class="pro-view">
-                        <div class="view-title">🔴 专业解析</div>
+                        <div class="view-title">🔴 专业解读</div>
                         <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>核心创新</strong>: 提出 4D Geometric Control 表示法，统一编码相机和物体动态。</li>
-                            <li><strong>技术路线</strong>: 使用预训练 Video Diffusion Model，将 4D 状态渲染为 Conditioning Signal。</li>
-                            <li><strong>意义</strong>: 解决了传统文本控制的模糊性问题。</li>
+                            <li><strong>Problem / Setup</strong>: 纯文本控制存在歧义与不可复现；需要一种可组合、可精确约束的控制信号。</li>
+                            <li><strong>Method</strong>: 以几何/运动表示统一编码相机与物体动态，将其渲染/投影为可被视频生成模型消费的 conditioning。</li>
+                            <li><strong>Why it works</strong>: 将“想要的运动”从语言空间迁移到几何空间，减少模型在动作与相机运动上的自由度，从而提升一致性。</li>
+                            <li><strong>Evaluation</strong>: 可控性（轨迹误差）、一致性（跨帧稳定）、以及与文本/参考图的组合控制能力。</li>
                         </ul>
+                    </div>
+                    <div class="commentary">
+                        <div class="commentary-title">🧠 ntiGravity's Commentary</div>
+                        <p>我把这类工作视为“世界模型的控制层”——它解决的是<strong>接口问题</strong>：如何把可复现的意图（轨迹/相机）喂给生成器。真正的产品化还需要把这层接口与 state/memory、失败恢复连起来，才能支撑长交互。</p>
                     </div>
                 </div>
             </div>
@@ -277,60 +297,34 @@
             <div class="paper-card">
                 <div class="paper-header">
                     <div>
-                        <div class="paper-title"><a href="https://arxiv.org/abs/2512.XXXXX"
-                                target="_blank">ChronoDreamer: Action-Conditioned World Model for Robotic Planning</a>
-                        </div>
-                        <div class="paper-meta">
-                            <span>📅 2025-12-23</span>
-                            <span>📄 arXiv (Preprint)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dual-view">
-                    <div class="layman-view">
-                        <div class="view-title">🟢 通俗解读</div>
-                        <p>ChronoDreamer 让机器人可以"做白日梦"来练习操作。它能根据机械臂的动作指令，想象出接下来会发生什么画面，帮助机器人在行动前先"脑补"一遍。</p>
-                    </div>
-                    <div class="pro-view">
-                        <div class="view-title">🔴 专业解析</div>
-                        <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>架构</strong>: Spatio-temporal Transformer，多模态输入 (RGB, Contact Map, Joint State)。
-                            </li>
-                            <li><strong>特点</strong>: 针对高频接触的机器人操作场景优化。</li>
-                            <li><strong>注意</strong>: 属于具身智能边界，但 World Model 架构可复用。</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="paper-card">
-                <div class="paper-header">
-                    <div>
                         <div class="paper-title"><a href="https://arxiv.org/abs/2512.16093"
                                 target="_blank">TurboDiffusion: Accelerating Video Diffusion by 100-200x</a></div>
                         <div class="paper-meta">
                             <span>📅 2025-12-20</span>
                             <span>📄 arXiv:2512.16093</span>
-                            <span class="paper-tag github">GitHub</span>
+                            <span class="paper-tag github"><a href="https://github.com/thu-ml/TurboDiffusion"
+                                    target="_blank">GitHub</a></span>
                         </div>
                     </div>
                 </div>
 
-                <div class="dual-view">
+                <div class="paper-sections">
                     <div class="layman-view">
                         <div class="view-title">🟢 通俗解读</div>
-                        <p>这是一个"加速外挂"。它能把原本要 1 分钟生成的 AI 视频，缩短到不到 1 秒，而且画质几乎不变。是 <a href="https://www.vidu.studio/"
-                                target="_blank">Vidu</a> 实时生成的核心技术。</p>
+                        <p>这篇论文本质是在做“视频扩散的<strong>涡轮增压</strong>”：把原本需要很多步才能生成的视频，压缩到极少步数完成，并尽量保持质量不崩。这类加速是把世界模型推向“可交互”的必经之路。</p>
                     </div>
                     <div class="pro-view">
-                        <div class="view-title">🔴 专业解析</div>
+                        <div class="view-title">🔴 专业解读</div>
                         <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>SLA (Sparse Linear Attention)</strong>: 将 O(N²) 降为 O(N)。</li>
-                            <li><strong>Consistency Distillation</strong>: 50步 → 2-4步。</li>
-                            <li><strong>W8A8 Quantization</strong>: 显存占用减半。</li>
-                            <li><strong>团队</strong>: 清华 TSAIL + 生数科技联合发布。</li>
+                            <li><strong>Problem / Setup</strong>: 扩散采样步数与时空注意力带来高延迟，难以满足实时/交互预算。</li>
+                            <li><strong>Method</strong>: 通过结构/注意力优化与一致性类蒸馏把采样步数显著压缩，并配合量化降低显存与吞吐瓶颈。</li>
+                            <li><strong>Evaluation</strong>: 除质量指标外，更关键是端到端速度（fps/latency）与加速后的一致性损失。</li>
+                            <li><strong>Limitations</strong>: 加速往往带来分布外失真与可控性折损，需要与更稳的 conditioning/state 设计配合。</li>
                         </ul>
+                    </div>
+                    <div class="commentary">
+                        <div class="commentary-title">🧠 ntiGravity's Commentary</div>
+                        <p>“加速”不是锦上添花，而是交互世界模型的地基。我会优先看它是否提供<strong>可落地的推理栈</strong>（量化/缓存/并行）与清晰的速度-质量曲线，而不是只给一个峰值加速数字。</p>
                     </div>
                 </div>
             </div>
@@ -338,26 +332,57 @@
             <div class="paper-card">
                 <div class="paper-header">
                     <div>
-                        <div class="paper-title"><a href="https://researchgate.net/publication/387654321"
-                                target="_blank">RELIC: Interactive Video World Model with Long-Horizon Memory</a></div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2512.04040" target="_blank">RELIC:
+                                Interactive Video World Model with Long-Horizon Memory</a></div>
                         <div class="paper-meta">
-                            <span>📅 2025-12-15 (Preprint)</span>
-                            <span>📄 ResearchGate</span>
+                            <span>📅 2025-12-03</span>
+                            <span>📄 arXiv:2512.04040</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="dual-view">
+                <div class="paper-sections">
                     <div class="layman-view">
                         <div class="view-title">🟢 通俗解读</div>
-                        <p>RELIC 让 AI 生成的视频世界拥有"长期记忆"。你走出房间再回来，东西还会在原位。这是目前视频模型最缺失的能力之一。</p>
+                        <p>RELIC 的目标是给“视频世界”加上<strong>长期记忆</strong>：你离开场景再回来，物体不应该随机换位置。对交互世界模型来说，这相当于从“会画”迈向“会记”。</p>
                     </div>
                     <div class="pro-view">
-                        <div class="view-title">🔴 专业解析</div>
+                        <div class="view-title">🔴 专业解读</div>
                         <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>关键问题</strong>: 解决 Long-horizon 场景下的 Temporal Consistency。</li>
-                            <li><strong>方法</strong>: 引入显式 Memory Bank，而不仅依赖 Autoregressive 上下文。</li>
+                            <li><strong>Problem / Setup</strong>: 仅靠短上下文/隐式记忆会在长跨度下发生漂移，表现为物体消失、身份错乱、场景重置。</li>
+                            <li><strong>Method</strong>: 引入显式 Memory（例如 memory bank / key-value 存储 / 可检索状态），把跨段稳定信息从生成主干中“外置”。</li>
+                            <li><strong>Why it works</strong>: 让模型在生成时可以“查档”，而不是完全依赖最近几帧的像素相关性。</li>
+                            <li><strong>Evaluation</strong>: 物体恒常性、长段一致性、回访一致性（revisit consistency）、以及交互动作下的状态可读写性。</li>
+                            <li><strong>Limitations</strong>: 显式记忆带来检索误差与写入噪声；需要设计写入策略与冲突解决（同一物体多次观测融合）。</li>
                         </ul>
+
+                        <figure class="paper-figure">
+                            <svg viewBox="0 0 900 170" width="100%" height="170" role="img" aria-label="RELIC 显式记忆辅助长时一致性的示意图">
+                                <rect x="20" y="35" width="250" height="100" rx="14" fill="#fff1f2" stroke="#fda4af" />
+                                <text x="145" y="80" text-anchor="middle" font-size="16" fill="#1e293b">Video Generator</text>
+                                <text x="145" y="102" text-anchor="middle" font-size="12" fill="#475569">(diffusion / transformer)</text>
+
+                                <rect x="330" y="20" width="240" height="60" rx="14" fill="#f0fdf4" stroke="#86efac" />
+                                <text x="450" y="55" text-anchor="middle" font-size="14" fill="#1e293b">Write: observations → memory</text>
+
+                                <rect x="330" y="95" width="240" height="60" rx="14" fill="#f0fae6" stroke="#86efac" />
+                                <text x="450" y="130" text-anchor="middle" font-size="14" fill="#1e293b">Read: retrieve state → condition</text>
+
+                                <rect x="630" y="35" width="250" height="100" rx="14" fill="#dbeafe" stroke="#93c5fd" />
+                                <text x="755" y="80" text-anchor="middle" font-size="16" fill="#1e293b">Explicit Memory</text>
+                                <text x="755" y="102" text-anchor="middle" font-size="12" fill="#475569">(bank / KV store)</text>
+
+                                <path d="M270 85 L330 50" stroke="#64748b" stroke-width="3" />
+                                <path d="M570 50 L630 85" stroke="#64748b" stroke-width="3" />
+                                <path d="M270 85 L330 125" stroke="#64748b" stroke-width="3" />
+                                <path d="M570 125 L630 85" stroke="#64748b" stroke-width="3" />
+                            </svg>
+                            <figcaption>示意图：把长期稳定信息外置为可读写的显式记忆，降低“只靠上下文”导致的长时漂移。</figcaption>
+                        </figure>
+                    </div>
+                    <div class="commentary">
+                        <div class="commentary-title">🧠 ntiGravity's Commentary</div>
+                        <p>“显式记忆”是交互世界模型的分水岭：没有它，长时一致性很难靠堆模型解决。我会重点看 RELIC 的记忆写入/检索策略是否<strong>可扩展、可诊断</strong>（能回答：错在哪一条记忆？如何回滚？）。</p>
                     </div>
                 </div>
             </div>
@@ -365,6 +390,41 @@
 
         <section>
             <h2>📅 2025年9月</h2>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2509.22622" target="_blank">LongLive:
+                                Real-time Interactive Long Video Generation</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2025-09-26</span>
+                            <span>📄 arXiv:2509.22622</span>
+                            <span class="paper-tag github"><a href="https://github.com/NVlabs/LongLive"
+                                    target="_blank">GitHub</a></span>
+                            <span class="paper-tag"><a href="https://nvlabs.github.io/LongLive/" target="_blank">Project</a></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="paper-sections">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>它要做“能一直玩”的视频生成：你不断输入操作，模型就持续生成后续画面，并尽量保持世界状态不崩。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解读</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>核心挑战</strong>: 长时交互下的误差累积（drift）与实时延迟预算同时成立。</li>
+                            <li><strong>关键能力</strong>: 流式/分块生成、状态缓存与锚点对齐、动作条件注入的稳定接口。</li>
+                            <li><strong>评估重点</strong>: 延迟（latency/fps）、长时一致性（回访一致性/物体恒常性）、控制响应（可逆/可恢复）。</li>
+                        </ul>
+                    </div>
+                    <div class="commentary">
+                        <div class="commentary-title">🧠 ntiGravity's Commentary</div>
+                        <p>LongLive 的真正价值在于把“交互世界模型”的系统问题讲清楚：<strong>延迟、漂移、可控、可恢复</strong>缺一不可。后续建议把它的评测维度抽成表格，对标 Matrix-Game 2.0 与 Genie 3。</p>
+                    </div>
+                </div>
+            </div>
 
             <div class="paper-card">
                 <div class="paper-header">
@@ -378,18 +438,23 @@
                     </div>
                 </div>
 
-                <div class="dual-view">
+                <div class="paper-sections">
                     <div class="layman-view">
                         <div class="view-title">🟢 通俗解读</div>
-                        <p>WorldGym 把世界模型变成了一个"虚拟健身房"。AI Agent 可以在里面反复练习，而不用真的去操作机器人或开真车，省钱又安全。</p>
+                        <p>WorldGym 把世界模型当作一个“虚拟环境”，让 agent 可以在里面反复练习与评估策略。它更像是在回答：世界模型能不能不仅生成画面，还能当“可用的模拟器”。</p>
                     </div>
                     <div class="pro-view">
-                        <div class="view-title">🔴 专业解析</div>
+                        <div class="view-title">🔴 专业解读</div>
                         <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>架构</strong>: Autoregressive, Action-conditioned 视频生成。</li>
-                            <li><strong>评估方式</strong>: 使用 VLM (Vision-Language Model) 作为 Reward Function。</li>
-                            <li><strong>验证</strong>: 在 World Model 中的策略成功率与真实世界高度相关。</li>
+                            <li><strong>Problem / Setup</strong>: 训练/评估策略需要环境；真实环境昂贵且不可控，世界模型可作为替代环境。</li>
+                            <li><strong>Method</strong>: action-conditioned 的生成式环境 + 以 VLM/判别器等方式构造 reward/评估信号。</li>
+                            <li><strong>Evaluation</strong>: 关键是“在世界模型里学到的策略”与“真实世界表现”的相关性。</li>
+                            <li><strong>Limitations</strong>: 世界模型偏差会被策略利用（simulator hacking），需要约束与校准。</li>
                         </ul>
+                    </div>
+                    <div class="commentary">
+                        <div class="commentary-title">🧠 ntiGravity's Commentary</div>
+                        <p>WorldGym 这类工作提供了一个重要的现实指标：世界模型好不好，不仅看生成质量，更看它是否能支撑<strong>下游决策</strong>且与真实结果一致。对“神经游戏引擎”来说，这是走向可用系统的关键路标。</p>
                     </div>
                 </div>
             </div>
@@ -406,31 +471,30 @@
                         <div class="paper-meta">
                             <span>📅 2025-08-18</span>
                             <span>📄 arXiv:2508.13009</span>
-                            <span class="paper-tag github">GitHub</span>
+                            <span class="paper-tag github"><a href="https://github.com/SkyworkAI/Matrix-Game"
+                                    target="_blank">GitHub</a></span>
                         </div>
                     </div>
                 </div>
 
-                <div class="dual-view">
+                <div class="paper-sections">
                     <div class="layman-view">
                         <div class="view-title">🟢 通俗解读</div>
-                        <p>这就是把 GTA5 喂给了一个画图 AI。当你按 "W" 键时，它就画出下一帧向前的画面。因为画得非常快 (25
-                            FPS)，所以你感觉像在玩游戏。<strong>而且是开源的！</strong></p>
+                        <p>可以把它理解成“神经游戏引擎的开源雏形”：你按键盘（动作），模型就生成下一帧画面，速度快到像在玩游戏。关键点是：它让更多团队能复现实验，而不是只看巨头 demo。</p>
                     </div>
                     <div class="pro-view">
-                        <div class="view-title">🔴 专业解析</div>
+                        <div class="view-title">🔴 专业解读</div>
                         <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>架构</strong>: DiT + Causal Masking + Cross-Attention Action Injection。</li>
-                            <li><strong>数据</strong>: UE5 + GTA5 合成数据，带精确 Action Label。</li>
-                            <li><strong>意义</strong>: 中小团队的参考实现，打破巨头垄断。</li>
+                            <li><strong>Problem / Setup</strong>: 要把视频生成变成“环境”，必须 action-conditioned 且能实时推理。</li>
+                            <li><strong>Method</strong>: 以 DiT 为骨架，通过因果掩码保证时序生成可用，并用 cross-attention 将动作注入生成过程。</li>
+                            <li><strong>Data</strong>: 高质量 action label 与合成数据管线（UE5/GTA5）通常比架构更关键。</li>
+                            <li><strong>Evaluation</strong>: 交互可玩性（fps/latency）、动作响应一致性、长时漂移与失败恢复。</li>
                         </ul>
                     </div>
-                </div>
-
-                <div class="commentary">
-                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
-                    <p>这是 2025 年最重要的开源项目之一。它证明了只要你有足够的 UE/GTA 合成数据，Diffusion Model 真的能学会物理引擎的逻辑。<strong>缺点</strong>:
-                        没有显式 Memory Bank，长时一致性差。</p>
+                    <div class="commentary">
+                        <div class="commentary-title">🧠 ntiGravity's Commentary</div>
+                        <p>这是 2025 年最重要的开源里程碑之一。它证明了“只要数据足够对齐（动作标注 + 可控环境），扩散/Transformer 真的能学到类似引擎的动态”。但它也暴露了硬伤：如果没有显式 memory/state，长时一致性很难靠堆模型解决。</p>
+                    </div>
                 </div>
             </div>
 
@@ -447,19 +511,23 @@
                     </div>
                 </div>
 
-                <div class="dual-view">
+                <div class="paper-sections">
                     <div class="layman-view">
                         <div class="view-title">🟢 通俗解读</div>
-                        <p>Genie 3 能把你的一句话变成一个可探索的 3D 梦境。你可以像玩游戏一样在里面走动，而且走出房间再回来，东西还在原位。这是目前的天花板。</p>
+                        <p>Genie 3 把“生成视频”推进到“生成可探索世界”：你可以在里面走动、改变视角，且能在一段时间内保持基本一致性。这就是从“看短片”走向“玩关卡”的关键一步。</p>
                     </div>
                     <div class="pro-view">
-                        <div class="view-title">🔴 专业解析</div>
+                        <div class="view-title">🔴 专业解读</div>
                         <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>规格</strong>: 720p / 24 FPS / 分钟级一致性。</li>
-                            <li><strong>Tokenizer</strong>: Magvit-v2 (LFQ)。</li>
-                            <li><strong>控制</strong>: Latent Action (无需人工标注)。</li>
-                            <li><strong>意义</strong>: 从"动图"到"可玩关卡"的分水岭。</li>
+                            <li><strong>Problem / Setup</strong>: 需要把环境动态与控制信号建模成可生成的序列，同时保持分钟级一致性与实时感。</li>
+                            <li><strong>Method（公开信息）</strong>: 结合高效视频 tokenizer（如 Magvit 系列）与可学习的 latent action，使模型在无显式人工动作标注下获得可控性。</li>
+                            <li><strong>Evaluation</strong>: 规格（分辨率/fps/一致性时长）与交互可控性（响应延迟、动作一致性、可回访一致性）。</li>
+                            <li><strong>Limitations</strong>: 仍可能主要依赖像素相关性而非显式因果模型；长交互下的 state/memory 读写能力仍是关键瓶颈。</li>
                         </ul>
+                    </div>
+                    <div class="commentary">
+                        <div class="commentary-title">🧠 ntiGravity's Commentary</div>
+                        <p>Genie 3 的“天花板”更多是系统工程的胜利：把 tokenizer、动作抽象、推理速度与一致性绑成一套产品级链路。下一步真正拉开差距的，会是显式 state/memory 与可恢复机制（存档/回滚/重锚定）。</p>
                     </div>
                 </div>
             </div>
