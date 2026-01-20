@@ -1,0 +1,26 @@
+---
+description: AntiGravity 内容规范（强制）—引用统一规则源
+globs:
+  - "**/*.md"
+  - "world_model_interactive_guide/**/*.html"
+alwaysApply: true
+---
+
+你正在为本仓库生成/修改内容与页面。**必须严格遵守** AntiGravity 内容撰写规范指南。
+
+## 权威规则来源（必须遵守）
+- 规则原文（首选引用路径）：`../.agent/workflows/antigravity-content-guide.md`
+- 备用路径（若你的环境不支持上面的相对路径）：`.agent/workflows/antigravity-content-guide.md`
+
+> 若本文件与规则原文有任何不一致，以规则原文为准。
+
+## 强制执行的关键约束（便于执行的最小集合）
+- **可追溯性**：所有关键陈述（数字/结论/产品能力/论文结论）都必须有可点击来源链接。
+- **论文追踪（07）**：
+  - 标题必须能跳转原文（优先 arXiv/PDF/官方 Project Page）。
+  - 每篇论文必须包含三段垂直模块：🟢通俗解读 → 🔴专业解读 → 🧠 ntiGravity's Commentary。
+  - 专业解读需拆解要点，必要时举例；重要论文建议图文并茂（可用 SVG/流程图/对比表）。
+- **社区动态（08）**：尽可能给出引用/原帖跳转链接（tweet/thread/HF discussion/博客文章等）。
+- **更新策略**：无高价值内容可不更新；禁止为了“日更”添加低价值、无引用、重复内容。
+- **最后更新时间模块**：更新型章节页顶部必须统一展示：
+  - `⏰ 最后更新时间: YYYY-MM-DD | 本页内容将每日更新「XXXXXX」。`
