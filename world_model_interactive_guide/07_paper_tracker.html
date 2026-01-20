@@ -149,11 +149,97 @@
                 (非具身智能)</strong>、<strong>交互视频生成</strong>、<strong>游戏模拟</strong>的最新研究。按发布日期从新到旧排列。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-01-17 | 本页内容每日更新，追踪学术前沿。
+            ⏰ <strong>最后更新时间</strong>: 2026-01-20 | 本页内容每日更新，追踪学术前沿。
         </div>
 
         <section>
             <h2>📅 2026年1月</h2>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title">LongLive: Real-time Interactive Long Video Generation</div>
+                        <div class="paper-meta">
+                            <span>📅 2026-01-20</span>
+                            <span>📄 arXiv/Project: <strong>待核实</strong></span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>关键词是<strong>“长视频 + 可交互 + 实时”</strong>。它想解决的是：你不只是生成一段 10 秒短片，而是像玩游戏一样，在一个持续很久的“可播放视频世界”里边操作边生成，而且几乎不卡顿。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>问题定义</strong>: 长时生成的漂移 (drift) + 交互控制的一致性 + 实时延迟预算的三重约束。</li>
+                            <li><strong>常见技术路线</strong>: 流式/分块生成 (chunked streaming) + 显式/隐式状态缓存 (state cache) + 锚点/关键帧对齐 (anchors) 抑制长期漂移。</li>
+                            <li><strong>交互接口</strong>: 将动作/编辑意图编码成离散 token 或连续向量，通过 cross-attention / adapter 注入到生成器的每层或关键层。</li>
+                            <li><strong>评估重点</strong>: 延迟 (latency)、长时一致性 (object permanence / map stability)、交互可控性 (响应与可逆性)、错误累积的鲁棒性。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title">WAN 2.2（交互/长视频方向）</div>
+                        <div class="paper-meta">
+                            <span>📅 2026-01-20</span>
+                            <span>📄 arXiv/Tech Report: <strong>待核实</strong></span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>可以把 WAN 2.2 当作对 2.1 的“工程化升级”：更像产品可用的版本，重点通常会落在<strong>更稳的长时一致性</strong>与<strong>更低的生成延迟</strong>，以及更完整的控制能力。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>目标</strong>: 在不显著损失质量的前提下，提升长跨度时空一致性，并把推理速度推向可交互门槛。</li>
+                            <li><strong>可能改进点</strong>: 更强的时序建模（更长上下文/更稳的 conditioning）、记忆机制（显式 memory bank 或状态递推）、推理加速（蒸馏/稀疏注意力/量化）。</li>
+                            <li><strong>控制维度</strong>: 文本/参考图/运动轨迹/镜头运动等控制通常会更体系化，便于“可复现地调参”。</li>
+                            <li><strong>验证方式</strong>: 长视频分段一致性评测 + 交互动作响应评测（例如动作延迟、控制偏差与漂移率）。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title">WAN 2.1（基础版本/对照组）</div>
+                        <div class="paper-meta">
+                            <span>📅 2026-01-20</span>
+                            <span>📄 arXiv/Tech Report: <strong>待核实</strong></span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>WAN 2.1 更像“打底版本”：先把画面质量与基础可控性做上去，但在长视频和强交互场景里，通常还会遇到“玩久了就跑偏”的问题。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>角色定位</strong>: 作为 2.2 的对照组，用于观察“加了哪些机制后，长时与实时能力提升了多少”。</li>
+                            <li><strong>常见短板</strong>: 长跨度一致性不足、状态不可显式读写导致的不可控漂移、推理延迟偏高。</li>
+                            <li><strong>可迁移价值</strong>: 可用于复用 tokenizer/conditioning 设计与训练配方，为 2.2 或 LongLive 类方向提供基线。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
             <div class="paper-card">
                 <div class="paper-header">

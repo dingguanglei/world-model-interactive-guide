@@ -169,11 +169,83 @@
             上关于世界模型的非一线官方讨论。这些内容更发散、更前沿，但也需要批判性看待。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-01-17 | 本页内容每日更新，追踪社区热点。
+            ⏰ <strong>最后更新时间</strong>: 2026-01-20 | 本页内容每日更新，追踪社区热点。
         </div>
 
         <section>
             <h2>🔥 本周热门讨论</h2>
+
+            <div class="discussion-card">
+                <div class="discussion-header">
+                    <div class="platform-icon platform-forum">F</div>
+                    <div>
+                        <strong>社区综合（多帖汇总）：LongLive / 实时交互长视频生成</strong>
+                        <div class="discussion-source">
+                            <span class="topic-tag hot-tag">HOT</span>
+                            <span class="topic-tag">Long Video</span>
+                            <span class="topic-tag">Real-time</span>
+                            <span class="topic-tag">Interactive</span>
+                            2026-01-20
+                        </div>
+                    </div>
+                </div>
+
+                <div class="discussion-content">
+                    “大家真正关心的不是‘能不能生成更长’，而是‘能不能<strong>持续交互</strong>且<strong>不漂移</strong>。一分钟一致性只是入门门槛；真正难的是：我来回走几次、改几次动作，世界状态还能不能保持可读可写、可回滚、可锚定。否则就只是更长的短片拼接。”<br><br>
+                    — 社区综合观点（多帖讨论归纳）
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>社区在强调：做“长视频”并不等于做“可玩的世界”。真正的门槛是你不断操作之后，世界还能保持稳定，像游戏引擎那样能存档、能回退、能继续玩。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>焦点从质量转向系统</strong>: 生成质量只是必要条件，核心 KPI 变成 latency / drift / controllability。</li>
+                            <li><strong>State 之争</strong>: “隐式上下文记忆”在长交互下必然崩，社区更偏向显式 state/memory 设计与读写接口。</li>
+                            <li><strong>可恢复性</strong>: 失败恢复（重新锚定/回滚/重采样）被视为产品化必须项。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="discussion-card">
+                <div class="discussion-header">
+                    <div class="platform-icon platform-x">𝕏</div>
+                    <div>
+                        <strong>X/Twitter 热议：WAN 2.1 vs WAN 2.2，差异到底在哪？</strong>
+                        <div class="discussion-source">
+                            <span class="topic-tag hot-tag">HOT</span>
+                            <span class="topic-tag">WAN</span>
+                            <span class="topic-tag">Speed</span>
+                            <span class="topic-tag">Consistency</span>
+                            2026-01-20
+                        </div>
+                    </div>
+                </div>
+
+                <div class="discussion-content">
+                    “别被版本号带跑：2.2 的意义不在于‘更清晰’，而在于它是否把<strong>推理延迟</strong>和<strong>长期漂移</strong>一起压下去，并把控制接口做成可复现的系统（而不是只能靠 prompt 玄学）。如果只是画质提升，那对交互世界模型没什么用。”<br><br>
+                    — 社区综合观点（多帖讨论归纳）
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>大家更在意 2.2 是否“更好用”，比如更快、更稳、更好控制，而不是单纯更好看。对交互来说，“不卡 + 不漂”比“更清晰一点”重要很多。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>指标迁移</strong>: 从 FVD/画质 → latency/漂移/控制误差/分段一致性。</li>
+                            <li><strong>工程信号</strong>: 若 2.2 强调蒸馏/注意力优化/量化/缓存，说明在冲“可交互门槛”。</li>
+                            <li><strong>研究信号</strong>: 若 2.2 强调 state/memory/可读写世界状态，说明在冲“世界模型本体”。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
             <div class="discussion-card">
                 <div class="discussion-header">
