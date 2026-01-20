@@ -149,6 +149,75 @@
                         的加速技巧。</p>
                 </div>
             </div>
+
+            <div class="card">
+                <h3>📄 LongLive: Real-time Interactive Long Video Generation（重点专栏）</h3>
+                <p>
+                    <strong>Link</strong>: <span style="color:var(--text-secondary);">公开链接待核实（将于确认 arXiv / Project Page 后补充）</span>
+                </p>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem;">
+                    <div style="background:#f0fae6; padding:1.25rem; border-radius:0.5rem; border:1px solid #bbf7d0;">
+                        <h4 style="color: #166534; margin-top:0;">🟢 通俗解读 (Layman)</h4>
+                        <p><strong>LongLive 想做的不是“生成一段视频”，而是“持续生成一个可玩的长视频世界”。</strong>你可以不断输入指令/动作（比如移动、转向、交互、编辑），模型要在几乎实时的反馈下，一边生成一边保持世界不崩坏：物体别乱变、布局别漂移、镜头别跳变。</p>
+                        <p>如果把普通视频生成比作“拍一段短片”，LongLive 更像“边拍边演、还能让观众随时改剧本”。</p>
+                    </div>
+                    <div style="background:#fff1f2; padding:1.25rem; border-radius:0.5rem; border:1px solid #fecdd3;">
+                        <h4 style="color: #9f1239; margin-top:0;">🔴 专业解析 (Professional)</h4>
+                        <ul style="padding-left:1.2rem; margin-bottom: 0;">
+                            <li><strong>三重约束</strong>: Long-horizon（分钟级+）× Interactive（动作/编辑条件）× Real-time（延迟预算）。三者同时成立时，任何“离线高质量但慢”的方案都会被淘汰。</li>
+                            <li><strong>流式生成</strong>: 将长视频拆成可滑动窗口的 chunk（例如固定帧数的片段），每次只生成增量，避免端到端长序列推理。</li>
+                            <li><strong>状态表示</strong>: 需要可递推的 world state（显式 memory bank / 隐式 latent state / 压缩 token cache），让“世界”跨 chunk 延续，而不是每段从像素相关性重建。</li>
+                            <li><strong>动作注入</strong>: 将 action token/向量注入到生成器（cross-attention、adapter、control branch），并保证动作与视觉因果一致（按键→运动→碰撞→遮挡）。</li>
+                            <li><strong>漂移抑制</strong>: 锚点机制（关键帧/重投影/特征对齐）、自一致训练目标（cycle consistency）、或显式对象级约束（object permanence）用于控制长期误差累积。</li>
+                            <li><strong>系统工程</strong>: 推理侧常见组合拳为“蒸馏减少步数 + 注意力/缓存优化 + 低比特量化 + 批内并行/流水线”，目标是把“可交互”变成体验级指标。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <blockquote style="margin-top: 1.5rem;">
+                    <strong>读这类论文的关键</strong>: 不要只看模型结构图，重点看 <strong>Streaming 方案</strong>、<strong>State 的定义与读写接口</strong>、以及 <strong>延迟评测与工程优化细节</strong>。实时交互是“系统问题”，不是单点算法问题。
+                </blockquote>
+
+                <div class="commentary" style="margin-top: 1rem;">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p><strong>LongLive 的价值</strong>在于把“长视频”和“交互”放在同一个约束系统里审视：你要么承认需要可持续的 world state，要么承认你只能做短片。</p>
+                    <p><strong>一个很实用的评审问题</strong>: 你们的 world state 是“可读可写”的（像游戏引擎存档）还是“只能靠上下文隐式记住”的？前者更像世界模型，后者更像强视频预测器。</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📄 WAN 2.1 / WAN 2.2（版本对比专栏）</h3>
+                <p>
+                    <strong>Link</strong>: <span style="color:var(--text-secondary);">公开链接待核实（将于确认官方/论文链接后补充）</span>
+                </p>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem;">
+                    <div style="background:#f0fae6; padding:1.25rem; border-radius:0.5rem; border:1px solid #bbf7d0;">
+                        <h4 style="color: #166534; margin-top:0;">🟢 通俗解读 (Layman)</h4>
+                        <p><strong>把 2.1 看成“能生成、能控制，但玩久了会飘”；把 2.2 看成“更像可用产品的升级版”。</strong>对交互/长视频来说，提升往往不是“画质更好一点”，而是“越玩越不崩”。</p>
+                        <p>版本号变化背后通常对应：更稳的记忆、更快的生成、更系统的控制。</p>
+                    </div>
+                    <div style="background:#fff1f2; padding:1.25rem; border-radius:0.5rem; border:1px solid #fecdd3;">
+                        <h4 style="color: #9f1239; margin-top:0;">🔴 专业解析 (Professional)</h4>
+                        <ul style="padding-left:1.2rem; margin-bottom: 0;">
+                            <li><strong>2.1（基线）</strong>: 通常用于建立质量-可控性的基本盘，但长时一致性与实时性很容易成为短板。</li>
+                            <li><strong>2.2（升级点）</strong>: 更像是围绕“可交互门槛”做系统优化：更强的时序建模、更显式的状态缓存/记忆、更激进的推理加速（步数蒸馏/注意力优化/量化）。</li>
+                            <li><strong>对比要点</strong>:（1）长视频漂移率；（2）动作响应延迟；（3）动作-视觉因果一致；（4）分段/续写一致；（5）控制接口是否可复现（参数化、可组合）。</li>
+                            <li><strong>工程落地</strong>: 如果 2.2 的改进主要来自推理与缓存优化，那么它更接近“产品化路径”；如果主要来自更强的 state 机制，则更接近“世界模型路径”。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <blockquote style="margin-top: 1.5rem;">
+                    <strong>版本对比的正确打开方式</strong>: 不要只比较“某个指标”，要比较<strong>系统指标</strong>：延迟、吞吐、漂移、可控性、失败恢复（例如重新锚定/回滚）的能力。
+                </blockquote>
+
+                <div class="commentary" style="margin-top: 1rem;">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p>如果你在做交互世界模型，建议把 WAN 2.1/2.2 当作“训练侧与推理侧”拆开研究：<strong>训练配方决定上限，推理工程决定能不能实时</strong>。两者缺一不可。</p>
+                </div>
+            </div>
         </section>
 
         <section>
