@@ -406,6 +406,82 @@
             </div>
         </section>
 
+        <section id="kling">
+            <h2>2.6 快手：可灵 AI（Kling AI）—— “能力可组合”的视频生成平台</h2>
+
+            <div class="card">
+                <h3>🔗 入口与来源（可追溯）</h3>
+                <p style="margin-bottom: 0.5rem;">
+                    <strong>产品</strong>: <a href="https://klingai.kuaishou.com/" target="_blank">klingai.kuaishou.com</a> |
+                    <a href="https://klingai.com/cn/" target="_blank">klingai.com</a>
+                </p>
+                <p style="margin-bottom: 0;">
+                    <strong>公司</strong>: <a href="https://ir.kuaishou.com/" target="_blank">Kuaishou Technology IR</a>
+                </p>
+
+                <h3 style="margin-top: 1.5rem;">🧠 观察框架：从“模型”到“能力层”</h3>
+                <p style="margin-bottom: 0.75rem;">
+                    Kling 的产品形态非常“工程化”：官网把能力拆成一组可以被调用的模块，而不是只给一个 T2V 模型入口。这意味着它更像一套<strong>视频生成能力层（capability
+                        layer）</strong>，适合嵌入到编辑器/电商/营销/社交等不同产品里。<sup><a href="https://klingai.com/cn/"
+                            target="_blank">[来源]</a></sup>
+                </p>
+
+                <h3>🧩 功能面拆解（官网功能列表 → 对应的系统含义）</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>官网能力</th>
+                            <th>对系统/工程意味着什么</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Text to Video</strong> <sup><a href="https://klingai.com/cn/"
+                                        target="_blank">[来源]</a></sup></td>
+                            <td>基础入口；关键 KPI 是可控性与一致性，而不只是画质。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Image to Video</strong> <sup><a href="https://klingai.com/cn/"
+                                        target="_blank">[来源]</a></sup></td>
+                            <td>“参考图锁定”路线（人物/商品一致性），通常比纯 T2V 更靠近商用素材生产。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Video Extension</strong> <sup><a href="https://klingai.com/cn/"
+                                        target="_blank">[来源]</a></sup></td>
+                            <td>视频续写/扩展；本质是 prefix-conditioned continuation，对“长视频/交互”是硬前置能力。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lip-Sync</strong> <sup><a href="https://klingai.com/cn/"
+                                        target="_blank">[来源]</a></sup></td>
+                            <td>音频条件 + 人脸/身份保持；是短剧/口播/营销视频的刚需模块，工程上意味着音视频对齐评测与身份一致性约束。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Video Effects</strong> <sup><a href="https://klingai.com/cn/"
+                                        target="_blank">[来源]</a></sup></td>
+                            <td>更偏模板/玩法；更容易规模化与产品化（但也更容易陷入“滤镜化”竞争）。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Multi-Image / Multi-Elements</strong> <sup><a href="https://klingai.com/cn/"
+                                        target="_blank">[来源]</a></sup></td>
+                            <td>多参考/多元素组合，强调可组合输入。这通常意味着更复杂的 conditioning 设计与更明确的失败模式（元素丢失/身份漂移）。</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>⚙️ 开发者平台信号</h3>
+                <p style="margin-bottom: 0;">
+                    官网明确出现“Video V2.5 Turbo model API”等升级提示，说明其对外接口在持续迭代，值得在后续调研里跟踪 API 的输入约束（时长/分辨率/参考图数量）与稳定性。
+                    <sup><a href="https://klingai.com/cn/" target="_blank">[来源]</a></sup>
+                </p>
+            </div>
+
+            <div class="commentary">
+                <div class="commentary-title">🧠 ANTIGRAVITY'S COMMENTARY</div>
+                <p>做“可灵”的正确打开方式不是把它当成一个模型，而是把它当成<strong>一组可拼装的能力模块</strong>：续写解决长时，口型解决口播，Multi-Image/Multi-Elements 解决一致性与组合，特效解决玩法与增长。
+                    真正的差距会出现在：这些模块能否在统一的风格/角色资产上协同工作，而不是各自为政。</p>
+            </div>
+        </section>
+
         <section id="decision">
             <h2>📊 选型决策：我该用谁？</h2>
             <table>

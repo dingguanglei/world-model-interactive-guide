@@ -492,6 +492,68 @@
             </div>
         </section>
 
+        <section id="kuaishou-kling">
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-logo" style="background: linear-gradient(135deg, #f97316, #ef4444);">快</div>
+                    <div>
+                        <div class="company-name">快手（Kuaishou）— 可灵 AI（Kling AI）</div>
+                        <div class="company-tagline">面向创作者与开发者的 AI 视频/图像生成平台：T2V、I2V、续写、口型、特效、多元素引用</div>
+                    </div>
+                </div>
+
+                <h3>🏢 公司与产品入口（可追溯来源）</h3>
+                <table>
+                    <tr>
+                        <td><strong>公司</strong></td>
+                        <td><a href="https://ir.kuaishou.com/" target="_blank">Kuaishou Technology Investor Relations</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>产品官网</strong></td>
+                        <td><a href="https://klingai.kuaishou.com/" target="_blank">klingai.kuaishou.com</a> | <a
+                                href="https://klingai.com/cn/" target="_blank">klingai.com</a></td>
+                    </tr>
+                </table>
+
+                <h3>🧩 产品能力面（从官网功能列表反推“系统到底做了什么”）</h3>
+                <p style="margin-bottom: 0.75rem;">
+                    Kling 的一个重要信号是：它把“视频生成”拆成多种可调用能力（不仅是 T2V / I2V），并将这些能力以网站与 API 形态对外组织——这意味着它更接近“视频生成引擎”，而非单一模型 demo。
+                    <sup><a href="https://klingai.com/cn/" target="_blank">[来源]</a></sup>
+                </p>
+                <ul>
+                    <li><strong>Text to Video / Image to Video</strong>：基础生成入口（文本/图片条件）。<sup><a
+                                href="https://klingai.com/cn/" target="_blank">[来源]</a></sup></li>
+                    <li><strong>Video Extension</strong>：视频续写/扩展（本质是 video continuation 或 prefix-conditioned generation）。
+                        <sup><a href="https://klingai.com/cn/" target="_blank">[来源]</a></sup></li>
+                    <li><strong>Lip-Sync</strong>：口型对齐（音频/语音条件 + 人脸/身份保持），是“可商用视频应用”典型刚需模块。<sup><a
+                                href="https://klingai.com/cn/" target="_blank">[来源]</a></sup></li>
+                    <li><strong>Video Effects</strong>：视频特效（更偏模板化/风格化/可规模化玩法）。<sup><a
+                                href="https://klingai.com/cn/" target="_blank">[来源]</a></sup></li>
+                    <li><strong>Multi-Image to Video</strong>：多参考图驱动（往往用于角色/服饰/元素一致性）。<sup><a
+                                href="https://klingai.com/cn/" target="_blank">[来源]</a></sup></li>
+                    <li><strong>Audio Generation / Multi-Elements</strong>：音频生成与多元素组合（强调可组合能力，而不是只靠 prompt）。
+                        <sup><a href="https://klingai.com/cn/" target="_blank">[来源]</a></sup></li>
+                    <li><strong>Image Generation + Virtual Try-on</strong>：把“电商场景”作为显式目标（图片生成 + 虚拟试穿为电商闭环铺路）。
+                        <sup><a href="https://klingai.com/cn/" target="_blank">[来源]</a></sup></li>
+                </ul>
+
+                <h3>⚙️ 工程/商业落地信号</h3>
+                <ul>
+                    <li><strong>开发者平台导向</strong>：官网将能力拆成可调用的“API 能力模块”（对外可集成）。<sup><a
+                                href="https://klingai.com/cn/" target="_blank">[来源]</a></sup></li>
+                    <li><strong>版本与 API 更新提示</strong>：官网信息包含 “Video V2.5 Turbo model API” 等升级提示，说明其对外接口在持续迭代。
+                        <sup><a href="https://klingai.com/cn/" target="_blank">[来源]</a></sup></li>
+                </ul>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 ntiGravity's Commentary</div>
+                    <p>Kling 最值得深挖的并不是“某个 demo 是否惊艳”，而是它把产品拆成<strong>可组合的能力层</strong>：续写、口型、特效、多参考、多元素。对真实商业项目来说，这比单一的 T2V/I2V 更重要——
+                        因为业务要的不是“生成一段视频”，而是“在可控约束下生成可交付视频”。后续调研我会重点盯：每个能力的输入/输出约束（分辨率、时长、参考图数量、身份保持）以及 API 的稳定性与计费模型。</p>
+                </div>
+            </div>
+        </section>
+
         <nav class="chapter-nav">
             <a href="05_roadmap.html" class="chapter-nav-link prev">
                 <span class="chapter-nav-label">← 上一章</span>
