@@ -274,7 +274,7 @@
             </div>
         </section>
 
-        <section>
+        <section id="aisphere">
             <div class="company-card">
                 <div class="company-header">
                     <div class="company-logo" style="background: linear-gradient(135deg, #8b5cf6, #d946ef);">P</div>
@@ -354,6 +354,88 @@
                     <div class="commentary-title">🧠 AntiGravity's Commentary</div>
                     <p>王长虎在字节的履历意味着爱诗从 Day 1 就懂<strong>如何做消费级产品</strong>。PixVerse 的产品逻辑是"让普通人也能当导演"，而不是卖 API 给开发者。阿里领投 B
                         轮，说明大厂认可了这条"C 端 SaaS"的路线。<strong>短剧风口 + 音画一体，爱诗是最贴近变现的玩家之一。</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sandai">
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-logo" style="background: linear-gradient(135deg, #111827, #6b7280);">S</div>
+                    <div>
+                        <div class="company-name">Sand.ai（三呆科技）</div>
+                        <div class="company-tagline">Magi-1 自回归视频世界模型 | 开源 24B/4.5B 模型与推理栈</div>
+                    </div>
+                </div>
+
+                <h3>🏢 项目/公司概况（以官方可追溯信息为准）</h3>
+                <table>
+                    <tr>
+                        <td><strong>官网</strong></td>
+                        <td><a href="https://sand.ai/" target="_blank">sand.ai</a> | <a href="https://sand.ai/about-us"
+                                target="_blank">About</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>产品</strong></td>
+                        <td><a href="https://magi.sand.ai/" target="_blank">Magi Product</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>核心论文</strong></td>
+                        <td><a href="https://arxiv.org/abs/2505.13211" target="_blank">MAGI-1: Autoregressive Video
+                                Generation at Scale (arXiv:2505.13211)</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>技术报告 PDF</strong></td>
+                        <td><a href="https://static.magi.world/static/files/MAGI_1.pdf" target="_blank">MAGI_1.pdf</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>开源代码 / 权重</strong></td>
+                        <td><a href="https://github.com/SandAI-org/MAGI-1" target="_blank">GitHub: SandAI-org/MAGI-1</a>
+                            | <a href="https://huggingface.co/sand-ai/MAGI-1" target="_blank">HuggingFace: sand-ai/MAGI-1</a>
+                        </td>
+                    </tr>
+                </table>
+
+                <h3>🧩 技术路线拆解：为什么 MAGI-1 值得被当作“工程样板”</h3>
+                <p style="margin-bottom: 0.75rem;">
+                    MAGI-1 的关键，不是“又一个视频扩散模型”，而是把<strong>自回归 + 流式生成</strong>做成系统级可运行方案：按固定长度 chunk 生成，并允许 chunk 之间并行去噪，从而天然支持
+                    streaming 与更强的因果时序建模（官方描述见 About 与技术报告）。<sup><a href="https://github.com/SandAI-org/MAGI-1"
+                            target="_blank">[来源]</a></sup>
+                </p>
+                <ul>
+                    <li><strong>Chunk-wise 自回归（核心范式）</strong>：以固定长度片段作为生成单元（官方示例为每 chunk 24 帧），逐 chunk 预测，下一 chunk 可在当前 chunk 去噪到一定程度后启动，实现“流式并行”推理。
+                        <sup><a href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                    <li><strong>时空压缩（Tokenizer/表示）</strong>：其 VAE 使用 transformer 架构，提供 8× 空间压缩与 4× 时间压缩，直指“推理吞吐”瓶颈。
+                        <sup><a href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                    <li><strong>DiT 架构与训练稳定性补丁</strong>：包括 Block-Causal Attention、GQA、QK-Norm、SwiGLU、FFN Sandwich Norm 等一系列面向规模训练的稳定性与效率设计。
+                        <sup><a href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                    <li><strong>蒸馏与多预算推理</strong>：采用 shortcut distillation，让单一 velocity 模型支持不同推理步数预算，并引入 CFG distillation 保持条件一致性。
+                        <sup><a href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                </ul>
+
+                <h3>⚙️ 落地工程与 Infra（能直接复用的细节）</h3>
+                <ul>
+                    <li><strong>Docker 推理环境</strong>：官方提供镜像与一键启动命令，体现“开源即工程可跑”。<sup><a
+                                href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                    <li><strong>硬件预算透明</strong>：官方 Model Zoo 明确给出各模型推荐机器（例如 24B 需要 H100/H800×8；4.5B 可在单张 RTX 4090 上运行）。
+                        <sup><a href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                    <li><strong>加速组件</strong>：针对 Hopper 架构推荐安装 MagiAttention 以加速推理。<sup><a
+                                href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                </ul>
+
+                <h3>🧪 评测信号（为什么它不像“只会拍短片”的模型）</h3>
+                <ul>
+                    <li><strong>Human Eval 位置</strong>：官方宣称在开源模型中达到较强水平，并将自身定位为对闭源商用模型（如 Kling）的竞争者之一。
+                        <sup><a href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                    <li><strong>Physics-IQ</strong>：官方给出了在 Physics-IQ benchmark 上的物理行为预测表现，强调“自回归结构”的优势。
+                        <sup><a href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                </ul>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 ntiGravity's Commentary</div>
+                    <p>Sand.ai/MAGI-1 值得重点研究的原因很现实：它把“世界模型”的关键问题<strong>从算法迁移到系统</strong>——chunk、并行、缓存、可流式推理、可落地的硬件预算。对想做交互/长视频的人来说，
+                        MAGI-1 更像一份“工程蓝图”：你可以不复现它的全部指标，但可以直接复用它的<strong>分块生成范式 + 推理栈 + 配置透明度</strong>，把团队从“堆 prompt”拉回到“做系统”。</p>
                 </div>
             </div>
         </section>

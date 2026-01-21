@@ -256,10 +256,14 @@
                 </tr>
             </tbody>
         </table>
-        accelerates video diffusion models by 100× while preserving visual quality. Our key innovations include
-        <strong>Sparse Linear Attention (SLA)</strong> and <strong>Consistency Distillation</strong>."
+
+        <blockquote>
+            <strong>原文关键摘录 (TurboDiffusion Abstract)</strong>: "We introduce TurboDiffusion, a training-free framework
+            that accelerates video diffusion models by <strong>100×</strong> while preserving visual quality. Our key
+            innovations include <strong>Sparse Linear Attention (SLA)</strong> and <strong>Consistency
+                Distillation</strong>."
+            <sup><a href="https://arxiv.org/abs/2512.16093" target="_blank">[来源]</a></sup>
         </blockquote>
-        </section>
 
         <div class="commentary">
             <div class="commentary-title">🧠 ANTIGRAVITY'S COMMENTARY</div>
@@ -304,6 +308,58 @@
                 是一个非常聪明的设计，它避免了传统"先生成视频再配音"的割裂感。不过代价是：你很难精细控制每一帧的节奏。如果你需要做电影级的精剪，PixVerse 不是最佳选择；如果你需要批量生产 15 秒短视频，它是王者。
             </p>
         </div>
+
+        <section id="magi1">
+            <h2>2.4 Sand.ai: Magi-1（开源自回归视频世界模型）</h2>
+
+            <div class="card">
+                <h3>🔗 官方与可追溯来源</h3>
+                <p style="margin-bottom: 0.5rem;">
+                    <strong>产品</strong>: <a href="https://magi.sand.ai/" target="_blank">Magi Product</a> |
+                    <strong>官网</strong>: <a href="https://sand.ai/" target="_blank">sand.ai</a>
+                </p>
+                <p style="margin-bottom: 0.5rem;">
+                    <strong>论文</strong>: <a href="https://arxiv.org/abs/2505.13211" target="_blank">MAGI-1: Autoregressive
+                        Video Generation at Scale (arXiv:2505.13211)</a> |
+                    <a href="https://static.magi.world/static/files/MAGI_1.pdf" target="_blank">技术报告 PDF</a>
+                </p>
+                <p style="margin-bottom: 0;">
+                    <strong>开源</strong>: <a href="https://github.com/SandAI-org/MAGI-1" target="_blank">GitHub</a> |
+                    <a href="https://huggingface.co/sand-ai/MAGI-1" target="_blank">HuggingFace 权重</a>
+                </p>
+
+                <h3 style="margin-top: 1.5rem;">🧠 关键能力：为什么它更像“可流式推理的世界模型”</h3>
+                <p style="margin-bottom: 0.75rem;">
+                    MAGI-1 的核心设计是把视频生成拆成<strong>chunk（固定长度片段）</strong>并按时间<strong>自回归</strong>生成：模型逐 chunk 预测，并通过“chunk 内整体去噪 +
+                    chunk 间因果约束”支持 streaming 与更强的时序一致性。<sup><a href="https://github.com/SandAI-org/MAGI-1"
+                            target="_blank">[来源]</a></sup>
+                </p>
+                <ul>
+                    <li><strong>生成范式</strong>: 自回归 chunk-by-chunk；官方描述每个 chunk 为 24 帧，并允许最多 4 个 chunk 并发去噪以提高吞吐。
+                        <sup><a href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                    <li><strong>Tokenizer/表示</strong>: Transformer-based VAE，8× 空间压缩、4× 时间压缩。
+                        <sup><a href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                    <li><strong>任务覆盖</strong>: 支持 <code>t2v</code>/<code>i2v</code>/<code>v2v</code>（仓库给出参数与示例脚本）。
+                        <sup><a href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                    <li><strong>可控性</strong>: 支持 chunk-wise prompting（分段提示词），用于长时合成、平滑转场、细粒度文本控制。
+                        <sup><a href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                </ul>
+
+                <h3>⚙️ 落地工程：给想复现/部署的人看的</h3>
+                <ul>
+                    <li><strong>一键环境</strong>: 官方提供 Docker 镜像与启动命令，降低“能跑起来”的门槛。
+                        <sup><a href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                    <li><strong>硬件建议</strong>: 24B 推荐 H100/H800×8；4.5B 可在单张 RTX 4090 运行（并给出 distill / fp8 quant 变体）。
+                        <sup><a href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                </ul>
+            </div>
+
+            <div class="commentary">
+                <div class="commentary-title">🧠 ANTIGRAVITY'S COMMENTARY</div>
+                <p>如果你把“世界模型”当成一个<strong>可持续运行的系统</strong>，Magi-1 值得反复读：它把 chunk、并行、硬件预算、推理栈写得足够透明。相比只展示 demo 的闭源产品，
+                    Magi-1 的意义更像“教你怎么做一台机器”。</p>
+            </div>
+        </section>
 
         <section id="decision">
             <h2>📊 选型决策：我该用谁？</h2>
