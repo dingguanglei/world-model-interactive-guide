@@ -68,6 +68,15 @@
             color: #b45309;
         }
 
+        .paper-tag a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .paper-tag a:hover {
+            text-decoration: underline;
+        }
+
         .dual-view {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -149,7 +158,7 @@
                 (非具身智能)</strong>、<strong>交互视频生成</strong>、<strong>游戏模拟</strong>的最新研究。按发布日期从新到旧排列。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-01-20 | 本页内容每日更新，追踪学术前沿。
+            ⏰ <strong>最后更新时间</strong>: 2026-01-23 | 本页内容每日更新，追踪学术前沿。
         </div>
 
         <section>
@@ -158,10 +167,11 @@
             <div class="paper-card">
                 <div class="paper-header">
                     <div>
-                        <div class="paper-title">LongLive: Real-time Interactive Long Video Generation</div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2509.22622" target="_blank">LongLive: Real-time Interactive Long Video Generation</a></div>
                         <div class="paper-meta">
-                            <span>📅 2026-01-20</span>
-                            <span>📄 arXiv/Project: <strong>待核实</strong></span>
+                            <span>📅 2026-01-23</span>
+                            <span>📄 arXiv:2509.22622</span>
+                            <span class="paper-tag github"><a href="https://github.com/NVlabs/LongLive" target="_blank">GitHub</a></span>
                             <span class="paper-tag new">NEW</span>
                         </div>
                     </div>
@@ -175,11 +185,51 @@
                     <div class="pro-view">
                         <div class="view-title">🔴 专业解析</div>
                         <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>问题定义</strong>: 长时生成的漂移 (drift) + 交互控制的一致性 + 实时延迟预算的三重约束。</li>
-                            <li><strong>常见技术路线</strong>: 流式/分块生成 (chunked streaming) + 显式/隐式状态缓存 (state cache) + 锚点/关键帧对齐 (anchors) 抑制长期漂移。</li>
-                            <li><strong>交互接口</strong>: 将动作/编辑意图编码成离散 token 或连续向量，通过 cross-attention / adapter 注入到生成器的每层或关键层。</li>
-                            <li><strong>评估重点</strong>: 延迟 (latency)、长时一致性 (object permanence / map stability)、交互可控性 (响应与可逆性)、错误累积的鲁棒性。</li>
+                            <li><strong>核心设定（为什么选 AR）</strong>：LongLive 用 <strong>frame-level causal AR</strong>（因果注意力）替代双向注意力的扩散模型，核心收益是<strong>可以 KV cache</strong>，把“长视频推理成本”从“整段反复算”变成“增量续写”。<sup><a href="https://arxiv.org/abs/2509.22622" target="_blank">[来源]</a></sup></li>
+                            <li><strong>贡献 1：KV-recache（解决交互式换 prompt）</strong>：在 prompt 切换边界，如果直接清空 KV cache 会导致画面突变；如果保留全部 cache 又会“粘住旧 prompt”。LongLive 的做法是在边界处<strong>用“已生成帧 + 新 prompt”重新计算/刷新 cache</strong>，把新 prompt 的语义重新写入 cross-attn，再让 self-attn 传播，从而做到“不断片 + 快速贴合新 prompt”。<sup><a href="https://arxiv.org/abs/2509.22622" target="_blank">[来源]</a></sup></li>
+                            <li><strong>贡献 2：Streaming Long Tuning（train-long → test-long）</strong>：点名批评传统 AR 视频模型“train-short-test-long”导致越生成越崩；LongLive 明确提出<strong>训练阶段就按流式长视频的方式对齐推理</strong>，缓解 train-test gap。<sup><a href="https://arxiv.org/abs/2509.22622" target="_blank">[来源]</a></sup></li>
+                            <li><strong>贡献 3：Short-window Attention + Frame Sink（加速且保一致）</strong>：把注意力窗口缩短以提高吞吐，并引入<strong>frame-level attention sink（frame sink）</strong>保留长程一致性（让远处信息“有地方被看见/被汇总”）。<sup><a href="https://arxiv.org/abs/2509.22622" target="_blank">[来源]</a></sup></li>
+                            <li><strong>工程指标（必须看）</strong>：论文报告 1.3B 模型 minute-long 微调仅 32 GPU-days；推理在单张 H100 上<strong>20.7 FPS</strong>，最长支持<strong>240 秒</strong>，并支持 INT8 量化推理（质量损失很小）。<sup><a href="https://arxiv.org/abs/2509.22622" target="_blank">[来源]</a></sup></li>
                         </ul>
+
+                        <figure style="margin: 0.75rem 0 0;">
+                            <figcaption style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                <strong>图：LongLive 的“交互式换 Prompt + KV-recache”流程（简化示意）</strong>
+                            </figcaption>
+                            <svg viewBox="0 0 900 260" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LongLive KV-recache pipeline">
+                                <defs>
+                                    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                        <path d="M0,0 L10,3 L0,6 Z" fill="#64748b" />
+                                    </marker>
+                                </defs>
+                                <rect x="20" y="30" width="210" height="70" rx="10" fill="#f0fae6" stroke="#22c55e" />
+                                <text x="35" y="58" font-size="14" fill="#166534" font-weight="700">Prompt Stream</text>
+                                <text x="35" y="78" font-size="12" fill="#166534">P1 → P2 → P3（运行中切换）</text>
+
+                                <rect x="260" y="30" width="260" height="70" rx="10" fill="#fff1f2" stroke="#e11d48" />
+                                <text x="275" y="58" font-size="14" fill="#9f1239" font-weight="700">Frame-level Causal AR (DiT-like)</text>
+                                <text x="275" y="78" font-size="12" fill="#9f1239">Self-Attn（因果） + Cross-Attn（prompt）</text>
+
+                                <rect x="550" y="30" width="150" height="70" rx="10" fill="#e0f2fe" stroke="#0369a1" />
+                                <text x="565" y="58" font-size="14" fill="#0369a1" font-weight="700">KV Cache</text>
+                                <text x="565" y="78" font-size="12" fill="#0369a1">增量续写加速</text>
+
+                                <rect x="730" y="30" width="150" height="70" rx="10" fill="#ffffff" stroke="#94a3b8" />
+                                <text x="745" y="58" font-size="14" fill="#334155" font-weight="700">Video Output</text>
+                                <text x="745" y="78" font-size="12" fill="#334155">实时帧流</text>
+
+                                <line x1="230" y1="65" x2="260" y2="65" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+                                <line x1="520" y1="65" x2="550" y2="65" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+                                <line x1="700" y1="65" x2="730" y2="65" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+
+                                <rect x="260" y="140" width="620" height="90" rx="12" fill="#f8fafc" stroke="#e2e8f0" />
+                                <text x="275" y="170" font-size="14" fill="#0f172a" font-weight="700">Prompt Switch Boundary</text>
+                                <text x="275" y="192" font-size="12" fill="#334155">KV-recache：用「已生成帧」+「新 prompt」重新写入/刷新 cross-attn 相关 KV</text>
+                                <text x="275" y="212" font-size="12" fill="#334155">目标：不断片（continuity）+ 快速贴合新 prompt（adherence）</text>
+
+                                <line x1="520" y1="100" x2="520" y2="140" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+                            </svg>
+                        </figure>
                     </div>
                 </div>
             </div>
@@ -187,10 +237,11 @@
             <div class="paper-card">
                 <div class="paper-header">
                     <div>
-                        <div class="paper-title">WAN 2.2（交互/长视频方向）</div>
+                        <div class="paper-title"><a href="https://github.com/Wan-Video/Wan2.2" target="_blank">WAN 2.2（开源视频基础模型套件）</a></div>
                         <div class="paper-meta">
-                            <span>📅 2026-01-20</span>
-                            <span>📄 arXiv/Tech Report: <strong>待核实</strong></span>
+                            <span>📅 2026-01-23</span>
+                            <span>📄 Tech Report: <a href="https://arxiv.org/abs/2503.20314" target="_blank">arXiv:2503.20314</a></span>
+                            <span class="paper-tag github"><a href="https://github.com/Wan-Video/Wan2.2" target="_blank">GitHub</a></span>
                             <span class="paper-tag new">NEW</span>
                         </div>
                     </div>
@@ -204,11 +255,44 @@
                     <div class="pro-view">
                         <div class="view-title">🔴 专业解析</div>
                         <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>目标</strong>: 在不显著损失质量的前提下，提升长跨度时空一致性，并把推理速度推向可交互门槛。</li>
-                            <li><strong>可能改进点</strong>: 更强的时序建模（更长上下文/更稳的 conditioning）、记忆机制（显式 memory bank 或状态递推）、推理加速（蒸馏/稀疏注意力/量化）。</li>
-                            <li><strong>控制维度</strong>: 文本/参考图/运动轨迹/镜头运动等控制通常会更体系化，便于“可复现地调参”。</li>
-                            <li><strong>验证方式</strong>: 长视频分段一致性评测 + 交互动作响应评测（例如动作延迟、控制偏差与漂移率）。</li>
+                            <li><strong>改进点 1：MoE（Mixture-of-Experts）扩容但不涨算力</strong>：官方 README 明确强调把 <strong>MoE 引入视频扩散</strong>，并用“跨 timestep 的专门 expert”拆分去噪过程，使总体容量变大但计算成本维持不变。<sup><a href="https://github.com/Wan-Video/Wan2.2" target="_blank">[来源]</a></sup></li>
+                            <li><strong>改进点 2：美学可控（数据 + 标签）</strong>：引入精细美学数据与标签（光照、构图、对比度、色调等），使“电影感风格”更可控而不仅是随机抽样到好看。<sup><a href="https://github.com/Wan-Video/Wan2.2" target="_blank">[来源]</a></sup></li>
+                            <li><strong>改进点 3：复杂运动泛化（数据扩容）</strong>：相比 Wan2.1，训练数据规模提升（+65.6% images，+83.2% videos），旨在提升 motion / semantics / aesthetics 的泛化。<sup><a href="https://github.com/Wan-Video/Wan2.2" target="_blank">[来源]</a></sup></li>
+                            <li><strong>关键工程信号：720P@24fps 的 TI2V-5B + 高压缩 VAE</strong>：Wan2.2 开源一个 5B 的 hybrid TI2V 模型，配套 Wan2.2-VAE 的压缩比 <strong>16×16×4</strong>，支持 720P/24fps，并宣称可在 4090 等消费卡运行。<sup><a href="https://github.com/Wan-Video/Wan2.2" target="_blank">[来源]</a></sup></li>
                         </ul>
+
+                        <figure style="margin: 0.75rem 0 0;">
+                            <figcaption style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                <strong>图：WAN 2.2 “跨 timestep 的 MoE 去噪”示意（简化）</strong>
+                            </figcaption>
+                            <svg viewBox="0 0 900 210" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wan2.2 MoE denoising across timesteps">
+                                <defs>
+                                    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                        <path d="M0,0 L10,3 L0,6 Z" fill="#64748b" />
+                                    </marker>
+                                </defs>
+                                <text x="20" y="26" font-size="13" fill="#334155">Noise level / timestep: high → medium → low</text>
+                                <line x1="20" y1="45" x2="880" y2="45" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow2)"/>
+
+                                <rect x="40" y="70" width="240" height="55" rx="10" fill="#fff1f2" stroke="#e11d48"/>
+                                <text x="55" y="102" font-size="13" fill="#9f1239" font-weight="700">Expert A (high-noise)</text>
+                                <text x="55" y="120" font-size="11" fill="#9f1239">粗结构 / 大轮廓</text>
+
+                                <rect x="330" y="70" width="240" height="55" rx="10" fill="#fff1f2" stroke="#e11d48"/>
+                                <text x="345" y="102" font-size="13" fill="#9f1239" font-weight="700">Expert B (mid-noise)</text>
+                                <text x="345" y="120" font-size="11" fill="#9f1239">运动/语义细化</text>
+
+                                <rect x="620" y="70" width="240" height="55" rx="10" fill="#fff1f2" stroke="#e11d48"/>
+                                <text x="635" y="102" font-size="13" fill="#9f1239" font-weight="700">Expert C (low-noise)</text>
+                                <text x="635" y="120" font-size="11" fill="#9f1239">纹理 / 电影感细节</text>
+
+                                <line x1="280" y1="98" x2="330" y2="98" stroke="#64748b" stroke-width="2" marker-end="url(#arrow2)"/>
+                                <line x1="570" y1="98" x2="620" y2="98" stroke="#64748b" stroke-width="2" marker-end="url(#arrow2)"/>
+
+                                <rect x="40" y="145" width="820" height="45" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+                                <text x="55" y="173" font-size="12" fill="#334155">MoE 的产品含义：容量↑（质量/泛化潜力）但每步算力≈不变；真正瓶颈转向 VAE/注意力/采样步数等系统侧优化。</text>
+                            </svg>
+                        </figure>
                     </div>
                 </div>
             </div>
@@ -216,10 +300,11 @@
             <div class="paper-card">
                 <div class="paper-header">
                     <div>
-                        <div class="paper-title">WAN 2.1（基础版本/对照组）</div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2503.20314" target="_blank">WAN 2.1（技术报告：Wan 视频生成基础模型）</a></div>
                         <div class="paper-meta">
-                            <span>📅 2026-01-20</span>
-                            <span>📄 arXiv/Tech Report: <strong>待核实</strong></span>
+                            <span>📅 2026-01-23</span>
+                            <span>📄 arXiv:2503.20314</span>
+                            <span class="paper-tag github"><a href="https://github.com/Wan-Video/Wan2.1" target="_blank">GitHub</a></span>
                             <span class="paper-tag new">NEW</span>
                         </div>
                     </div>
@@ -233,9 +318,11 @@
                     <div class="pro-view">
                         <div class="view-title">🔴 专业解析</div>
                         <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>角色定位</strong>: 作为 2.2 的对照组，用于观察“加了哪些机制后，长时与实时能力提升了多少”。</li>
-                            <li><strong>常见短板</strong>: 长跨度一致性不足、状态不可显式读写导致的不可控漂移、推理延迟偏高。</li>
-                            <li><strong>可迁移价值</strong>: 可用于复用 tokenizer/conditioning 设计与训练配方，为 2.2 或 LongLive 类方向提供基线。</li>
+                            <li><strong>系统拆解：VAE（决定 token 长度/吞吐的第一层）</strong>：Wan 报告提出 <strong>Wan-VAE（3D causal VAE）</strong>，把视频从 \([1+T, H, W, 3]\) 压缩到 \([1+T/4, H/8, W/8, C]\)，即<strong>时域 4×、空域 8×8×</strong> 的压缩；并强调第一帧只做空间压缩以更好兼容图像先验。<sup><a href="https://arxiv.org/abs/2503.20314" target="_blank">[来源]</a></sup></li>
+                            <li><strong>关键优化 1：因果性 + RMSNorm（让“流式编码/解码”成立）</strong>：用 RMSNorm 替换 GroupNorm 以保持时序因果，从而可实现<strong>feature cache</strong>机制，提高长视频编码/解码效率。<sup><a href="https://arxiv.org/abs/2503.20314" target="_blank">[来源]</a></sup></li>
+                            <li><strong>关键优化 2：Chunk-wise + Feature Cache（支持任意长视频 VAE 推理）</strong>：将输入按 \(1+T/4\) 的 chunk 处理，每个 chunk 最多 4 帧；用“上一 chunk 的末尾特征”作为缓存拼到下一 chunk，避免长序列显存爆炸。论文还给出 kernel=3 时缓存两帧的示意。<sup><a href="https://arxiv.org/abs/2503.20314" target="_blank">[来源]</a></sup></li>
+                            <li><strong>训练细节（不是泛泛而谈）</strong>：Wan-VAE 采用三阶段：先训 2D image VAE → inflate 成 3D causal VAE → 高质量视频微调；损失包含 L1、KL、LPIPS（权重分别 3、3e-6、3），最终加入 3D discriminator 的 GAN loss。<sup><a href="https://arxiv.org/abs/2503.20314" target="_blank">[来源]</a></sup></li>
+                            <li><strong>2.1 ↔ 2.2 的对比抓手（从“瓶颈”角度）</strong>：如果 2.2 的 MoE 扩容提升质量/泛化，那么要想真正跨到“可交互门槛”，还得同时在<strong>采样步数、注意力/缓存、VAE 解码</strong>上做系统级协同（TurboDiffusion 就是典型例子）。<sup><a href="https://arxiv.org/abs/2512.16093" target="_blank">[来源]</a></sup></li>
                         </ul>
                     </div>
                 </div>
@@ -244,11 +331,11 @@
             <div class="paper-card">
                 <div class="paper-header">
                     <div>
-                        <div class="paper-title"><a href="https://arxiv.org/abs/2601.05232" target="_blank">4D Geometric
-                                Control for Video World Models</a></div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2601.05138" target="_blank">VerseCrafter: Dynamic Realistic Video World Model with 4D Geometric Control</a></div>
                         <div class="paper-meta">
-                            <span>📅 2026-01-09</span>
-                            <span>📄 arXiv:2601.05232</span>
+                            <span>📅 2026-01-08</span>
+                            <span>📄 arXiv:2601.05138</span>
+                            <span class="paper-tag"><a href="https://sixiaozheng.github.io/VerseCrafter_page/" target="_blank">Project</a></span>
                             <span class="paper-tag new">NEW</span>
                         </div>
                     </div>
@@ -257,15 +344,52 @@
                 <div class="dual-view">
                     <div class="layman-view">
                         <div class="view-title">🟢 通俗解读</div>
-                        <p>这篇论文教 AI 用"4D 坐标"来控制视频生成。就像在游戏引擎里移动摄像机和物体一样，你可以精确控制画面中每个物体的位置和运动轨迹，而不是只能用文字描述。</p>
+                        <p>VerseCrafter 把“生成视频”升级成“生成一个带 4D 世界状态的视频”。你不再只用文字说“往左转、车开过去”，而是直接给模型一个<strong>可编辑的 4D 几何控制信号</strong>：相机怎么走、每个物体怎么动，统一在同一个世界坐标里。</p>
                     </div>
                     <div class="pro-view">
                         <div class="view-title">🔴 专业解析</div>
                         <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>核心创新</strong>: 提出 4D Geometric Control 表示法，统一编码相机和物体动态。</li>
-                            <li><strong>技术路线</strong>: 使用预训练 Video Diffusion Model，将 4D 状态渲染为 Conditioning Signal。</li>
-                            <li><strong>意义</strong>: 解决了传统文本控制的模糊性问题。</li>
+                            <li><strong>核心贡献：4D Geometric Control（统一相机 + 多物体运动）</strong>：用<strong>静态背景点云</strong>表达场景几何，用<strong>每个物体的 3D Gaussian 轨迹</strong>表达动态（均值=路径，协方差=体积/朝向/占据概率），相比 3D box/SMPL 等更<strong>柔性、类目无关、可编辑</strong>。<sup><a href="https://arxiv.org/abs/2601.05138" target="_blank">[来源]</a></sup></li>
+                            <li><strong>模型注入方式：GeoAdapter（ControlNet 风格轻量分支）</strong>：将 4D 控制渲染成多视角 conditioning signal，并通过 GeoAdapter 注入到<strong>冻结的 Wan2.1-14B 视频扩散骨干</strong>，以“几何驱动”方式约束相机与物体运动，同时保留大模型的视觉先验。<sup><a href="https://arxiv.org/abs/2601.05138" target="_blank">[来源]</a></sup></li>
+                            <li><strong>数据瓶颈的解决：VerseControl4D 自动标注引擎</strong>：从 in-the-wild 视频自动提取相机/物体轨迹并构建 4D 控制，从而获得大规模训练数据（解决“真实世界没有 4D 标注”的硬伤）。<sup><a href="https://arxiv.org/abs/2601.05138" target="_blank">[来源]</a></sup></li>
+                            <li><strong>评测关注点（别只看画质）</strong>：是否真正<strong>按指定相机轨迹与多物体轨迹走</strong>（view-consistency、遮挡鲁棒性），并与 Yume/Uni3C 等 3D-aware baselines 对比。<sup><a href="https://sixiaozheng.github.io/VerseCrafter_page/" target="_blank">[来源]</a></sup></li>
                         </ul>
+
+                        <figure style="margin: 0.75rem 0 0;">
+                            <figcaption style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                <strong>图：VerseCrafter 的“4D 控制 → 渲染 → 注入 → 生成”链路（简化示意）</strong>
+                            </figcaption>
+                            <svg viewBox="0 0 900 260" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="VerseCrafter pipeline">
+                                <defs>
+                                    <marker id="arrow3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                        <path d="M0,0 L10,3 L0,6 Z" fill="#64748b" />
+                                    </marker>
+                                </defs>
+                                <rect x="20" y="35" width="260" height="70" rx="10" fill="#f0fae6" stroke="#22c55e" />
+                                <text x="35" y="62" font-size="14" fill="#166534" font-weight="700">4D Geometric Control</text>
+                                <text x="35" y="82" font-size="12" fill="#166534">背景点云 + 物体 3D Gaussian 轨迹</text>
+
+                                <rect x="310" y="35" width="190" height="70" rx="10" fill="#e0f2fe" stroke="#0369a1" />
+                                <text x="325" y="62" font-size="14" fill="#0369a1" font-weight="700">Render to Views</text>
+                                <text x="325" y="82" font-size="12" fill="#0369a1">conditioning maps</text>
+
+                                <rect x="530" y="35" width="150" height="70" rx="10" fill="#fff1f2" stroke="#e11d48" />
+                                <text x="545" y="62" font-size="14" fill="#9f1239" font-weight="700">GeoAdapter</text>
+                                <text x="545" y="82" font-size="12" fill="#9f1239">(ControlNet-style)</text>
+
+                                <rect x="710" y="35" width="170" height="70" rx="10" fill="#ffffff" stroke="#94a3b8" />
+                                <text x="725" y="62" font-size="14" fill="#334155" font-weight="700">Frozen Wan2.1-14B</text>
+                                <text x="725" y="82" font-size="12" fill="#334155">Video Diffusion Backbone</text>
+
+                                <line x1="280" y1="70" x2="310" y2="70" stroke="#64748b" stroke-width="2" marker-end="url(#arrow3)" />
+                                <line x1="500" y1="70" x2="530" y2="70" stroke="#64748b" stroke-width="2" marker-end="url(#arrow3)" />
+                                <line x1="680" y1="70" x2="710" y2="70" stroke="#64748b" stroke-width="2" marker-end="url(#arrow3)" />
+
+                                <rect x="20" y="145" width="860" height="90" rx="12" fill="#f8fafc" stroke="#e2e8f0" />
+                                <text x="35" y="175" font-size="13" fill="#0f172a" font-weight="700">为什么 3D Gaussian 轨迹比 2D/3D Box 更好用？</text>
+                                <text x="35" y="197" font-size="12" fill="#334155">（1）在世界坐标里统一相机与物体（view-consistent）；（2）协方差=软占据，更适配真实物体形状；（3）可编辑、类目无关。</text>
+                            </svg>
+                        </figure>
                     </div>
                 </div>
             </div>
@@ -312,7 +436,7 @@
                         <div class="paper-meta">
                             <span>📅 2025-12-20</span>
                             <span>📄 arXiv:2512.16093</span>
-                            <span class="paper-tag github">GitHub</span>
+                            <span class="paper-tag github"><a href="https://github.com/thu-ml/TurboDiffusion" target="_blank">GitHub</a></span>
                         </div>
                     </div>
                 </div>
@@ -326,11 +450,55 @@
                     <div class="pro-view">
                         <div class="view-title">🔴 专业解析</div>
                         <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>SLA (Sparse Linear Attention)</strong>: 将 O(N²) 降为 O(N)。</li>
-                            <li><strong>Consistency Distillation</strong>: 50步 → 2-4步。</li>
-                            <li><strong>W8A8 Quantization</strong>: 显存占用减半。</li>
-                            <li><strong>团队</strong>: 清华 TSAIL + 生数科技联合发布。</li>
+                            <li><strong>目标（“100–200×”到底加速了什么）</strong>：加速的是<strong>扩散采样阶段</strong>的端到端 latency（论文说明统计时不含 text encoding 与 VAE decoding）。<sup><a href="https://arxiv.org/abs/2512.16093" target="_blank">[来源]</a></sup></li>
+                            <li><strong>加速点 1：Attention 加速（SageAttention2++ + SLA）</strong>：先用可训练的 <strong>Sparse-Linear Attention (SLA)</strong> 替换 full attention 并做适配微调；推理阶段再用基于 SageAttention 的 CUDA 实现（论文称 SageSLA）把“稀疏性”与“低比特 TensorCore”叠加起来。<sup><a href="https://arxiv.org/abs/2512.16093" target="_blank">[来源]</a></sup></li>
+                            <li><strong>加速点 2：步数蒸馏（rCM）</strong>：用 rCM 做 step distillation，把采样步数从 100 缩到 4/3（论文实践里用 3 steps，并建议在 4 steps 下更稳）。<sup><a href="https://arxiv.org/abs/2512.16093" target="_blank">[来源]</a></sup></li>
+                            <li><strong>加速点 3：W8A8（线性层 INT8）</strong>：权重与激活都量化到 INT8，且采用 block-wise 粒度（论文给出 block size <strong>128×128</strong>），配合 Tensor Cores 提升线性层吞吐并将模型体积约减半。<sup><a href="https://arxiv.org/abs/2512.16093" target="_blank">[来源]</a></sup></li>
+                            <li><strong>关键超参（决定“快”与“崩”）</strong>：Top-K ratio=0.1（对应 90% attention sparsity）、3 sampling steps；作者建议 Top-K \([0.1, 0.15]\) 且 steps=4 更稳定。<sup><a href="https://arxiv.org/abs/2512.16093" target="_blank">[来源]</a></sup></li>
+                            <li><strong>量化结果（不是一句话）</strong>：在单张 RTX 5090 上，对 Wan2.1/2.2 多个模型报告接近 100–200× 的速度提升（例如 Wan2.1-T2V-14B-720P 的 final 版本速度提升到 199×），并给出逐项叠加（CPU offload → W8A8 & fused norm → rCM → SageSLA）。<sup><a href="https://arxiv.org/abs/2512.16093" target="_blank">[来源]</a></sup></li>
                         </ul>
+
+                        <figure style="margin: 0.75rem 0 0;">
+                            <figcaption style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                <strong>图：TurboDiffusion 的“训练侧两条线 → 权重合并 → 推理侧加速栈”</strong>
+                            </figcaption>
+                            <svg viewBox="0 0 900 300" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TurboDiffusion pipeline">
+                                <defs>
+                                    <marker id="arrowTD" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                        <path d="M0,0 L10,3 L0,6 Z" fill="#64748b" />
+                                    </marker>
+                                </defs>
+
+                                <rect x="20" y="30" width="260" height="60" rx="10" fill="#ffffff" stroke="#94a3b8" />
+                                <text x="35" y="58" font-size="14" fill="#334155" font-weight="700">Pretrained Video Diffusion Model</text>
+                                <text x="35" y="77" font-size="12" fill="#334155">（Wan2.1/2.2 等）</text>
+
+                                <line x1="280" y1="60" x2="330" y2="60" stroke="#64748b" stroke-width="2" marker-end="url(#arrowTD)" />
+
+                                <rect x="330" y="15" width="250" height="80" rx="12" fill="#fff1f2" stroke="#e11d48" />
+                                <text x="345" y="43" font-size="13" fill="#9f1239" font-weight="700">Branch A (Attention)</text>
+                                <text x="345" y="63" font-size="12" fill="#9f1239">FullAttn → SLA（训练适配）</text>
+                                <text x="345" y="81" font-size="12" fill="#9f1239">推理用 SageSLA（CUDA + 低比特）</text>
+
+                                <rect x="330" y="120" width="250" height="80" rx="12" fill="#fff1f2" stroke="#e11d48" />
+                                <text x="345" y="148" font-size="13" fill="#9f1239" font-weight="700">Branch B (Steps)</text>
+                                <text x="345" y="168" font-size="12" fill="#9f1239">rCM 做 step distillation</text>
+                                <text x="345" y="186" font-size="12" fill="#9f1239">100 steps → 4/3 steps</text>
+
+                                <line x1="580" y1="60" x2="640" y2="100" stroke="#64748b" stroke-width="2" marker-end="url(#arrowTD)" />
+                                <line x1="580" y1="160" x2="640" y2="120" stroke="#64748b" stroke-width="2" marker-end="url(#arrowTD)" />
+
+                                <rect x="640" y="85" width="240" height="70" rx="12" fill="#e0f2fe" stroke="#0369a1" />
+                                <text x="655" y="112" font-size="13" fill="#0369a1" font-weight="700">Merge Weights</text>
+                                <text x="655" y="132" font-size="12" fill="#0369a1">SLA finetune + rCM updates</text>
+
+                                <rect x="20" y="225" width="860" height="60" rx="12" fill="#f8fafc" stroke="#e2e8f0" />
+                                <text x="35" y="253" font-size="13" fill="#0f172a" font-weight="700">Inference Stack（最终加速栈）</text>
+                                <text x="35" y="273" font-size="12" fill="#334155">SageSLA（attention） + rCM（少步数） + W8A8（线性层 INT8, 128×128） + fused norm/其它 kernel 优化</text>
+
+                                <line x1="760" y1="155" x2="760" y2="225" stroke="#64748b" stroke-width="2" marker-end="url(#arrowTD)" />
+                            </svg>
+                        </figure>
                     </div>
                 </div>
             </div>
@@ -406,7 +574,7 @@
                         <div class="paper-meta">
                             <span>📅 2025-08-18</span>
                             <span>📄 arXiv:2508.13009</span>
-                            <span class="paper-tag github">GitHub</span>
+                            <span class="paper-tag github"><a href="https://github.com/SkyworkAI/Matrix-Game" target="_blank">GitHub</a></span>
                         </div>
                     </div>
                 </div>
@@ -420,10 +588,48 @@
                     <div class="pro-view">
                         <div class="view-title">🔴 专业解析</div>
                         <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>架构</strong>: DiT + Causal Masking + Cross-Attention Action Injection。</li>
-                            <li><strong>数据</strong>: UE5 + GTA5 合成数据，带精确 Action Label。</li>
-                            <li><strong>意义</strong>: 中小团队的参考实现，打破巨头垄断。</li>
+                            <li><strong>问题定义（为什么“实时交互”难）</strong>：双向注意力 + 多步去噪导致每帧都要看“全片”，延迟爆炸；而纯 AR 又容易误差累积导致越玩越崩。<sup><a href="https://arxiv.org/abs/2508.13009" target="_blank">[来源]</a></sup></li>
+                            <li><strong>贡献 1：数据管线（这篇最硬的护城河）</strong>：提出 UE + GTA5 的可规模化数据生产与标注，论文给出规模约 <strong>~1200 hours</strong> 的带交互标注视频数据；UE 管线包含 NavMesh 路径规划（增强轨迹多样性）、相机控制的 Quaternion 精度优化等；GTA5 侧通过 Script Hook 级集成做“画面-操作”同步录制。<sup><a href="https://arxiv.org/abs/2508.13009" target="_blank">[来源]</a></sup></li>
+                            <li><strong>贡献 2：模型骨干 + 动作注入</strong>：Video Diffusion Transformer 内集成 action control module，把键鼠输入做 frame-level 条件，通过注入模块让“动作→画面变化”具有因果一致性。<sup><a href="https://arxiv.org/abs/2508.13009" target="_blank">[来源]</a></sup></li>
+                            <li><strong>贡献 3：Few-step auto-regressive diffusion（KV cache + 少步数）</strong>：使用 causal few-step AR diffusion，并基于 Self-Forcing 训练范式把“推理时 KV cache 的滚动生成”对齐到训练中，从而在速度与稳定性之间取平衡。<sup><a href="https://arxiv.org/abs/2508.13009" target="_blank">[来源]</a></sup></li>
+                            <li><strong>硬指标（别只说“很快”）</strong>：论文报告在单张 H100 上可达 <strong>25 FPS</strong>，并支持 minute-level 视频滚动生成。<sup><a href="https://arxiv.org/abs/2508.13009" target="_blank">[来源]</a></sup></li>
                         </ul>
+
+                        <figure style="margin: 0.75rem 0 0;">
+                            <figcaption style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                <strong>图：Matrix-Game 2.0 从“数据生产 → 训练 → 实时交互推理”全链路（简化示意）</strong>
+                            </figcaption>
+                            <svg viewBox="0 0 900 290" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Matrix-Game pipeline">
+                                <defs>
+                                    <marker id="arrowMG" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                        <path d="M0,0 L10,3 L0,6 Z" fill="#64748b" />
+                                    </marker>
+                                </defs>
+
+                                <rect x="20" y="30" width="250" height="70" rx="12" fill="#f0fae6" stroke="#22c55e" />
+                                <text x="35" y="58" font-size="13" fill="#166534" font-weight="700">Data Engine</text>
+                                <text x="35" y="78" font-size="12" fill="#166534">UE：NavMesh/相机控制/自动采集</text>
+                                <text x="35" y="96" font-size="12" fill="#166534">GTA5：Script Hook 同步录制</text>
+
+                                <rect x="305" y="30" width="275" height="70" rx="12" fill="#e0f2fe" stroke="#0369a1" />
+                                <text x="320" y="58" font-size="13" fill="#0369a1" font-weight="700">Dataset (~1200h)</text>
+                                <text x="320" y="78" font-size="12" fill="#0369a1">frame-level video + action labels</text>
+                                <text x="320" y="96" font-size="12" fill="#0369a1">keyboard/mouse + camera signals</text>
+
+                                <rect x="615" y="30" width="265" height="70" rx="12" fill="#fff1f2" stroke="#e11d48" />
+                                <text x="630" y="58" font-size="13" fill="#9f1239" font-weight="700">Training</text>
+                                <text x="630" y="78" font-size="12" fill="#9f1239">DiT backbone + action injection</text>
+                                <text x="630" y="96" font-size="12" fill="#9f1239">Self-Forcing distillation</text>
+
+                                <line x1="270" y1="65" x2="305" y2="65" stroke="#64748b" stroke-width="2" marker-end="url(#arrowMG)" />
+                                <line x1="580" y1="65" x2="615" y2="65" stroke="#64748b" stroke-width="2" marker-end="url(#arrowMG)" />
+
+                                <rect x="20" y="145" width="860" height="120" rx="12" fill="#f8fafc" stroke="#e2e8f0" />
+                                <text x="35" y="175" font-size="13" fill="#0f172a" font-weight="700">Interactive Inference Loop（实时交互）</text>
+                                <text x="35" y="197" font-size="12" fill="#334155">Input: 初始帧 + 动作流（WASD/鼠标） → Causal AR Diffusion（少步数 + KV cache） → 25 FPS 输出</text>
+                                <text x="35" y="220" font-size="12" fill="#334155">核心难点：误差累积（drift）与长时稳定性；Self-Forcing 用“训练期模拟推理滚动”缓解 train-test gap。</text>
+                            </svg>
+                        </figure>
                     </div>
                 </div>
 
