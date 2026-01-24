@@ -130,6 +130,9 @@ description: AntiGravity 高质量内容撰写规范指南
 | **日期** | 📅 YYYY-MM-DD |
 | **来源** | arXiv ID / Conference / Preprint / Project Page / GitHub（按可追溯性优先级展示） |
 | **标签** | NEW / GitHub / Conference |
+| **代码开源** | **必须标注**：是否有公开 GitHub（有则给可点击链接） |
+| **参数开源** | **必须标注**：是否公开模型权重/检查点（优先链接到 HuggingFace/ModelScope/官方 Release/Checkpoint 指南） |
+| **数据集开源** | **必须标注**：训练数据是否开源/可公开获取（有则给可点击数据集页；否则明确标注“未公开/不可获取”） |
 | **论文解读模块** | **必须上下垂直排列**：🟢通俗解读 → 🔴专业解读 →（可选）🧠 ntiGravity's Commentary |
 | **图文并茂** | 重要论文**建议**至少包含 1 张辅助图（可用 `SVG` 示意图/流程图/对比表） |
 
@@ -396,6 +399,7 @@ description: AntiGravity 高质量内容撰写规范指南
 ```
 □ 论文按日期从新到旧排列
 □ 每篇论文标题都有原文跳转链接（优先 arXiv/PDF/Project Page）
+□ 每条论文卡片的 meta 行包含：GitHub（如有）+ 代码开源/参数开源/数据集开源 三个标签（尽量提供可点击链接）
 □ 每篇论文都有双视角解读（🟢通俗 + 🔴专业）
 □ 🔴 专业解析具备“可复现”细节：逐条贡献/优化点 + 指标/设置 +（重要论文）架构/流程图
 □ 重要论文有 Commentary（或采用三段解读布局）
