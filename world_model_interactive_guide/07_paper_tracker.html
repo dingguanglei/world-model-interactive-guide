@@ -158,11 +158,156 @@
                 (非具身智能)</strong>、<strong>交互视频生成</strong>、<strong>游戏模拟</strong>的最新研究。按发布日期从新到旧排列。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-01-23 | 本页内容每日更新，追踪学术前沿。
+            ⏰ <strong>最后更新时间</strong>: 2026-01-24 | 本页内容每日更新，追踪学术前沿。
         </div>
 
         <section>
             <h2>📅 2026年1月</h2>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2601.15281" target="_blank">StableWorld: Towards Stable and Consistent Long Interactive Video Generation</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2026-01-24</span>
+                            <span>📄 arXiv:2601.15281</span>
+                            <span class="paper-tag"><a href="https://sd-world.github.io/" target="_blank">Project</a></span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>StableWorld 的直觉非常“工程”：世界模型越跑越崩，往往不是因为动作太复杂，而是<strong>同一场景里那一点点“跑偏”在不断累积</strong>。它做的事很像“视频世界的垃圾回收”——滑动窗口里别把已经变脏的历史帧当参考，否则你等于把错误一代代传下去。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>问题根因（不是泛泛而谈）</strong>：作者先在“静态交互”设定下量化漂移：相邻帧差异很小，但在同一场景里逐步累积，最终导致 scene collapse。并用 inter-frame MSE（latent/pixel）展示“越往后越偏离初始干净状态”。<sup><a href="https://arxiv.org/abs/2601.15281" target="_blank">[来源]</a></sup></li>
+                            <li><strong>关键观察：窗口变大为啥会更稳？</strong>：扩大 KV-cache window 可以让模型看到更早、更“干净”的帧，从而抑制 drift；但直接加大窗口会显著增算力/降速度。作者进一步指出稳定性主要来自“窗口里保留了几帧干净的 early frames”。<sup><a href="https://arxiv.org/abs/2601.15281" target="_blank">[来源]</a></sup></li>
+                            <li><strong>核心贡献：Dynamic Frame Eviction（动态逐出机制）</strong>：不再“窗口一滑就丢最老帧”，而是：<strong>永远保留最近帧</strong>保证局部运动连续；对更早的中间帧，用几何一致性判定哪些是“视角相近但已被污染/冗余”的帧，并优先逐出，避免把 drift 继续写进历史缓冲。<sup><a href="https://arxiv.org/abs/2601.15281" target="_blank">[来源]</a></sup></li>
+                            <li><strong>几何一致性打分（可复现公式链）</strong>：以窗口内最早帧 \(P_0\) 为 reference，对中间帧 \(P_k\) 提 ORB 特征，ratio test 得到匹配对 \(G\)，再用 RANSAC 同时拟合 Homography 与 Fundamental matrix，取两者 inlier ratio 的最大值 \(s(P_0,P_k)=\\max(r_H,r_F)\)。若 \(s\\ge\\theta\) 则继续检查更远帧；首次低于阈值时，逐出“失败点前一帧”，否则逐出最远中间帧。论文默认阈值 \(\u03b8=0.75\)。<sup><a href="https://arxiv.org/abs/2601.15281" target="_blank">[来源]</a></sup></li>
+                            <li><strong>落地参数（不同模型如何接）</strong>：Matrix-Game KV-cache=9，最早 6 帧为 earlier frames；因每步生成 3 帧，检查第 3/6 帧决定逐出。Open-Oasis window=16，最早 12 帧为 earlier，检查第 1/6/12 帧。Hunyuan-GameCraft 每步生成 33 帧并形成新窗口，按对应帧相似度决定是否把 earlier frames 合并进新窗口。<sup><a href="https://arxiv.org/abs/2601.15281" target="_blank">[来源]</a></sup></li>
+                            <li><strong>量化提升（关键数字）</strong>：在 VBench-Long 上，Matrix-Game 的 Image Quality 从 63.39→73.52、Aesthetic 从 38.83→53.44；Open-Oasis 的 Image Quality 66.37→73.75；Hunyuan-GameCraft 的 Aesthetic 48.38→57.44；总体额外开销仅 1.00–1.02× latency。<sup><a href="https://arxiv.org/abs/2601.15281" target="_blank">[来源]</a></sup></li>
+                        </ul>
+
+                        <figure style="margin: 0.75rem 0 0;">
+                            <figcaption style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                <strong>图：StableWorld 的“动态逐出”滑窗策略（对比 vanilla 丢最老帧）</strong>
+                            </figcaption>
+                            <svg viewBox="0 0 900 260" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="StableWorld dynamic frame eviction">
+                                <defs>
+                                    <marker id="arrowSW" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                        <path d="M0,0 L10,3 L0,6 Z" fill="#64748b" />
+                                    </marker>
+                                </defs>
+
+                                <text x="20" y="26" font-size="13" fill="#334155">Sliding Window (history)</text>
+
+                                <!-- window blocks -->
+                                <rect x="20" y="40" width="120" height="55" rx="10" fill="#f0fae6" stroke="#22c55e" />
+                                <text x="32" y="70" font-size="12" fill="#166534" font-weight="700">P0</text>
+                                <text x="55" y="70" font-size="12" fill="#166534">Reference</text>
+
+                                <rect x="155" y="40" width="330" height="55" rx="10" fill="#fff1f2" stroke="#e11d48" />
+                                <text x="170" y="70" font-size="12" fill="#9f1239" font-weight="700">P1..Pk</text>
+                                <text x="230" y="70" font-size="12" fill="#9f1239">Middle frames（可能漂移/冗余）</text>
+
+                                <rect x="500" y="40" width="250" height="55" rx="10" fill="#e0f2fe" stroke="#0369a1" />
+                                <text x="515" y="70" font-size="12" fill="#0369a1" font-weight="700">Recent frames</text>
+                                <text x="605" y="70" font-size="12" fill="#0369a1">保证局部运动连续</text>
+
+                                <rect x="765" y="40" width="115" height="55" rx="10" fill="#ffffff" stroke="#94a3b8" />
+                                <text x="780" y="70" font-size="12" fill="#334155" font-weight="700">New</text>
+                                <text x="815" y="70" font-size="12" fill="#334155">Pk+1</text>
+
+                                <line x1="880" y1="67" x2="880" y2="67" stroke="#64748b" stroke-width="2" />
+
+                                <!-- eviction decision -->
+                                <rect x="20" y="120" width="860" height="115" rx="12" fill="#f8fafc" stroke="#e2e8f0" />
+                                <text x="35" y="148" font-size="13" fill="#0f172a" font-weight="700">Dynamic Frame Eviction</text>
+                                <text x="35" y="170" font-size="12" fill="#334155">对 P0 与 Pk 做 ORB 匹配 → RANSAC(H/F) → similarity s=max(rH,rF)。</text>
+                                <text x="35" y="190" font-size="12" fill="#334155">若 s≥θ：视角相近（可能冗余且更易积累 drift）→ 优先逐出中间帧；若 s&lt;θ：检测到视角变化/场景切换 → 允许保留新信息。</text>
+                                <text x="35" y="212" font-size="12" fill="#334155">对比 vanilla：固定丢最老帧 → “干净参考”更快消失 → drift 更快累积。</text>
+
+                                <line x1="820" y1="95" x2="820" y2="120" stroke="#64748b" stroke-width="2" marker-end="url(#arrowSW)" />
+                            </svg>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2601.12719" target="_blank">S2DiT: Sandwich Diffusion Transformer for Mobile Streaming Video Generation</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2026-01-24</span>
+                            <span>📄 arXiv:2601.12719</span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>S2DiT 的目标很明确：把“服务器上才能跑的 DiT 视频生成”做成<strong>手机端可流式生成</strong>。它的做法像“三明治”：高分辨率阶段用“便宜但够强的注意力”保细节，低分辨率阶段用“稀疏/下采样注意力”吸收全局信息，再用蒸馏把大模型能力压进一个小模型里。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>目标指标（给出硬数字）</strong>：作者声称在 iPhone 上可<strong>流式 &gt;10 FPS</strong>；表格里 S2DiT-AR 的 streaming 约 <strong>~11 FPS</strong>，VBench 83.26（与服务器级模型接近）。<sup><a href="https://arxiv.org/abs/2601.12719" target="_blank">[来源]</a></sup></li>
+                            <li><strong>优化点 1：LCHA（LinConv Hybrid Attention）——线性复杂度但不丢局部</strong>：两条并行分支：
+                                - <strong>Linear path</strong>：用可学习的正核 \(\u03d5(x)=softplus(Wx+b)\) 做线性注意力，并配 QK norm 与 3D RoPE；
+                                - <strong>Local conv path</strong>：深度可分离 3D conv + 线性混合，且做 temporal causal padding 以支持 streaming；
+                                两路输出用门控系数 \(\u03b1\)（FusionGate）融合。<sup><a href="https://arxiv.org/abs/2601.12719" target="_blank">[来源]</a></sup></li>
+                            <li><strong>优化点 2：SSA（Stride Self-Attention）——用结构化稀疏换吞吐</strong>：对 QKV 做均匀 stride 下采样，在更低 token 数下建模全局，再通过上采样恢复分辨率；作者强调“只用低分辨率 SSA 会掉质”，因此要与 LCHA 混合。<sup><a href="https://arxiv.org/abs/2601.12719" target="_blank">[来源]</a></sup></li>
+                            <li><strong>优化点 3：Budget-aware DP Search（把算力预算变成结构）</strong>：把 block 类型（LCHA/SSA）的 latency \(\u2113_t\) 与 memory \(m_t\) 显式建模，在总 block 数 K 下用动态规划选出 \((N_{LCHA},N_{SSA})\) 使其最贴近设备 \((L_{max},M_{max})\) 预算；再用组级 mask 搜索模块分布（什么时候切换分支）。<sup><a href="https://arxiv.org/abs/2601.12719" target="_blank">[来源]</a></sup></li>
+                            <li><strong>优化点 4：2-in-1 Distillation（把大老师“搬到离线”）</strong>：第一阶段做 cached offline distillation：用 Wan 2.2-14B 预计算并缓存 diffusion tuples 与 text embeddings，避免训练时跑 teacher；第二阶段面向 streaming，引入 self-forcing + distribution-matching distillation（少步数）并探索 adversarial fine-tuning 以增强跨 segment 的时序一致性。<sup><a href="https://arxiv.org/abs/2601.12719" target="_blank">[来源]</a></sup></li>
+                        </ul>
+
+                        <figure style="margin: 0.75rem 0 0;">
+                            <figcaption style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                <strong>图：S2DiT 的“三明治架构 + 两阶段蒸馏”全链路（简化）</strong>
+                            </figcaption>
+                            <svg viewBox="0 0 900 300" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="S2DiT sandwich architecture and distillation">
+                                <defs>
+                                    <marker id="arrowS2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                        <path d="M0,0 L10,3 L0,6 Z" fill="#64748b" />
+                                    </marker>
+                                </defs>
+
+                                <rect x="20" y="35" width="340" height="70" rx="12" fill="#fff1f2" stroke="#e11d48" />
+                                <text x="35" y="62" font-size="13" fill="#9f1239" font-weight="700">High-Res Stage: LCHA</text>
+                                <text x="35" y="82" font-size="12" fill="#9f1239">Linear attention (softplus(Wx+b)) + causal DW-Conv</text>
+                                <text x="35" y="100" font-size="12" fill="#9f1239">FusionGate α 融合（保细节，线性复杂度）</text>
+
+                                <rect x="395" y="35" width="240" height="70" rx="12" fill="#e0f2fe" stroke="#0369a1" />
+                                <text x="410" y="62" font-size="13" fill="#0369a1" font-weight="700">Low-Res Stage: SSA</text>
+                                <text x="410" y="82" font-size="12" fill="#0369a1">Stride downsample QKV</text>
+                                <text x="410" y="100" font-size="12" fill="#0369a1">全局上下文更便宜</text>
+
+                                <rect x="670" y="35" width="210" height="70" rx="12" fill="#f0fae6" stroke="#22c55e" />
+                                <text x="685" y="62" font-size="13" fill="#166534" font-weight="700">DP Search</text>
+                                <text x="685" y="82" font-size="12" fill="#166534">按 Lmax/Mmax 分配</text>
+                                <text x="685" y="100" font-size="12" fill="#166534">LCHA/SSA 位置</text>
+
+                                <line x1="360" y1="70" x2="395" y2="70" stroke="#64748b" stroke-width="2" marker-end="url(#arrowS2)" />
+                                <line x1="635" y1="70" x2="670" y2="70" stroke="#64748b" stroke-width="2" marker-end="url(#arrowS2)" />
+
+                                <rect x="20" y="135" width="860" height="145" rx="12" fill="#f8fafc" stroke="#e2e8f0" />
+                                <text x="35" y="163" font-size="13" fill="#0f172a" font-weight="700">2-in-1 Distillation</text>
+                                <text x="35" y="186" font-size="12" fill="#334155">Stage-1 Cached Offline KD：Wan2.2-14B 预计算 diffusion tuples + text embeddings → 监督 student（省 teacher FLOPs/显存）</text>
+                                <text x="35" y="208" font-size="12" fill="#334155">Stage-2 Streaming：self-forcing + distribution-matching distillation（少步数）+ adversarial fine-tune（跨 segment 一致）</text>
+                                <text x="35" y="232" font-size="12" fill="#334155">结果：few-step AR diffusion，移动端 streaming ~11 FPS（论文表格）</text>
+                            </svg>
+                        </figure>
+                    </div>
+                </div>
+            </div>
 
             <div class="paper-card">
                 <div class="paper-header">
@@ -401,12 +546,12 @@
             <div class="paper-card">
                 <div class="paper-header">
                     <div>
-                        <div class="paper-title"><a href="https://arxiv.org/abs/2512.XXXXX"
-                                target="_blank">ChronoDreamer: Action-Conditioned World Model for Robotic Planning</a>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2512.18619"
+                                target="_blank">ChronoDreamer: Action-Conditioned World Model as an Online Simulator for Robotic Planning</a>
                         </div>
                         <div class="paper-meta">
                             <span>📅 2025-12-23</span>
-                            <span>📄 arXiv (Preprint)</span>
+                            <span>📄 arXiv:2512.18619</span>
                         </div>
                     </div>
                 </div>
@@ -506,11 +651,11 @@
             <div class="paper-card">
                 <div class="paper-header">
                     <div>
-                        <div class="paper-title"><a href="https://researchgate.net/publication/387654321"
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2512.04040"
                                 target="_blank">RELIC: Interactive Video World Model with Long-Horizon Memory</a></div>
                         <div class="paper-meta">
                             <span>📅 2025-12-15 (Preprint)</span>
-                            <span>📄 ResearchGate</span>
+                            <span>📄 arXiv:2512.04040</span>
                         </div>
                     </div>
                 </div>
