@@ -37,17 +37,9 @@ description: AntiGravity 高质量内容撰写规范指南
 
 **示例布局**:
 ```html
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-    <div style="background:#f0fae6; ...">
-        <h4>🟢 通俗解读</h4>
-        <p>这就是把 GTA5 喂给了一个画图 AI...</p>
-    </div>
-    <div style="background:#fff1f2; ...">
-        <h4>🔴 专业解析</h4>
-        <ul>
-            <li><strong>Architecture:</strong> 基于 DiT...</li>
-        </ul>
-    </div>
+<div class="dual-view">
+    <div class="layman-view">🟢 通俗解读 ...</div>
+    <div class="pro-view">🔴 专业解析 ...</div>
 </div>
 ```
 
@@ -138,7 +130,7 @@ description: AntiGravity 高质量内容撰写规范指南
 | **日期** | 📅 YYYY-MM-DD |
 | **来源** | arXiv ID / Conference / Preprint / Project Page / GitHub（按可追溯性优先级展示） |
 | **标签** | NEW / GitHub / Conference |
-| **论文解读模块** | **三段垂直排列**：🟢通俗解读 → 🔴专业解读 → 🧠 ntiGravity's Commentary |
+| **论文解读模块** | **必须上下垂直排列**：🟢通俗解读 → 🔴专业解读 →（可选）🧠 ntiGravity's Commentary |
 | **图文并茂** | 重要论文**建议**至少包含 1 张辅助图（可用 `SVG` 示意图/流程图/对比表） |
 
 #### 4.2.1 标题链接规则（强制）
@@ -469,7 +461,7 @@ description: AntiGravity 高质量内容撰写规范指南
 ### 9.2 标准组件样式 (Component Standards)
 
 #### A. 双视角卡片 (Dual-View Cards)
-用于展示通俗与专业解读，必须保持左右分栏结构（移动端自动堆叠）。
+用于展示通俗与专业解读，在论文追踪等页面必须**上下垂直堆叠**（🟢在上、🔴在下），避免左右排布导致阅读跳跃。
 
 | 视角 | 背景色 | 边框色 | 标题色 |
 |------|-------|-------|-------|

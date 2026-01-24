@@ -78,9 +78,9 @@
         }
 
         .dual-view {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
             margin: 1rem 0;
         }
 
@@ -121,11 +121,7 @@
             margin-bottom: 2rem;
         }
 
-        @media (max-width: 768px) {
-            .dual-view {
-                grid-template-columns: 1fr;
-            }
-        }
+        /* 双视角卡片要求：上下排布（🟢在上，🔴在下） */
     </style>
 </head>
 
