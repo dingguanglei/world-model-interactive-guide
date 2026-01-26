@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>07. 论文追踪 - World Model Guide</title>
     <link rel="stylesheet" href="css/style.css">
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['\\(', '\\)'], ['$', '$']] },
+            options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+        };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         .paper-card {
             background: white;
@@ -113,6 +120,103 @@
             border-left: 4px solid #e11d48;
         }
 
+        .commentary {
+            background: #fce7f3;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #db2777;
+            margin-top: 1rem;
+        }
+
+        .commentary-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: #9d174d;
+            letter-spacing: 0.2px;
+        }
+
+        .source-note {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .source-note a {
+            color: var(--accent);
+        }
+
+        .month-index {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 0.75rem 0 1.25rem;
+            padding: 0.75rem;
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+        }
+
+        .month-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: white;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .month-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .paper-figure {
+            margin: 1rem 0;
+        }
+
+        .paper-figure img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            background: white;
+        }
+
+        .paper-figure figcaption {
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        details.month-group {
+            margin: 1rem 0;
+        }
+
+        details.month-group > summary {
+            cursor: pointer;
+            list-style: none;
+            font-weight: 800;
+            color: var(--text-primary);
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            background: #eef2ff;
+            border: 1px solid #c7d2fe;
+        }
+
+        details.month-group > summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details.month-group[open] > summary {
+            background: #e0e7ff;
+        }
+
         .view-title {
             font-weight: 700;
             font-size: 0.9rem;
@@ -135,7 +239,6 @@
             font-size: 0.9rem;
             margin-bottom: 2rem;
         }
-
         /* 双视角卡片要求：上下排布（🟢在上，🔴在下） */
     </style>
 </head>
@@ -167,20 +270,115 @@
         <h1>07. 最新论文追踪 (Paper Tracker)</h1>
         <p>本页追踪 arXiv/GitHub 上关于<strong>世界模型
                 (非具身智能)</strong>、<strong>交互视频生成</strong>、<strong>游戏模拟</strong>的最新研究。按发布日期从新到旧排列。</p>
+        <p style="color: var(--text-secondary); margin-top: -0.25rem;">📌 按年月折叠浏览（默认展开最近 3 个月）。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-01-24 | 本页内容每日更新，追踪学术前沿。
+            ⏰ <strong>最后更新时间</strong>: 2026-01-26 | 本页内容每日更新，追踪学术前沿。
         </div>
 
         <section>
-            <h2>📅 2026年1月</h2>
+            <h2>🗂️ 按月折叠浏览</h2>
+            <div class="month-index" role="navigation" aria-label="月份导航">
+                <a class="month-link" href="#month-2026-01">2026年1月</a>
+                <a class="month-link" href="#month-2025-12">2025年12月</a>
+                <a class="month-link" href="#month-2025-09">2025年9月</a>
+                <a class="month-link" href="#month-2025-08">2025年8月</a>
+                <a class="month-link" href="#month-2025-03">2025年3月</a>
+            </div>
+
+            <details class="month-group" id="month-2026-01" data-month="2026-01" open>
+                <summary>📅 2026年1月</summary>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2601.16914" target="_blank">LoL: Longer than Longer, Scaling Video Generation to Hour</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2026-01-23</span>
+                            <span>📄 arXiv:2601.16914</span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2601.16914-fig1.webp" alt="LoL Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1）</figcaption>
+                </figure>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>LoL 盯住了一个“长视频流式生成的怪病”：为了稳定长序列，很多方法会保留一些<strong>attention sink 帧</strong>当锚点，但跑着跑着画面会突然“回到锚点”，像时间循环一样不断重复——作者把它叫做 <strong>sink-collapse</strong>。这篇工作的目标就是让视频能<strong>一直往前跑</strong>，而不是在某些时刻被锚点拽回去。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>问题定义：sink-collapse</strong>：使用 attention sink 稳定 AR/流式生成时，模型在特定 latent frame index 会突然回归到 sink frame，出现“场景重置/循环运动”。论文指出 LongLive 与 Self-Forcing++ 等在相同索引处出现 collapse。<sup><a href="https://arxiv.org/abs/2601.16914" target="_blank">[来源]</a></sup></li>
+                            <li><strong>根因分析（关键结论）</strong>：作者认为根因来自 <strong>RoPE 的周期结构</strong> 与 <strong>multi-head attention</strong> 的冲突：当多头在某些相位对齐点产生“同质化注意力”时，会共同把权重集中到 sink，触发 collapse。并用 phase concentration 分析显示 collapse 点与局部最大值相关。<sup><a href="https://arxiv.org/abs/2601.16914" target="_blank">[来源]</a></sup></li>
+                            <li><strong>方法：multi-head RoPE jitter（训练无关/轻量）</strong>：在不同 attention head 上对 RoPE base frequency 做轻微偏移（围绕原始 \(\theta\) 抖动），打破跨头注意力同质化，从而抑制 sink-collapse。<sup><a href="https://arxiv.org/abs/2601.16914" target="_blank">[来源]</a></sup></li>
+                            <li><strong>结果主张</strong>：论文声称实现“real-time, streaming, infinite-length generation”，并展示持续生成到 <strong>12 小时</strong> 的视频样例。<sup><a href="https://arxiv.org/abs/2601.16914" target="_blank">[来源]</a></sup></li>
+                        </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2601.16914" target="_blank">论文</a>（Abstract；§1 Introduction：sink-collapse 现象；§3 Method：multi-head RoPE jitter；Fig.1/2：超长生成与相位分析）。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">LoL 的价值点在“把超长流式生成的 failure mode 命名并可诊断化”，然后给出一个训练无关的补丁。它也暴露了一个现实：长时稳定性不只靠更大窗口/更多数据，<strong>位置编码与注意力头的几何结构</strong>本身就能制造系统性崩溃。风险是泛化：如果模型不用 RoPE 或不用 sink，这个补丁未必适用；即便适用，也需要量化“抖动幅度 ↔ 质量退化”的曲线。</p>
+                </div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2601.16471" target="_blank">Order from Chaos: Physical World Understanding from Glitchy Gameplay Videos</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2026-01-23</span>
+                            <span>📄 arXiv:2601.16471</span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2601.16471-fig1.webp" alt="Order from Chaos Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1）</figcaption>
+                </figure>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>这篇论文很“数据工程”：作者发现游戏里的<strong>物理 Bug/画面异常（glitch）</strong>其实是天然的“物理常识反例库”。把这些反例做成问答数据，就能教模型更好地判断“这个视频哪里不符合物理”。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>核心范式</strong>：用 gameplay videos 里的 glitch（违反预定义物理规律的异常）作为可规模化监督源，构建物理理解数据集 <strong>PhysGame</strong>。<sup><a href="https://arxiv.org/abs/2601.16471" target="_blank">[来源]</a></sup></li>
+                            <li><strong>数据规模</strong>：PhysGame 包含 <strong>140,057</strong> 条围绕 glitch 的 QA，覆盖 5 个物理域与 16 个细粒度类别；并提供专家标注评测集 <strong>GameBench</strong>（880 条 glitch 视频）。<sup><a href="https://arxiv.org/abs/2601.16471" target="_blank">[来源]</a></sup></li>
+                            <li><strong>关键工程点</strong>：meta-information–guided prompting：利用 gameplay 的标题/描述等元信息提升自动生成 QA 的质量与准确性（降低“瞎编物理”的噪声）。<sup><a href="https://arxiv.org/abs/2601.16471" target="_blank">[来源]</a></sup></li>
+                            <li><strong>结果（论文给出的硬数字）</strong>：对 Qwen2.5-VL 的 PhysBench 提升 <strong>+2.5%</strong>，MVBench 提升 <strong>+1.9%</strong>，GameBench 提升 <strong>+3.7%</strong>（绝对值）。<sup><a href="https://arxiv.org/abs/2601.16471" target="_blank">[来源]</a></sup></li>
+                        </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2601.16471" target="_blank">论文</a>（Abstract；Fig.1：PhysGame & transfer；Dataset/Benchmark：PhysGame(140,057) 与 GameBench(880)；Experiments：PhysBench/MVBench/GameBench 提升）。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">这条线的意义不在“又一个 benchmark”，而在于提供了一种可规模化的<strong>反事实/反常识监督</strong>：glitch 让“违反物理”变成可见信号。最大风险是标签偏差：游戏 glitch 的分布可能过度集中在渲染/碰撞实现细节，迁移到真实世界需要严格的 domain gap 分析；因此更建议把它当作“物理异常检测”能力的增量训练源，而不是万能物理理解。</p>
+                </div>
+            </div>
 
             <div class="paper-card">
                 <div class="paper-header">
                     <div>
                         <div class="paper-title"><a href="https://arxiv.org/abs/2601.15281" target="_blank">StableWorld: Towards Stable and Consistent Long Interactive Video Generation</a></div>
                         <div class="paper-meta">
-                            <span>📅 2026-01-24</span>
+                            <span>📅 2026-01-21</span>
                             <span>📄 <a href="https://arxiv.org/abs/2601.15281" target="_blank">arXiv:2601.15281</a></span>
                             <span class="paper-tag"><a href="https://sd-world.github.io/" target="_blank">Project</a></span>
                             <span class="paper-tag github"><a href="https://github.com/xbyym/StableWorld" target="_blank">GitHub</a></span>
@@ -191,6 +389,11 @@
                         </div>
                     </div>
                 </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2601.15281-fig1.webp" alt="StableWorld Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1）</figcaption>
+                </figure>
 
                 <div class="dual-view">
                     <div class="layman-view">
@@ -203,10 +406,13 @@
                             <li><strong>问题根因（不是泛泛而谈）</strong>：作者先在“静态交互”设定下量化漂移：相邻帧差异很小，但在同一场景里逐步累积，最终导致 scene collapse。并用 inter-frame MSE（latent/pixel）展示“越往后越偏离初始干净状态”。<sup><a href="https://arxiv.org/abs/2601.15281" target="_blank">[来源]</a></sup></li>
                             <li><strong>关键观察：窗口变大为啥会更稳？</strong>：扩大 KV-cache window 可以让模型看到更早、更“干净”的帧，从而抑制 drift；但直接加大窗口会显著增算力/降速度。作者进一步指出稳定性主要来自“窗口里保留了几帧干净的 early frames”。<sup><a href="https://arxiv.org/abs/2601.15281" target="_blank">[来源]</a></sup></li>
                             <li><strong>核心贡献：Dynamic Frame Eviction（动态逐出机制）</strong>：不再“窗口一滑就丢最老帧”，而是：<strong>永远保留最近帧</strong>保证局部运动连续；对更早的中间帧，用几何一致性判定哪些是“视角相近但已被污染/冗余”的帧，并优先逐出，避免把 drift 继续写进历史缓冲。<sup><a href="https://arxiv.org/abs/2601.15281" target="_blank">[来源]</a></sup></li>
-                            <li><strong>几何一致性打分（可复现公式链）</strong>：以窗口内最早帧 \(P_0\) 为 reference，对中间帧 \(P_k\) 提 ORB 特征，ratio test 得到匹配对 \(G\)，再用 RANSAC 同时拟合 Homography 与 Fundamental matrix，取两者 inlier ratio 的最大值 \(s(P_0,P_k)=\\max(r_H,r_F)\)。若 \(s\\ge\\theta\) 则继续检查更远帧；首次低于阈值时，逐出“失败点前一帧”，否则逐出最远中间帧。论文默认阈值 \(\u03b8=0.75\)。<sup><a href="https://arxiv.org/abs/2601.15281" target="_blank">[来源]</a></sup></li>
+                            <li><strong>几何一致性打分（可复现公式链）</strong>：以窗口内最早帧 \(P_0\) 为 reference，对中间帧 \(P_k\) 提 ORB 特征，ratio test 得到匹配对 \(G\)，再用 RANSAC 同时拟合 Homography 与 Fundamental matrix，取两者 inlier ratio 的最大值 \(s(P_0,P_k)=\max(r_H,r_F)\)。若 \(s \ge \theta\) 则继续检查更远帧；首次低于阈值时，逐出“失败点前一帧”，否则逐出最远中间帧。论文默认阈值 \(\theta=0.75\)。<sup><a href="https://arxiv.org/abs/2601.15281" target="_blank">[来源]</a></sup></li>
                             <li><strong>落地参数（不同模型如何接）</strong>：Matrix-Game KV-cache=9，最早 6 帧为 earlier frames；因每步生成 3 帧，检查第 3/6 帧决定逐出。Open-Oasis window=16，最早 12 帧为 earlier，检查第 1/6/12 帧。Hunyuan-GameCraft 每步生成 33 帧并形成新窗口，按对应帧相似度决定是否把 earlier frames 合并进新窗口。<sup><a href="https://arxiv.org/abs/2601.15281" target="_blank">[来源]</a></sup></li>
                             <li><strong>量化提升（关键数字）</strong>：在 VBench-Long 上，Matrix-Game 的 Image Quality 从 63.39→73.52、Aesthetic 从 38.83→53.44；Open-Oasis 的 Image Quality 66.37→73.75；Hunyuan-GameCraft 的 Aesthetic 48.38→57.44；总体额外开销仅 1.00–1.02× latency。<sup><a href="https://arxiv.org/abs/2601.15281" target="_blank">[来源]</a></sup></li>
                         </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2601.15281" target="_blank">论文</a>（Abstract；Method：Dynamic Frame Eviction 与 ORB/RANSAC similarity；Experiments：VBench-Long 与 latency 开销）。
+                        </div>
 
                         <figure style="margin: 0.75rem 0 0;">
                             <figcaption style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
@@ -252,6 +458,167 @@
                         </figure>
                     </div>
                 </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">StableWorld 的强点不是“提出一个更大的模型”，而是把长期漂移拆成“滑窗里参考帧被污染/冗余”的系统问题，并给出一个可落地的逐出判据。真实落地最大的坑在视觉特征鲁棒性：低纹理/强模糊/大视差时 ORB+RANSAC 可能不稳定，建议工程上增加 fallback（例如保守保留 early clean frames 或引入更鲁棒的 learned matching）。</p>
+                </div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2601.16296" target="_blank">Memory-V2V: Augmenting Video-to-Video Diffusion Models with Memory</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2026-01-22</span>
+                            <span>📄 arXiv:2601.16296</span>
+                            <span class="paper-tag"><a href="https://dohunlee1.github.io/MemoryV2V" target="_blank">Project</a></span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2601.16296-fig1.webp" alt="Memory-V2V Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1）</figcaption>
+                </figure>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>Memory-V2V 解决的是“多轮改视频越改越不像同一个片子”的痛点：你改完一段再改下一段，模型往往<strong>记不住之前已经确定的角色/风格/细节</strong>，导致跨轮次漂移。它的思路很直白：把你之前编辑过的视频当成一个“外部记忆库”，每次新一轮编辑前先<strong>检索</strong>出最相关的历史片段来“对齐记忆”，再做本轮去噪。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>任务定义（作者强调是第一次系统化讨论）</strong>：Multi-turn video editing 的“跨轮次一致性（cross-consistency）”——每轮独立去噪生成，但最终结果要和所有历史编辑版本在关键视觉属性上保持一致（例如长视频分段编辑的外观不漂移、novel view 合成的跨视角区域一致）。<sup><a href="https://arxiv.org/abs/2601.16296" target="_blank">[来源]</a></sup></li>
+                            <li><strong>核心框架：外部视频记忆 + 检索条件化</strong>：维护一个外部 cache 存储“之前编辑过的视频”；当前轮次先做 retrieval，挑出和当前编辑最相关的历史结果，再把这些历史结果编码为 conditioning tokens 注入到当前轮次的 V2V 扩散去噪中。<sup><a href="https://arxiv.org/abs/2601.16296" target="_blank">[来源]</a></sup></li>
+                            <li><strong>表示选择（工程取舍）</strong>：作者对比了 3D 重建型编码器、NVS 模型的 encoder-decoder 表示、以及视频扩散常用的 video VAE latent，结论是 video VAE latent 在 fidelity 与效率上最平衡，适合做“记忆表示”。<sup><a href="https://arxiv.org/abs/2601.16296" target="_blank">[来源]</a></sup></li>
+                            <li><strong>动态 tokenizer：按相关性自适应 token 密度</strong>：直接把所有历史视频都全量 token 化会爆算力且引入冗余；Memory‑V2V 引入可学习的 dynamic tokenizers，对检索到的历史视频按相关性使用不同 kernel size 进行 tokenization（相关性越高 → token 越密）。<sup><a href="https://arxiv.org/abs/2601.16296" target="_blank">[来源]</a></sup></li>
+                            <li><strong>token compressor：把“低响应 token”压缩而不是丢弃</strong>：作者计算 per-frame attention responsiveness 评估 token 重要性，并发现直接丢低响应 token 会损失一致性；改为在 DiT backbone 的特定 blocks 中加入可学习压缩层，压掉冗余但保留关键视觉线索，整体带来约 <strong>30%</strong> speedup。<sup><a href="https://arxiv.org/abs/2601.16296" target="_blank">[来源]</a></sup></li>
+                            <li><strong>验证场景</strong>：Video novel view synthesis 与 text-guided long video editing（多段/多轮编辑），目标是“跨轮次一致性显著提升，同时任务内质量不降甚至提升”。<sup><a href="https://arxiv.org/abs/2601.16296" target="_blank">[来源]</a></sup></li>
+                        </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2601.16296" target="_blank">论文</a>（Abstract；§1 Introduction：cross-consistency 问题；Method：retrieval + dynamic tokenizers + token compressor）。
+                        </div>
+
+                        <figure style="margin: 0.75rem 0 0;">
+                            <figcaption style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                <strong>图：Memory‑V2V 的“问题 → 机制 → 结果”因果逻辑（简化）</strong>
+                            </figcaption>
+                            <svg viewBox="0 0 900 180" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Memory-V2V causal logic">
+                                <defs>
+                                    <marker id="arrowMV" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                        <path d="M0,0 L10,3 L0,6 Z" fill="#64748b" />
+                                    </marker>
+                                </defs>
+                                <rect x="20" y="40" width="210" height="70" rx="12" fill="#fff1f2" stroke="#e11d48"/>
+                                <text x="35" y="70" font-size="13" fill="#9f1239" font-weight="700">Problem</text>
+                                <text x="35" y="92" font-size="12" fill="#9f1239">多轮编辑跨轮次漂移</text>
+
+                                <rect x="255" y="40" width="250" height="70" rx="12" fill="#e0f2fe" stroke="#0369a1"/>
+                                <text x="270" y="70" font-size="13" fill="#0369a1" font-weight="700">Cause</text>
+                                <text x="270" y="92" font-size="12" fill="#0369a1">每轮独立去噪，缺少显式记忆约束</text>
+
+                                <rect x="530" y="40" width="230" height="70" rx="12" fill="#f0fae6" stroke="#22c55e"/>
+                                <text x="545" y="70" font-size="13" fill="#166534" font-weight="700">Mechanism</text>
+                                <text x="545" y="92" font-size="12" fill="#166534">检索历史 → 动态tokenize → 压缩注入</text>
+
+                                <rect x="785" y="40" width="95" height="70" rx="12" fill="#fef3c7" stroke="#f59e0b"/>
+                                <text x="797" y="78" font-size="13" fill="#b45309" font-weight="700">Effect</text>
+                                <text x="797" y="100" font-size="12" fill="#b45309">一致性↑</text>
+
+                                <line x1="230" y1="75" x2="255" y2="75" stroke="#64748b" stroke-width="2" marker-end="url(#arrowMV)"/>
+                                <line x1="505" y1="75" x2="530" y2="75" stroke="#64748b" stroke-width="2" marker-end="url(#arrowMV)"/>
+                                <line x1="760" y1="75" x2="785" y2="75" stroke="#64748b" stroke-width="2" marker-end="url(#arrowMV)"/>
+                            </svg>
+                        </figure>
+                    </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">Memory‑V2V 把“视频编辑”推进到真正的多轮交互系统：上一轮结果变成下一轮约束。它最可取的设计是“检索 + 动态 token 密度”——记忆不是越多越好，而是要把最相关的信息以可控带宽注入到去噪过程。落地风险在检索误差：一旦 retrieval 选错，模型会被强行对齐到错误外观，反而放大漂移；产品层面需要暴露“记忆命中/置信度”给用户做校正。</p>
+                </div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2601.16163" target="_blank">Cosmos Policy: Fine-Tuning Video Models for Visuomotor Control and Planning</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2026-01-22</span>
+                            <span>📄 arXiv:2601.16163</span>
+                            <span class="paper-tag"><a href="https://research.nvidia.com/labs/dir/cosmos-policy/" target="_blank">Project</a></span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2601.16163-fig1.webp" alt="Cosmos Policy Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1）</figcaption>
+                </figure>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>Cosmos Policy 的野心是把“会生成视频的模型”直接变成“会控制机器人的策略”。它的关键点是<strong>不另外加一套 action 模块</strong>：把动作也当成“视频序列里的帧”去生成；同时让模型顺便“想象”执行动作后的未来观测，并给出成功概率（value）。这样在测试时就能像“先想一想再做”一样：多生成几条候选动作，挑最可能成功的那条执行。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>训练范式（单阶段 + 无结构改动）</strong>：从 NVIDIA 的 Cosmos‑Predict2‑2B 预训练视频模型出发，仅用目标平台采集的 imitation demonstrations 做一轮 post-training；作者强调<strong>不做任何架构修改</strong>，所有模态（多视角相机、proprio、action、future state、value）都通过“视频 latent diffusion 的序列建模”统一学习。<sup><a href="https://arxiv.org/abs/2601.16163" target="_blank">[来源]</a></sup></li>
+                            <li><strong>动作如何接入“视频扩散”</strong>：将 robot action chunk 编码为 latent frames，和图像观测的 latent 一起构成扩散序列；模型通过同一套去噪目标学习高维、多峰的动作分布（与“另起 action diffusers/逆动力学模块”的路线对比）。<sup><a href="https://arxiv.org/abs/2601.16163" target="_blank">[来源]</a></sup></li>
+                            <li><strong>同时学 world model + value</strong>：除动作外，还生成未来 state（图像观测 + proprio）与 value（未来 state 的 reward-to-go），同样编码成 latent frames；这让模型具备“可用于规划”的最小三件套：\(a_{t:t+k}\)、\(s_{t+\Delta}\)、\(V(s_{t+\Delta})\)。<sup><a href="https://arxiv.org/abs/2601.16163" target="_blank">[来源]</a></sup></li>
+                            <li><strong>测试时规划（best-of-N）</strong>：采样 N 组候选动作 → 想象对应未来 state → 用 value 排序 → 执行最高 value 的动作（或动作 chunk 的首段）。作者报告：在两项真实世界高难任务上，加入规划后平均<strong>+12.5%</strong> task completion。<sup><a href="https://arxiv.org/abs/2601.16163" target="_blank">[来源]</a></sup></li>
+                            <li><strong>关键结果（直接政策形态）</strong>：LIBERO 平均成功率 <strong>98.5%</strong>，RoboCasa 平均成功率 <strong>67.1%</strong>；真实世界双臂操作任务平均成功率 <strong>93.6%</strong>，并声称超过同数据微调的 VLA 与从零训练 diffusion policy。<sup><a href="https://arxiv.org/abs/2601.16163" target="_blank">[来源]</a></sup></li>
+                            <li><strong>可复现入口</strong>：作者声明开源 code、models、training data（统一放在项目页）。<sup><a href="https://research.nvidia.com/labs/dir/cosmos-policy/" target="_blank">[来源]</a></sup></li>
+                        </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2601.16163" target="_blank">论文</a>（Abstract；§1 Introduction：单阶段无架构改动；Method：actions/state/value as latent frames；Planning：best-of-N + value；Experiments：LIBERO/RoboCasa/real-world）。
+                        </div>
+
+                        <figure style="margin: 0.75rem 0 0;">
+                            <figcaption style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                <strong>图：Cosmos Policy 的“问题 → 因果链 → 规划”逻辑（简化）</strong>
+                            </figcaption>
+                            <svg viewBox="0 0 900 200" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cosmos Policy causal logic">
+                                <defs>
+                                    <marker id="arrowCP" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                        <path d="M0,0 L10,3 L0,6 Z" fill="#64748b" />
+                                    </marker>
+                                </defs>
+                                <rect x="20" y="45" width="210" height="75" rx="12" fill="#fff1f2" stroke="#e11d48"/>
+                                <text x="35" y="74" font-size="13" fill="#9f1239" font-weight="700">Problem</text>
+                                <text x="35" y="96" font-size="12" fill="#9f1239">策略学习多阶段/模块拼装</text>
+
+                                <rect x="255" y="45" width="260" height="75" rx="12" fill="#e0f2fe" stroke="#0369a1"/>
+                                <text x="270" y="74" font-size="13" fill="#0369a1" font-weight="700">Mechanism</text>
+                                <text x="270" y="96" font-size="12" fill="#0369a1">动作/未来观测/value 编码为 latent frames</text>
+                                <text x="270" y="114" font-size="12" fill="#0369a1">单阶段微调 video diffusion</text>
+
+                                <rect x="540" y="45" width="210" height="75" rx="12" fill="#f0fae6" stroke="#22c55e"/>
+                                <text x="555" y="74" font-size="13" fill="#166534" font-weight="700">Planning</text>
+                                <text x="555" y="96" font-size="12" fill="#166534">best-of-N 采样候选动作</text>
+                                <text x="555" y="114" font-size="12" fill="#166534">按 value 排序执行</text>
+
+                                <rect x="775" y="45" width="105" height="75" rx="12" fill="#fef3c7" stroke="#f59e0b"/>
+                                <text x="787" y="84" font-size="13" fill="#b45309" font-weight="700">Effect</text>
+                                <text x="787" y="106" font-size="12" fill="#b45309">成功率↑</text>
+
+                                <line x1="230" y1="82" x2="255" y2="82" stroke="#64748b" stroke-width="2" marker-end="url(#arrowCP)"/>
+                                <line x1="515" y1="82" x2="540" y2="82" stroke="#64748b" stroke-width="2" marker-end="url(#arrowCP)"/>
+                                <line x1="750" y1="82" x2="775" y2="82" stroke="#64748b" stroke-width="2" marker-end="url(#arrowCP)"/>
+                            </svg>
+                        </figure>
+                    </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">把 action 也当作 video latent 来扩散生成，是一个非常强的“统一建模”信号：它利用生成模型天然擅长的多峰分布来表示动作不确定性。真正决定能否落地的是推理预算：best-of-N 到底要多大的 N、想象多远、在多视角输入下延迟是否可控——这些如果不透明，很容易变成“只在 benchmark 成立”。后续建议优先补齐 N–成功率–延迟的三维曲线与失败案例分类。</p>
+                </div>
             </div>
 
             <div class="paper-card">
@@ -259,7 +626,7 @@
                     <div>
                         <div class="paper-title"><a href="https://arxiv.org/abs/2601.12719" target="_blank">S2DiT: Sandwich Diffusion Transformer for Mobile Streaming Video Generation</a></div>
                         <div class="paper-meta">
-                            <span>📅 2026-01-24</span>
+                            <span>📅 2026-01-19</span>
                             <span>📄 <a href="https://arxiv.org/abs/2601.12719" target="_blank">arXiv:2601.12719</a></span>
                             <span class="paper-tag closed">代码未开源</span>
                             <span class="paper-tag unknown">参数未公开</span>
@@ -268,6 +635,11 @@
                         </div>
                     </div>
                 </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2601.12719-fig1.webp" alt="S2DiT Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1）</figcaption>
+                </figure>
 
                 <div class="dual-view">
                     <div class="layman-view">
@@ -279,13 +651,16 @@
                         <ul style="padding-left: 1rem; margin: 0;">
                             <li><strong>目标指标（给出硬数字）</strong>：作者声称在 iPhone 上可<strong>流式 &gt;10 FPS</strong>；表格里 S2DiT-AR 的 streaming 约 <strong>~11 FPS</strong>，VBench 83.26（与服务器级模型接近）。<sup><a href="https://arxiv.org/abs/2601.12719" target="_blank">[来源]</a></sup></li>
                             <li><strong>优化点 1：LCHA（LinConv Hybrid Attention）——线性复杂度但不丢局部</strong>：两条并行分支：
-                                - <strong>Linear path</strong>：用可学习的正核 \(\u03d5(x)=softplus(Wx+b)\) 做线性注意力，并配 QK norm 与 3D RoPE；
+                                - <strong>Linear path</strong>：用可学习的正核 \(\phi(x)=softplus(Wx+b)\) 做线性注意力，并配 QK norm 与 3D RoPE；
                                 - <strong>Local conv path</strong>：深度可分离 3D conv + 线性混合，且做 temporal causal padding 以支持 streaming；
-                                两路输出用门控系数 \(\u03b1\)（FusionGate）融合。<sup><a href="https://arxiv.org/abs/2601.12719" target="_blank">[来源]</a></sup></li>
+                                两路输出用门控系数 \(\alpha\)（FusionGate）融合。<sup><a href="https://arxiv.org/abs/2601.12719" target="_blank">[来源]</a></sup></li>
                             <li><strong>优化点 2：SSA（Stride Self-Attention）——用结构化稀疏换吞吐</strong>：对 QKV 做均匀 stride 下采样，在更低 token 数下建模全局，再通过上采样恢复分辨率；作者强调“只用低分辨率 SSA 会掉质”，因此要与 LCHA 混合。<sup><a href="https://arxiv.org/abs/2601.12719" target="_blank">[来源]</a></sup></li>
-                            <li><strong>优化点 3：Budget-aware DP Search（把算力预算变成结构）</strong>：把 block 类型（LCHA/SSA）的 latency \(\u2113_t\) 与 memory \(m_t\) 显式建模，在总 block 数 K 下用动态规划选出 \((N_{LCHA},N_{SSA})\) 使其最贴近设备 \((L_{max},M_{max})\) 预算；再用组级 mask 搜索模块分布（什么时候切换分支）。<sup><a href="https://arxiv.org/abs/2601.12719" target="_blank">[来源]</a></sup></li>
+                            <li><strong>优化点 3：Budget-aware DP Search（把算力预算变成结构）</strong>：把 block 类型（LCHA/SSA）的 latency \(\ell_t\) 与 memory \(m_t\) 显式建模，在总 block 数 K 下用动态规划选出 \((N_{LCHA},N_{SSA})\) 使其最贴近设备 \((L_{max},M_{max})\) 预算；再用组级 mask 搜索模块分布（什么时候切换分支）。<sup><a href="https://arxiv.org/abs/2601.12719" target="_blank">[来源]</a></sup></li>
                             <li><strong>优化点 4：2-in-1 Distillation（把大老师“搬到离线”）</strong>：第一阶段做 cached offline distillation：用 Wan 2.2-14B 预计算并缓存 diffusion tuples 与 text embeddings，避免训练时跑 teacher；第二阶段面向 streaming，引入 self-forcing + distribution-matching distillation（少步数）并探索 adversarial fine-tuning 以增强跨 segment 的时序一致性。<sup><a href="https://arxiv.org/abs/2601.12719" target="_blank">[来源]</a></sup></li>
                         </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2601.12719" target="_blank">论文</a>（Abstract；Method：LCHA/SSA/预算搜索；Training：2-in-1 distillation；Experiments：mobile streaming FPS & VBench）。
+                        </div>
 
                         <figure style="margin: 0.75rem 0 0;">
                             <figcaption style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
@@ -325,178 +700,10 @@
                         </figure>
                     </div>
                 </div>
-            </div>
 
-            <div class="paper-card">
-                <div class="paper-header">
-                    <div>
-                        <div class="paper-title"><a href="https://arxiv.org/abs/2509.22622" target="_blank">LongLive: Real-time Interactive Long Video Generation</a></div>
-                        <div class="paper-meta">
-                            <span>📅 2026-01-23</span>
-                            <span>📄 <a href="https://arxiv.org/abs/2509.22622" target="_blank">arXiv:2509.22622</a></span>
-                            <span class="paper-tag github"><a href="https://github.com/NVlabs/LongLive" target="_blank">GitHub</a></span>
-                            <span class="paper-tag open"><a href="https://github.com/NVlabs/LongLive" target="_blank">代码开源</a></span>
-                            <span class="paper-tag open"><a href="https://huggingface.co/Efficient-Large-Model/LongLive-1.3B" target="_blank">参数开源</a></span>
-                            <span class="paper-tag unknown">数据集未公开</span>
-                            <span class="paper-tag new">NEW</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dual-view">
-                    <div class="layman-view">
-                        <div class="view-title">🟢 通俗解读</div>
-                        <p>关键词是<strong>“长视频 + 可交互 + 实时”</strong>。它想解决的是：你不只是生成一段 10 秒短片，而是像玩游戏一样，在一个持续很久的“可播放视频世界”里边操作边生成，而且几乎不卡顿。</p>
-                    </div>
-                    <div class="pro-view">
-                        <div class="view-title">🔴 专业解析</div>
-                        <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>核心设定（为什么选 AR）</strong>：LongLive 用 <strong>frame-level causal AR</strong>（因果注意力）替代双向注意力的扩散模型，核心收益是<strong>可以 KV cache</strong>，把“长视频推理成本”从“整段反复算”变成“增量续写”。<sup><a href="https://arxiv.org/abs/2509.22622" target="_blank">[来源]</a></sup></li>
-                            <li><strong>贡献 1：KV-recache（解决交互式换 prompt）</strong>：在 prompt 切换边界，如果直接清空 KV cache 会导致画面突变；如果保留全部 cache 又会“粘住旧 prompt”。LongLive 的做法是在边界处<strong>用“已生成帧 + 新 prompt”重新计算/刷新 cache</strong>，把新 prompt 的语义重新写入 cross-attn，再让 self-attn 传播，从而做到“不断片 + 快速贴合新 prompt”。<sup><a href="https://arxiv.org/abs/2509.22622" target="_blank">[来源]</a></sup></li>
-                            <li><strong>贡献 2：Streaming Long Tuning（train-long → test-long）</strong>：点名批评传统 AR 视频模型“train-short-test-long”导致越生成越崩；LongLive 明确提出<strong>训练阶段就按流式长视频的方式对齐推理</strong>，缓解 train-test gap。<sup><a href="https://arxiv.org/abs/2509.22622" target="_blank">[来源]</a></sup></li>
-                            <li><strong>贡献 3：Short-window Attention + Frame Sink（加速且保一致）</strong>：把注意力窗口缩短以提高吞吐，并引入<strong>frame-level attention sink（frame sink）</strong>保留长程一致性（让远处信息“有地方被看见/被汇总”）。<sup><a href="https://arxiv.org/abs/2509.22622" target="_blank">[来源]</a></sup></li>
-                            <li><strong>工程指标（必须看）</strong>：论文报告 1.3B 模型 minute-long 微调仅 32 GPU-days；推理在单张 H100 上<strong>20.7 FPS</strong>，最长支持<strong>240 秒</strong>，并支持 INT8 量化推理（质量损失很小）。<sup><a href="https://arxiv.org/abs/2509.22622" target="_blank">[来源]</a></sup></li>
-                        </ul>
-
-                        <figure style="margin: 0.75rem 0 0;">
-                            <figcaption style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
-                                <strong>图：LongLive 的“交互式换 Prompt + KV-recache”流程（简化示意）</strong>
-                            </figcaption>
-                            <svg viewBox="0 0 900 260" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LongLive KV-recache pipeline">
-                                <defs>
-                                    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                                        <path d="M0,0 L10,3 L0,6 Z" fill="#64748b" />
-                                    </marker>
-                                </defs>
-                                <rect x="20" y="30" width="210" height="70" rx="10" fill="#f0fae6" stroke="#22c55e" />
-                                <text x="35" y="58" font-size="14" fill="#166534" font-weight="700">Prompt Stream</text>
-                                <text x="35" y="78" font-size="12" fill="#166534">P1 → P2 → P3（运行中切换）</text>
-
-                                <rect x="260" y="30" width="260" height="70" rx="10" fill="#fff1f2" stroke="#e11d48" />
-                                <text x="275" y="58" font-size="14" fill="#9f1239" font-weight="700">Frame-level Causal AR (DiT-like)</text>
-                                <text x="275" y="78" font-size="12" fill="#9f1239">Self-Attn（因果） + Cross-Attn（prompt）</text>
-
-                                <rect x="550" y="30" width="150" height="70" rx="10" fill="#e0f2fe" stroke="#0369a1" />
-                                <text x="565" y="58" font-size="14" fill="#0369a1" font-weight="700">KV Cache</text>
-                                <text x="565" y="78" font-size="12" fill="#0369a1">增量续写加速</text>
-
-                                <rect x="730" y="30" width="150" height="70" rx="10" fill="#ffffff" stroke="#94a3b8" />
-                                <text x="745" y="58" font-size="14" fill="#334155" font-weight="700">Video Output</text>
-                                <text x="745" y="78" font-size="12" fill="#334155">实时帧流</text>
-
-                                <line x1="230" y1="65" x2="260" y2="65" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
-                                <line x1="520" y1="65" x2="550" y2="65" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
-                                <line x1="700" y1="65" x2="730" y2="65" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
-
-                                <rect x="260" y="140" width="620" height="90" rx="12" fill="#f8fafc" stroke="#e2e8f0" />
-                                <text x="275" y="170" font-size="14" fill="#0f172a" font-weight="700">Prompt Switch Boundary</text>
-                                <text x="275" y="192" font-size="12" fill="#334155">KV-recache：用「已生成帧」+「新 prompt」重新写入/刷新 cross-attn 相关 KV</text>
-                                <text x="275" y="212" font-size="12" fill="#334155">目标：不断片（continuity）+ 快速贴合新 prompt（adherence）</text>
-
-                                <line x1="520" y1="100" x2="520" y2="140" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
-                            </svg>
-                        </figure>
-                    </div>
-                </div>
-            </div>
-
-            <div class="paper-card">
-                <div class="paper-header">
-                    <div>
-                        <div class="paper-title"><a href="https://github.com/Wan-Video/Wan2.2" target="_blank">WAN 2.2（开源视频基础模型套件）</a></div>
-                        <div class="paper-meta">
-                            <span>📅 2026-01-23</span>
-                            <span>📄 Tech Report: <a href="https://arxiv.org/abs/2503.20314" target="_blank">arXiv:2503.20314</a></span>
-                            <span class="paper-tag github"><a href="https://github.com/Wan-Video/Wan2.2" target="_blank">GitHub</a></span>
-                            <span class="paper-tag open"><a href="https://github.com/Wan-Video/Wan2.2" target="_blank">代码开源</a></span>
-                            <span class="paper-tag open"><a href="https://huggingface.co/Wan-AI" target="_blank">参数开源</a></span>
-                            <span class="paper-tag unknown">数据集未公开</span>
-                            <span class="paper-tag new">NEW</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dual-view">
-                    <div class="layman-view">
-                        <div class="view-title">🟢 通俗解读</div>
-                        <p>可以把 WAN 2.2 当作对 2.1 的“工程化升级”：更像产品可用的版本，重点通常会落在<strong>更稳的长时一致性</strong>与<strong>更低的生成延迟</strong>，以及更完整的控制能力。</p>
-                    </div>
-                    <div class="pro-view">
-                        <div class="view-title">🔴 专业解析</div>
-                        <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>改进点 1：MoE（Mixture-of-Experts）扩容但不涨算力</strong>：官方 README 明确强调把 <strong>MoE 引入视频扩散</strong>，并用“跨 timestep 的专门 expert”拆分去噪过程，使总体容量变大但计算成本维持不变。<sup><a href="https://github.com/Wan-Video/Wan2.2" target="_blank">[来源]</a></sup></li>
-                            <li><strong>改进点 2：美学可控（数据 + 标签）</strong>：引入精细美学数据与标签（光照、构图、对比度、色调等），使“电影感风格”更可控而不仅是随机抽样到好看。<sup><a href="https://github.com/Wan-Video/Wan2.2" target="_blank">[来源]</a></sup></li>
-                            <li><strong>改进点 3：复杂运动泛化（数据扩容）</strong>：相比 Wan2.1，训练数据规模提升（+65.6% images，+83.2% videos），旨在提升 motion / semantics / aesthetics 的泛化。<sup><a href="https://github.com/Wan-Video/Wan2.2" target="_blank">[来源]</a></sup></li>
-                            <li><strong>关键工程信号：720P@24fps 的 TI2V-5B + 高压缩 VAE</strong>：Wan2.2 开源一个 5B 的 hybrid TI2V 模型，配套 Wan2.2-VAE 的压缩比 <strong>16×16×4</strong>，支持 720P/24fps，并宣称可在 4090 等消费卡运行。<sup><a href="https://github.com/Wan-Video/Wan2.2" target="_blank">[来源]</a></sup></li>
-                        </ul>
-
-                        <figure style="margin: 0.75rem 0 0;">
-                            <figcaption style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
-                                <strong>图：WAN 2.2 “跨 timestep 的 MoE 去噪”示意（简化）</strong>
-                            </figcaption>
-                            <svg viewBox="0 0 900 210" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wan2.2 MoE denoising across timesteps">
-                                <defs>
-                                    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                                        <path d="M0,0 L10,3 L0,6 Z" fill="#64748b" />
-                                    </marker>
-                                </defs>
-                                <text x="20" y="26" font-size="13" fill="#334155">Noise level / timestep: high → medium → low</text>
-                                <line x1="20" y1="45" x2="880" y2="45" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow2)"/>
-
-                                <rect x="40" y="70" width="240" height="55" rx="10" fill="#fff1f2" stroke="#e11d48"/>
-                                <text x="55" y="102" font-size="13" fill="#9f1239" font-weight="700">Expert A (high-noise)</text>
-                                <text x="55" y="120" font-size="11" fill="#9f1239">粗结构 / 大轮廓</text>
-
-                                <rect x="330" y="70" width="240" height="55" rx="10" fill="#fff1f2" stroke="#e11d48"/>
-                                <text x="345" y="102" font-size="13" fill="#9f1239" font-weight="700">Expert B (mid-noise)</text>
-                                <text x="345" y="120" font-size="11" fill="#9f1239">运动/语义细化</text>
-
-                                <rect x="620" y="70" width="240" height="55" rx="10" fill="#fff1f2" stroke="#e11d48"/>
-                                <text x="635" y="102" font-size="13" fill="#9f1239" font-weight="700">Expert C (low-noise)</text>
-                                <text x="635" y="120" font-size="11" fill="#9f1239">纹理 / 电影感细节</text>
-
-                                <line x1="280" y1="98" x2="330" y2="98" stroke="#64748b" stroke-width="2" marker-end="url(#arrow2)"/>
-                                <line x1="570" y1="98" x2="620" y2="98" stroke="#64748b" stroke-width="2" marker-end="url(#arrow2)"/>
-
-                                <rect x="40" y="145" width="820" height="45" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
-                                <text x="55" y="173" font-size="12" fill="#334155">MoE 的产品含义：容量↑（质量/泛化潜力）但每步算力≈不变；真正瓶颈转向 VAE/注意力/采样步数等系统侧优化。</text>
-                            </svg>
-                        </figure>
-                    </div>
-                </div>
-            </div>
-
-            <div class="paper-card">
-                <div class="paper-header">
-                    <div>
-                        <div class="paper-title"><a href="https://arxiv.org/abs/2503.20314" target="_blank">WAN 2.1（技术报告：Wan 视频生成基础模型）</a></div>
-                        <div class="paper-meta">
-                            <span>📅 2026-01-23</span>
-                            <span>📄 <a href="https://arxiv.org/abs/2503.20314" target="_blank">arXiv:2503.20314</a></span>
-                            <span class="paper-tag github"><a href="https://github.com/Wan-Video/Wan2.1" target="_blank">GitHub</a></span>
-                            <span class="paper-tag open"><a href="https://github.com/Wan-Video/Wan2.1" target="_blank">代码开源</a></span>
-                            <span class="paper-tag open"><a href="https://huggingface.co/Wan-AI" target="_blank">参数开源</a></span>
-                            <span class="paper-tag unknown">数据集未公开</span>
-                            <span class="paper-tag new">NEW</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dual-view">
-                    <div class="layman-view">
-                        <div class="view-title">🟢 通俗解读</div>
-                        <p>WAN 2.1 更像“打底版本”：先把画面质量与基础可控性做上去，但在长视频和强交互场景里，通常还会遇到“玩久了就跑偏”的问题。</p>
-                    </div>
-                    <div class="pro-view">
-                        <div class="view-title">🔴 专业解析</div>
-                        <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>系统拆解：VAE（决定 token 长度/吞吐的第一层）</strong>：Wan 报告提出 <strong>Wan-VAE（3D causal VAE）</strong>，把视频从 \([1+T, H, W, 3]\) 压缩到 \([1+T/4, H/8, W/8, C]\)，即<strong>时域 4×、空域 8×8×</strong> 的压缩；并强调第一帧只做空间压缩以更好兼容图像先验。<sup><a href="https://arxiv.org/abs/2503.20314" target="_blank">[来源]</a></sup></li>
-                            <li><strong>关键优化 1：因果性 + RMSNorm（让“流式编码/解码”成立）</strong>：用 RMSNorm 替换 GroupNorm 以保持时序因果，从而可实现<strong>feature cache</strong>机制，提高长视频编码/解码效率。<sup><a href="https://arxiv.org/abs/2503.20314" target="_blank">[来源]</a></sup></li>
-                            <li><strong>关键优化 2：Chunk-wise + Feature Cache（支持任意长视频 VAE 推理）</strong>：将输入按 \(1+T/4\) 的 chunk 处理，每个 chunk 最多 4 帧；用“上一 chunk 的末尾特征”作为缓存拼到下一 chunk，避免长序列显存爆炸。论文还给出 kernel=3 时缓存两帧的示意。<sup><a href="https://arxiv.org/abs/2503.20314" target="_blank">[来源]</a></sup></li>
-                            <li><strong>训练细节（不是泛泛而谈）</strong>：Wan-VAE 采用三阶段：先训 2D image VAE → inflate 成 3D causal VAE → 高质量视频微调；损失包含 L1、KL、LPIPS（权重分别 3、3e-6、3），最终加入 3D discriminator 的 GAN loss。<sup><a href="https://arxiv.org/abs/2503.20314" target="_blank">[来源]</a></sup></li>
-                            <li><strong>2.1 ↔ 2.2 的对比抓手（从“瓶颈”角度）</strong>：如果 2.2 的 MoE 扩容提升质量/泛化，那么要想真正跨到“可交互门槛”，还得同时在<strong>采样步数、注意力/缓存、VAE 解码</strong>上做系统级协同（TurboDiffusion 就是典型例子）。<sup><a href="https://arxiv.org/abs/2512.16093" target="_blank">[来源]</a></sup></li>
-                        </ul>
-                    </div>
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">S2DiT 最稀缺的是“把端上预算写进结构搜索里”，这比单点换注意力更接近产品化。需要警惕的是复现路径：FPS 往往依赖特定端侧算子实现与量化/编译参数（Metal kernel、算子融合、内存布局）。如果论文/代码不把这部分讲清楚，读者很难在自己的设备上达到同级 streaming 速度。</p>
                 </div>
             </div>
 
@@ -517,6 +724,11 @@
                     </div>
                 </div>
 
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2601.05138-fig1.webp" alt="VerseCrafter Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1）</figcaption>
+                </figure>
+
                 <div class="dual-view">
                     <div class="layman-view">
                         <div class="view-title">🟢 通俗解读</div>
@@ -530,6 +742,9 @@
                             <li><strong>数据瓶颈的解决：VerseControl4D 自动标注引擎</strong>：从 in-the-wild 视频自动提取相机/物体轨迹并构建 4D 控制，从而获得大规模训练数据（解决“真实世界没有 4D 标注”的硬伤）。<sup><a href="https://arxiv.org/abs/2601.05138" target="_blank">[来源]</a></sup></li>
                             <li><strong>评测关注点（别只看画质）</strong>：是否真正<strong>按指定相机轨迹与多物体轨迹走</strong>（view-consistency、遮挡鲁棒性），并与 Yume/Uni3C 等 3D-aware baselines 对比。<sup><a href="https://sixiaozheng.github.io/VerseCrafter_page/" target="_blank">[来源]</a></sup></li>
                         </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2601.05138" target="_blank">论文</a>（Method：4D control 表示与 GeoAdapter 注入；Data：VerseControl4D 自动标注引擎；Experiments：view/motion consistency 指标与对比）。
+                        </div>
 
                         <figure style="margin: 0.75rem 0 0;">
                             <figcaption style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
@@ -568,11 +783,16 @@
                         </figure>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section>
-            <h2>📅 2025年12月</h2>
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">VerseCrafter 的关键意义是把“控制”从 prompt 拉回到可编辑的几何信号：这才是世界模型真正需要的接口。但要警惕两点：一是 4D 控制信号的获取成本（即使自动标注，也需要稳定的 SfM/轨迹估计）；二是控制-画质 tradeoff（控制越硬，视觉先验越容易被牺牲）。后续更值得追踪它在遮挡与快速相机运动下的失败模式。</p>
+                </div>
+            </div>
+            </details>
+
+            <details class="month-group" id="month-2025-12" data-month="2025-12">
+                <summary>📅 2025年12月</summary>
 
             <div class="paper-card">
                 <div class="paper-header">
@@ -581,7 +801,7 @@
                                 target="_blank">ChronoDreamer: Action-Conditioned World Model as an Online Simulator for Robotic Planning</a>
                         </div>
                         <div class="paper-meta">
-                            <span>📅 2025-12-23</span>
+                            <span>📅 2025-12-21</span>
                             <span>📄 <a href="https://arxiv.org/abs/2512.18619" target="_blank">arXiv:2512.18619</a></span>
                             <span class="paper-tag closed">代码未开源</span>
                             <span class="paper-tag unknown">参数未公开</span>
@@ -589,6 +809,11 @@
                         </div>
                     </div>
                 </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2512.18619-fig1.webp" alt="ChronoDreamer Figure 1" loading="lazy">
+                    <figcaption><strong>论文首页渲染（含主图）</strong>：来源 <a href="https://arxiv.org/abs/2512.18619" target="_blank">arXiv:2512.18619</a> 首页</figcaption>
+                </figure>
 
                 <div class="dual-view">
                     <div class="layman-view">
@@ -603,7 +828,15 @@
                             <li><strong>特点</strong>: 针对高频接触的机器人操作场景优化。</li>
                             <li><strong>注意</strong>: 属于具身智能边界，但 World Model 架构可复用。</li>
                         </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2512.18619" target="_blank">论文</a>（Abstract/Method：action-conditioned online simulator 设定；Inputs：RGB/contact/joint state；Experiments：planning 相关评测）。
+                        </div>
                     </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">这类“机器人白日梦”工作的分水岭不在生成质量，而在闭环可用性：模拟是否能支撑规划/评估，并且误差不会在 rollout 中爆炸。建议后续更新时重点补齐：rollout horizon、计划代价函数、以及在接触丰富场景下的失败分类（滑动/卡住/遮挡）。</p>
                 </div>
             </div>
 
@@ -613,7 +846,7 @@
                         <div class="paper-title"><a href="https://arxiv.org/abs/2512.16093"
                                 target="_blank">TurboDiffusion: Accelerating Video Diffusion by 100-200x</a></div>
                         <div class="paper-meta">
-                            <span>📅 2025-12-20</span>
+                            <span>📅 2025-12-18</span>
                             <span>📄 <a href="https://arxiv.org/abs/2512.16093" target="_blank">arXiv:2512.16093</a></span>
                             <span class="paper-tag github"><a href="https://github.com/thu-ml/TurboDiffusion" target="_blank">GitHub</a></span>
                             <span class="paper-tag open"><a href="https://github.com/thu-ml/TurboDiffusion" target="_blank">代码开源</a></span>
@@ -622,6 +855,11 @@
                         </div>
                     </div>
                 </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2512.16093-fig1.webp" alt="TurboDiffusion Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1）</figcaption>
+                </figure>
 
                 <div class="dual-view">
                     <div class="layman-view">
@@ -639,6 +877,9 @@
                             <li><strong>关键超参（决定“快”与“崩”）</strong>：Top-K ratio=0.1（对应 90% attention sparsity）、3 sampling steps；作者建议 Top-K \([0.1, 0.15]\) 且 steps=4 更稳定。<sup><a href="https://arxiv.org/abs/2512.16093" target="_blank">[来源]</a></sup></li>
                             <li><strong>量化结果（不是一句话）</strong>：在单张 RTX 5090 上，对 Wan2.1/2.2 多个模型报告接近 100–200× 的速度提升（例如 Wan2.1-T2V-14B-720P 的 final 版本速度提升到 199×），并给出逐项叠加（CPU offload → W8A8 & fused norm → rCM → SageSLA）。<sup><a href="https://arxiv.org/abs/2512.16093" target="_blank">[来源]</a></sup></li>
                         </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2512.16093" target="_blank">论文</a>（Method：SLA / rCM / W8A8 与关键超参；Experiments：逐项叠加 ablation 与不同模型加速倍率；Scope：统计口径不含 text encode/VAE decode）。
+                        </div>
 
                         <figure style="margin: 0.75rem 0 0;">
                             <figcaption style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
@@ -683,6 +924,11 @@
                         </figure>
                     </div>
                 </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">TurboDiffusion 的思路是“加速栈叠满”：注意力稀疏化 + 少步数蒸馏 + 端侧量化，最终把瓶颈推到 VAE 解码与 I/O。它对行业的意义在于证明“实时视频扩散不是玄学”，但也要清醒：100× 往往依赖特定 GPU/Kernel（SageAttention 系列）与统计口径；真正产品化要看端到端延迟（含 VAE/编码/调度）以及不同硬件的退化曲线。</p>
+                </div>
             </div>
 
             <div class="paper-card">
@@ -691,7 +937,7 @@
                         <div class="paper-title"><a href="https://arxiv.org/abs/2512.04040"
                                 target="_blank">RELIC: Interactive Video World Model with Long-Horizon Memory</a></div>
                         <div class="paper-meta">
-                            <span>📅 2025-12-15 (Preprint)</span>
+                            <span>📅 2025-12-03</span>
                             <span>📄 <a href="https://arxiv.org/abs/2512.04040" target="_blank">arXiv:2512.04040</a></span>
                             <span class="paper-tag closed">代码未开源</span>
                             <span class="paper-tag unknown">参数未公开</span>
@@ -699,6 +945,11 @@
                         </div>
                     </div>
                 </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2512.04040-fig1.webp" alt="RELIC Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1）</figcaption>
+                </figure>
 
                 <div class="dual-view">
                     <div class="layman-view">
@@ -711,13 +962,104 @@
                             <li><strong>关键问题</strong>: 解决 Long-horizon 场景下的 Temporal Consistency。</li>
                             <li><strong>方法</strong>: 引入显式 Memory Bank，而不仅依赖 Autoregressive 上下文。</li>
                         </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2512.04040" target="_blank">论文</a>（Abstract/Method：显式 Memory Bank 设计；Experiments：长时一致性评测与消融）。
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section>
-            <h2>📅 2025年9月</h2>
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">“显式记忆”几乎是交互世界模型绕不过去的路线：纯靠隐式上下文迟早会在长交互下崩。评价 RELIC 这类工作的关键不是“记忆模块存在”，而是它是否提供可读写的接口、如何检索/融合、以及失败恢复策略（记错了怎么办）。后续值得补齐其记忆容量、检索代价与错误传播的分析。</p>
+                </div>
+            </div>
+            </details>
+
+            <details class="month-group" id="month-2025-09" data-month="2025-09">
+                <summary>📅 2025年9月</summary>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2509.22622" target="_blank">LongLive: Real-time Interactive Long Video Generation</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2025-09-26</span>
+                            <span>📄 arXiv:2509.22622</span>
+                            <span class="paper-tag github"><a href="https://github.com/NVlabs/LongLive" target="_blank">GitHub</a></span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2509.22622-fig1.webp" alt="LongLive Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1）</figcaption>
+                </figure>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>关键词是<strong>“长视频 + 可交互 + 实时”</strong>。它想解决的是：你不只是生成一段 10 秒短片，而是像玩游戏一样，在一个持续很久的“可播放视频世界”里边操作边生成，而且几乎不卡顿。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>核心设定（为什么选 AR）</strong>：LongLive 用 <strong>frame-level causal AR</strong>（因果注意力）替代双向注意力的扩散模型，核心收益是<strong>可以 KV cache</strong>，把“长视频推理成本”从“整段反复算”变成“增量续写”。<sup><a href="https://arxiv.org/abs/2509.22622" target="_blank">[来源]</a></sup></li>
+                            <li><strong>贡献 1：KV-recache（解决交互式换 prompt）</strong>：在 prompt 切换边界，如果直接清空 KV cache 会导致画面突变；如果保留全部 cache 又会“粘住旧 prompt”。LongLive 的做法是在边界处<strong>用“已生成帧 + 新 prompt”重新计算/刷新 cache</strong>，把新 prompt 的语义重新写入 cross-attn，再让 self-attn 传播，从而做到“不断片 + 快速贴合新 prompt”。<sup><a href="https://arxiv.org/abs/2509.22622" target="_blank">[来源]</a></sup></li>
+                            <li><strong>贡献 2：Streaming Long Tuning（train-long → test-long）</strong>：训练阶段就按流式长视频方式对齐推理，缓解 train-test gap。<sup><a href="https://arxiv.org/abs/2509.22622" target="_blank">[来源]</a></sup></li>
+                            <li><strong>贡献 3：Short-window Attention + Frame Sink（加速且保一致）</strong>：缩短注意力窗口提吞吐，引入 frame-level attention sink 保留长程一致性。<sup><a href="https://arxiv.org/abs/2509.22622" target="_blank">[来源]</a></sup></li>
+                            <li><strong>工程指标（必须看）</strong>：论文报告单卡 H100 推理 <strong>20.7 FPS</strong>，最长支持 <strong>240 秒</strong>，并支持 INT8 量化推理。<sup><a href="https://arxiv.org/abs/2509.22622" target="_blank">[来源]</a></sup></li>
+                        </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2509.22622" target="_blank">论文</a>（Abstract；Method：KV-recache / short-window attention / frame sink；Training：Streaming Long Tuning；Experiments：FPS、最长时长、量化）。
+                        </div>
+
+                        <figure style="margin: 0.75rem 0 0;">
+                            <figcaption style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                <strong>图：LongLive 的“交互式换 Prompt + KV-recache”流程（简化示意）</strong>
+                            </figcaption>
+                            <svg viewBox="0 0 900 260" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LongLive KV-recache pipeline">
+                                <defs>
+                                    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                        <path d="M0,0 L10,3 L0,6 Z" fill="#64748b" />
+                                    </marker>
+                                </defs>
+                                <rect x="20" y="30" width="210" height="70" rx="10" fill="#f0fae6" stroke="#22c55e" />
+                                <text x="35" y="58" font-size="14" fill="#166534" font-weight="700">Prompt Stream</text>
+                                <text x="35" y="78" font-size="12" fill="#166534">P1 → P2 → P3（运行中切换）</text>
+
+                                <rect x="260" y="30" width="260" height="70" rx="10" fill="#fff1f2" stroke="#e11d48" />
+                                <text x="275" y="58" font-size="14" fill="#9f1239" font-weight="700">Frame-level Causal AR (DiT-like)</text>
+                                <text x="275" y="78" font-size="12" fill="#9f1239">Self-Attn（因果） + Cross-Attn（prompt）</text>
+
+                                <rect x="550" y="30" width="150" height="70" rx="10" fill="#e0f2fe" stroke="#0369a1" />
+                                <text x="565" y="58" font-size="14" fill="#0369a1" font-weight="700">KV Cache</text>
+                                <text x="565" y="78" font-size="12" fill="#0369a1">增量续写加速</text>
+
+                                <rect x="730" y="30" width="150" height="70" rx="10" fill="#ffffff" stroke="#94a3b8" />
+                                <text x="745" y="58" font-size="14" fill="#334155" font-weight="700">Video Output</text>
+                                <text x="745" y="78" font-size="12" fill="#334155">实时帧流</text>
+
+                                <line x1="230" y1="65" x2="260" y2="65" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+                                <line x1="520" y1="65" x2="550" y2="65" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+                                <line x1="700" y1="65" x2="730" y2="65" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+
+                                <rect x="260" y="140" width="620" height="90" rx="12" fill="#f8fafc" stroke="#e2e8f0" />
+                                <text x="275" y="170" font-size="14" fill="#0f172a" font-weight="700">Prompt Switch Boundary</text>
+                                <text x="275" y="192" font-size="12" fill="#334155">KV-recache：用「已生成帧」+「新 prompt」重新写入/刷新 cross-attn 相关 KV</text>
+                                <text x="275" y="212" font-size="12" fill="#334155">目标：不断片（continuity）+ 快速贴合新 prompt（adherence）</text>
+
+                                <line x1="520" y1="100" x2="520" y2="140" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+                            </svg>
+                        </figure>
+                    </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">LongLive 把“交互式长视频”写成了可复现的系统工程：KV cache 是前置条件，KV-recache 解决换指令边界，Streaming Long Tuning 对齐 train-test。它的关键风险仍是长时 drift 与失败恢复：没有显式 state/memory 时，越长越容易累计误差；因此后续更值得关注其回滚/重锚定接口与评测。</p>
+                </div>
+            </div>
 
             <div class="paper-card">
                 <div class="paper-header">
@@ -746,13 +1088,21 @@
                             <li><strong>评估方式</strong>: 使用 VLM (Vision-Language Model) 作为 Reward Function。</li>
                             <li><strong>验证</strong>: 在 World Model 中的策略成功率与真实世界高度相关。</li>
                         </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://openreview.net/forum?id=worldgym" target="_blank">OpenReview</a>（Method：world model 作为 environment 的设定；Evaluation：VLM reward/相关性验证）。
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section>
-            <h2>📅 2025年8月 (里程碑月)</h2>
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">WorldGym 的价值在“把世界模型变成评测基础设施”，这比单篇论文的指标更接近产业需求：我们缺的是可重复的 policy regression test。需要警惕的是 reward 代理：VLM reward 的偏差会把评测导向“看起来对”的策略，而不一定是“真的对”。后续更新建议补齐 reward 校准、OOD 场景鲁棒性与相关性统计口径。</p>
+                </div>
+            </div>
+            </details>
+
+            <details class="month-group" id="month-2025-08" data-month="2025-08">
+                <summary>📅 2025年8月 (里程碑月)</summary>
 
             <div class="paper-card">
                 <div class="paper-header">
@@ -769,6 +1119,11 @@
                         </div>
                     </div>
                 </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2508.13009-fig1.webp" alt="Matrix-Game 2.0 Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1）</figcaption>
+                </figure>
 
                 <div class="dual-view">
                     <div class="layman-view">
@@ -824,6 +1179,9 @@
                     </div>
                 </div>
 
+                <div class="source-note">
+                    <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2508.13009" target="_blank">论文</a>（Data：UE/GTA5 合成与动作标注管线；Model：action injection 与少步数 AR diffusion；Experiments：25 FPS 与长时稳定性讨论）。
+                </div>
                 <div class="commentary">
                     <div class="commentary-title">🧠 AntiGravity's Commentary</div>
                     <p>这是 2025 年最重要的开源项目之一。它证明了只要你有足够的 UE/GTA 合成数据，Diffusion Model 真的能学会物理引擎的逻辑。<strong>缺点</strong>:
@@ -860,9 +1218,157 @@
                             <li><strong>控制</strong>: Latent Action (无需人工标注)。</li>
                             <li><strong>意义</strong>: 从"动图"到"可玩关卡"的分水岭。</li>
                         </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">DeepMind Blog</a>（规格/演示：博文要点与视频展示；Tokenizer/Latent Action：博文/配套材料描述）。
+                        </div>
                     </div>
                 </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">Genie 3 的意义更多是“把可玩性带到公众视野”：分钟级一致性、可探索的交互演示会强烈抬高市场预期。但从工程角度仍要回到两个问题：一是 state 是否可读写（还是隐式上下文）；二是失败恢复（回滚/重锚定）有没有系统化机制。没有这两件事，很容易仍停留在“很强的视频预测器”而非可长期运行的世界系统。</p>
+                </div>
             </div>
+            </details>
+
+            <details class="month-group" id="month-2025-03" data-month="2025-03">
+                <summary>📅 2025年3月</summary>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://github.com/Wan-Video/Wan2.2" target="_blank">WAN 2.2（开源视频基础模型套件）</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2025-03-26</span>
+                            <span>📄 Tech Report: <a href="https://arxiv.org/abs/2503.20314" target="_blank">arXiv:2503.20314</a></span>
+                            <span class="paper-tag github"><a href="https://github.com/Wan-Video/Wan2.2" target="_blank">GitHub</a></span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2503.20314-fig1.webp" alt="WAN Tech Report Figure 1" loading="lazy">
+                    <figcaption><strong>论文首页渲染（含主图）</strong>：来源 <a href="https://arxiv.org/abs/2503.20314" target="_blank">arXiv:2503.20314</a> 首页</figcaption>
+                </figure>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>可以把 WAN 2.2 当作对 2.1 的“工程化升级”：更像产品可用的版本，重点通常会落在<strong>更稳的长时一致性</strong>与<strong>更低的生成延迟</strong>，以及更完整的控制能力。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>改进点 1：MoE（Mixture-of-Experts）扩容但不涨算力</strong>：官方 README 明确强调把 <strong>MoE 引入视频扩散</strong>，并用“跨 timestep 的专门 expert”拆分去噪过程，使总体容量变大但计算成本维持不变。<sup><a href="https://github.com/Wan-Video/Wan2.2" target="_blank">[来源]</a></sup></li>
+                            <li><strong>改进点 2：美学可控（数据 + 标签）</strong>：引入精细美学数据与标签（光照、构图、对比度、色调等），使“电影感风格”更可控而不仅是随机抽样到好看。<sup><a href="https://github.com/Wan-Video/Wan2.2" target="_blank">[来源]</a></sup></li>
+                            <li><strong>改进点 3：复杂运动泛化（数据扩容）</strong>：相比 Wan2.1，训练数据规模提升（+65.6% images，+83.2% videos），旨在提升 motion / semantics / aesthetics 的泛化。<sup><a href="https://github.com/Wan-Video/Wan2.2" target="_blank">[来源]</a></sup></li>
+                            <li><strong>关键工程信号：720P@24fps 的 TI2V-5B + 高压缩 VAE</strong>：Wan2.2 开源一个 5B 的 hybrid TI2V 模型，配套 Wan2.2-VAE 的压缩比 <strong>16×16×4</strong>，支持 720P/24fps，并宣称可在 4090 等消费卡运行。<sup><a href="https://github.com/Wan-Video/Wan2.2" target="_blank">[来源]</a></sup></li>
+                        </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://github.com/Wan-Video/Wan2.2" target="_blank">官方仓库</a> / <a href="https://arxiv.org/abs/2503.20314" target="_blank">Tech Report</a>（README：MoE 与数据扩容信号；VAE：16×16×4 压缩；部署：720P/24fps 与消费卡可用性声明）。
+                        </div>
+
+                        <figure style="margin: 0.75rem 0 0;">
+                            <figcaption style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                <strong>图：WAN 2.2 “跨 timestep 的 MoE 去噪”示意（简化）</strong>
+                            </figcaption>
+                            <svg viewBox="0 0 900 210" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wan2.2 MoE denoising across timesteps">
+                                <defs>
+                                    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                        <path d="M0,0 L10,3 L0,6 Z" fill="#64748b" />
+                                    </marker>
+                                </defs>
+                                <text x="20" y="26" font-size="13" fill="#334155">Noise level / timestep: high → medium → low</text>
+                                <line x1="20" y1="45" x2="880" y2="45" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow2)"/>
+
+                                <rect x="40" y="70" width="240" height="55" rx="10" fill="#fff1f2" stroke="#e11d48"/>
+                                <text x="55" y="102" font-size="13" fill="#9f1239" font-weight="700">Expert A (high-noise)</text>
+                                <text x="55" y="120" font-size="11" fill="#9f1239">粗结构 / 大轮廓</text>
+
+                                <rect x="330" y="70" width="240" height="55" rx="10" fill="#fff1f2" stroke="#e11d48"/>
+                                <text x="345" y="102" font-size="13" fill="#9f1239" font-weight="700">Expert B (mid-noise)</text>
+                                <text x="345" y="120" font-size="11" fill="#9f1239">运动/语义细化</text>
+
+                                <rect x="620" y="70" width="240" height="55" rx="10" fill="#fff1f2" stroke="#e11d48"/>
+                                <text x="635" y="102" font-size="13" fill="#9f1239" font-weight="700">Expert C (low-noise)</text>
+                                <text x="635" y="120" font-size="11" fill="#9f1239">纹理 / 电影感细节</text>
+
+                                <line x1="280" y1="98" x2="330" y2="98" stroke="#64748b" stroke-width="2" marker-end="url(#arrow2)"/>
+                                <line x1="570" y1="98" x2="620" y2="98" stroke="#64748b" stroke-width="2" marker-end="url(#arrow2)"/>
+
+                                <rect x="40" y="145" width="820" height="45" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+                                <text x="55" y="173" font-size="12" fill="#334155">MoE 的产品含义：容量↑（质量/泛化潜力）但每步算力≈不变；真正瓶颈转向 VAE/注意力/采样步数等系统侧优化。</text>
+                            </svg>
+                        </figure>
+                    </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">WAN 2.2 的 MoE 更像“把容量做上去”的战略动作，但交互世界模型的瓶颈往往不在参数量，而在端到端系统预算（VAE 解码、采样步数、注意力/缓存、调度）。因此评价 2.2 的关键不是“更清晰”，而是它是否把这些系统瓶颈一起工程化解决，并给出可复现的延迟/稳定性指标。</p>
+                </div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2503.20314" target="_blank">WAN 2.1（技术报告：Wan 视频生成基础模型）</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2025-03-26</span>
+                            <span>📄 arXiv:2503.20314</span>
+                            <span class="paper-tag github"><a href="https://github.com/Wan-Video/Wan2.1" target="_blank">GitHub</a></span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2503.20314-fig1.webp" alt="WAN 2.1 Tech Report Figure 1" loading="lazy">
+                    <figcaption><strong>论文首页渲染（含主图）</strong>：来源 <a href="https://arxiv.org/abs/2503.20314" target="_blank">arXiv:2503.20314</a> 首页</figcaption>
+                </figure>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>WAN 2.1 更像“打底版本”：先把画面质量与基础可控性做上去，但在长视频和强交互场景里，通常还会遇到“玩久了就跑偏”的问题。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>系统拆解：VAE（决定 token 长度/吞吐的第一层）</strong>：Wan 报告提出 <strong>Wan-VAE（3D causal VAE）</strong>，把视频从 \([1+T, H, W, 3]\) 压缩到 \([1+T/4, H/8, W/8, C]\)，即<strong>时域 4×、空域 8×8×</strong> 的压缩；并强调第一帧只做空间压缩以更好兼容图像先验。<sup><a href="https://arxiv.org/abs/2503.20314" target="_blank">[来源]</a></sup></li>
+                            <li><strong>关键优化 1：因果性 + RMSNorm（让“流式编码/解码”成立）</strong>：用 RMSNorm 替换 GroupNorm 以保持时序因果，从而可实现<strong>feature cache</strong>机制，提高长视频编码/解码效率。<sup><a href="https://arxiv.org/abs/2503.20314" target="_blank">[来源]</a></sup></li>
+                            <li><strong>关键优化 2：Chunk-wise + Feature Cache（支持任意长视频 VAE 推理）</strong>：将输入按 \(1+T/4\) 的 chunk 处理，每个 chunk 最多 4 帧；用“上一 chunk 的末尾特征”作为缓存拼到下一 chunk，避免长序列显存爆炸。论文还给出 kernel=3 时缓存两帧的示意。<sup><a href="https://arxiv.org/abs/2503.20314" target="_blank">[来源]</a></sup></li>
+                            <li><strong>训练细节（不是泛泛而谈）</strong>：Wan-VAE 采用三阶段：先训 2D image VAE → inflate 成 3D causal VAE → 高质量视频微调；损失包含 L1、KL、LPIPS（权重分别 3、3e-6、3），最终加入 3D discriminator 的 GAN loss。<sup><a href="https://arxiv.org/abs/2503.20314" target="_blank">[来源]</a></sup></li>
+                            <li><strong>2.1 ↔ 2.2 的对比抓手（从“瓶颈”角度）</strong>：如果 2.2 的 MoE 扩容提升质量/泛化，那么要想真正跨到“可交互门槛”，还得同时在<strong>采样步数、注意力/缓存、VAE 解码</strong>上做系统级协同（TurboDiffusion 就是典型例子）。<sup><a href="https://arxiv.org/abs/2512.16093" target="_blank">[来源]</a></sup></li>
+                        </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2503.20314" target="_blank">论文</a>（VAE：3D causal VAE 压缩与 chunk-wise feature cache；Training：三阶段训练与损失配置；对比讨论引用 TurboDiffusion：加速栈与系统瓶颈）。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">WAN 2.1 最值得抄的不是某个模型结构细节，而是把 VAE 作为“系统第一层”认真工程化：因果性 + cache 让长视频/流式成为可能。很多团队只盯 backbone，最后会发现真正卡住的是 VAE 解码与端到端吞吐。用这条线去读 2.2/端侧蒸馏/量化，会更接近产品化的真实问题。</p>
+                </div>
+            </div>
+            </details>
+
+            <script>
+                // 默认只展开最近 3 个月（按 data-month=YYYY-MM 排序）
+                (function () {
+                    const items = Array.from(document.querySelectorAll('details.month-group[data-month]'));
+                    const months = items
+                        .map(d => ({ el: d, key: d.getAttribute('data-month') || '' }))
+                        .filter(x => /^\\d{4}-\\d{2}$/.test(x.key))
+                        .sort((a, b) => (a.key < b.key ? 1 : -1));
+                    months.forEach((x, idx) => {
+                        if (idx < 3) x.el.setAttribute('open', '');
+                        else x.el.removeAttribute('open');
+                    });
+                })();
+            </script>
         </section>
 
         <nav class="chapter-nav">
