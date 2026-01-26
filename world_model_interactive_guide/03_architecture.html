@@ -8,6 +8,16 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+    <style>
+        .last-updated {
+            background: #fef3c7;
+            border: 1px solid #fcd34d;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -28,7 +38,9 @@
             <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线 (Roadmap)</a></li>
             <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
             <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">07. 论文追踪 (Papers)</a></li>
-            <li class="nav-item"><a href="08_community.html" class="nav-link">08. 社区动态 (Community)</a></li>
+            <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">08. 评测基准 (Benchmarks)</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">09. 社区动态 (Community)</a></li>
+            <li class="nav-item"><a href="09_update_log.html" class="nav-link">10. 更新日志 (Updates)</a></li>
             <li class="nav-item"><a href="references.html" class="nav-link">附录：参考文献 (Refs)</a></li>
         </ul>
     </nav>
@@ -36,6 +48,10 @@
     <main class="main-content">
         <h1>03. 核心技术架构与关键论文 (Architecture)</h1>
         <p>本章我们拆解"如何让模型听懂键盘指令"以及"如何跑得比显卡还快"。我们将深入探讨 Tokenizer、Streaming Inference 和 Action Injection 的底层机制。</p>
+
+        <div class="last-updated">
+            ⏰ <strong>最后更新时间</strong>: 2026-01-20 | 本页内容将每日更新「业界主流技术路线、工程架构与 AI Infra 落地进展」。
+        </div>
 
         <section>
             <h2>3.1 架构对比：视频模型 vs 游戏模型</h2>

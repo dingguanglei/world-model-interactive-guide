@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>09. 更新日志 - World Model Guide</title>
+    <title>10. 更新日志 - World Model Guide</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
         .log-entry {
@@ -162,14 +162,15 @@
             <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线 (Roadmap)</a></li>
             <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
             <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">07. 论文追踪 (Papers)</a></li>
-            <li class="nav-item"><a href="08_community.html" class="nav-link">08. 社区动态 (Community)</a></li>
-            <li class="nav-item"><a href="09_update_log.html" class="nav-link active">09. 更新日志 (Updates)</a></li>
+            <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">08. 评测基准 (Benchmarks)</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">09. 社区动态 (Community)</a></li>
+            <li class="nav-item"><a href="09_update_log.html" class="nav-link active">10. 更新日志 (Updates)</a></li>
             <li class="nav-item"><a href="references.html" class="nav-link">附录：参考文献 (Refs)</a></li>
         </ul>
     </nav>
 
     <main class="main-content">
-        <h1>09. 更新日志 (Update Log)</h1>
+        <h1>10. 更新日志 (Update Log)</h1>
         <p>本页记录所有内容更新的日期、类别和简要描述。每次调研更新后，都会在此同步记录变更内容。</p>
 
         <section>
@@ -180,15 +181,15 @@
                     <div class="stat-label">总更新天数</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">41</div>
+                    <div class="stat-number">60</div>
                     <div class="stat-label">总更新条目</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">15</div>
+                    <div class="stat-number">17</div>
                     <div class="stat-label">论文</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">2</div>
+                    <div class="stat-number">8</div>
                     <div class="stat-label">公司</div>
                 </div>
                 <div class="stat-card">
@@ -227,9 +228,13 @@
                         <li><strong>[NEW]</strong> 新增 <a href="https://arxiv.org/abs/2601.16163" target="_blank">Cosmos Policy (arXiv:2601.16163)</a>：把 action / future state / value 编码为 latent frames，单阶段微调预训练视频模型并用 best-of-N + value 做规划，给出 LIBERO/RoboCasa/真实世界成功率</li>
                         <li><strong>[NEW]</strong> 新增 <a href="https://arxiv.org/abs/2601.16914" target="_blank">LoL (arXiv:2601.16914)</a>：系统分析超长流式生成的 sink-collapse，提出 multi-head RoPE jitter（训练无关）以抑制崩溃，并展示 12 小时连续生成</li>
                         <li><strong>[NEW]</strong> 新增 <a href="https://arxiv.org/abs/2601.16471" target="_blank">Order from Chaos / PhysGame (arXiv:2601.16471)</a>：从 gameplay glitch 构建物理常识 QA 数据集（PhysGame 140,057；GameBench 880），提升物理推理与泛视频理解</li>
+                        <li><strong>[NEW]</strong> 新增 <a href="https://arxiv.org/abs/2506.08009" target="_blank">Self Forcing (arXiv:2506.08009)</a>：训练期做带 KV cache 的自回归自滚动（self-rollout）+ 视频级整体损失，缓解 exposure bias，实现流式生成与更稳定的长 rollout</li>
+                        <li><strong>[NEW]</strong> 新增 <a href="https://arxiv.org/abs/2412.07772" target="_blank">CausVid (arXiv:2412.07772)</a>：把慢双向视频扩散蒸馏成快因果流式生成（video-DMD、ODE 初始化、非对称蒸馏），实现低初始延迟与持续帧率</li>
                         <li><strong>[UPDATE]</strong> 论文追踪页面结构升级：新增“按年月折叠 + 二级导航”（默认展开最近 3 个月），修复公式渲染（MathJax），并为每篇论文补充 <strong>来源定位</strong> 与 <strong>🧠 AntiGravity's Commentary</strong></li>
                         <li><strong>[UPDATE]</strong> 为 arXiv 论文卡片新增“论文主图（Figure 1/首页主图）”展示：主图提取后以本地资源形式存放在 <code>assets/papers/</code>，并在卡片中标注来源定位</li>
                         <li><strong>[UPDATE]</strong> 按 arXiv 官方 published date 校准论文日期展示（用于更准确的年月折叠与浏览）</li>
+                        <li><strong>[UPDATE]</strong> Benchmarks 升级为独立一级章节 <a href="10_benchmarks.html" target="_blank">10_benchmarks.html</a>：沉淀业界常用的评测基准与评测方法（包含使用方式、评测重点与引用链接），保持与论文追踪一致的三段解读风格</li>
+                        <li><strong>[UPDATE]</strong> Benchmarks 聚焦到“视频生成/世界模型”评测：移除视频理解类基准（如 MVBench），避免评测口径跑偏</li>
                     </ul>
 
                     <h4>核心技术架构 (03_architecture.html)</h4>
@@ -298,6 +303,38 @@
                 </div>
             </div>
 
+            <!-- 2026-01-21 -->
+            <div class="log-entry">
+                <div class="log-date">📅 2026-01-21</div>
+                <div class="log-category">
+                    <span class="cat-tag company">🏢 公司</span>
+                    <span class="cat-tag product">🚀 产品</span>
+                    <span class="cat-tag tech">⚙️ 技术</span>
+                </div>
+                <div class="log-content">
+                    <h4>产品深度 (02_product.html)</h4>
+                    <ul>
+                        <li><strong>[ADD]</strong> <a href="02_product.html#magi1">Sand.ai - Magi-1</a>：开源自回归 chunk 流式生成路线与部署要点</li>
+                        <li><strong>[ADD]</strong> <a href="02_product.html#moki">美图 - MOKI</a>：脚本→分镜→素材→剪辑→配乐/字幕的工作流拆解</li>
+                        <li><strong>[ADD]</strong> <a href="02_product.html#kling">快手 - 可灵 AI (Kling)</a>：能力层（续写/口型/多元素）视角解读</li>
+                        <li><strong>[ADD]</strong> <a href="02_product.html#jimeng">抖音/字节 - 即梦 AI</a>：工具+社区+同款复用的创作闭环</li>
+                        <li><strong>[ADD]</strong> <a href="02_product.html#huiwa">阿里 - 绘蛙</a>：电商“图+文案+模特资产”生产线</li>
+                        <li><strong>[ADD]</strong> <a href="02_product.html#hailuo">MiniMax - 海螺视频</a>：模型/规格/成本/闲时无限生成的产品化策略</li>
+                        <li><strong>[FIX]</strong> <a href="02_product.html">修复 Vidu/TurboDiffusion 段落的 blockquote/HTML 结构</a></li>
+                    </ul>
+
+                    <h4>公司调研 (06_companies.html)</h4>
+                    <ul>
+                        <li><strong>[ADD]</strong> <a href="06_companies.html#sandai">Sand.ai（三呆科技）</a>：Magi-1 开源与推理栈（论文/代码/权重）</li>
+                        <li><strong>[ADD]</strong> <a href="06_companies.html#meitu-moki">美图 - MOKI</a>：短片创作工作流与成本可控定位</li>
+                        <li><strong>[ADD]</strong> <a href="06_companies.html#kuaishou-kling">快手 - 可灵 AI</a>：视频生成能力模块化（续写/口型/多元素）</li>
+                        <li><strong>[ADD]</strong> <a href="06_companies.html#bytedance-jimeng">字节/抖音 - 即梦 AI</a>：创作社区与同款复用机制</li>
+                        <li><strong>[ADD]</strong> <a href="06_companies.html#alibaba-huiwa">阿里 - 绘蛙</a>：电商营销内容创作平台</li>
+                        <li><strong>[ADD]</strong> <a href="06_companies.html#minimax-hailuo">MiniMax - 海螺视频</a>：规格/成本梯度与闲时无限生成策略</li>
+                    </ul>
+                </div>
+            </div>
+
             <!-- 2026-01-20 -->
             <div class="log-entry">
                 <div class="log-date">📅 2026-01-20</div>
@@ -309,9 +346,9 @@
                 <div class="log-content">
                     <h4>论文追踪 (07_paper_tracker.html)</h4>
                     <ul>
-                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">LongLive: Real-time Interactive Long Video Generation</a></li>
-                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">WAN 2.2</a></li>
-                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">WAN 2.1</a></li>
+                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">LongLive: Real-time Interactive Long Video Generation</a>（已补齐：<a href="https://arxiv.org/abs/2509.22622" target="_blank">arXiv:2509.22622</a> / <a href="https://nvlabs.github.io/LongLive/" target="_blank">Project</a> / <a href="https://github.com/NVlabs/LongLive" target="_blank">GitHub</a>）</li>
+                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">Wan 2.2</a>（已补齐：<a href="https://arxiv.org/abs/2503.20314" target="_blank">Wan paper</a> / <a href="https://github.com/Wan-Video/Wan2.2" target="_blank">GitHub</a>）</li>
+                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">Wan 2.1</a>（已补齐：<a href="https://arxiv.org/abs/2503.20314" target="_blank">Wan paper</a> / <a href="https://github.com/Wan-Video/Wan2.1" target="_blank">GitHub</a>）</li>
                     </ul>
 
                     <h4>社区动态 (08_community.html)</h4>
@@ -413,7 +450,7 @@
         <nav class="chapter-nav">
             <a href="08_community.html" class="chapter-nav-link prev">
                 <span class="chapter-nav-label">← 上一章</span>
-                <span class="chapter-nav-title">08. 社区动态 (Community)</span>
+                <span class="chapter-nav-title">09. 社区动态 (Community)</span>
             </a>
             <a href="references.html" class="chapter-nav-link next">
                 <span class="chapter-nav-label">下一章 →</span>

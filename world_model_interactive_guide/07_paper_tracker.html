@@ -70,6 +70,21 @@
             color: #15803d;
         }
 
+        .paper-tag.open {
+            background: #f0fdf4;
+            color: #15803d;
+        }
+
+        .paper-tag.closed {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .paper-tag.unknown {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
         .paper-tag.new {
             background: #fef3c7;
             color: #b45309;
@@ -224,6 +239,7 @@
             font-size: 0.9rem;
             margin-bottom: 2rem;
         }
+        /* 双视角卡片要求：上下排布（🟢在上，🔴在下） */
     </style>
 </head>
 
@@ -245,7 +261,9 @@
             <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线 (Roadmap)</a></li>
             <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
             <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link active">07. 论文追踪 (Papers)</a></li>
-            <li class="nav-item"><a href="08_community.html" class="nav-link">08. 社区动态 (Community)</a></li>
+            <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">08. 评测基准 (Benchmarks)</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">09. 社区动态 (Community)</a></li>
+            <li class="nav-item"><a href="09_update_log.html" class="nav-link">10. 更新日志 (Updates)</a></li>
             <li class="nav-item"><a href="references.html" class="nav-link">附录：参考文献 (Refs)</a></li>
         </ul>
     </nav>
@@ -255,6 +273,7 @@
         <p>本页追踪 arXiv/GitHub 上关于<strong>世界模型
                 (非具身智能)</strong>、<strong>交互视频生成</strong>、<strong>游戏模拟</strong>的最新研究。按发布日期从新到旧排列。</p>
         <p style="color: var(--text-secondary); margin-top: -0.25rem;">📌 按年月折叠浏览（默认展开最近 3 个月）。</p>
+        <p style="color: var(--text-secondary); margin-top: -0.25rem;">📏 评测基准与评测方法请见 <a href="10_benchmarks.html">08. 评测基准</a>（与本章并列维护）。</p>
 
         <div class="last-updated">
             ⏰ <strong>最后更新时间</strong>: 2026-01-26 | 本页内容每日更新，追踪学术前沿。
@@ -267,7 +286,9 @@
                 <a class="month-link" href="#month-2025-12">2025年12月</a>
                 <a class="month-link" href="#month-2025-09">2025年9月</a>
                 <a class="month-link" href="#month-2025-08">2025年8月</a>
+                <a class="month-link" href="#month-2025-06">2025年6月</a>
                 <a class="month-link" href="#month-2025-03">2025年3月</a>
+                <a class="month-link" href="#month-2024-12">2024年12月</a>
             </div>
 
             <details class="month-group" id="month-2026-01" data-month="2026-01" open>
@@ -363,8 +384,12 @@
                         <div class="paper-title"><a href="https://arxiv.org/abs/2601.15281" target="_blank">StableWorld: Towards Stable and Consistent Long Interactive Video Generation</a></div>
                         <div class="paper-meta">
                             <span>📅 2026-01-21</span>
-                            <span>📄 arXiv:2601.15281</span>
+                            <span>📄 <a href="https://arxiv.org/abs/2601.15281" target="_blank">arXiv:2601.15281</a></span>
                             <span class="paper-tag"><a href="https://sd-world.github.io/" target="_blank">Project</a></span>
+                            <span class="paper-tag github"><a href="https://github.com/xbyym/StableWorld" target="_blank">GitHub</a></span>
+                            <span class="paper-tag open"><a href="https://github.com/xbyym/StableWorld" target="_blank">代码开源</a></span>
+                            <span class="paper-tag unknown">参数未公开</span>
+                            <span class="paper-tag unknown">数据集未公开</span>
                             <span class="paper-tag new">NEW</span>
                         </div>
                     </div>
@@ -607,7 +632,10 @@
                         <div class="paper-title"><a href="https://arxiv.org/abs/2601.12719" target="_blank">S2DiT: Sandwich Diffusion Transformer for Mobile Streaming Video Generation</a></div>
                         <div class="paper-meta">
                             <span>📅 2026-01-19</span>
-                            <span>📄 arXiv:2601.12719</span>
+                            <span>📄 <a href="https://arxiv.org/abs/2601.12719" target="_blank">arXiv:2601.12719</a></span>
+                            <span class="paper-tag closed">代码未开源</span>
+                            <span class="paper-tag unknown">参数未公开</span>
+                            <span class="paper-tag unknown">数据集未公开</span>
                             <span class="paper-tag new">NEW</span>
                         </div>
                     </div>
@@ -690,8 +718,12 @@
                         <div class="paper-title"><a href="https://arxiv.org/abs/2601.05138" target="_blank">VerseCrafter: Dynamic Realistic Video World Model with 4D Geometric Control</a></div>
                         <div class="paper-meta">
                             <span>📅 2026-01-08</span>
-                            <span>📄 arXiv:2601.05138</span>
+                            <span>📄 <a href="https://arxiv.org/abs/2601.05138" target="_blank">arXiv:2601.05138</a></span>
                             <span class="paper-tag"><a href="https://sixiaozheng.github.io/VerseCrafter_page/" target="_blank">Project</a></span>
+                            <span class="paper-tag github"><a href="https://github.com/TencentARC/VerseCrafter" target="_blank">GitHub</a></span>
+                            <span class="paper-tag open"><a href="https://github.com/TencentARC/VerseCrafter" target="_blank">代码开源</a></span>
+                            <span class="paper-tag open"><a href="https://huggingface.co/TencentARC/VerseCrafter" target="_blank">参数开源</a></span>
+                            <span class="paper-tag unknown">数据集未公开</span>
                             <span class="paper-tag new">NEW</span>
                         </div>
                     </div>
@@ -775,7 +807,10 @@
                         </div>
                         <div class="paper-meta">
                             <span>📅 2025-12-21</span>
-                            <span>📄 arXiv:2512.18619</span>
+                            <span>📄 <a href="https://arxiv.org/abs/2512.18619" target="_blank">arXiv:2512.18619</a></span>
+                            <span class="paper-tag closed">代码未开源</span>
+                            <span class="paper-tag unknown">参数未公开</span>
+                            <span class="paper-tag unknown">数据集未公开</span>
                         </div>
                     </div>
                 </div>
@@ -817,8 +852,11 @@
                                 target="_blank">TurboDiffusion: Accelerating Video Diffusion by 100-200x</a></div>
                         <div class="paper-meta">
                             <span>📅 2025-12-18</span>
-                            <span>📄 arXiv:2512.16093</span>
+                            <span>📄 <a href="https://arxiv.org/abs/2512.16093" target="_blank">arXiv:2512.16093</a></span>
                             <span class="paper-tag github"><a href="https://github.com/thu-ml/TurboDiffusion" target="_blank">GitHub</a></span>
+                            <span class="paper-tag open"><a href="https://github.com/thu-ml/TurboDiffusion" target="_blank">代码开源</a></span>
+                            <span class="paper-tag open"><a href="https://huggingface.co/TurboDiffusion" target="_blank">参数开源</a></span>
+                            <span class="paper-tag unknown">数据集未公开</span>
                         </div>
                     </div>
                 </div>
@@ -905,7 +943,10 @@
                                 target="_blank">RELIC: Interactive Video World Model with Long-Horizon Memory</a></div>
                         <div class="paper-meta">
                             <span>📅 2025-12-03</span>
-                            <span>📄 arXiv:2512.04040</span>
+                            <span>📄 <a href="https://arxiv.org/abs/2512.04040" target="_blank">arXiv:2512.04040</a></span>
+                            <span class="paper-tag closed">代码未开源</span>
+                            <span class="paper-tag unknown">参数未公开</span>
+                            <span class="paper-tag unknown">数据集未公开</span>
                         </div>
                     </div>
                 </div>
@@ -1033,6 +1074,9 @@
                         <div class="paper-meta">
                             <span>📅 2025-09-19</span>
                             <span>📄 OpenReview (NeurIPS Submission)</span>
+                            <span class="paper-tag closed">代码未开源</span>
+                            <span class="paper-tag unknown">参数未公开</span>
+                            <span class="paper-tag unknown">数据集未公开</span>
                         </div>
                     </div>
                 </div>
@@ -1072,8 +1116,11 @@
                                 2.0: An Open-Source Real-Time Interactive World Model</a></div>
                         <div class="paper-meta">
                             <span>📅 2025-08-18</span>
-                            <span>📄 arXiv:2508.13009</span>
+                            <span>📄 <a href="https://arxiv.org/abs/2508.13009" target="_blank">arXiv:2508.13009</a></span>
                             <span class="paper-tag github"><a href="https://github.com/SkyworkAI/Matrix-Game" target="_blank">GitHub</a></span>
+                            <span class="paper-tag open"><a href="https://github.com/SkyworkAI/Matrix-Game" target="_blank">代码开源</a></span>
+                            <span class="paper-tag open"><a href="https://huggingface.co/Skywork/Matrix-Game-2.0" target="_blank">参数开源</a></span>
+                            <span class="paper-tag unknown">数据集未公开</span>
                         </div>
                     </div>
                 </div>
@@ -1156,6 +1203,9 @@
                         <div class="paper-meta">
                             <span>📅 2025-08-05</span>
                             <span>📄 DeepMind Official</span>
+                            <span class="paper-tag closed">代码未开源</span>
+                            <span class="paper-tag unknown">参数未公开</span>
+                            <span class="paper-tag unknown">数据集未公开</span>
                         </div>
                     </div>
                 </div>
@@ -1182,6 +1232,95 @@
                 <div class="commentary">
                     <div class="commentary-title">🧠 AntiGravity's Commentary</div>
                     <p style="margin:0;">Genie 3 的意义更多是“把可玩性带到公众视野”：分钟级一致性、可探索的交互演示会强烈抬高市场预期。但从工程角度仍要回到两个问题：一是 state 是否可读写（还是隐式上下文）；二是失败恢复（回滚/重锚定）有没有系统化机制。没有这两件事，很容易仍停留在“很强的视频预测器”而非可长期运行的世界系统。</p>
+                </div>
+            </div>
+            </details>
+
+            <details class="month-group" id="month-2025-06" data-month="2025-06">
+                <summary>📅 2025年6月</summary>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2506.08009" target="_blank">Self Forcing: Bridging the Train-Test Gap in Autoregressive Video Diffusion</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2025-06-09</span>
+                            <span>📄 <a href="https://arxiv.org/abs/2506.08009" target="_blank">arXiv:2506.08009</a></span>
+                            <span class="paper-tag"><a href="https://self-forcing.github.io/" target="_blank">Project</a></span>
+                            <span class="paper-tag github"><a href="https://github.com/guandeh17/Self-Forcing" target="_blank">GitHub</a></span>
+                            <span class="paper-tag open"><a href="https://github.com/guandeh17/Self-Forcing" target="_blank">代码开源</a></span>
+                            <span class="paper-tag open"><a href="https://huggingface.co/gdhe17/Self-Forcing/tree/main" target="_blank">参数开源</a></span>
+                            <span class="paper-tag open"><a href="https://huggingface.co/gdhe17/Self-Forcing/tree/main" target="_blank">数据集：data-free</a></span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2506.08009-fig1.webp" alt="arXiv:2506.08009 Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1）</figcaption>
+                </figure>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>很多“边生成边播放”的视频模型都会越生成越崩，本质原因是：<strong>训练时看的是正确答案（真视频），推理时吃的是自己生成的东西</strong>，吃着吃着就越吃越偏。Self Forcing 的核心就是把推理时那套“自己滚动生成”的过程搬进训练里，让模型在训练期就学会面对自己的错误并纠正。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>问题：Exposure Bias / Train-Test Gap</strong>：传统 Teacher Forcing / Diffusion Forcing 训练都用 ground-truth context 去预测未来帧，但推理时 context 其实来自模型自身输出，造成分布不匹配并引发误差累积。<sup><a href="https://arxiv.org/abs/2506.08009" target="_blank">[来源]</a></sup></li>
+                            <li><strong>核心机制：训练期做“自回归自滚动”（Self-rollout）</strong>：训练时用 <strong>KV cache</strong> 做 autoregressive rollout，让下一帧的去噪条件来自“前面自己生成出来的帧”，而不是 GT 帧（Fig.1(c)）。<sup><a href="https://arxiv.org/abs/2506.08009" target="_blank">[来源]</a></sup></li>
+                            <li><strong>监督信号：视频级整体损失（Holistic, video-level）</strong>：不是只做 frame-wise 目标，而是在完整生成序列上施加分布匹配损失（文中举例 SiD / DMD / GAN 等），直接评价整段视频的质量，逼近“推理时分布”。<sup><a href="https://arxiv.org/abs/2506.08009" target="_blank">[来源]</a></sup></li>
+                            <li><strong>算力可承受的关键：Few-step diffusion + Stochastic Gradient Truncation</strong>：为避免训练期自回归 rollout 过慢，作者用 few-step diffusion backbone，并引入随机梯度截断来平衡计算成本与效果。<sup><a href="https://arxiv.org/abs/2506.08009" target="_blank">[来源]</a></sup></li>
+                            <li><strong>长视频外推：Rolling KV Cache</strong>：提出 rolling KV cache 以支持更高效的视频外推（extrapolation），让 streaming 生成可以持续滚动。<sup><a href="https://arxiv.org/abs/2506.08009" target="_blank">[来源]</a></sup></li>
+                            <li><strong>结果（硬指标）</strong>：作者报告在单张 H100 上实现 <strong>17 FPS</strong> 的实时流式生成，并达到 sub-second latency，同时画质可匹配/超过更慢的非因果扩散模型。<sup><a href="https://arxiv.org/abs/2506.08009" target="_blank">[来源]</a></sup></li>
+                        </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2506.08009" target="_blank">论文</a>（Abstract：Self-rollout/KV cache、video-level holistic loss、few-step + stochastic gradient truncation、rolling KV cache 与 17 FPS；Fig.1：TF/DF/SF 训练分布差异与 SF 机制）。
+                        </div>
+
+                        <figure style="margin: 0.75rem 0 0;">
+                            <figcaption style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                <strong>图：Self Forcing 如何把“推理滚动”搬进训练（问题 & 因果逻辑图）</strong>
+                            </figcaption>
+                            <svg viewBox="0 0 900 250" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Self Forcing causal logic">
+                                <defs>
+                                    <marker id="arrowSF" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                        <path d="M0,0 L10,3 L0,6 Z" fill="#64748b" />
+                                    </marker>
+                                </defs>
+
+                                <rect x="20" y="40" width="235" height="80" rx="12" fill="#fff1f2" stroke="#e11d48" />
+                                <text x="35" y="70" font-size="13" fill="#9f1239" font-weight="700">Problem</text>
+                                <text x="35" y="92" font-size="12" fill="#9f1239">Train 用 GT context</text>
+                                <text x="35" y="112" font-size="12" fill="#9f1239">Test 吃 self-generated</text>
+
+                                <rect x="275" y="40" width="245" height="80" rx="12" fill="#ffe4e6" stroke="#fb7185" />
+                                <text x="290" y="70" font-size="13" fill="#9f1239" font-weight="700">Cause</text>
+                                <text x="290" y="92" font-size="12" fill="#9f1239">Distribution mismatch</text>
+                                <text x="290" y="112" font-size="12" fill="#9f1239">→ error accumulation</text>
+
+                                <rect x="540" y="40" width="245" height="80" rx="12" fill="#e0f2fe" stroke="#0369a1" />
+                                <text x="555" y="70" font-size="13" fill="#0369a1" font-weight="700">Mechanism (SF)</text>
+                                <text x="555" y="92" font-size="12" fill="#0369a1">train-time self-rollout + KV cache</text>
+                                <text x="555" y="112" font-size="12" fill="#0369a1">video-level distribution matching</text>
+
+                                <rect x="20" y="150" width="765" height="70" rx="12" fill="#f0fae6" stroke="#22c55e" />
+                                <text x="35" y="178" font-size="13" fill="#166534" font-weight="700">Effect</text>
+                                <text x="35" y="200" font-size="12" fill="#166534">train-test gap ↓ → long rollout 更稳；few-step + truncation 控制算力；rolling KV 支持 streaming</text>
+
+                                <line x1="255" y1="80" x2="275" y2="80" stroke="#64748b" stroke-width="2" marker-end="url(#arrowSF)" />
+                                <line x1="520" y1="80" x2="540" y2="80" stroke="#64748b" stroke-width="2" marker-end="url(#arrowSF)" />
+                                <line x1="660" y1="120" x2="660" y2="150" stroke="#64748b" stroke-width="2" marker-end="url(#arrowSF)" />
+                            </svg>
+                        </figure>
+                    </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">Self Forcing 这条线真正有价值的是它把“流式生成能否长期稳定”从 trick 拉回到<strong>训练分布与推理分布一致</strong>这个根因上。对落地团队来说，建议重点复用两件事：① train-time rollout（把 KV cache/滚动链路写进训练）；② 评价口径从帧级转向视频级（否则很容易在早期帧好看、后面崩）。另外它强调 data-free 的 post-training 路径，对快速迭代非常友好，但也要警惕：无数据并不等于无偏差，prompt 分布与真实使用分布的 gap 仍会反噬。</p>
                 </div>
             </div>
             </details>
@@ -1310,6 +1449,96 @@
             </div>
             </details>
 
+            <details class="month-group" id="month-2024-12" data-month="2024-12">
+                <summary>📅 2024年12月</summary>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2412.07772" target="_blank">CausVid: From Slow Bidirectional to Fast Autoregressive Video Diffusion Models</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2024-12-10</span>
+                            <span>📄 <a href="https://arxiv.org/abs/2412.07772" target="_blank">arXiv:2412.07772</a></span>
+                            <span class="paper-tag"><a href="https://causvid.github.io/" target="_blank">Project</a></span>
+                            <span class="paper-tag"><a href="https://causvid.github.io/causvid_paper.pdf" target="_blank">PDF</a></span>
+                            <span class="paper-tag github"><a href="https://github.com/tianweiy/CausVid" target="_blank">GitHub</a></span>
+                            <span class="paper-tag open"><a href="https://github.com/tianweiy/CausVid" target="_blank">代码开源</a></span>
+                            <span class="paper-tag open"><a href="https://huggingface.co/tianweiy/CausVid" target="_blank">参数开源</a></span>
+                            <span class="paper-tag open"><a href="https://huggingface.co/datasets/LanguageBind/Open-Sora-Plan-v1.1.0/tree/main/all_mixkit" target="_blank">数据集开源</a></span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2412.07772-fig1.webp" alt="arXiv:2412.07772 Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1）</figcaption>
+                </figure>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>传统“高画质视频扩散”像是一次性把整段视频都算完：你必须等到最后一帧算完才能看到结果，所以交互完全没戏。CausVid 的目标是把它变成“边算边出”：<strong>先等 1.3 秒出第一屏，然后以约 9.4 FPS 持续流式生成</strong>，把视频生成从“离线渲染”变成“可交互工作流”。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>问题根因：双向注意力导致“单帧=全片”</strong>：bidirectional DiT 生成当前帧需要处理包含未来在内的整段序列，128 帧全片生成延迟可达 219s（Fig.1）。<sup><a href="https://arxiv.org/abs/2412.07772" target="_blank">[来源]</a></sup></li>
+                            <li><strong>路线：从 bidirectional teacher → causal student</strong>：把预训练的双向扩散 Transformer 适配成因果自回归 Transformer，实现 on-the-fly 逐帧生成，并可用 KV cache 加速。<sup><a href="https://arxiv.org/abs/2412.07772" target="_blank">[来源]</a></sup></li>
+                            <li><strong>关键加速：把 DMD 扩展到视频，50-step → 4-step</strong>：用 distribution matching distillation 将 50 步扩散蒸馏到 4 步生成器，显著降低推理延迟。<sup><a href="https://arxiv.org/abs/2412.07772" target="_blank">[来源]</a></sup></li>
+                            <li><strong>稳定蒸馏：ODE 轨迹初始化 + 非对称蒸馏</strong>：用 teacher 的 ODE trajectories 做学生初始化，并用“bidirectional teacher 监督 causal student”的 asymmetric distillation，降低 AR 误差累积、支持 long-duration 外推（即使训练用短 clip）。<sup><a href="https://arxiv.org/abs/2412.07772" target="_blank">[来源]</a></sup></li>
+                            <li><strong>能力外延（交互产品很重要）</strong>：支持 streaming 的 T2V/I2V/V2V 与 dynamic prompting（Fig.2），让用户可在生成过程中改变 prompt 而不必重算整段。<sup><a href="https://arxiv.org/abs/2412.07772" target="_blank">[来源]</a></sup></li>
+                            <li><strong>结果（硬指标）</strong>：初始延迟约 <strong>1.3s</strong>，之后以约 <strong>9.4 FPS</strong> 流式生成；并在 VBench-Long 上报告 <strong>84.27</strong> 总分。<sup><a href="https://arxiv.org/abs/2412.07772" target="_blank">[来源]</a></sup></li>
+                        </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2412.07772" target="_blank">论文</a>（Fig.1：219s→1.3s 与 streaming 9.4 FPS；Abstract：DMD-to-video、50→4 steps、ODE init、asymmetric distillation、VBench-Long 84.27；Fig.2：dynamic prompting 与任务覆盖）。补充实现与开源/权重/数据：<a href="https://github.com/tianweiy/CausVid" target="_blank">GitHub README</a>（HuggingFace checkpoints 与 MixKit 数据准备/LMDB）。
+                        </div>
+
+                        <figure style="margin: 0.75rem 0 0;">
+                            <figcaption style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                                <strong>图：CausVid 把“慢双向扩散”蒸馏成“快因果流式生成”（问题 & 因果逻辑图）</strong>
+                            </figcaption>
+                            <svg viewBox="0 0 900 250" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CausVid causal logic">
+                                <defs>
+                                    <marker id="arrowCV" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                        <path d="M0,0 L10,3 L0,6 Z" fill="#64748b" />
+                                    </marker>
+                                </defs>
+
+                                <rect x="20" y="40" width="260" height="80" rx="12" fill="#fff1f2" stroke="#e11d48" />
+                                <text x="35" y="70" font-size="13" fill="#9f1239" font-weight="700">Problem</text>
+                                <text x="35" y="92" font-size="12" fill="#9f1239">Bidirectional attention</text>
+                                <text x="35" y="112" font-size="12" fill="#9f1239">→ 单帧需看全片（含未来）</text>
+
+                                <rect x="300" y="40" width="265" height="80" rx="12" fill="#ffe4e6" stroke="#fb7185" />
+                                <text x="315" y="70" font-size="13" fill="#9f1239" font-weight="700">Bottleneck</text>
+                                <text x="315" y="92" font-size="12" fill="#9f1239">latency 219s / 128 frames</text>
+                                <text x="315" y="112" font-size="12" fill="#9f1239">不可交互 / 不可流式</text>
+
+                                <rect x="585" y="40" width="295" height="80" rx="12" fill="#e0f2fe" stroke="#0369a1" />
+                                <text x="600" y="70" font-size="13" fill="#0369a1" font-weight="700">Mechanism</text>
+                                <text x="600" y="92" font-size="12" fill="#0369a1">bidirectional teacher → causal student</text>
+                                <text x="600" y="112" font-size="12" fill="#0369a1">video-DMD: 50 steps → 4 steps</text>
+
+                                <rect x="20" y="150" width="860" height="70" rx="12" fill="#f0fae6" stroke="#22c55e" />
+                                <text x="35" y="178" font-size="13" fill="#166534" font-weight="700">Effect</text>
+                                <text x="35" y="200" font-size="12" fill="#166534">initial latency 1.3s；streaming ~9.4 FPS；KV cache 支持交互；asymmetric+ODE init 缓解 AR 误差累积</text>
+
+                                <line x1="280" y1="80" x2="300" y2="80" stroke="#64748b" stroke-width="2" marker-end="url(#arrowCV)" />
+                                <line x1="565" y1="80" x2="585" y2="80" stroke="#64748b" stroke-width="2" marker-end="url(#arrowCV)" />
+                                <line x1="730" y1="120" x2="730" y2="150" stroke="#64748b" stroke-width="2" marker-end="url(#arrowCV)" />
+                            </svg>
+                        </figure>
+                    </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">CausVid 的价值不是“又一个视频模型”，而是给出了把 <strong>bidirectional 画质</strong>转成 <strong>causal 交互</strong> 的一条可复现工程路径：teacher-student +（视频版）DMD + ODE init + 非对称监督。对产品端最关键的，是它把<strong>初始延迟</strong>与<strong>持续帧率</strong>作为一等指标，并明确写进图 1——这正是交互世界模型的 KPI。后续跟踪点：在更复杂动作控制/动态 prompt 下的失败模式（漂移、角色一致性崩坏）以及端到端延迟是否被 VAE/编码/调度重新卡住。</p>
+                </div>
+            </div>
+            </details>
+
             <script>
                 // 默认只展开最近 3 个月（按 data-month=YYYY-MM 排序）
                 (function () {
@@ -1331,9 +1560,9 @@
                 <span class="chapter-nav-label">← 上一章</span>
                 <span class="chapter-nav-title">06. 公司调研 (Companies)</span>
             </a>
-            <a href="08_community.html" class="chapter-nav-link next">
+            <a href="10_benchmarks.html" class="chapter-nav-link next">
                 <span class="chapter-nav-label">下一章 →</span>
-                <span class="chapter-nav-title">08. 社区动态 (Community)</span>
+                <span class="chapter-nav-title">08. 评测基准 (Benchmarks)</span>
             </a>
         </nav>
     </main>

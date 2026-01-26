@@ -66,6 +66,15 @@
             font-size: 1.1rem;
             font-weight: 600;
         }
+
+        .last-updated {
+            background: #fef3c7;
+            border: 1px solid #fcd34d;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
     </style>
 </head>
 
@@ -87,7 +96,9 @@
             <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线 (Roadmap)</a></li>
             <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
             <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">07. 论文追踪 (Papers)</a></li>
-            <li class="nav-item"><a href="08_community.html" class="nav-link">08. 社区动态 (Community)</a></li>
+            <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">08. 评测基准 (Benchmarks)</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">09. 社区动态 (Community)</a></li>
+            <li class="nav-item"><a href="09_update_log.html" class="nav-link">10. 更新日志 (Updates)</a></li>
             <li class="nav-item"><a href="references.html" class="nav-link">附录：参考文献 (Refs)</a></li>
         </ul>
     </nav>
@@ -95,6 +106,10 @@
     <main class="main-content">
         <h1>02. 主流产品深度解析 (Deep Dive)</h1>
         <p>本章我们透过"官方演示视频"的视觉表现，深度反推各大模型的技术边界与应用场景。从 Genie 3 的通用世界模拟，到 Vidu 的生产力工具定位，再到 PixVerse 的消费级音画一体化。</p>
+
+        <div class="last-updated">
+            ⏰ <strong>最后更新时间</strong>: 2026-01-21 | 本页内容将每日更新「市场上最新的交互视频产品/神经游戏引擎/相关产品动态」。
+        </div>
 
         <section id="genie3">
             <h2>2.1 Google DeepMind: Genie 3 —— "通用的可交互梦境"</h2>
@@ -243,10 +258,14 @@
                 </tr>
             </tbody>
         </table>
-        accelerates video diffusion models by 100× while preserving visual quality. Our key innovations include
-        <strong>Sparse Linear Attention (SLA)</strong> and <strong>Consistency Distillation</strong>."
+
+        <blockquote>
+            <strong>原文关键摘录 (TurboDiffusion Abstract)</strong>: "We introduce TurboDiffusion, a training-free framework
+            that accelerates video diffusion models by <strong>100×</strong> while preserving visual quality. Our key
+            innovations include <strong>Sparse Linear Attention (SLA)</strong> and <strong>Consistency
+                Distillation</strong>."
+            <sup><a href="https://arxiv.org/abs/2512.16093" target="_blank">[来源]</a></sup>
         </blockquote>
-        </section>
 
         <div class="commentary">
             <div class="commentary-title">🧠 ANTIGRAVITY'S COMMENTARY</div>
@@ -292,6 +311,336 @@
             </p>
         </div>
 
+        <section id="magi1">
+            <h2>2.4 Sand.ai: Magi-1（开源自回归视频世界模型）</h2>
+
+            <div class="card">
+                <h3>🔗 官方与可追溯来源</h3>
+                <p style="margin-bottom: 0.5rem;">
+                    <strong>产品</strong>: <a href="https://magi.sand.ai/" target="_blank">Magi Product</a> |
+                    <strong>官网</strong>: <a href="https://sand.ai/" target="_blank">sand.ai</a>
+                </p>
+                <p style="margin-bottom: 0.5rem;">
+                    <strong>论文</strong>: <a href="https://arxiv.org/abs/2505.13211" target="_blank">MAGI-1: Autoregressive
+                        Video Generation at Scale (arXiv:2505.13211)</a> |
+                    <a href="https://static.magi.world/static/files/MAGI_1.pdf" target="_blank">技术报告 PDF</a>
+                </p>
+                <p style="margin-bottom: 0;">
+                    <strong>开源</strong>: <a href="https://github.com/SandAI-org/MAGI-1" target="_blank">GitHub</a> |
+                    <a href="https://huggingface.co/sand-ai/MAGI-1" target="_blank">HuggingFace 权重</a>
+                </p>
+
+                <h3 style="margin-top: 1.5rem;">🧠 关键能力：为什么它更像“可流式推理的世界模型”</h3>
+                <p style="margin-bottom: 0.75rem;">
+                    MAGI-1 的核心设计是把视频生成拆成<strong>chunk（固定长度片段）</strong>并按时间<strong>自回归</strong>生成：模型逐 chunk 预测，并通过“chunk 内整体去噪 +
+                    chunk 间因果约束”支持 streaming 与更强的时序一致性。<sup><a href="https://github.com/SandAI-org/MAGI-1"
+                            target="_blank">[来源]</a></sup>
+                </p>
+                <ul>
+                    <li><strong>生成范式</strong>: 自回归 chunk-by-chunk；官方描述每个 chunk 为 24 帧，并允许最多 4 个 chunk 并发去噪以提高吞吐。
+                        <sup><a href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                    <li><strong>Tokenizer/表示</strong>: Transformer-based VAE，8× 空间压缩、4× 时间压缩。
+                        <sup><a href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                    <li><strong>任务覆盖</strong>: 支持 <code>t2v</code>/<code>i2v</code>/<code>v2v</code>（仓库给出参数与示例脚本）。
+                        <sup><a href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                    <li><strong>可控性</strong>: 支持 chunk-wise prompting（分段提示词），用于长时合成、平滑转场、细粒度文本控制。
+                        <sup><a href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                </ul>
+
+                <h3>⚙️ 落地工程：给想复现/部署的人看的</h3>
+                <ul>
+                    <li><strong>一键环境</strong>: 官方提供 Docker 镜像与启动命令，降低“能跑起来”的门槛。
+                        <sup><a href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                    <li><strong>硬件建议</strong>: 24B 推荐 H100/H800×8；4.5B 可在单张 RTX 4090 运行（并给出 distill / fp8 quant 变体）。
+                        <sup><a href="https://github.com/SandAI-org/MAGI-1" target="_blank">[来源]</a></sup></li>
+                </ul>
+            </div>
+
+            <div class="commentary">
+                <div class="commentary-title">🧠 ANTIGRAVITY'S COMMENTARY</div>
+                <p>如果你把“世界模型”当成一个<strong>可持续运行的系统</strong>，Magi-1 值得反复读：它把 chunk、并行、硬件预算、推理栈写得足够透明。相比只展示 demo 的闭源产品，
+                    Magi-1 的意义更像“教你怎么做一台机器”。</p>
+            </div>
+        </section>
+
+        <section id="moki">
+            <h2>2.5 美图：MOKI —— “我用AI做短片”（工作流优先）</h2>
+
+            <div class="card">
+                <h3>🔗 来源与入口（可追溯）</h3>
+                <p style="margin-bottom: 0.5rem;">
+                    <strong>产品</strong>: <a href="https://www.moki.cn/" target="_blank">moki.cn</a>
+                </p>
+                <p style="margin-bottom: 0;">
+                    <strong>发布与功能描述</strong>: <a href="https://www.ithome.com/0/774/815.htm"
+                        target="_blank">IT之家：美图公司推出 AI 短片创作工具 MOKI</a>
+                </p>
+
+                <h3 style="margin-top: 1.5rem;">🧠 核心思路：把“不可控的连续生成”拆成“可控的离散工序”</h3>
+                <p style="margin-bottom: 0.75rem;">
+                    如果你用过文生视频工具做“短片”，会遇到两个硬伤：<strong>叙事节奏不稳</strong>（镜头语言随机）与<strong>成本不可控</strong>（多次重试）。MOKI 的设计取向更像传统影视制作：先把脚本、风格、角色定下来，然后<strong>生成分镜</strong>，把分镜转换为视频素材，再用智能剪辑、AI 配乐、AI 音效、自动字幕完成成片。
+                    <sup><a href="https://www.ithome.com/0/774/815.htm" target="_blank">[来源]</a></sup>
+                </p>
+
+                <h3>⚙️ 工作流拆解（按公开信息，尽量工程化表达）</h3>
+                <ol>
+                    <li><strong>Pre-production（前期设定）</strong>：脚本/视觉风格/角色设定（用于统一“世界观”和角色一致性）。<sup><a
+                                href="https://www.ithome.com/0/774/815.htm" target="_blank">[来源]</a></sup></li>
+                    <li><strong>Storyboard（分镜生成）</strong>：AI 自动生成分镜图（相当于先把镜头列表确定）。<sup><a
+                                href="https://www.ithome.com/0/774/815.htm" target="_blank">[来源]</a></sup></li>
+                    <li><strong>Materialize（素材化）</strong>：将分镜图转为视频素材（把“图→视频片段”变成可批处理任务）。<sup><a
+                                href="https://www.ithome.com/0/774/815.htm" target="_blank">[来源]</a></sup></li>
+                    <li><strong>Post-production（后期串联）</strong>：智能剪辑 + AI 配乐/音效 + 自动字幕，完成成片。<sup><a
+                                href="https://www.ithome.com/0/774/815.htm" target="_blank">[来源]</a></sup></li>
+                </ol>
+
+                <h3>✅ 适用场景（基于“工作流优先”的产品逻辑）</h3>
+                <ul>
+                    <li><strong>短剧/广告/品牌内容</strong>: 需要稳定镜头语言与成本预算的场景（先分镜，后生成）。</li>
+                    <li><strong>企业内容团队</strong>: 更像“素材生产线”，而不是一次性 demo。</li>
+                </ul>
+            </div>
+
+            <div class="commentary">
+                <div class="commentary-title">🧠 ANTIGRAVITY'S COMMENTARY</div>
+                <p>判断 MOKI 是否“真能打”，我会盯两个指标：<strong>（1）分镜可编辑性</strong>（能否像真正的分镜脚本那样局部改镜头而不重做全片）与<strong>（2）素材资产复用</strong>（同一角色/风格能否跨项目复用）。
+                    这两点决定它是“短视频玩具”还是“生产工具”。</p>
+            </div>
+        </section>
+
+        <section id="kling">
+            <h2>2.6 快手：可灵 AI（Kling AI）—— “能力可组合”的视频生成平台</h2>
+
+            <div class="card">
+                <h3>🔗 入口与来源（可追溯）</h3>
+                <p style="margin-bottom: 0.5rem;">
+                    <strong>产品</strong>: <a href="https://klingai.kuaishou.com/" target="_blank">klingai.kuaishou.com</a> |
+                    <a href="https://klingai.com/cn/" target="_blank">klingai.com</a>
+                </p>
+                <p style="margin-bottom: 0;">
+                    <strong>公司</strong>: <a href="https://ir.kuaishou.com/" target="_blank">Kuaishou Technology IR</a>
+                </p>
+
+                <h3 style="margin-top: 1.5rem;">🧠 观察框架：从“模型”到“能力层”</h3>
+                <p style="margin-bottom: 0.75rem;">
+                    Kling 的产品形态非常“工程化”：官网把能力拆成一组可以被调用的模块，而不是只给一个 T2V 模型入口。这意味着它更像一套<strong>视频生成能力层（capability
+                        layer）</strong>，适合嵌入到编辑器/电商/营销/社交等不同产品里。<sup><a href="https://klingai.com/cn/"
+                            target="_blank">[来源]</a></sup>
+                </p>
+
+                <h3>🧩 功能面拆解（官网功能列表 → 对应的系统含义）</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>官网能力</th>
+                            <th>对系统/工程意味着什么</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Text to Video</strong> <sup><a href="https://klingai.com/cn/"
+                                        target="_blank">[来源]</a></sup></td>
+                            <td>基础入口；关键 KPI 是可控性与一致性，而不只是画质。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Image to Video</strong> <sup><a href="https://klingai.com/cn/"
+                                        target="_blank">[来源]</a></sup></td>
+                            <td>“参考图锁定”路线（人物/商品一致性），通常比纯 T2V 更靠近商用素材生产。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Video Extension</strong> <sup><a href="https://klingai.com/cn/"
+                                        target="_blank">[来源]</a></sup></td>
+                            <td>视频续写/扩展；本质是 prefix-conditioned continuation，对“长视频/交互”是硬前置能力。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lip-Sync</strong> <sup><a href="https://klingai.com/cn/"
+                                        target="_blank">[来源]</a></sup></td>
+                            <td>音频条件 + 人脸/身份保持；是短剧/口播/营销视频的刚需模块，工程上意味着音视频对齐评测与身份一致性约束。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Video Effects</strong> <sup><a href="https://klingai.com/cn/"
+                                        target="_blank">[来源]</a></sup></td>
+                            <td>更偏模板/玩法；更容易规模化与产品化（但也更容易陷入“滤镜化”竞争）。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Multi-Image / Multi-Elements</strong> <sup><a href="https://klingai.com/cn/"
+                                        target="_blank">[来源]</a></sup></td>
+                            <td>多参考/多元素组合，强调可组合输入。这通常意味着更复杂的 conditioning 设计与更明确的失败模式（元素丢失/身份漂移）。</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>⚙️ 开发者平台信号</h3>
+                <p style="margin-bottom: 0;">
+                    官网明确出现“Video V2.5 Turbo model API”等升级提示，说明其对外接口在持续迭代，值得在后续调研里跟踪 API 的输入约束（时长/分辨率/参考图数量）与稳定性。
+                    <sup><a href="https://klingai.com/cn/" target="_blank">[来源]</a></sup>
+                </p>
+            </div>
+
+            <div class="commentary">
+                <div class="commentary-title">🧠 ANTIGRAVITY'S COMMENTARY</div>
+                <p>做“可灵”的正确打开方式不是把它当成一个模型，而是把它当成<strong>一组可拼装的能力模块</strong>：续写解决长时，口型解决口播，Multi-Image/Multi-Elements 解决一致性与组合，特效解决玩法与增长。
+                    真正的差距会出现在：这些模块能否在统一的风格/角色资产上协同工作，而不是各自为政。</p>
+            </div>
+        </section>
+
+        <section id="jimeng">
+            <h2>2.7 抖音 / 字节跳动：即梦 AI（Dreamina）—— “工具 + 社区 + 同款”的创作闭环</h2>
+
+            <div class="card">
+                <h3>🔗 来源与入口（可追溯）</h3>
+                <p style="margin-bottom: 0.5rem;">
+                    <strong>官网</strong>: <a href="https://jimeng.jianying.com/" target="_blank">即梦AI - 即刻造梦</a>
+                </p>
+                <p style="margin-bottom: 0;">
+                    <strong>App Store</strong>: <a
+                        href="https://apps.apple.com/cn/app/%E5%8D%B3%E6%A2%A6ai-%E6%8A%96%E9%9F%B3%E6%97%97%E4%B8%8Bai%E5%9B%BE%E7%89%87%E5%92%8C%E8%A7%86%E9%A2%91%E5%B7%A5%E5%85%B7/id6503676563"
+                        target="_blank">即梦AI - 抖音旗下AI图片和视频工具</a> |
+                    <strong>公司</strong>: <a href="https://www.bytedance.com/" target="_blank">ByteDance</a>
+                </p>
+
+                <h3 style="margin-top: 1.5rem;">🧠 产品逻辑：把生成能力变成“可增长的内容网络”</h3>
+                <p style="margin-bottom: 0.75rem;">
+                    即梦的官方描述非常明确：它不仅提供 AI 图片/视频生成，还提供<strong>探索页浏览作品、链接分享、提示词同款复用</strong>等社区机制。对 AIGC 来说，这意味着增长不只靠“更强模型”，还靠“更强的作品传播与复刻机制”。
+                    <sup><a href="https://apps.apple.com/cn/app/%E5%8D%B3%E6%A2%A6ai-%E6%8A%96%E9%9F%B3%E6%97%97%E4%B8%8Bai%E5%9B%BE%E7%89%87%E5%92%8C%E8%A7%86%E9%A2%91%E5%B7%A5%E5%85%B7/id6503676563"
+                            target="_blank">[来源]</a></sup>
+                </p>
+
+                <h3>⚙️ 能力拆解（来自官方文案）</h3>
+                <ul>
+                    <li><strong>AI 图片创作</strong>：用自然语言生成图片，并提供编辑能力以继续迭代。<sup><a
+                                href="https://apps.apple.com/cn/app/%E5%8D%B3%E6%A2%A6ai-%E6%8A%96%E9%9F%B3%E6%97%97%E4%B8%8Bai%E5%9B%BE%E7%89%87%E5%92%8C%E8%A7%86%E9%A2%91%E5%B7%A5%E5%85%B7/id6503676563"
+                                target="_blank">[来源]</a></sup></li>
+                    <li><strong>视频创作</strong>：输入想法生成视频，并鼓励“多轮尝试”获得满意结果（这是产品层面对不可控性的现实回应）。<sup><a
+                                href="https://apps.apple.com/cn/app/%E5%8D%B3%E6%A2%A6ai-%E6%8A%96%E9%9F%B3%E6%97%97%E4%B8%8Bai%E5%9B%BE%E7%89%87%E5%92%8C%E8%A7%86%E9%A2%91%E5%B7%A5%E5%85%B7/id6503676563"
+                                target="_blank">[来源]</a></sup></li>
+                    <li><strong>探索与同款</strong>：浏览他人作品、复用提示词生成同款（提示词复刻是社区“教学”的核心机制）。<sup><a
+                                href="https://apps.apple.com/cn/app/%E5%8D%B3%E6%A2%A6ai-%E6%8A%96%E9%9F%B3%E6%97%97%E4%B8%8Bai%E5%9B%BE%E7%89%87%E5%92%8C%E8%A7%86%E9%A2%91%E5%B7%A5%E5%85%B7/id6503676563"
+                                target="_blank">[来源]</a></sup></li>
+                    <li><strong>会员权益</strong>：官方提及“视频延长、去水印”等权益，说明其商业化锚点与视频生成的系统约束（时长/队列/输出）强相关。<sup><a
+                                href="https://apps.apple.com/cn/app/%E5%8D%B3%E6%A2%A6ai-%E6%8A%96%E9%9F%B3%E6%97%97%E4%B8%8Bai%E5%9B%BE%E7%89%87%E5%92%8C%E8%A7%86%E9%A2%91%E5%B7%A5%E5%85%B7/id6503676563"
+                                target="_blank">[来源]</a></sup></li>
+                </ul>
+            </div>
+
+            <div class="commentary">
+                <div class="commentary-title">🧠 ANTIGRAVITY'S COMMENTARY</div>
+                <p>即梦这类“社区型 AIGC”最怕两件事：<strong>（1）同款不可复现</strong>（提示词/参数不透明导致只能看不能学），<strong>（2）视频生成的等待与失败成本过高</strong>（队列/失败率拉低留存）。
+                    后续我会把它和 PixVerse/MOKI 的“工作流型产品”做一张对比表：谁更像内容社区，谁更像生产线。</p>
+            </div>
+        </section>
+
+        <section id="huiwa">
+            <h2>2.8 阿里巴巴：绘蛙（Huiwa）—— 电商内容“图+文案+模特资产”的生产线</h2>
+
+            <div class="card">
+                <h3>🔗 入口与来源（可追溯）</h3>
+                <p style="margin-bottom: 0.5rem;">
+                    <strong>产品</strong>: <a href="https://www.ihuiwa.com/" target="_blank">ihuiwa.com</a>
+                </p>
+                <p style="margin-bottom: 0;">
+                    <strong>发布/介绍（阿里系渠道）</strong>: <a href="https://developer.aliyun.com/article/1452351"
+                        target="_blank">阿里上线AI电商工具“绘蛙” - 阿里云开发者社区</a>
+                </p>
+
+                <h3 style="margin-top: 1.5rem;">🧠 核心逻辑：电商不是“生成一张图”，而是“批量生产一套可投放素材”</h3>
+                <p style="margin-bottom: 0.75rem;">
+                    绘蛙把目标写得非常直白：为电商场景提供图片与文案解决方案，核心价值是<strong>降低拍摄成本</strong>与<strong>规模化产出营销素材</strong>。相比通用视频/图片模型，绘蛙更强调“可复用资产”（商品模型/模特模型）与“可直接投放的内容形态”（主图、小红书图、种草文案、口播文案）。
+                    <sup><a href="https://www.ihuiwa.com/" target="_blank">[来源]</a></sup>
+                    <sup><a href="https://developer.aliyun.com/article/1452351" target="_blank">[来源]</a></sup>
+                </p>
+
+                <h3>⚙️ 能力拆解（从官网描述整理为“电商内容流水线”）</h3>
+                <ol>
+                    <li><strong>资产准备</strong>：提供海量虚拟模特；支持训练自己的商品模型/模特模型（用于一致性与复用）。<sup><a
+                                href="https://www.ihuiwa.com/" target="_blank">[来源]</a></sup></li>
+                    <li><strong>图像生产</strong>：生成电商商品主图、跨境主图、小红书图片等营销图，并支持换装/换背景等变体生产。<sup><a
+                                href="https://www.ihuiwa.com/" target="_blank">[来源]</a></sup></li>
+                    <li><strong>文案生产</strong>：生成种草文案、穿搭文案等（内容电商化）。<sup><a
+                                href="https://www.ihuiwa.com/" target="_blank">[来源]</a></sup></li>
+                    <li><strong>视频脚本</strong>：生成视频口播文案（为短视频/直播带货内容供给做准备）。<sup><a
+                                href="https://www.ihuiwa.com/" target="_blank">[来源]</a></sup></li>
+                    <li><strong>后期工具箱</strong>：去水印、智能消除、换脸、高清修复等一键工具（覆盖电商常见修图需求）。<sup><a
+                                href="https://www.ihuiwa.com/" target="_blank">[来源]</a></sup></li>
+                </ol>
+
+                <h3>✅ 适用场景（更偏“电商营销”而非“影视创作”）</h3>
+                <ul>
+                    <li><strong>电商上新</strong>：同一商品快速生成多风格、多背景、多卖点素材。</li>
+                    <li><strong>达人种草</strong>：图 + 文案一起产出，降低内容团队成本。</li>
+                    <li><strong>跨境电商</strong>：多语种/多平台素材变体（需要进一步核实具体支持范围）。</li>
+                </ul>
+            </div>
+
+            <div class="commentary">
+                <div class="commentary-title">🧠 ANTIGRAVITY'S COMMENTARY</div>
+                <p>绘蛙的胜负手在“资产化”：只要商品/模特模型训练入口可用、质量稳定，它就能形成电商团队最需要的<strong>素材版本管理 + 复用</strong>能力。下一步值得深挖：是否存在“品牌资产库/素材版本回归/投放 AB”的产品化闭环（这决定它是工具还是平台）。</p>
+            </div>
+        </section>
+
+        <section id="hailuo">
+            <h2>2.9 MiniMax：海螺视频（Hailuo AI）—— 把“模型/分辨率/时长/成本”做成可选项</h2>
+
+            <div class="card">
+                <h3>🔗 入口与来源（可追溯）</h3>
+                <p style="margin-bottom: 0.5rem;">
+                    <strong>产品</strong>: <a href="https://hailuoai.com/" target="_blank">hailuoai.com</a>
+                </p>
+                <p style="margin-bottom: 0;">
+                    <strong>公司</strong>: <a href="https://www.minimaxi.com/" target="_blank">MiniMax（minimaxi.com）</a>
+                </p>
+
+                <h3 style="margin-top: 1.5rem;">🧠 为什么海螺值得看：它把“生成”变成“可配置的商品”</h3>
+                <p style="margin-bottom: 0.75rem;">
+                    海螺官网页面信息中出现 Hailuo 2.3 / Hailuo 2.3-Fast 等模型，并提供分辨率（768p/1080p）与时长（6s/10s）等选项，同时把成本做成明确梯度——这是一种非常典型的“产品化大模型”路径：把能力切分成可售卖的规格。
+                    <sup><a href="https://hailuoai.com/" target="_blank">[来源]</a></sup>
+                </p>
+
+                <h3>📊 规格与成本（从官网配置项整理成表）</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>分辨率</th>
+                            <th>时长</th>
+                            <th>示例成本（积分）</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>768p</strong></td>
+                            <td>6s</td>
+                            <td>25</td>
+                        </tr>
+                        <tr>
+                            <td><strong>768p</strong></td>
+                            <td>10s</td>
+                            <td>50</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1080p</strong></td>
+                            <td>6s</td>
+                            <td>80</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: -0.5rem;">
+                    <strong>说明</strong>: 以上为官网页面配置项中某模型（示例项）的分辨率/时长/成本组合，具体模型与权益可能随版本迭代变化。来源：<a href="https://hailuoai.com/"
+                        target="_blank">hailuoai.com</a>
+                </p>
+
+                <h3>🧩 闲时模式“无限生成”：典型的队列与时段策略</h3>
+                <p style="margin-bottom: 0;">
+                    官网出现“无限图像和视频生成”及“用完积分后仍可在闲时模式使用 Hailuo 系列模型无限生成”的文案。这通常意味着平台用队列/时段调度把长尾需求吸纳进来，从而降低边际成本并提高留存。
+                    <sup><a href="https://hailuoai.com/" target="_blank">[来源]</a></sup>
+                </p>
+            </div>
+
+            <div class="commentary">
+                <div class="commentary-title">🧠 ANTIGRAVITY'S COMMENTARY</div>
+                <p>海螺是一个“产品经理视角很强”的样本：它把模型、分辨率、时长与成本组合成一套<strong>可选型</strong>系统，再用“闲时无限生成”做差异化。后续最值得深挖的是：2.3 与 2.3-Fast 的真实速度差异、质量退化曲线、以及是否提供更强的可控接口（参考图、镜头、运动控制）。</p>
+            </div>
+        </section>
+
         <section id="decision">
             <h2>📊 选型决策：我该用谁？</h2>
             <table>
@@ -307,6 +656,36 @@
                         <td><strong>我要做 3A 游戏的宣传片 (PV)</strong></td>
                         <td><strong><a href="https://www.vidu.studio/" target="_blank">Vidu Q2</a></strong></td>
                         <td>画质最顶，参考图控制最稳，素材不崩。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>我要做短片“生产线”（脚本→分镜→剪辑→配乐/字幕）</strong></td>
+                        <td><strong><a href="#moki">MOKI</a></strong></td>
+                        <td>工作流优先，把不可控生成拆成可控工序；更贴近商业短片制作。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>我要做电商营销素材（商拍图 + 虚拟模特 + 种草文案/口播文案）</strong></td>
+                        <td><strong><a href="#huiwa">绘蛙</a></strong></td>
+                        <td>电商 ROI 导向：资产训练 + 批量变体 + 文案/脚本一体化。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>我要把视频生成能力接入产品（续写/口型/多元素等模块化能力）</strong></td>
+                        <td><strong><a href="#kling">可灵 AI (Kling)</a></strong></td>
+                        <td>能力模块化（Video Extension/Lip-Sync/Multi-Elements），更像“可组合能力层”。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>我要做“创作社区/同款复刻”形态的 AIGC 产品</strong></td>
+                        <td><strong><a href="#jimeng">即梦 AI</a></strong></td>
+                        <td>工具 + 社区 + 同款复用机制，适合内容网络式增长。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>我要快速生成并按成本/规格选型（分辨率/时长/积分梯度）</strong></td>
+                        <td><strong><a href="#hailuo">海螺视频</a></strong></td>
+                        <td>把模型/规格/成本产品化，并用“闲时无限生成”做留存策略。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>我要做开源可部署的研究/工程系统（流式/分块/硬件预算透明）</strong></td>
+                        <td><strong><a href="#magi1">Magi-1</a></strong></td>
+                        <td>自回归 chunk 流式生成范式 + 完整推理栈与权重，适合做系统复现与二次开发。</td>
                     </tr>
                     <tr>
                         <td><strong>我要做互动视频 / 短剧 APP</strong></td>
