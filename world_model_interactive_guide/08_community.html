@@ -169,11 +169,49 @@
             上关于世界模型的非一线官方讨论。这些内容更发散、更前沿，但也需要批判性看待。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-01-20 | 本页内容每日更新，追踪社区热点。
+            ⏰ <strong>最后更新时间</strong>: 2026-01-26 | 本页内容每日更新，追踪社区热点。
         </div>
 
         <section>
             <h2>🔥 本周热门讨论</h2>
+
+            <div class="discussion-card">
+                <div class="discussion-header">
+                    <div class="platform-icon platform-blog">B</div>
+                    <div>
+                        <strong>官方发布引发讨论：Cosmos Policy 用“视频扩散序列”直接生成动作 + 未来状态 + 价值</strong>
+                        <div class="discussion-source">
+                            <span class="topic-tag hot-tag">HOT</span>
+                            <span class="topic-tag">Policy</span>
+                            <span class="topic-tag">Planning</span>
+                            <span class="topic-tag">Video Model</span>
+                            2026-01-26 |
+                            引用: <a href="https://arxiv.org/abs/2601.16163" target="_blank">arXiv:2601.16163</a> /
+                            <a href="https://research.nvidia.com/labs/dir/cosmos-policy/" target="_blank">Project</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="discussion-content">
+                    “单阶段 post-training、无架构改动：把 robot action chunk、未来 state（图像+本体状态）以及 value 都编码成 latent frames，统一用视频模型的 latent diffusion 目标学习；测试时用 best-of-N 生成候选动作并按 value 排序做规划。”<br><br>
+                    — 摘要与方法要点转述（来源见上方引用链接）
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>这相当于把“会拍电影”的模型改成“会操作机器人”的模型：它不只给你下一步怎么动，还会提前想象“动完之后会发生什么”，再挑最可能成功的那条动作去做。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>统一序列建模信号</strong>: action / future observation / value 都当作同一扩散序列中的 latent frames，避免“视频模型 + action head”多阶段拼装。</li>
+                            <li><strong>规划入口更直接</strong>: 有 value 就能做 best-of-N 排序；对“世界模型落地”来说，这是把生成模型推向可执行系统的典型路径。</li>
+                            <li><strong>关注点（社区分歧）</strong>: 关键不只是 benchmark 成功率，而是 planning 需要的采样数 N、推理延迟预算、以及真实世界分布外失败模式（多视角/遮挡/触觉缺失）。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
             <div class="discussion-card">
                 <div class="discussion-header">

@@ -158,7 +158,7 @@
                 (非具身智能)</strong>、<strong>交互视频生成</strong>、<strong>游戏模拟</strong>的最新研究。按发布日期从新到旧排列。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-01-24 | 本页内容每日更新，追踪学术前沿。
+            ⏰ <strong>最后更新时间</strong>: 2026-01-26 | 本页内容每日更新，追踪学术前沿。
         </div>
 
         <section>
@@ -235,6 +235,70 @@
                                 <line x1="820" y1="95" x2="820" y2="120" stroke="#64748b" stroke-width="2" marker-end="url(#arrowSW)" />
                             </svg>
                         </figure>
+                    </div>
+                </div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2601.16296" target="_blank">Memory-V2V: Augmenting Video-to-Video Diffusion Models with Memory</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2026-01-26</span>
+                            <span>📄 arXiv:2601.16296</span>
+                            <span class="paper-tag"><a href="https://dohunlee1.github.io/MemoryV2V" target="_blank">Project</a></span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>Memory-V2V 解决的是“多轮改视频越改越不像同一个片子”的痛点：你改完一段再改下一段，模型往往<strong>记不住之前已经确定的角色/风格/细节</strong>，导致跨轮次漂移。它的思路很直白：把你之前编辑过的视频当成一个“外部记忆库”，每次新一轮编辑前先<strong>检索</strong>出最相关的历史片段来“对齐记忆”，再做本轮去噪。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>任务定义（作者强调是第一次系统化讨论）</strong>：Multi-turn video editing 的“跨轮次一致性（cross-consistency）”——每轮独立去噪生成，但最终结果要和所有历史编辑版本在关键视觉属性上保持一致（例如长视频分段编辑的外观不漂移、novel view 合成的跨视角区域一致）。<sup><a href="https://arxiv.org/abs/2601.16296" target="_blank">[来源]</a></sup></li>
+                            <li><strong>核心框架：外部视频记忆 + 检索条件化</strong>：维护一个外部 cache 存储“之前编辑过的视频”；当前轮次先做 retrieval，挑出和当前编辑最相关的历史结果，再把这些历史结果编码为 conditioning tokens 注入到当前轮次的 V2V 扩散去噪中。<sup><a href="https://arxiv.org/abs/2601.16296" target="_blank">[来源]</a></sup></li>
+                            <li><strong>表示选择（工程取舍）</strong>：作者对比了 3D 重建型编码器、NVS 模型的 encoder-decoder 表示、以及视频扩散常用的 video VAE latent，结论是 video VAE latent 在 fidelity 与效率上最平衡，适合做“记忆表示”。<sup><a href="https://arxiv.org/abs/2601.16296" target="_blank">[来源]</a></sup></li>
+                            <li><strong>动态 tokenizer：按相关性自适应 token 密度</strong>：直接把所有历史视频都全量 token 化会爆算力且引入冗余；Memory‑V2V 引入可学习的 dynamic tokenizers，对检索到的历史视频按相关性使用不同 kernel size 进行 tokenization（相关性越高 → token 越密）。<sup><a href="https://arxiv.org/abs/2601.16296" target="_blank">[来源]</a></sup></li>
+                            <li><strong>token compressor：把“低响应 token”压缩而不是丢弃</strong>：作者计算 per-frame attention responsiveness 评估 token 重要性，并发现直接丢低响应 token 会损失一致性；改为在 DiT backbone 的特定 blocks 中加入可学习压缩层，压掉冗余但保留关键视觉线索，整体带来约 <strong>30%</strong> speedup。<sup><a href="https://arxiv.org/abs/2601.16296" target="_blank">[来源]</a></sup></li>
+                            <li><strong>验证场景</strong>：Video novel view synthesis 与 text-guided long video editing（多段/多轮编辑），目标是“跨轮次一致性显著提升，同时任务内质量不降甚至提升”。<sup><a href="https://arxiv.org/abs/2601.16296" target="_blank">[来源]</a></sup></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2601.16163" target="_blank">Cosmos Policy: Fine-Tuning Video Models for Visuomotor Control and Planning</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2026-01-26</span>
+                            <span>📄 arXiv:2601.16163</span>
+                            <span class="paper-tag"><a href="https://research.nvidia.com/labs/dir/cosmos-policy/" target="_blank">Project</a></span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>Cosmos Policy 的野心是把“会生成视频的模型”直接变成“会控制机器人的策略”。它的关键点是<strong>不另外加一套 action 模块</strong>：把动作也当成“视频序列里的帧”去生成；同时让模型顺便“想象”执行动作后的未来观测，并给出成功概率（value）。这样在测试时就能像“先想一想再做”一样：多生成几条候选动作，挑最可能成功的那条执行。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>训练范式（单阶段 + 无结构改动）</strong>：从 NVIDIA 的 Cosmos‑Predict2‑2B 预训练视频模型出发，仅用目标平台采集的 imitation demonstrations 做一轮 post-training；作者强调<strong>不做任何架构修改</strong>，所有模态（多视角相机、proprio、action、future state、value）都通过“视频 latent diffusion 的序列建模”统一学习。<sup><a href="https://arxiv.org/abs/2601.16163" target="_blank">[来源]</a></sup></li>
+                            <li><strong>动作如何接入“视频扩散”</strong>：将 robot action chunk 编码为 latent frames，和图像观测的 latent 一起构成扩散序列；模型通过同一套去噪目标学习高维、多峰的动作分布（与“另起 action diffusers/逆动力学模块”的路线对比）。<sup><a href="https://arxiv.org/abs/2601.16163" target="_blank">[来源]</a></sup></li>
+                            <li><strong>同时学 world model + value</strong>：除动作外，还生成未来 state（图像观测 + proprio）与 value（未来 state 的 reward-to-go），同样编码成 latent frames；这让模型具备“可用于规划”的最小三件套：\(a_{t:t+k}\)、\(s_{t+\Delta}\)、\(V(s_{t+\Delta})\)。<sup><a href="https://arxiv.org/abs/2601.16163" target="_blank">[来源]</a></sup></li>
+                            <li><strong>测试时规划（best-of-N）</strong>：采样 N 组候选动作 → 想象对应未来 state → 用 value 排序 → 执行最高 value 的动作（或动作 chunk 的首段）。作者报告：在两项真实世界高难任务上，加入规划后平均<strong>+12.5%</strong> task completion。<sup><a href="https://arxiv.org/abs/2601.16163" target="_blank">[来源]</a></sup></li>
+                            <li><strong>关键结果（直接政策形态）</strong>：LIBERO 平均成功率 <strong>98.5%</strong>，RoboCasa 平均成功率 <strong>67.1%</strong>；真实世界双臂操作任务平均成功率 <strong>93.6%</strong>，并声称超过同数据微调的 VLA 与从零训练 diffusion policy。<sup><a href="https://arxiv.org/abs/2601.16163" target="_blank">[来源]</a></sup></li>
+                            <li><strong>可复现入口</strong>：作者声明开源 code、models、training data（统一放在项目页）。<sup><a href="https://research.nvidia.com/labs/dir/cosmos-policy/" target="_blank">[来源]</a></sup></li>
+                        </ul>
                     </div>
                 </div>
             </div>
