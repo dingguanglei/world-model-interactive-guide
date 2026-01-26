@@ -194,6 +194,38 @@ void URecorderComponent::TickComponent(...) {
             </div>
         </section>
 
+        <section>
+            <h2>4.7 最新增量：用“游戏 Glitch”做物理常识反例数据（PhysGame）</h2>
+            <p>如果你想让模型具备更强的物理常识（哪里违反物理、哪些现象不合理），传统数据要么标注贵、要么仿真不真实。<a
+                    href="https://arxiv.org/abs/2601.16471" target="_blank">Order from Chaos (arXiv:2601.16471)</a>
+                提出了一条很实用的“数据工程”路线：利用 gameplay videos 里的<strong>glitch（物理/渲染异常）</strong>作为可规模化监督源，构建 PhysGame QA 数据集。</p>
+
+            <ul>
+                <li><strong>PhysGame</strong>：140,057 条 glitch-centric QA，覆盖 5 个物理域、16 个细分类别。<sup><a href="https://arxiv.org/abs/2601.16471"
+                            target="_blank">[来源]</a></sup></li>
+                <li><strong>GameBench</strong>：880 条专家标注评测视频，用于验证“是否真的更会找物理不合理”。<sup><a href="https://arxiv.org/abs/2601.16471"
+                            target="_blank">[来源]</a></sup></li>
+                <li><strong>Meta-guided prompting</strong>：利用标题/描述等 metadata 指导 QA 生成，降低自动生成的物理胡编概率。<sup><a
+                            href="https://arxiv.org/abs/2601.16471" target="_blank">[来源]</a></sup></li>
+            </ul>
+
+            <pre class="mermaid">
+flowchart TD
+    A[Gameplay Videos] --> B[Glitch 片段挖掘/筛选]
+    A --> M[Metadata: title/description]
+    B --> P[Meta-guided Prompting]
+    M --> P
+    P --> Q[自动生成 QA 对]
+    Q --> T[Instruction Tuning (MLLM/VLM)]
+    T --> E[评测: GameBench/PhysBench/MVBench]
+            </pre>
+
+            <div class="commentary">
+                <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                <p>这条路线的“工程含金量”在于把物理常识训练从“正例描述”转向“反例诊断”：glitch 让“违反物理”变成可见信号。但一定要把 domain gap 当成一等公民：游戏 glitch 的分布可能过度集中在渲染/碰撞实现细节，迁移到真实世界需要明确的失效分析与再采样策略。</p>
+            </div>
+        </section>
+
         <nav class="chapter-nav">
             <a href="03_architecture.html" class="chapter-nav-link prev">
                 <span class="chapter-nav-label">← 上一章</span>

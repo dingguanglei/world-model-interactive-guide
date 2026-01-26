@@ -205,6 +205,44 @@ sequenceDiagram
             <p>详见附录 <a href="references.html">参考文献页</a>，那里有我对每一篇论文的"通俗翻译"和"毒舌点评"。</p>
         </section>
 
+        <section>
+            <h2>3.6 最新增量：超长流式生成的崩溃模式（sink-collapse）</h2>
+            <p>当你把视频生成推到“分钟 → 小时”时，失败往往不再是画质问题，而是系统性崩溃：画面会在某些时刻突然回到“锚点帧”并开始循环。<a
+                    href="https://arxiv.org/abs/2601.16914" target="_blank">LoL (arXiv:2601.16914)</a> 将这种现象命名为
+                <strong>sink-collapse</strong>，并给出一个训练无关的修复手段。</p>
+
+            <pre class="mermaid">
+flowchart LR
+    A[超长流式生成: KV cache + 窗口注意力] --> B[引入 attention sink 帧稳定长程]
+    B --> C[失败模式: sink-collapse<br/>画面回归 sink, 场景重置/循环]
+    C --> D[根因: RoPE 周期结构 × 多头注意力同质化]
+    D --> E[解法: multi-head RoPE jitter<br/>不同 head 轻微偏移 base frequency]
+    E --> F[效果: 抑制 collapse, 支持更长 rollouts]
+            </pre>
+
+            <div class="commentary">
+                <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                <p>这条工作提醒我们：长时稳定性不只是“更大窗口/更多数据”，位置编码与注意力头的几何结构本身就会制造系统性崩溃。产品化上更关键的是把这些 failure
+                    mode 做成可监控指标：什么时候开始向 sink 回归？回归前有什么信号？这决定了你能不能做“提前纠错/重锚定”。</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>3.7 最新增量：从“生成视频”到“可执行系统”的统一序列建模</h2>
+            <p>两个方向在迅速靠近“世界模型可执行化”的核心：</p>
+            <ul>
+                <li><strong>多轮编辑一致性</strong>：<a href="https://arxiv.org/abs/2601.16296" target="_blank">Memory‑V2V</a>
+                    把“上一轮编辑结果”作为显式外部记忆，通过检索与动态 tokenization 注入到扩散去噪，使视频编辑更像“多轮对话系统”。</li>
+                <li><strong>视频模型变策略</strong>：<a href="https://arxiv.org/abs/2601.16163" target="_blank">Cosmos Policy</a>
+                    把 action / future state / value 统一编码成 latent frames，用视频扩散目标单阶段微调，测试时用 best-of-N + value 规划。</li>
+            </ul>
+
+            <div class="commentary">
+                <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                <p>我把它们看成同一件事的两面：<strong>“把系统状态显式化”</strong>。Memory‑V2V 显式化的是“历史编辑状态”，Cosmos Policy 显式化的是“动作-未来-价值”。一旦状态能被读写，后续才有机会谈回滚、重锚定、规划与评测回归。</p>
+            </div>
+        </section>
+
         <nav class="chapter-nav">
             <a href="02_product.html" class="chapter-nav-link prev">
                 <span class="chapter-nav-label">← 上一章</span>
