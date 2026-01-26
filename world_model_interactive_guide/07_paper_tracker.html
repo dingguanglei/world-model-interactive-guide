@@ -261,7 +261,9 @@
             <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线 (Roadmap)</a></li>
             <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
             <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link active">07. 论文追踪 (Papers)</a></li>
+            <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">10. 评测基准 (Benchmarks)</a></li>
             <li class="nav-item"><a href="08_community.html" class="nav-link">08. 社区动态 (Community)</a></li>
+            <li class="nav-item"><a href="09_update_log.html" class="nav-link">09. 更新日志 (Updates)</a></li>
             <li class="nav-item"><a href="references.html" class="nav-link">附录：参考文献 (Refs)</a></li>
         </ul>
     </nav>
@@ -271,6 +273,7 @@
         <p>本页追踪 arXiv/GitHub 上关于<strong>世界模型
                 (非具身智能)</strong>、<strong>交互视频生成</strong>、<strong>游戏模拟</strong>的最新研究。按发布日期从新到旧排列。</p>
         <p style="color: var(--text-secondary); margin-top: -0.25rem;">📌 按年月折叠浏览（默认展开最近 3 个月）。</p>
+        <p style="color: var(--text-secondary); margin-top: -0.25rem;">📏 评测基准与评测方法请见 <a href="10_benchmarks.html">10_benchmarks.html</a>（与本章并列维护）。</p>
 
         <div class="last-updated">
             ⏰ <strong>最后更新时间</strong>: 2026-01-26 | 本页内容每日更新，追踪学术前沿。
@@ -1552,288 +1555,14 @@
             </script>
         </section>
 
-        <section id="benchmark-tracker">
-            <h2>📏 Benchmarks：评测基准与评测方法</h2>
-            <p style="color: var(--text-secondary); margin-top: -0.25rem;">
-                本章用于补齐“论文里用到的评测到底在测什么、怎么测、测出来代表什么”。每个基准/评测方法都按论文追踪同款结构：🟢通俗→🔴专业→🧠点评，并附可追溯链接。
-            </p>
-
-            <div class="month-index" role="navigation" aria-label="评测导航">
-                <a class="month-link" href="#bm-vbench">VBench / VBench++ / VBench-Long</a>
-                <a class="month-link" href="#bm-vbench2">VBench-2.0（Intrinsic Faithfulness）</a>
-                <a class="month-link" href="#bm-physbench">PhysBench（物理理解）</a>
-                <a class="month-link" href="#bm-mvbench">MVBench（多模态视频理解）</a>
-                <a class="month-link" href="#bm-fvd">FVD（Fréchet Video Distance）</a>
-                <a class="month-link" href="#bm-vlm-judge">VLM-as-a-Judge / Reward</a>
-            </div>
-
-            <div class="paper-card" id="bm-vbench">
-                <div class="paper-header">
-                    <div>
-                        <div class="paper-title"><a href="https://github.com/Vchitect/VBench" target="_blank">VBench / VBench++ / VBench-Long：视频生成评测“多维体检表”</a></div>
-                        <div class="paper-meta">
-                            <span>📅 2023-11-29</span>
-                            <span>📄 <a href="https://arxiv.org/abs/2311.17982" target="_blank">arXiv:2311.17982</a></span>
-                            <span class="paper-tag"><a href="https://vchitect.github.io/VBench-project/" target="_blank">Project</a></span>
-                            <span class="paper-tag github"><a href="https://github.com/Vchitect/VBench" target="_blank">GitHub</a></span>
-                            <span class="paper-tag open"><a href="https://huggingface.co/spaces/Vchitect/VBench_Leaderboard" target="_blank">Leaderboard</a></span>
-                            <span class="paper-tag open"><a href="https://github.com/Vchitect/VBench/tree/master/vbench2_beta_long" target="_blank">VBench-Long</a></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dual-view">
-                    <div class="layman-view">
-                        <div class="view-title">🟢 通俗解读</div>
-                        <p>VBench 像一个“视频体检表”：不是只问“好不好看”，而是把视频质量拆成很多项（比如主体是否一直是同一个人、动作是否自然、画面有没有闪烁、是否符合文本描述），然后给每一项打分。这样你就能知道模型到底“强在哪、弱在哪”。</p>
-                    </div>
-                    <div class="pro-view">
-                        <div class="view-title">🔴 专业解析</div>
-                        <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>评测对象</strong>：主要面向 T2V/I2V 的生成结果（prompt + 生成视频），输出为多维度分数与汇总分。<sup><a href="https://github.com/Vchitect/VBench" target="_blank">[来源]</a></sup></li>
-                            <li><strong>评测重点</strong>：把“视频生成质量”拆成多维指标，通常可分为两类：Video Quality（清晰度/美学/一致性/闪烁等）与 Video-Condition Consistency（与 prompt 的语义一致、动作一致等）。<sup><a href="https://arxiv.org/abs/2311.17982" target="_blank">[来源]</a></sup></li>
-                            <li><strong>长视频扩展</strong>：VBench++ 提供 VBench-Long，用于评测长视频生成模型（对分钟级/更长输出更敏感）。<sup><a href="https://github.com/Vchitect/VBench/tree/master/vbench2_beta_long" target="_blank">[来源]</a></sup></li>
-                            <li><strong>使用方式（怎么跑）</strong>：
-                                <ul style="margin: 0.5rem 0 0.25rem; padding-left: 1.25rem;">
-                                    <li>准备：生成视频 + 对应 prompt（以及可选的条件信息）。</li>
-                                    <li>按 repo README 运行 evaluator 脚本计算各维度分数；提交 leaderboard 前通常会计算 Total/Quality/Semantic 等汇总指标。<sup><a href="https://github.com/Vchitect/VBench" target="_blank">[来源]</a></sup></li>
-                                    <li>如果想快速对比模型，可直接参考官方 HuggingFace leaderboard/Arena 的公开结果与样例视频。<sup><a href="https://huggingface.co/spaces/Vchitect/VBench_Leaderboard" target="_blank">[来源]</a></sup></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <div class="source-note">
-                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2311.17982" target="_blank">论文</a>（总体设计与维度拆分）；<a href="https://github.com/Vchitect/VBench" target="_blank">GitHub README</a>（VBench / VBench++ / VBench-Long 组件位置、leaderboard 与运行方式、Arena 链接）。
-                        </div>
-
-                        <figure style="margin: 0.75rem 0 0;">
-                            <figcaption style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
-                                <strong>图：VBench 的“多维评测”流水线（简化）</strong>
-                            </figcaption>
-                            <svg viewBox="0 0 900 220" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="VBench evaluation pipeline">
-                                <defs>
-                                    <marker id="arrowBM1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                                        <path d="M0,0 L10,3 L0,6 Z" fill="#64748b" />
-                                    </marker>
-                                </defs>
-                                <rect x="20" y="40" width="240" height="70" rx="12" fill="#f0fae6" stroke="#22c55e" />
-                                <text x="35" y="68" font-size="13" fill="#166534" font-weight="700">Inputs</text>
-                                <text x="35" y="90" font-size="12" fill="#166534">prompt + generated video</text>
-
-                                <rect x="290" y="40" width="310" height="70" rx="12" fill="#e0f2fe" stroke="#0369a1" />
-                                <text x="305" y="68" font-size="13" fill="#0369a1" font-weight="700">Multi-dimension evaluators</text>
-                                <text x="305" y="90" font-size="12" fill="#0369a1">quality + condition-consistency</text>
-
-                                <rect x="630" y="40" width="250" height="70" rx="12" fill="#fff1f2" stroke="#e11d48" />
-                                <text x="645" y="68" font-size="13" fill="#9f1239" font-weight="700">Outputs</text>
-                                <text x="645" y="90" font-size="12" fill="#9f1239">dimension scores + total score</text>
-
-                                <line x1="260" y1="75" x2="290" y2="75" stroke="#64748b" stroke-width="2" marker-end="url(#arrowBM1)" />
-                                <line x1="600" y1="75" x2="630" y2="75" stroke="#64748b" stroke-width="2" marker-end="url(#arrowBM1)" />
-
-                                <rect x="20" y="135" width="860" height="55" rx="12" fill="#f8fafc" stroke="#e2e8f0" />
-                                <text x="35" y="168" font-size="12" fill="#334155">关键解读：看“总分”只能排序；看“分维度曲线”才能定位模型瓶颈（主体漂移/运动不稳/语义不对/闪烁等）。</text>
-                            </svg>
-                        </figure>
-                    </div>
-                </div>
-
-                <div class="commentary">
-                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
-                    <p style="margin:0;">VBench 是行业里最接近“可诊断”的自动评测体系之一：它的价值不在 rank，而在让你能把工程优化对齐到具体维度（例如先解决主体一致性，再谈美学）。但要小心“刷分陷阱”：任何自动指标都会诱导过拟合，建议用它做回归测试（regression）与方向性诊断，而不是当唯一 KPI。</p>
-                </div>
-            </div>
-
-            <div class="paper-card" id="bm-vbench2">
-                <div class="paper-header">
-                    <div>
-                        <div class="paper-title"><a href="https://vchitect.github.io/VBench-2.0-project/" target="_blank">VBench-2.0：评测“内在真实度”（物理/常识/人类运动/创造性）</a></div>
-                        <div class="paper-meta">
-                            <span>📅 2025-03-27</span>
-                            <span>📄 <a href="https://arxiv.org/abs/2503.21755" target="_blank">arXiv:2503.21755</a></span>
-                            <span class="paper-tag"><a href="https://vchitect.github.io/VBench-2.0-project/" target="_blank">Project</a></span>
-                            <span class="paper-tag github"><a href="https://github.com/Vchitect/VBench/tree/master/VBench-2.0" target="_blank">GitHub</a></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dual-view">
-                    <div class="layman-view">
-                        <div class="view-title">🟢 通俗解读</div>
-                        <p>如果说 VBench 更像“画质体检”，VBench-2.0 更像“世界观体检”：它更关心视频是否<strong>符合物理和常识</strong>、人的动作是不是合理、剧情是否自洽，而不仅是清晰好看。</p>
-                    </div>
-                    <div class="pro-view">
-                        <div class="view-title">🔴 专业解析</div>
-                        <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>评测重点（Intrinsic Faithfulness）</strong>：从“像不像”推进到“对不对”，覆盖 commonsense、physics、human motion、composition 等更深层能力维度。<sup><a href="https://arxiv.org/abs/2503.21755" target="_blank">[来源]</a></sup></li>
-                            <li><strong>使用方式（怎么用）</strong>：在同一仓库内以独立模块维护（`VBench-2.0/`），按维度或全量评测运行；官方还支持评测自定义视频（single dimension / customized videos）。<sup><a href="https://github.com/Vchitect/VBench/tree/master/VBench-2.0" target="_blank">[来源]</a></sup></li>
-                            <li><strong>落地建议</strong>：当你做“世界模型/交互视频”时，优先把 VBench-2.0 当作“物理/常识/人类动作一致性”的回归测试，而不是泛画质评分。因为这类能力更接近长期稳定与可交互的真实瓶颈。</li>
-                        </ul>
-                        <div class="source-note">
-                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2503.21755" target="_blank">论文</a>（intrinsic faithfulness 的维度设计与动机）；<a href="https://github.com/Vchitect/VBench/tree/master/VBench-2.0" target="_blank">GitHub</a>（模块位置、评测自定义视频的说明与脚本入口）。
-                        </div>
-                    </div>
-                </div>
-
-                <div class="commentary">
-                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
-                    <p style="margin:0;">“内在真实度”是世界模型最终会被追问的能力：哪怕短视频看起来很美，只要物理/常识经常崩，交互就不可用。VBench-2.0 的意义是把这类能力变成可测量的维度；但仍要注意：复杂叙事/长链因果往往是现有基准最薄弱的一环，别被单一汇总分掩盖了失败模式。</p>
-                </div>
-            </div>
-
-            <div class="paper-card" id="bm-physbench">
-                <div class="paper-header">
-                    <div>
-                        <div class="paper-title"><a href="https://physbench.github.io/" target="_blank">PhysBench：物理世界理解评测（视频-图像-文本混合）</a></div>
-                        <div class="paper-meta">
-                            <span>📅 2025-01-27</span>
-                            <span>📄 <a href="https://arxiv.org/abs/2501.16411" target="_blank">arXiv:2501.16411</a></span>
-                            <span class="paper-tag"><a href="https://physbench.github.io/" target="_blank">Project</a></span>
-                            <span class="paper-tag github"><a href="https://github.com/physical-superintelligence-lab/PhysBench" target="_blank">GitHub</a></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dual-view">
-                    <div class="layman-view">
-                        <div class="view-title">🟢 通俗解读</div>
-                        <p>PhysBench 用来测试模型懂不懂“物理常识”：比如东西会不会掉、碰撞会怎样、物体关系和运动是否合理。它更像给模型做“物理理解考试”。</p>
-                    </div>
-                    <div class="pro-view">
-                        <div class="view-title">🔴 专业解析</div>
-                        <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>评测重点</strong>：面向 VLM 的物理世界理解能力评测，覆盖物体属性/关系/场景/动力学等维度，并提供系统化评测入口。<sup><a href="https://arxiv.org/abs/2501.16411" target="_blank">[来源]</a></sup></li>
-                            <li><strong>使用方式</strong>：以官方仓库为准，按其数据准备与评测脚本跑基准；实践中常把它当作“物理推理能力”的回归测试集，用来验证模型更新是否真的提升物理理解而非只提升语言模板。<sup><a href="https://github.com/physical-superintelligence-lab/PhysBench" target="_blank">[来源]</a></sup></li>
-                            <li><strong>与世界模型的关系</strong>：当论文宣称“更懂物理/更真实”，建议把 PhysBench/PhysGame 这类数据与评测，作为对齐物理真实度的外部证据，而不是只看 VBench 总分。</li>
-                        </ul>
-                        <div class="source-note">
-                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2501.16411" target="_blank">论文</a>（任务定义/维度/结论）；<a href="https://github.com/physical-superintelligence-lab/PhysBench" target="_blank">GitHub</a>（数据与评测脚本入口）。
-                        </div>
-                    </div>
-                </div>
-
-                <div class="commentary">
-                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
-                    <p style="margin:0;">物理理解类基准最大的价值是把“看起来合理”拆成可检验的问题集。对世界模型团队来说，建议把它用作：① 训练/对齐数据的目标分布参考；② 推理链路改动后的回归测试。注意避免只追求答题技巧：真正要的是跨场景的物理一致性，而不是模板化 QA。</p>
-                </div>
-            </div>
-
-            <div class="paper-card" id="bm-mvbench">
-                <div class="paper-header">
-                    <div>
-                        <div class="paper-title"><a href="https://arxiv.org/abs/2311.17005" target="_blank">MVBench：多模态视频理解评测（面向 VLM/Video-LLM）</a></div>
-                        <div class="paper-meta">
-                            <span>📅 2023-11-28</span>
-                            <span>📄 <a href="https://arxiv.org/abs/2311.17005" target="_blank">arXiv:2311.17005</a></span>
-                            <span class="paper-tag github"><a href="https://github.com/OpenGVLab/Ask-Anything/blob/main/video_chat2/MVBENCH.md" target="_blank">GitHub Doc</a></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dual-view">
-                    <div class="layman-view">
-                        <div class="view-title">🟢 通俗解读</div>
-                        <p>MVBench 是给“能看视频的语言模型”出的考试题：给一段视频，然后问一堆理解问题（发生了什么、先后顺序、人物/物体关系等），看模型是不是只会“看图说话”。</p>
-                    </div>
-                    <div class="pro-view">
-                        <div class="view-title">🔴 专业解析</div>
-                        <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>评测重点</strong>：系统评估多模态视频理解能力（动作、时序、关系、事件等），常用于 Video-LLM 的能力对比与训练/微调验证。<sup><a href="https://arxiv.org/abs/2311.17005" target="_blank">[来源]</a></sup></li>
-                            <li><strong>使用方式</strong>：不同实现可能挂在各自 Video-Chat/Video-LLM 项目里；OpenGVLab 的实现文档在其 `Ask-Anything` 仓库中（MVBENCH.md），可作为跑分与对齐的参考入口。<sup><a href="https://github.com/OpenGVLab/Ask-Anything/blob/main/video_chat2/MVBENCH.md" target="_blank">[来源]</a></sup></li>
-                            <li><strong>与生成评测的区别</strong>：MVBench 测的是“理解/推理”，不是“生成质量”。当论文用 VLM 来做生成评测（VLM-as-a-judge）时，也应该同时关注 VLM 自己在 MVBench 这类基准上的可靠性。</li>
-                        </ul>
-                        <div class="source-note">
-                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2311.17005" target="_blank">论文</a>（任务定义与构建）；<a href="https://github.com/OpenGVLab/Ask-Anything/blob/main/video_chat2/MVBENCH.md" target="_blank">实现文档</a>（评测入口与跑分说明）。
-                        </div>
-                    </div>
-                </div>
-
-                <div class="commentary">
-                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
-                    <p style="margin:0;">如果你把 VLM 当裁判来评估视频生成，那么 MVBench 这类“裁判能力基准”就是前置体检：裁判自己不稳，打分就会漂。建议在报告里同时给出：① 裁判模型版本；② 关键失败题型；③ 人类抽检一致性（否则很容易把评测变成自嗨）。</p>
-                </div>
-            </div>
-
-            <div class="paper-card" id="bm-fvd">
-                <div class="paper-header">
-                    <div>
-                        <div class="paper-title"><a href="https://arxiv.org/abs/1812.01717" target="_blank">FVD：Fréchet Video Distance（经典自动指标）</a></div>
-                        <div class="paper-meta">
-                            <span>📅 2018-12-03</span>
-                            <span>📄 <a href="https://arxiv.org/abs/1812.01717" target="_blank">arXiv:1812.01717</a></span>
-                            <span class="paper-tag"><a href="https://github.com/tensorflow/gan" target="_blank">TF-GAN</a></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dual-view">
-                    <div class="layman-view">
-                        <div class="view-title">🟢 通俗解读</div>
-                        <p>FVD 是“自动打分”的老指标：它用一个视频特征提取器把真实视频和生成视频都变成向量分布，然后看两者差得有多远。分数越低通常越接近真实。</p>
-                    </div>
-                    <div class="pro-view">
-                        <div class="view-title">🔴 专业解析</div>
-                        <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>核心定义</strong>：在视频特征空间里计算 Fréchet 距离，本质与 FID 类似：\(\|\mu_r-\mu_g\|_2^2 + \mathrm{Tr}(\Sigma_r+\Sigma_g-2(\Sigma_r\Sigma_g)^{1/2})\)。<sup><a href="https://arxiv.org/abs/1812.01717" target="_blank">[来源]</a></sup></li>
-                            <li><strong>使用方式</strong>：关键是统一特征提取器与采样设置（帧率/时长/裁剪），否则分数不可比；常见实现可参考 TF-GAN 中的 FVD/FID 相关工具。<sup><a href="https://github.com/tensorflow/gan" target="_blank">[来源]</a></sup></li>
-                            <li><strong>评测重点与局限</strong>：FVD 更像“总体分布相似度”，对特定失败模式（身份漂移/动作因果错误/物理不合理）不敏感；因此更适合作为 baseline 指标，与 VBench 等诊断型评测互补。</li>
-                        </ul>
-                        <div class="source-note">
-                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/1812.01717" target="_blank">论文</a>（新指标与挑战设置）；<a href="https://github.com/tensorflow/gan" target="_blank">TF-GAN</a>（参考实现与工程化落地）。
-                        </div>
-                    </div>
-                </div>
-
-                <div class="commentary">
-                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
-                    <p style="margin:0;">FVD 在很多论文里仍会被引用，但对“可交互世界模型”来说它远远不够：你关心的是长期因果一致性与可控性，而不是平均意义上的分布接近。建议把它留给横向 baseline，对核心结论优先用诊断型（VBench/VBench-2.0）或任务型（PhysBench/PhysGame）评测来支撑。</p>
-                </div>
-            </div>
-
-            <div class="paper-card" id="bm-vlm-judge">
-                <div class="paper-header">
-                    <div>
-                        <div class="paper-title"><a href="https://openreview.net/forum?id=worldgym" target="_blank">VLM-as-a-Judge / Reward：用“能看视频的模型”当评测器</a></div>
-                        <div class="paper-meta">
-                            <span>📅 方法条目</span>
-                            <span>📄 <a href="https://openreview.net/forum?id=worldgym" target="_blank">OpenReview</a></span>
-                            <span class="paper-tag">Method</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dual-view">
-                    <div class="layman-view">
-                        <div class="view-title">🟢 通俗解读</div>
-                        <p>这是“用 AI 评 AI”：让一个更强的视觉语言模型去看生成的视频，然后打分或给奖励，告诉你“这段视频/这一步动作看起来是不是更合理”。</p>
-                    </div>
-                    <div class="pro-view">
-                        <div class="view-title">🔴 专业解析</div>
-                        <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>使用方式</strong>：把 VLM 当作 reward function / judge：输入（prompt + video 或 state rollout），输出为偏好分/成功率估计/对齐分数；常用于 policy 评估或 best-of-N 选择。<sup><a href="https://openreview.net/forum?id=worldgym" target="_blank">[来源]</a></sup></li>
-                            <li><strong>评测重点</strong>：适合评估“任务成功/语义目标是否达成/行为是否合理”等无法用像素指标表达的目标；对交互世界模型尤其关键，因为最终目标往往是“可用性”，不是画质。<sup><a href="https://openreview.net/forum?id=worldgym" target="_blank">[来源]</a></sup></li>
-                            <li><strong>关键风险</strong>：judge 本身有偏差（幻觉、偏好漂移、对视觉细节不敏感/过敏感），需要做校准（人类抽检一致性、OOD 测试、reward hacking 风险评估）。</li>
-                        </ul>
-                        <div class="source-note">
-                            <strong>来源定位</strong>：以 WorldGym 为例：<a href="https://openreview.net/forum?id=worldgym" target="_blank">OpenReview</a>（Method/Evaluation：VLM reward 与相关性验证）。通用方法适用于更多“VLM-based evaluation”论文。
-                        </div>
-                    </div>
-                </div>
-
-                <div class="commentary">
-                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
-                    <p style="margin:0;">VLM-as-a-judge 是目前最“工程可用”的评测补丁，但必须把它当作<strong>带偏差的代理指标</strong>而不是事实。最佳实践是：VLM 负责高频回归与快速筛选，人类负责小样本高质量审计（并把审计结果反过来校准 judge）。否则最常见的结局就是：模型学会讨好裁判，而不是学会真实世界规律。</p>
-                </div>
-            </div>
-        </section>
-
         <nav class="chapter-nav">
             <a href="06_companies.html" class="chapter-nav-link prev">
                 <span class="chapter-nav-label">← 上一章</span>
                 <span class="chapter-nav-title">06. 公司调研 (Companies)</span>
             </a>
-            <a href="08_community.html" class="chapter-nav-link next">
+            <a href="10_benchmarks.html" class="chapter-nav-link next">
                 <span class="chapter-nav-label">下一章 →</span>
-                <span class="chapter-nav-title">08. 社区动态 (Community)</span>
+                <span class="chapter-nav-title">10. 评测基准 (Benchmarks)</span>
             </a>
         </nav>
     </main>
