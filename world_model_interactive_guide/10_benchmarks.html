@@ -239,7 +239,6 @@
                 <a class="month-link" href="#bm-vbench">VBench / VBench++ / VBench-Long</a>
                 <a class="month-link" href="#bm-vbench2">VBench-2.0（Intrinsic Faithfulness）</a>
                 <a class="month-link" href="#bm-physbench">PhysBench（物理理解）</a>
-                <a class="month-link" href="#bm-mvbench">MVBench（多模态视频理解）</a>
                 <a class="month-link" href="#bm-fvd">FVD（Fréchet Video Distance）</a>
                 <a class="month-link" href="#bm-vlm-judge">VLM-as-a-Judge / Reward</a>
             </div>
@@ -392,42 +391,6 @@
                 <div class="commentary">
                     <div class="commentary-title">🧠 AntiGravity's Commentary</div>
                     <p style="margin:0;">物理理解类基准最大的价值是把“看起来合理”拆成可检验的问题集。对世界模型团队来说，建议把它用作：① 训练/对齐数据的目标分布参考；② 推理链路改动后的回归测试。注意避免只追求答题技巧：真正要的是跨场景的物理一致性，而不是模板化 QA。</p>
-                </div>
-            </div>
-
-            <div class="paper-card" id="bm-mvbench">
-                <div class="paper-header">
-                    <div>
-                        <div class="paper-title"><a href="https://arxiv.org/abs/2311.17005" target="_blank">MVBench：多模态视频理解评测（面向 VLM/Video-LLM）</a></div>
-                        <div class="paper-meta">
-                            <span>📅 2023-11-28</span>
-                            <span>📄 <a href="https://arxiv.org/abs/2311.17005" target="_blank">arXiv:2311.17005</a></span>
-                            <span class="paper-tag github"><a href="https://github.com/OpenGVLab/Ask-Anything/blob/main/video_chat2/MVBENCH.md" target="_blank">GitHub Doc</a></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dual-view">
-                    <div class="layman-view">
-                        <div class="view-title">🟢 通俗解读</div>
-                        <p>MVBench 是给“能看视频的语言模型”出的考试题：给一段视频，然后问一堆理解问题（发生了什么、先后顺序、人物/物体关系等），看模型是不是只会“看图说话”。</p>
-                    </div>
-                    <div class="pro-view">
-                        <div class="view-title">🔴 专业解析</div>
-                        <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>评测重点</strong>：系统评估多模态视频理解能力（动作、时序、关系、事件等），常用于 Video-LLM 的能力对比与训练/微调验证。<sup><a href="https://arxiv.org/abs/2311.17005" target="_blank">[来源]</a></sup></li>
-                            <li><strong>使用方式</strong>：不同实现可能挂在各自 Video-Chat/Video-LLM 项目里；OpenGVLab 的实现文档在其 `Ask-Anything` 仓库中（MVBENCH.md），可作为跑分与对齐的参考入口。<sup><a href="https://github.com/OpenGVLab/Ask-Anything/blob/main/video_chat2/MVBENCH.md" target="_blank">[来源]</a></sup></li>
-                            <li><strong>与生成评测的区别</strong>：MVBench 测的是“理解/推理”，不是“生成质量”。当论文用 VLM 来做生成评测（VLM-as-a-judge）时，也应该同时关注 VLM 自己在 MVBench 这类基准上的可靠性。</li>
-                        </ul>
-                        <div class="source-note">
-                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2311.17005" target="_blank">论文</a>（任务定义与构建）；<a href="https://github.com/OpenGVLab/Ask-Anything/blob/main/video_chat2/MVBENCH.md" target="_blank">实现文档</a>（评测入口与跑分说明）。
-                        </div>
-                    </div>
-                </div>
-
-                <div class="commentary">
-                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
-                    <p style="margin:0;">如果你把 VLM 当裁判来评估视频生成，那么 MVBench 这类“裁判能力基准”就是前置体检：裁判自己不稳，打分就会漂。建议在报告里同时给出：① 裁判模型版本；② 关键失败题型；③ 人类抽检一致性（否则很容易把评测变成自嗨）。</p>
                 </div>
             </div>
 
