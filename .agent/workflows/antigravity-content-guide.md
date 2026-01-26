@@ -146,6 +146,7 @@ description: AntiGravity 高质量内容撰写规范指南
 | **日期** | 📅 YYYY-MM-DD |
 | **来源** | arXiv ID / Conference / Preprint（并在正文中标注“信息来自论文哪一章节/图表/表格”） |
 | **标签** | NEW / GitHub / Conference |
+| **论文主图** | **优先展示**论文主图（通常 Figure 1）：把图片存入仓库 `world_model_interactive_guide/assets/papers/` 并在卡片中用 `<img>` 引用；figcaption 必须写清 “Figure X + 来源定位” |
 | **三段解读** | **必须上下垂直排列**：🟢通俗 → 🔴专业 → 🧠 AntiGravity's Commentary |
 | **来源定位** | **必须**在专业解析末尾增加“来源定位”：Abstract/§x/Fig.x/Table.x（可点击链接回论文） |
 | **思路图** | **建议**提供“问题 & 因果逻辑图”（SVG/流程图），重要论文 **强制** |
