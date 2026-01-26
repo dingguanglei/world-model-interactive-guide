@@ -180,7 +180,7 @@
                     <div class="stat-label">总更新天数</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">33</div>
+                    <div class="stat-number">35</div>
                     <div class="stat-label">总更新条目</div>
                 </div>
                 <div class="stat-card">
@@ -218,17 +218,25 @@
                 <div class="log-category">
                     <span class="cat-tag papers">📄 论文</span>
                     <span class="cat-tag community">💬 社区</span>
+                    <span class="cat-tag tech">⚙️ 技术</span>
                 </div>
                 <div class="log-content">
                     <h4>论文追踪 (07_paper_tracker.html)</h4>
                     <ul>
                         <li><strong>[NEW]</strong> 新增 <a href="https://arxiv.org/abs/2601.16296" target="_blank">Memory‑V2V (arXiv:2601.16296)</a>：外部视频记忆 + 检索条件化，动态 tokenizer 与 token compressor（约 30% 加速）解决多轮视频编辑的跨轮次一致性</li>
                         <li><strong>[NEW]</strong> 新增 <a href="https://arxiv.org/abs/2601.16163" target="_blank">Cosmos Policy (arXiv:2601.16163)</a>：把 action / future state / value 编码为 latent frames，单阶段微调预训练视频模型并用 best-of-N + value 做规划，给出 LIBERO/RoboCasa/真实世界成功率</li>
+                        <li><strong>[UPDATE]</strong> 论文追踪页面结构升级：新增“按年月折叠 + 二级导航”（默认展开最近 3 个月），修复公式渲染（MathJax），并为每篇论文补充 <strong>来源定位</strong> 与 <strong>🧠 AntiGravity's Commentary</strong></li>
                     </ul>
 
                     <h4>社区动态 (08_community.html)</h4>
                     <ul>
                         <li><strong>[NEW]</strong> 新增 Cosmos Policy 相关讨论条目：围绕“无架构改动的统一扩散序列建模 + 规划入口”总结社区关注点（采样数 N、延迟预算、OOD 失败模式）</li>
+                        <li><strong>[UPDATE]</strong> 社区动态页面结构升级：🟢/🔴 改为上下排列，并为每条讨论补充 <strong>🧠 AntiGravity's Commentary</strong></li>
+                    </ul>
+
+                    <h4>技术/规范</h4>
+                    <ul>
+                        <li><strong>[UPDATE]</strong> 更新 <code>.agent/workflows/antigravity-content-guide.md</code>：按 01-08 章节逐页更新、无高价值内容可跳过；07/08 强制三段垂直结构（🟢→🔴→🧠）、引用需标注论文章节/图表、建议提供“问题&因果逻辑图”</li>
                     </ul>
                 </div>
             </div>

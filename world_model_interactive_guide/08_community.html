@@ -73,9 +73,9 @@
         }
 
         .dual-view {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
             margin: 1rem 0;
         }
 
@@ -91,6 +91,22 @@
             padding: 1rem;
             border-radius: 0.5rem;
             border-left: 4px solid #e11d48;
+        }
+
+        .commentary {
+            background: #fce7f3;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #db2777;
+            margin-top: 1rem;
+        }
+
+        .commentary-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: #9d174d;
+            letter-spacing: 0.2px;
         }
 
         .view-title {
@@ -130,12 +146,6 @@
             border-radius: 0.5rem;
             font-size: 0.9rem;
             margin-bottom: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .dual-view {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
@@ -211,6 +221,11 @@
                         </ul>
                     </div>
                 </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">这条讨论的含金量在于把“视频模型做策略”拆成可执行的系统闭环：生成动作、想象未来、用 value 排序规划。真正需要追问的是工程预算：best-of-N 的 N 多大才有效、端到端延迟是否能进实时窗口、以及 rollout 想象是否会在 OOD 场景下误导策略。</p>
+                </div>
             </div>
 
             <div class="discussion-card">
@@ -247,6 +262,11 @@
                         </ul>
                     </div>
                 </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">我同意社区把 KPI 从“画质”迁移到“系统可用性”：交互世界模型最终要对 latency/drift/恢复能力负责。接下来最该盯的，是有没有“可回滚/可重锚定”的工程接口与评测基准——没有这些，任何分钟级 demo 都很难变成可持续运行的产品。</p>
+                </div>
             </div>
 
             <div class="discussion-card">
@@ -282,6 +302,11 @@
                             <li><strong>研究信号</strong>: 若 2.2 强调 state/memory/可读写世界状态，说明在冲“世界模型本体”。</li>
                         </ul>
                     </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">“版本差异别看画质”这句话非常对：真正应该拿来对比的是端到端延迟（含 VAE）、长时漂移曲线、以及控制接口是否可复现（动作/相机/几何）。如果这些没有公开指标，讨论很容易沦为营销。建议后续在论文追踪里把 WAN 系列的对比固化为一张“可交互门槛 KPI 表”。</p>
                 </div>
             </div>
 
@@ -320,6 +345,11 @@
                         </ul>
                     </div>
                 </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">这类争论的价值在于提醒我们别把“可玩”直接等同于“理解”。从工程角度，我更关心可检验的因果能力：反事实（换一个动作会怎样）、可控干预（固定一个变量）、以及可恢复性（错误能否被定位与回滚）。如果这些评测缺失，讨论很容易停留在哲学层面。</p>
+                </div>
             </div>
 
             <div class="discussion-card">
@@ -356,6 +386,11 @@
                         </ul>
                     </div>
                 </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">这条讨论非常“到点子上”：世界模型的上限经常被数据管线决定。更细一点说，关键不是“采集很多视频”，而是采集到可对齐的动作/状态信号、并能持续迭代（版本化、回归评测、覆盖率监控）。如果没有这套工程，模型再大也只能在短视频上打转。</p>
+                </div>
             </div>
 
             <div class="discussion-card">
@@ -390,6 +425,11 @@
                         </ul>
                     </div>
                 </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">“从电影到游戏”的判断成立，但落地的核心不是一句话的趋势，而是系统指标：端到端延迟（包含编码/解码）、可控接口（动作/状态）、以及可恢复性（回滚/重锚定）。如果这三项没有工程化，产品最终仍会回到“更强的短片生成器”路径。</p>
+                </div>
             </div>
 
             <div class="discussion-card">
@@ -423,6 +463,11 @@
                             <li><strong>启示</strong>: TurboDiffusion 类的加速技术是消费级落地的关键。</li>
                         </ul>
                     </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">这条讨论非常“工程真实”：消费卡能跑不代表可用，真正的瓶颈是显存与一致性之间的拉扯（KV window 越短越省内存，但 drift 越快）。后续更新建议把“4090 可玩”拆成可复现参数：window、分辨率、FPS、失败模式，并明确哪些加速（量化/稀疏注意力/少步数）能系统性改善，而不是靠牺牲质量硬撑。</p>
                 </div>
             </div>
         </section>
