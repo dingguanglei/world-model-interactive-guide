@@ -9,6 +9,10 @@
 
 [https://dingguanglei.github.io/world-model-interactive-guide](https://dingguanglei.github.io/world-model-interactive-guide)
 
+## 技能库 (Skills)
+
+- 论文追踪「方式 A」主图自动提取与嵌入：`.agent/workflows/skills/paper-figure-extraction.md`（脚本：`scripts/paper_figures.py`）
+
 ## 核心内容
 
 本指南包含以下核心模块：
