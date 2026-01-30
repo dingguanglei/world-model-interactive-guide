@@ -275,7 +275,7 @@
         <p style="color: var(--text-secondary); margin-top: -0.25rem;">📌 按年月折叠浏览（默认展开最近 3 个月）。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-01-26 | 本页内容每日更新，追踪学术前沿。
+            ⏰ <strong>最后更新时间</strong>: 2026-01-30 | 本页内容将每日更新「追踪 arXiv/GitHub 上世界模型（非具身智能）/交互视频生成/游戏模拟的最新论文与开源项目」。
         </div>
 
         <section>
@@ -296,10 +296,154 @@
             <div class="paper-card">
                 <div class="paper-header">
                     <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2601.20540" target="_blank">Advancing Open-source World Models</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2026-01-28</span>
+                            <span>📄 <a href="https://arxiv.org/abs/2601.20540" target="_blank">arXiv:2601.20540</a></span>
+                            <span class="paper-tag"><a href="https://technology.robbyant.com/lingbot-world" target="_blank">Project</a></span>
+                            <span class="paper-tag github"><a href="https://github.com/Robbyant/lingbot-world" target="_blank">GitHub</a></span>
+                            <span class="paper-tag open"><a href="https://github.com/Robbyant/lingbot-world" target="_blank">代码开源</a></span>
+                            <span class="paper-tag open"><a href="https://huggingface.co/robbyant/lingbot-world-base-cam" target="_blank">参数开源(HF)</a></span>
+                            <span class="paper-tag open"><a href="https://www.modelscope.cn/models/Robbyant/lingbot-world-base-cam" target="_blank">参数开源(ModelScope)</a></span>
+                            <span class="paper-tag unknown">数据集未公开</span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2601.20540-fig1.webp" alt="Advancing Open-source World Models Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1 / 或 PDF 首页主图）</figcaption>
+                </figure>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>这篇工作主打一个关键词：<strong>“开源世界模型”</strong>。作者把一个源自视频生成的“可交互世界模拟器”开源出来，并宣称它既能保持画面/动力学质量，也能做<strong>分钟级</strong>的长时一致性，还能在交互时做到<strong>16 FPS</strong>且<strong>延迟低于 1 秒</strong>。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>定位/目标</strong>：提出并开源 <strong>LingBot‑World</strong>，把“从视频生成出发的 world simulator”产品化为可用的开源世界模型，试图缩小开源与闭源世界模型的能力差距。<sup><a href="https://arxiv.org/abs/2601.20540" target="_blank">[来源]</a></sup></li>
+                            <li><strong>能力主张（可追溯的硬口径）</strong>：覆盖多风格环境（现实/科学/卡通等）、<strong>分钟级</strong> horizon 的长期一致性（long-term memory）、交互生成 <strong>16 FPS</strong> 且端到端延迟 <strong>&lt; 1s</strong>。<sup><a href="https://arxiv.org/abs/2601.20540" target="_blank">[来源]</a></sup></li>
+                            <li><strong>可复现入口（工程侧）</strong>：作者在仓库提供推理脚本与示例数据，并在 README 中给出多分辨率（如 480p/720p）与多 GPU 推理（FSDP/DeepSpeed Ulysses）路径；模型权重提供 HuggingFace 与 ModelScope 入口。<sup><a href="https://github.com/Robbyant/lingbot-world" target="_blank">[来源: GitHub]</a></sup><sup><a href="https://huggingface.co/robbyant/lingbot-world-base-cam" target="_blank">[来源: HF]</a></sup><sup><a href="https://www.modelscope.cn/models/Robbyant/lingbot-world-base-cam" target="_blank">[来源: ModelScope]</a></sup></li>
+                        </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2601.20540" target="_blank">论文</a>（Abstract：能力/指标口径）；<a href="https://github.com/Robbyant/lingbot-world" target="_blank">GitHub README</a>（推理分辨率、多 GPU 推理与示例数据）；<a href="https://huggingface.co/robbyant/lingbot-world-base-cam" target="_blank">HF</a>/<a href="https://www.modelscope.cn/models/Robbyant/lingbot-world-base-cam" target="_blank">ModelScope</a>（权重发布入口）。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">对“神经游戏引擎/交互世界模型”赛道而言，<strong>开源 + 权重可拿到</strong>的价值极高：它让社区能把讨论从“看 demo”推进到“做系统回归与延迟预算”。但要警惕两个常见陷阱：其一，<strong>16 FPS + &lt;1s latency</strong> 的口径强依赖硬件/并行策略/分辨率与上下文长度；其二，“分钟级一致性”需要在失败模式上讲清楚（漂移、回滚、重锚定），否则容易只停留在展示视频层面。</p>
+                </div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2601.19834" target="_blank">Visual Generation Unlocks Human-Like Reasoning through Multimodal World Models</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2026-01-27</span>
+                            <span>📄 <a href="https://arxiv.org/abs/2601.19834" target="_blank">arXiv:2601.19834</a></span>
+                            <span class="paper-tag"><a href="https://thuml.github.io/Reasoning-Visual-World/" target="_blank">Project</a></span>
+                            <span class="paper-tag github"><a href="https://github.com/thuml/Reasoning-Visual-World" target="_blank">GitHub</a></span>
+                            <span class="paper-tag open"><a href="https://github.com/thuml/Reasoning-Visual-World" target="_blank">代码开源</a></span>
+                            <span class="paper-tag open"><a href="https://huggingface.co/datasets/thuml/VisWorld-Eval" target="_blank">数据集开源</a></span>
+                            <span class="paper-tag unknown">参数未公开/未知</span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2601.19834-fig1.webp" alt="Visual Generation Unlocks Human-Like Reasoning Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1 / 或 PDF 首页主图）</figcaption>
+                </figure>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>很多推理系统只会“用文字想问题”（verbal CoT）。这篇论文提出：在一些物理/空间任务里，<strong>让模型先“画出来/生成出可视化的中间过程”</strong>，反而更像人类的“脑内小剧场”，推理会更稳。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>核心主张：Visual Superiority Hypothesis</strong>：对某些物理世界相关任务，视觉生成能更自然地作为内部 world model；纯文字 world model 可能因表示能力或先验不足而出现瓶颈。<sup><a href="https://arxiv.org/abs/2601.19834" target="_blank">[来源]</a></sup></li>
+                            <li><strong>方法视角</strong>：把“内部 world modeling”形式化为 CoT 推理的核心组件，并讨论不同形式 world model 的差异。<sup><a href="https://arxiv.org/abs/2601.19834" target="_blank">[来源]</a></sup></li>
+                            <li><strong>评测与结论</strong>：构建 <strong>VisWorld‑Eval</strong>，并在 SOTA UMM 上做 controlled experiments，发现<strong>交错的视觉‑语言 CoT</strong>在“偏视觉 world modeling”的任务上显著优于纯文字 CoT，但在其它任务上优势不明显。<sup><a href="https://arxiv.org/abs/2601.19834" target="_blank">[来源]</a></sup></li>
+                            <li><strong>可复现入口</strong>：项目页提供代码仓库与评测数据集（HF Datasets）。<sup><a href="https://github.com/thuml/Reasoning-Visual-World" target="_blank">[来源: GitHub]</a></sup><sup><a href="https://huggingface.co/datasets/thuml/VisWorld-Eval" target="_blank">[来源: Dataset]</a></sup></li>
+                        </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2601.19834" target="_blank">论文</a>（Abstract：假设/评测结论）；<a href="https://thuml.github.io/Reasoning-Visual-World/" target="_blank">Project</a>（代码与数据集入口）；<a href="https://huggingface.co/datasets/thuml/VisWorld-Eval" target="_blank">VisWorld‑Eval</a>（数据集发布）。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">这篇不直接解决“视频世界模型的长时一致性/交互延迟”，但它给了一个更上层的启发：如果未来世界模型要支持“规划/推理”，中间状态不一定只用 token/文本表达，<strong>可生成的可视化中间过程</strong>可能是更稳的“工作记忆”。工程上建议把 VisWorld‑Eval 里的任务形态拆出来，转化为你自己的 world model regression：哪些任务确实需要视觉中间表征，哪些只是“多模态噱头”。</p>
+                </div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2601.19336" target="_blank">From Observations to Events: Event-Aware World Model for Reinforcement Learning</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2026-01-27</span>
+                            <span>📄 <a href="https://arxiv.org/abs/2601.19336" target="_blank">arXiv:2601.19336</a></span>
+                            <span class="paper-tag github"><a href="https://github.com/MarquisDarwin/EAWM" target="_blank">GitHub</a></span>
+                            <span class="paper-tag open"><a href="https://github.com/MarquisDarwin/EAWM" target="_blank">代码开源</a></span>
+                            <span class="paper-tag unknown">参数未公开</span>
+                            <span class="paper-tag unknown">数据集未公开</span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2601.19336-fig1.webp" alt="Event-Aware World Model Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1 / 或 PDF 首页主图）</figcaption>
+                </figure>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>很多世界模型在“看视频学世界”时容易被纹理/颜色等无关因素带偏。作者借鉴认知科学：人类会把连续观察切成一段段<strong>“事件”</strong>（发生了什么、什么时候开始/结束），再用这些事件做决策。EAWM 就是把这种“事件切分”做进世界模型里。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>问题</strong>：现有 MBRL 世界模型难以跨结构相似场景泛化，且对纹理/颜色等 spurious variations 敏感。<sup><a href="https://arxiv.org/abs/2601.19336" target="_blank">[来源]</a></sup></li>
+                            <li><strong>方法：Event-Aware World Model (EAWM)</strong>：用自动 event generator 从原始观测中导出事件，并用 <strong>Generic Event Segmentor (GES)</strong> 识别 event boundary（事件段起止）。通过 event prediction 约束表征空间，让其捕捉有意义的时空转移。<sup><a href="https://arxiv.org/abs/2601.19336" target="_blank">[来源]</a></sup></li>
+                            <li><strong>统一视角</strong>：论文声称给出了“看似不同”的 world model 架构的统一表述，从而让方法更通用。<sup><a href="https://arxiv.org/abs/2601.19336" target="_blank">[来源]</a></sup></li>
+                            <li><strong>结果（摘要口径）</strong>：在 Atari 100K、Craftax 1M、DeepMind Control 500K、DMC‑GB2 500K 上，使强 MBRL baseline 提升 <strong>10%–45%</strong>，并声称取得 SOTA。<sup><a href="https://arxiv.org/abs/2601.19336" target="_blank">[来源]</a></sup></li>
+                            <li><strong>可复现入口</strong>：代码开源于 GitHub。<sup><a href="https://github.com/MarquisDarwin/EAWM" target="_blank">[来源: GitHub]</a></sup></li>
+                        </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2601.19336" target="_blank">论文</a>（Abstract：问题/方法/指标口径）；<a href="https://github.com/MarquisDarwin/EAWM" target="_blank">GitHub</a>（代码复现入口）。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">“事件”是一个很实用的中间层：它把连续像素流压成更稳的决策单位，天然有助于跨场景泛化与抗纹理扰动。真正的看点不只是分割器，而是它如何与 world model 的预测目标/训练信号对齐（event prediction 的监督从哪来、噪声怎么控）。如果你在做交互视频世界模型，也可以把“事件边界”当成一种<strong>可回滚/可重锚定</strong>的系统节点：漂移累积到某个 boundary 时强制重同步，比盲目扩大窗口更可控。</p>
+                </div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
                         <div class="paper-title"><a href="https://arxiv.org/abs/2601.16914" target="_blank">LoL: Longer than Longer, Scaling Video Generation to Hour</a></div>
                         <div class="paper-meta">
                             <span>📅 2026-01-23</span>
                             <span>📄 arXiv:2601.16914</span>
+                            <span class="paper-tag unknown">代码未公开/未知</span>
+                            <span class="paper-tag unknown">参数未公开/未知</span>
+                            <span class="paper-tag unknown">数据集未公开/未知</span>
                             <span class="paper-tag new">NEW</span>
                         </div>
                     </div>
@@ -342,6 +486,9 @@
                         <div class="paper-meta">
                             <span>📅 2026-01-23</span>
                             <span>📄 arXiv:2601.16471</span>
+                            <span class="paper-tag unknown">代码未公开/未知</span>
+                            <span class="paper-tag unknown">参数未公开/未知</span>
+                            <span class="paper-tag unknown">数据集未公开/未知</span>
                             <span class="paper-tag new">NEW</span>
                         </div>
                     </div>
@@ -1193,12 +1340,12 @@
                 </div>
             </div>
 
-            <div class="paper-card">
+            <div class="paper-card" id="paper-genie3">
                 <div class="paper-header">
                     <div>
                         <div class="paper-title"><a
-                                href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
-                                target="_blank">Genie 3: A General Purpose World Model (DeepMind Blog)</a></div>
+                                href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/"
+                                target="_blank">Genie 3: A new frontier for world models (DeepMind Blog)</a></div>
                         <div class="paper-meta">
                             <span>📅 2025-08-05</span>
                             <span>📄 DeepMind Official</span>
@@ -1217,13 +1364,13 @@
                     <div class="pro-view">
                         <div class="view-title">🔴 专业解析</div>
                         <ul style="padding-left: 1rem; margin: 0;">
-                            <li><strong>规格</strong>: 720p / 24 FPS / 分钟级一致性。</li>
-                            <li><strong>Tokenizer</strong>: Magvit-v2 (LFQ)。</li>
-                            <li><strong>控制</strong>: Latent Action (无需人工标注)。</li>
-                            <li><strong>意义</strong>: 从"动图"到"可玩关卡"的分水岭。</li>
+                            <li><strong>公开规格（官方口径）</strong>：官方写明“给定文本提示即可生成可导航的动态世界”，并能以 <strong>24 FPS</strong> 实时导航（real time），分辨率为 <strong>720p</strong>，并能保持 <strong>a few minutes</strong> 级一致性。<sup><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">[来源]</a></sup></li>
+                            <li><strong>长时稳定性补充（官方口径）</strong>：博客进一步写到环境可在 “several minutes” 内保持 largely consistent，并称其 <strong>visual memory</strong> 可回溯到 “as far back as one minute ago”。<sup><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">[来源]</a></sup></li>
+                            <li><strong>未披露信息（重要边界）</strong>：公开博客未披露完整模型架构（Tokenizer/Backbone/动作表示/训练细节）、训练数据规模与来源、毫秒级延迟预算、以及失败恢复（回滚/重锚定）机制的系统说明。</li>
+                            <li><strong>意义（可验证的结论）</strong>：它把“世界模型”从论文概念推到可被大众直观理解的“可探索交互体验”，并把行业讨论的重点拉回到 long-horizon consistency 与交互实时性约束。<sup><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">[来源]</a></sup></li>
                         </ul>
                         <div class="source-note">
-                            <strong>来源定位</strong>：<a href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">DeepMind Blog</a>（规格/演示：博文要点与视频展示；Tokenizer/Latent Action：博文/配套材料描述）。
+                            <strong>来源定位</strong>：<a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">DeepMind Blog</a>（开头摘要：24 FPS / 720p / a few minutes；长时段讨论段落：several minutes + visual memory up to one minute ago）。<em>注</em>：该博文显示 <strong>dateModified: 2026-01-29</strong>（见页面结构化信息）。
                         </div>
                     </div>
                 </div>

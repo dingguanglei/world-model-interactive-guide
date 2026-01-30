@@ -87,7 +87,7 @@
                 <h3>📄 Genie 3: A General Purpose World Model</h3>
                 <p>
                     <strong>Link</strong>: <a
-                        href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
+                        href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/"
                         target="_blank" style="color:var(--accent);">DeepMind Official Blog</a>
                 </p>
 
@@ -100,18 +100,19 @@
                     <div style="background:#fff1f2; padding:1.25rem; border-radius:0.5rem; border:1px solid #fecdd3;">
                         <h4 style="color: #9f1239; margin-top:0;">🔴 专业解析 (Professional)</h4>
                         <ul style="padding-left:1.2rem; margin-bottom: 0;">
-                            <li><strong>Tokenizer:</strong> 使用 <strong>Magvit-v2</strong> 进行 3D 时空压缩，极大地降低了 Sequence
-                                Length。</li>
-                            <li><strong>Latent Action:</strong> Action Space 是 <strong>Latent</strong>
-                                的，不需要人工标注按键，而是自己从视频中学出"动作"的概念。</li>
+                            <li><strong>定位</strong>：Genie 3 被官方定义为 <strong>general purpose world model</strong>，目标是生成“可交互环境”而不只是一次性视频。<sup><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">[来源]</a></sup></li>
+                            <li><strong>交互与规格（公开口径）</strong>：官方写明“给定文本提示即可生成可导航的动态世界”，并能以 <strong>24 FPS</strong> 实时导航（real time），分辨率为 <strong>720p</strong>，一致性可维持 <strong>a few minutes</strong>。<sup><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">[来源]</a></sup></li>
+                            <li><strong>长时稳定性的补充口径</strong>：博客补充称环境可在 “several minutes” 内保持 largely consistent，并写到其 <strong>visual memory</strong> 可回溯到 “as far back as one minute ago”。<sup><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">[来源]</a></sup></li>
+                            <li><strong>未披露信息（需谨慎）</strong>：公开博客未给出完整的模型架构细节（Tokenizer/Backbone/动作表示/训练数据规模与来源等），也未给出毫秒级延迟预算与失败恢复机制的系统说明。</li>
                         </ul>
                     </div>
                 </div>
 
                 <blockquote style="margin-top: 1.5rem;">
-                    <strong>原文关键摘录 (Key Quote from Blog)</strong>: "Genie 3 can create and navigate diverse, open-ended
-                    game-like environments from a single text or image prompt, maintaining <strong>temporal consistency
-                        for several minutes</strong> at 24fps and 720p."
+                    <strong>原文关键摘录 (Key Quote from Blog)</strong>:
+                    "Given a text prompt, Genie 3 can generate dynamic worlds that you can navigate in real time at
+                    <strong>24 frames per second</strong>, retaining consistency for a few minutes at a resolution of
+                    <strong>720p</strong>."
                 </blockquote>
 
                 <div class="commentary" style="margin-top: 1rem;">
@@ -238,11 +239,11 @@
                 <li><strong>Google DeepMind: Genie 3</strong>
                     <ul>
                         <li>📰 <strong>Blog</strong>: <a
-                                href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
+                                href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/"
                                 target="_blank">Genie 3: A new frontier for world models</a></li>
                         <li>🎬 <strong>Video</strong>: <a href="https://youtu.be/n5x6yXDj0uo" target="_blank">YouTube
                                 Official Demo</a></li>
-                        <li><em>Key Claims</em>: 720p / 24fps, Minute-level interaction.</li>
+                        <li><em>Key Claims</em>: 720p / 24 FPS，a few minutes 的一致性；并提到 visual memory 可回溯到 one minute ago。<sup><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">[来源]</a></sup></li>
                     </ul>
                 </li>
                 <li><strong>ShengShu Technology: Vidu</strong>
