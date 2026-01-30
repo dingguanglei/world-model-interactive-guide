@@ -50,14 +50,14 @@
         <p>本章我们拆解"如何让模型听懂键盘指令"以及"如何跑得比显卡还快"。我们将深入探讨 Tokenizer、Streaming Inference 和 Action Injection 的底层机制。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-01-20 | 本页内容将每日更新「业界主流技术路线、工程架构与 AI Infra 落地进展」。
+            ⏰ <strong>最后更新时间</strong>: 2026-01-30 | 本页内容将每日更新「业界主流技术路线、工程架构与 AI Infra 落地进展」。
         </div>
 
         <section>
             <h2>3.1 架构对比：视频模型 vs 游戏模型</h2>
             <p>从技术角度看，<a href="https://openai.com/sora" target="_blank">Sora</a> 这类 Video Gen 和 <a
-                    href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
-                    target="_blank">Genie 3</a> 这类 Game Gen 存在本质的的区别。</p>
+                    href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/"
+                    target="_blank">Genie 3</a> 这类“可交互 world model”存在本质差异。<sup><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">[来源]</a></sup></p>
             <table>
                 <thead>
                     <tr>
@@ -70,12 +70,12 @@
                     <tr>
                         <td><strong>输入 Condition</strong></td>
                         <td>Text Prompt, First Image</td>
-                        <td><strong>Action Token (WASD)</strong>, Past Latent</td>
+                        <td><strong>Control / Action signals</strong>（具体形式因系统而异）+ Past Latent</td>
                     </tr>
                     <tr>
                         <td><strong>Tokenizer</strong></td>
                         <td>2D VAE (SDXL Style)</td>
-                        <td><strong>3D Causal VAE (Magvit-v2 Style)</strong></td>
+                        <td><strong>3D 视频 Tokenizer</strong>（如 MAGVIT 系列等）</td>
                     </tr>
                     <tr>
                         <td><strong>Attention</strong></td>
@@ -99,9 +99,9 @@
         </section>
 
         <section>
-            <h2>3.2 深度解剖 1：Magvit-v2 3D Tokenizer</h2>
-            <p>为什么 <a href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
-                    target="_blank">Genie 3</a> 能做到实时生成？关键在于它把视频压缩成了极其紧凑的 <strong>Discrete Tokens</strong>。</p>
+            <h2>3.2 深度解剖 1：视频 Tokenizer（以 MAGVIT 为例）</h2>
+            <p><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">Genie 3 官方博客</a>给出了 24 FPS / 720p / 分钟级一致性的体验级口径，但并未公开完整 tokenizer 细节。<sup><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">[来源]</a></sup></p>
+            <p>不过从系统角度，要把“交互世界生成”推到实时，几乎绕不开一个工程前提：把连续视频压缩成更短的离散/低维表示（tokens/latents），否则序列长度和解码开销会直接把延迟打爆。这里用 <a href="https://arxiv.org/abs/2212.05199" target="_blank">MAGVIT (arXiv:2212.05199)</a> 作为可追溯的代表性 tokenizer 路线做拆解。<sup><a href="https://arxiv.org/abs/2212.05199" target="_blank">[来源]</a></sup></p>
 
             <pre class="mermaid">
 flowchart LR
@@ -114,10 +114,9 @@ flowchart LR
         C3D2[ResBlock 3D]
     end
     
-    subgraph Quantizer [LFQ]
-        Vector[Latent] -->|Sign > 0| Binary[1]
-        Vector -->|Sign < 0| Binary2[0]
-        Binary -->|Binary2Int| Index[Token ID]
+    subgraph Quantizer [VQ / Discrete Tokens]
+        Vector[Latent] -->|Nearest Neighbor| Codebook[(Codebook)]
+        Codebook --> Index[Token ID]
     end
     
     Input --> Encoder --> Quantizer
@@ -125,9 +124,7 @@ flowchart LR
 
             <div class="commentary">
                 <div class="commentary-title">🧠 AntiGravity's Commentary</div>
-                <p>Magvit-v2 的真正的突破不是 3D CNN，而是 <strong>LFQ (Lookup-Free Quantization)</strong>。以前的 VQ-VAE
-                    需要在几十万的词表里"查字典"(Nearest Neighbor Search)，慢得离谱。LFQ 直接看向量符号是正还是负 ($z > 0 \to 1, z < 0 \to
-                        0$)，把"查字典"变成了"位运算"。这是 Genie 3 能跑 24fps 的隐形功臣。</p>
+                <p>对交互世界模型来说，tokenizer 的价值不在“压缩比”本身，而在于把“像素级推理”变成“token 级推理”，把最重的计算从每一步都做的视觉生成里剥离出去。即使 Genie 3 的 tokenizer 细节未公开，<strong>24 FPS / 720p / 分钟级一致性</strong>这个公开口径也足以说明：它一定依赖了非常强的表示压缩与高效的流式推理工程。<sup><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">[来源]</a></sup></p>
             </div>
         </section>
 

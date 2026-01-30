@@ -1,12 +1,17 @@
 {
-  "2412.07772": {
-    "file": "arxiv-2412.07772-fig1.webp",
-    "mode": "image-jpeg-area675840",
+  "2601.19336": {
+    "file": "arxiv-2601.19336-fig1.webp",
+    "mode": "image-png-area98304",
+    "page": 1
+  },
+  "2601.19834": {
+    "file": "arxiv-2601.19834-fig1.webp",
+    "mode": "image-png-area3955615",
     "page": 0
   },
-  "2506.08009": {
-    "file": "arxiv-2506.08009-fig1.webp",
-    "mode": "image-jpeg-area399360",
-    "page": 1
+  "2601.20540": {
+    "file": "arxiv-2601.20540-fig1.webp",
+    "mode": "image-jpeg-area46776480",
+    "page": 0
   }
 }

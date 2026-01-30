@@ -108,7 +108,7 @@
         <p>本章我们透过"官方演示视频"的视觉表现，深度反推各大模型的技术边界与应用场景。从 Genie 3 的通用世界模拟，到 Vidu 的生产力工具定位，再到 PixVerse 的消费级音画一体化。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-01-21 | 本页内容将每日更新「市场上最新的交互视频产品/神经游戏引擎/相关产品动态」。
+            ⏰ <strong>最后更新时间</strong>: 2026-01-30 | 本页内容将每日更新「市场上最新的交互视频产品/神经游戏引擎/相关产品动态」。
         </div>
 
         <section id="genie3">
@@ -126,7 +126,7 @@
                 <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: -0.5rem;">
                     <strong>Source</strong>: <a href="https://youtu.be/n5x6yXDj0uo" target="_blank">Genie 3 Official
                         Video (YouTube)</a> |
-                    <a href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
+                    <a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/"
                         target="_blank">DeepMind Blog</a>
                 </p>
 
@@ -145,9 +145,11 @@
                         (三维一致性)</strong>。它不再是简单的 Video Gen（帧预测），而是一个维护了 World State 的神经模拟器。</p>
 
                 <blockquote>
-                    <strong>原文引用 (DeepMind Blog)</strong>: "Genie 3 can create and navigate diverse, open-ended
-                    game-like environments from a single text or image prompt, maintaining temporal consistency for
-                    <strong>several minutes</strong> at 24fps and 720p."
+                    <strong>原文引用 (DeepMind Blog)</strong>:
+                    "Given a text prompt, Genie 3 can generate dynamic worlds that you can navigate in real time at
+                    <strong>24 frames per second</strong>, retaining consistency for a few minutes at a resolution of
+                    <strong>720p</strong>."
+                    <sup><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">[来源]</a></sup>
                 </blockquote>
             </div>
 
@@ -163,29 +165,29 @@
                 <tbody>
                     <tr>
                         <td><strong>分辨率</strong></td>
-                        <td><a href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
+                        <td><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/"
                                 target="_blank">720p (1280x720)</a></td>
                         <td>平衡了画质与推理速度，适合 HD 游戏体验。 <sup><a
-                                    href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
+                                    href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/"
                                     target="_blank">[来源]</a></sup></td>
                     </tr>
                     <tr>
                         <td><strong>帧率</strong></td>
-                        <td><a href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
+                        <td><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/"
                                 target="_blank">24 FPS</a></td>
                         <td>达到电影级流畅度，人眼不会感到明显的卡顿，这是"可玩性"的及格线。 <sup><a
-                                    href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
+                                    href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/"
                                     target="_blank">[来源]</a></sup></td>
                     </tr>
                     <tr>
                         <td><strong>交互延迟</strong></td>
-                        <td>&lt; 100ms</td>
-                        <td>接近云游戏的体验，玩家操作手柄后几乎立即看到反馈。</td>
+                        <td>未披露（官方仅称可 <a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">real time</a> 导航，且为 24 FPS）</td>
+                        <td>对交互产品来说，延迟决定“可玩性”。当前公开材料未给出毫秒级延迟口径。</td>
                     </tr>
                     <tr>
                         <td><strong>控制方式</strong></td>
-                        <td>Text + Action</td>
-                        <td>支持 "Spawn a dragon" (文本) 和 "Jump/Run" (动作)。</td>
+                        <td>文本提示 + 实时导航（具体控制协议未披露）</td>
+                        <td>公开描述强调“给定文本提示即可生成可导航的动态世界”。 <sup><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">[来源]</a></sup></td>
                     </tr>
                 </tbody>
             </table>
@@ -695,9 +697,9 @@
                     <tr>
                         <td><strong>我要做下一代 AI 游戏 / 模拟器</strong></td>
                         <td><strong><a
-                                    href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/"
-                                    target="_blank">Genie 3 (复现)</a></strong></td>
-                        <td>只有它能提供真正的实时交互和物理模拟。</td>
+                                    href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/"
+                                    target="_blank">Genie 3（官方演示）</a></strong></td>
+                        <td>官方公开材料展示了 24 FPS / 720p 的实时导航与分钟级一致性；但当前未提供开源复现或可商用 API。<sup><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">[来源]</a></sup></td>
                     </tr>
                 </tbody>
             </table>
