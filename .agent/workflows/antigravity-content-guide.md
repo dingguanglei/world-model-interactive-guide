@@ -375,6 +375,9 @@ description: AntiGravity 高质量内容撰写规范指南
     ⏰ <strong>最后更新时间</strong>: YYYY-MM-DD | 本页内容将每日更新「XXXXXX」。
 </div>
 ```
+- **样式统一（重要）**：
+  - `last-updated` 的样式必须由全局样式表 `world_model_interactive_guide/css/style.css` 中的 `.last-updated` 统一管理
+  - 各章节页面 **禁止** 在内联 `<style>` 中重复定义 `.last-updated { ... }`（否则会导致跨章节样式不一致）
 - 其中「XXXXXX」必须写清本页追踪范围，例如：
   - `产品深度`: “追踪市场上最新的交互视频产品/神经游戏引擎/相关产品动态”
   - `技术架构`: “追踪业界主流技术路线、工程架构与 AI Infra 落地进展”
@@ -454,6 +457,7 @@ description: AntiGravity 高质量内容撰写规范指南
 □ 每章都有 AntiGravity's Commentary
 □ 所有表格都有数据来源脚注
 □ 每个更新型章节页顶部都有 last-updated 模块，包含“每日更新”范围文案
+□ last-updated 样式由 `css/style.css` 统一管理（页面内无重复 `.last-updated { ... }` 定义）
 □ 如果当期没有高价值内容：允许不更新，但绝不添加“灌水/重复/无引用”的低价值条目
 □ 没有任何占位符文本
 □ 没有任何无效/空链接
