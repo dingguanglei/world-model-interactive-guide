@@ -52,7 +52,7 @@
         </blockquote>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-01-20 | 本页内容将每日更新「视频-动作数据的采集/合成/标注与数据 Infra 方案」。
+            ⏰ <strong>最后更新时间</strong>: 2026-02-02 | 本页内容将每日更新「视频-动作数据的采集/合成/标注与数据 Infra 方案」。
         </div>
 
         <section>
@@ -211,7 +211,7 @@ void URecorderComponent::TickComponent(...) {
         </section>
 
         <section>
-            <h2>4.7 最新增量：用“游戏 Glitch”做物理常识反例数据（PhysGame）</h2>
+            <h2 id="physgame">4.7 最新增量：用“游戏 Glitch”做物理常识反例数据（PhysGame）</h2>
             <p>如果你想让模型具备更强的物理常识（哪里违反物理、哪些现象不合理），传统数据要么标注贵、要么仿真不真实。<a
                     href="https://arxiv.org/abs/2601.16471" target="_blank">Order from Chaos (arXiv:2601.16471)</a>
                 提出了一条很实用的“数据工程”路线：利用 gameplay videos 里的<strong>glitch（物理/渲染异常）</strong>作为可规模化监督源，构建 PhysGame QA 数据集。</p>
@@ -232,7 +232,7 @@ flowchart TD
     B --> P[Meta-guided Prompting]
     M --> P
     P --> Q[自动生成 QA 对]
-    Q --> T[Instruction Tuning (MLLM/VLM)]
+    Q --> T[Instruction Tuning: MLLM/VLM]
     T --> E[评测: GameBench/PhysBench/MVBench]
             </pre>
 
