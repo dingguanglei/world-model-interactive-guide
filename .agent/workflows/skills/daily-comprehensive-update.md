@@ -25,6 +25,7 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
 - **样式统一约定（重要）**：
   - `last-updated` 的展示样式统一由 `world_model_interactive_guide/css/style.css` 中的 `.last-updated` 负责
   - 各章节页面 **禁止** 在内联 `<style>` 里重复定义 `.last-updated { ... }`（避免样式漂移与不一致）
+  - **日期刷新口径**：只有当该章节页面发生**实质内容更新**时才刷新 `最后更新时间`；纯样式/排版统一不刷新（只在 `09_update_log.html` 记录）
 
 - **环境约定**：
   - 项目根目录使用 `.venv`
@@ -231,6 +232,7 @@ git push -u origin <branch-name>
 □ 10/09 更新日志：新增当天条目，能跳转到具体更新位置
 □ 更新型页面顶部 last-updated 模块齐全且日期正确
 □ 各页面不再内联定义 `.last-updated { ... }`（样式由 `css/style.css` 统一管理）
+□ `最后更新时间` 仅在对应章节内容实质更新时刷新；纯样式/排版统一不刷新（只更新更新日志页）
 □ 本地 assets 引用无缺失，新增图片已入库且 manifest 更新
 □ git status 干净；commit 信息清晰；已 push 到指定分支
 ```
