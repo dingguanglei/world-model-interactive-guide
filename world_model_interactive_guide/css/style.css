@@ -27,6 +27,11 @@
 
     /* Transitions */
     --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    /* Backward-compatible aliases (legacy pages) */
+    --accent: var(--accent-blue);
+    --border: rgba(255, 255, 255, 0.6);
+    --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
 /* =============================================
@@ -421,6 +426,25 @@ a:hover {
 
 strong {
     font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* =============================================
+   LAST UPDATED (Unified)
+   ============================================= */
+.last-updated {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 1rem 1.25rem;
+    border-radius: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    margin: 1.75rem 0 2.25rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.last-updated strong {
+    font-weight: 700;
     color: var(--text-primary);
 }
 
