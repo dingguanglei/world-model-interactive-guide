@@ -1,4 +1,6 @@
 .venv/
+tmp_papers/
+tmp_mermaid/
 __pycache__/
 *.pyc
 .DS_Store

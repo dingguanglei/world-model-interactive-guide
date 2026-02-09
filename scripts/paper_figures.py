@@ -148,14 +148,21 @@ def extract_figures(
             except Exception:
                 pass
 
-    # manifest
-    manifest = {
-        r.arxiv_id: {"file": r.image_file, "mode": r.mode, "page": r.page}
-        for r in results
-        if r.mode != "skip-exists"
-    }
-    (out_dir / "manifest.json").write_text(
-        json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8"
+    # manifest (merge, do not drop previous entries)
+    manifest_path = out_dir / "manifest.json"
+    manifest: dict[str, dict[str, object]] = {}
+    if manifest_path.exists():
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        except Exception:
+            manifest = {}
+
+    for r in results:
+        manifest[r.arxiv_id] = {"file": r.image_file, "mode": r.mode, "page": r.page}
+
+    manifest_path.write_text(
+        json.dumps(dict(sorted(manifest.items())), ensure_ascii=False, indent=2),
+        encoding="utf-8",
     )
     return results
 
