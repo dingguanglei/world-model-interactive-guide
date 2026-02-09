@@ -267,12 +267,13 @@
         <p style="color: var(--text-secondary); margin-top: -0.25rem;">📌 按年月折叠浏览（默认展开最近 3 个月）。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-01-30 | 本页内容将每日更新「追踪 arXiv/GitHub 上世界模型（非具身智能）/交互视频生成/游戏模拟的最新论文与开源项目」。
+            ⏰ <strong>最后更新时间</strong>: 2026-02-09 | 本页内容将每日更新「追踪 arXiv/GitHub 上世界模型（非具身智能）/交互视频生成/游戏模拟的最新论文与开源项目」。
         </div>
 
         <section>
             <h2>🗂️ 按月折叠浏览</h2>
             <div class="month-index" role="navigation" aria-label="月份导航">
+                <a class="month-link" href="#month-2026-02">2026年2月</a>
                 <a class="month-link" href="#month-2026-01">2026年1月</a>
                 <a class="month-link" href="#month-2025-12">2025年12月</a>
                 <a class="month-link" href="#month-2025-09">2025年9月</a>
@@ -281,6 +282,148 @@
                 <a class="month-link" href="#month-2025-03">2025年3月</a>
                 <a class="month-link" href="#month-2024-12">2024年12月</a>
             </div>
+
+            <details class="month-group" id="month-2026-02" data-month="2026-02" open>
+                <summary>📅 2026年2月</summary>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2602.02214" target="_blank">Causal Forcing: Autoregressive Diffusion Distillation Done Right for High-Quality Real-Time Interactive Video Generation</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2026-02-06</span>
+                            <span>📄 <a href="https://arxiv.org/abs/2602.02214" target="_blank">arXiv:2602.02214</a></span>
+                            <span class="paper-tag"><a href="https://thuml.github.io/CausalForcing.github.io/" target="_blank">Project</a></span>
+                            <span class="paper-tag open"><a href="https://thuml.github.io/CausalForcing.github.io/" target="_blank">代码开源(项目页)</a></span>
+                            <span class="paper-tag unknown">参数未公开/未知</span>
+                            <span class="paper-tag unknown">数据集未公开/未知</span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2602.02214-fig1.webp" alt="arXiv:2602.02214 Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1）</figcaption>
+                </figure>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>要做“能边玩边生成”的交互视频，大家常见做法是：把一个很强的离线视频扩散模型“蒸馏”成<strong>少步数、可流式</strong>的自回归模型。但这篇论文指出：如果直接把“能看未来帧”的老师，硬蒸馏成“只能看过去”的学生，学生会学歪——画面就会糊、动作也不稳。Causal Forcing 的核心是：先造一个<strong>同样因果的老师</strong>，再做蒸馏，把架构差异从源头解决。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>问题：蒸馏的“架构鸿沟”</strong>：现有方法把双向（full attention）视频扩散 teacher 蒸馏为因果（causal attention）的 AR student；作者指出这种做法在 ODE distillation 的理论前提上会出错。<sup><a href="https://arxiv.org/abs/2602.02214" target="_blank">[来源]</a></sup></li>
+                            <li><strong>关键分析：frame-level injectivity</strong>：对 AR student 来说，ODE 初始化需要“每个 noisy frame 在 AR teacher 的 PF-ODE 下对应唯一 clean frame”；若从双向 teacher 蒸馏，容易违反该条件，导致学到 conditional expectation 形式的退化解。<sup><a href="https://arxiv.org/abs/2602.02214" target="_blank">[来源]</a></sup></li>
+                            <li><strong>方法：Causal Forcing</strong>：用 AR teacher 做 ODE 初始化（“因果 ODE 蒸馏”），以此桥接架构鸿沟；并强调 teacher forcing 相比 diffusion forcing 更适合 AR diffusion 训练（论文给出理论与实证对比）。<sup><a href="https://arxiv.org/abs/2602.02214" target="_blank">[来源]</a></sup></li>
+                            <li><strong>结果（可追溯口径）</strong>：作者报告相对 SOTA <em>Self Forcing</em>，在 Dynamic Degree、VisionReward、Instruction Following 上分别提升 19.3%、8.7%、16.7%。<sup><a href="https://arxiv.org/abs/2602.02214" target="_blank">[来源]</a></sup></li>
+                        </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2602.02214" target="_blank">论文</a>（Abstract：方法动机、frame-level injectivity 与指标提升口径；Fig.1：对比 Self Forcing vs 标准 DMD 的差距示意）；<a href="https://thuml.github.io/CausalForcing.github.io/" target="_blank">Project Page</a>（复现入口/代码发布）。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">这篇论文的价值不在“又一次蒸馏提速”，而在把一个长期被忽略的坑讲清楚：<strong>双向 teacher → 因果 student</strong> 不是“换个 mask 就完事”，它会直接破坏 ODE 初始化的可逆性假设，从而让 student 学到退化解。对做交互世界模型/神经游戏引擎的人来说，这意味着：你要追求实时与稳定，就必须把“架构差异”当成一等公民处理，而不是靠后续 DMD/奖励对齐去补洞。</p>
+                </div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2602.03747" target="_blank">LIVE: Long-horizon Interactive Video World Modeling</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2026-02-03</span>
+                            <span>📄 <a href="https://arxiv.org/abs/2602.03747" target="_blank">arXiv:2602.03747</a></span>
+                            <span class="paper-tag"><a href="https://junchao-cs.github.io/LIVE-demo/" target="_blank">Project</a></span>
+                            <span class="paper-tag unknown">代码未公开/未知</span>
+                            <span class="paper-tag unknown">参数未公开/未知</span>
+                            <span class="paper-tag unknown">数据集未公开/未知</span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2602.03747-fig1.webp" alt="arXiv:2602.03747 Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1）</figcaption>
+                </figure>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>很多“视频世界模型”短期看起来很聪明，但一跑长就会崩：小错误越积越多，最后整个世界漂移、逻辑断裂。LIVE 的思路更像“做闭环体检”：先让模型往前滚很长一段，再让它<strong>倒回去</strong>把起点还原出来；如果还原不回来，就说明中途误差已经不可控，于是训练会强迫模型把误差压在可控范围内。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>问题：长时误差累积（error accumulation）</strong>：AR video world models 在 short horizon 有效，但长 horizon 会出现误差传播并持续放大。<sup><a href="https://arxiv.org/abs/2602.03747" target="_blank">[来源]</a></sup></li>
+                            <li><strong>方法：cycle-consistency 约束长时误差</strong>：LIVE 先从 GT frames 做 forward rollout，再做 reverse generation 重建初始状态；在重建的 terminal state 上计算 diffusion loss，以显式约束 long-horizon error propagation，并声称无需 teacher-based distillation。<sup><a href="https://arxiv.org/abs/2602.03747" target="_blank">[来源]</a></sup></li>
+                            <li><strong>训练稳定性：progressive curriculum</strong>：论文给出一个统一视角涵盖不同 approach，并用 progressive 训练课程稳定训练过程。<sup><a href="https://arxiv.org/abs/2602.03747" target="_blank">[来源]</a></sup></li>
+                            <li><strong>结果（可追溯口径）</strong>：作者在 long-horizon benchmarks 上报告 SOTA，并强调能生成“远超训练 rollout length”的稳定高质量视频；Fig.1 展示 baseline 随长度退化而 LIVE 保持更稳定的趋势。<sup><a href="https://arxiv.org/abs/2602.03747" target="_blank">[来源]</a></sup></li>
+                        </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2602.03747" target="_blank">论文</a>（Abstract：cycle-consistency 目标与训练流程；Fig.1：长 rollout 质量退化对比与应用场景）；<a href="https://junchao-cs.github.io/LIVE-demo/" target="_blank">Project Page</a>（demo/材料入口）。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">LIVE 的信号很明确：把“长时一致性”从“希望模型自己学会”变成<strong>训练目标里可被惩罚的系统性约束</strong>。如果它的 cycle-consistency 能在交互（action-conditioned）场景下稳定工作，那么它更像一种“世界模型的回归测试”：你不需要无限长 rollout，也能用“能否回到起点”来诊断 drift。后续我会重点关注：reverse generation 的计算开销、以及在分布外动作/视角切换时是否仍能保持“可逆”约束有效。</p>
+                </div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2602.01801" target="_blank">Fast Autoregressive Video Diffusion and World Models with Temporal Cache Compression and Sparse Attention</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2026-02-02</span>
+                            <span>📄 <a href="https://arxiv.org/abs/2602.01801" target="_blank">arXiv:2602.01801</a></span>
+                            <span class="paper-tag unknown">Project/Code 未公开/未知</span>
+                            <span class="paper-tag unknown">参数未公开/未知</span>
+                            <span class="paper-tag unknown">数据集未公开/未知</span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2602.01801-fig1.webp" alt="arXiv:2602.01801 Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1）</figcaption>
+                </figure>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>自回归视频扩散要生成很长的视频时，会越来越卡：因为它把过去所有帧的“记忆”（KV cache）越存越多，注意力计算和显存都线性爆炸。这篇论文的核心就是三件事：<strong>把重复的记忆压缩</strong>、<strong>只看真正相关的文本 token</strong>、<strong>让注意力只连到语义相近的历史片段</strong>，从而做到“越生成越不慢”。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>瓶颈：KV cache 增长导致 latency/显存随时间上升</strong>：AR video diffusion 的 attention 随 rollout 变长会越来越慢、越来越占显存，从而迫使短 context window 并伤害 long-range consistency。<sup><a href="https://arxiv.org/abs/2602.01801" target="_blank">[来源]</a></sup></li>
+                            <li><strong>发现：三类持久冗余</strong>：近重复 cached keys、缓慢演化（语义主导）的 Q/K 导致重复 attention 计算、以及 cross-attention 对长 prompt 的无效计算。<sup><a href="https://arxiv.org/abs/2602.01801" target="_blank">[来源]</a></sup></li>
+                            <li><strong>方法（training-free）</strong>：TempCache 用 temporal correspondence 压缩 KV cache；AnnCA 用 ANN 匹配选 frame-relevant prompt tokens 加速 cross-attention；AnnSA 用 ANN 做语义匹配稀疏化 self-attention。三者可组合，且声称与现有 AR diffusion/world model backbone 兼容。<sup><a href="https://arxiv.org/abs/2602.01801" target="_blank">[来源]</a></sup></li>
+                            <li><strong>结果（可追溯口径）</strong>：报告端到端 5×–10× 加速，并强调长 rollout 下 throughput 稳定、峰值显存“几乎常数”，同时保持 near-identical 视觉质量；Fig.1 给出多分钟生成与世界模型场景的加速示例。<sup><a href="https://arxiv.org/abs/2602.01801" target="_blank">[来源]</a></sup></li>
+                        </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2602.01801" target="_blank">论文</a>（Abstract：TempCache/AnnCA/AnnSA 设计与“training-free”口径；Fig.1：多分钟 rollout 的速度/显存趋势示意）。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">对交互世界模型来说，“长时一致性”最终会被<strong>系统吞吐与显存曲线</strong>卡住：如果你做不到“越跑越不慢”，分钟级一致性就只能停留在 demo。TempCache/ANN 稀疏化这条路线的优势是<strong>training-free</strong>（更像工程 patch），适合作为推理侧的可插拔加速层。后续我会重点验证两点：ANN 匹配带来的质量/稳定性边界（是否引入难以察觉的漂移），以及它在不同 backbone（DiT/AR 扩散）的迁移成本。</p>
+                </div>
+            </div>
+
+            </details>
 
             <details class="month-group" id="month-2026-01" data-month="2026-01" open>
                 <summary>📅 2026年1月</summary>

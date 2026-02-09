@@ -1,17 +1,107 @@
 {
+  "2412.07772": {
+    "file": "arxiv-2412.07772-fig1.webp",
+    "mode": "skip-exists",
+    "page": -1
+  },
+  "2503.20314": {
+    "file": "arxiv-2503.20314-fig1.webp",
+    "mode": "skip-exists",
+    "page": -1
+  },
+  "2506.08009": {
+    "file": "arxiv-2506.08009-fig1.webp",
+    "mode": "skip-exists",
+    "page": -1
+  },
+  "2508.13009": {
+    "file": "arxiv-2508.13009-fig1.webp",
+    "mode": "skip-exists",
+    "page": -1
+  },
+  "2509.22622": {
+    "file": "arxiv-2509.22622-fig1.webp",
+    "mode": "skip-exists",
+    "page": -1
+  },
+  "2512.04040": {
+    "file": "arxiv-2512.04040-fig1.webp",
+    "mode": "skip-exists",
+    "page": -1
+  },
+  "2512.16093": {
+    "file": "arxiv-2512.16093-fig1.webp",
+    "mode": "skip-exists",
+    "page": -1
+  },
+  "2512.18619": {
+    "file": "arxiv-2512.18619-fig1.webp",
+    "mode": "skip-exists",
+    "page": -1
+  },
+  "2601.05138": {
+    "file": "arxiv-2601.05138-fig1.webp",
+    "mode": "skip-exists",
+    "page": -1
+  },
+  "2601.12719": {
+    "file": "arxiv-2601.12719-fig1.webp",
+    "mode": "skip-exists",
+    "page": -1
+  },
+  "2601.15281": {
+    "file": "arxiv-2601.15281-fig1.webp",
+    "mode": "skip-exists",
+    "page": -1
+  },
+  "2601.16163": {
+    "file": "arxiv-2601.16163-fig1.webp",
+    "mode": "skip-exists",
+    "page": -1
+  },
+  "2601.16296": {
+    "file": "arxiv-2601.16296-fig1.webp",
+    "mode": "skip-exists",
+    "page": -1
+  },
+  "2601.16471": {
+    "file": "arxiv-2601.16471-fig1.webp",
+    "mode": "skip-exists",
+    "page": -1
+  },
+  "2601.16914": {
+    "file": "arxiv-2601.16914-fig1.webp",
+    "mode": "skip-exists",
+    "page": -1
+  },
   "2601.19336": {
     "file": "arxiv-2601.19336-fig1.webp",
-    "mode": "image-png-area98304",
-    "page": 1
+    "mode": "skip-exists",
+    "page": -1
   },
   "2601.19834": {
     "file": "arxiv-2601.19834-fig1.webp",
-    "mode": "image-png-area3955615",
-    "page": 0
+    "mode": "skip-exists",
+    "page": -1
   },
   "2601.20540": {
     "file": "arxiv-2601.20540-fig1.webp",
-    "mode": "image-jpeg-area46776480",
+    "mode": "skip-exists",
+    "page": -1
+  },
+  "2602.01801": {
+    "file": "arxiv-2602.01801-fig1.webp",
+    "mode": "image-jpeg-area399360",
+    "page": 1
+  },
+  "2602.02214": {
+    "file": "arxiv-2602.02214-fig1.webp",
+    "mode": "image-jpeg-area386650",
+    "page": 1
+  },
+  "2602.03747": {
+    "file": "arxiv-2602.03747-fig1.webp",
+    "mode": "image-png-area15949516",
     "page": 0
   }
 }
