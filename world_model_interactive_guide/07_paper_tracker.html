@@ -267,7 +267,7 @@
         <p style="color: var(--text-secondary); margin-top: -0.25rem;">📌 按年月折叠浏览（默认展开最近 3 个月）。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-02-09 | 本页内容将每日更新「追踪 arXiv/GitHub 上世界模型（非具身智能）/交互视频生成/游戏模拟的最新论文与开源项目」。
+            ⏰ <strong>最后更新时间</strong>: 2026-02-11 | 本页内容将每日更新「追踪 arXiv/GitHub 上世界模型（非具身智能）/交互视频生成/游戏模拟的最新论文与开源项目」。
         </div>
 
         <section>
@@ -285,6 +285,143 @@
 
             <details class="month-group" id="month-2026-02" data-month="2026-02" open>
                 <summary>📅 2026年2月</summary>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2602.10104" target="_blank">Olaf-World: Orienting Latent Actions for Video World Modeling</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2026-02-10</span>
+                            <span>📄 <a href="https://arxiv.org/abs/2602.10104" target="_blank">arXiv:2602.10104</a></span>
+                            <span class="paper-tag"><a href="https://showlab.github.io/Olaf-World" target="_blank">Project</a></span>
+                            <span class="paper-tag unknown">代码未公开/未知</span>
+                            <span class="paper-tag unknown">参数未公开/未知</span>
+                            <span class="paper-tag unknown">数据集未公开/未知</span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2602.10104-fig1.webp" alt="arXiv:2602.10104 Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1）</figcaption>
+                </figure>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>很多“从视频里学动作”的方法，会学出一套只在某个场景里好用的“暗号”：换个房间、换个视角，同一个动作的 latent 表示就变了。Olaf‑World 的目标是把 latent action “摆正方向”：让<strong>同一个动作在不同场景里仍对应同一语义</strong>，这样才能把世界模型从“会复现”升级为“会迁移”。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>问题：latent actions 不可迁移</strong>：标准 latent action learning 目标多在 clip 内优化，缺乏跨上下文对齐机制，导致 latent action 纠缠了场景外观/布局等“clip-specific basis”。<sup><a href="https://arxiv.org/abs/2602.10104" target="_blank">[来源]</a></sup></li>
+                            <li><strong>关键洞察：用“可观测的控制效果”做共享参考</strong>：虽然 action 本身不可观测，但 action 带来的语义效果可通过视频表征的时间差分来捕捉，并用于跨上下文对齐。<sup><a href="https://arxiv.org/abs/2602.10104" target="_blank">[来源]</a></sup></li>
+                            <li><strong>方法：Seq∆‑REPA</strong>：提出 sequence-level 的 control-effect alignment，把“整段 latent action（integrated latent action）”锚定到冻结的自监督视频编码器所产生的 temporal feature differences 上，从而对齐动作语义。<sup><a href="https://arxiv.org/abs/2602.10104" target="_blank">[来源]</a></sup></li>
+                            <li><strong>效果（可追溯口径）</strong>：论文宣称学到更结构化的 latent action space，从而带来更强的 zero-shot action transfer，以及对新控制接口更省标注的数据高效适配。<sup><a href="https://arxiv.org/abs/2602.10104" target="_blank">[来源]</a></sup></li>
+                        </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2602.10104" target="_blank">论文</a>（Abstract：Seq∆‑REPA 定义、方法动机与结论口径；Fig.1：zero-shot transfer / 少量标注适配的直观示例）；<a href="https://showlab.github.io/Olaf-World" target="_blank">Project Page</a>（demo 入口）。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">“latent action 不可迁移”是把视频生成模型改造成世界模型时最容易踩的坑：你以为学到了控制，其实学到的是场景特征的捷径。Olaf‑World 值得关注的点在于它把对齐目标从“重建”拉到“跨上下文语义一致”，更接近交互系统真正需要的控制接口。下一步我会盯：这种对齐在长时 rollout 与复杂动作组合下是否仍稳定，以及对 encoder 选择/冻结策略有多敏感。</p>
+                </div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2602.09856" target="_blank">Code2World: A GUI World Model via Renderable Code Generation</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2026-02-10</span>
+                            <span>📄 <a href="https://arxiv.org/abs/2602.09856" target="_blank">arXiv:2602.09856</a></span>
+                            <span class="paper-tag"><a href="https://amap-ml.github.io/Code2World" target="_blank">Project</a></span>
+                            <span class="paper-tag github"><a href="https://github.com/AMAP-ML/Code2World" target="_blank">GitHub</a></span>
+                            <span class="paper-tag open"><a href="https://github.com/AMAP-ML/Code2World" target="_blank">代码开源</a></span>
+                            <span class="paper-tag open"><a href="https://huggingface.co/GD-ML/Code2World" target="_blank">参数开源(HF)</a></span>
+                            <span class="paper-tag open"><a href="https://huggingface.co/datasets/GD-ML/AndroidCode" target="_blank">数据集开源(HF)</a></span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2602.09856-fig1.webp" alt="arXiv:2602.09856 Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1）</figcaption>
+                </figure>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>做 GUI 智能体（点按钮、填表单）最怕“手滑一步错、后面全崩”。Code2World 提供一个“沙盒世界模型”：给当前界面 + 一个动作，模型先<strong>预测下一屏会变成什么样</strong>，让智能体像人一样先“脑内预演”，再决定要不要真的点下去。它的关键做法不是直接画下一张截图，而是生成可渲染的 HTML 代码。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>表征选择：renderable code</strong>：作者认为 text-based 过于抽象、pixel-based 难以保证结构可控，提出用可渲染代码生成来模拟下一状态，从而兼顾视觉保真与结构可控。<sup><a href="https://arxiv.org/abs/2602.09856" target="_blank">[来源]</a></sup></li>
+                            <li><strong>数据：AndroidCode（80K+ screen-action pairs）</strong>：将 GUI 轨迹翻译为高保真 HTML，并通过 visual-feedback revision 机制提升合成代码质量，以缓解数据稀缺。<sup><a href="https://arxiv.org/abs/2602.09856" target="_blank">[来源]</a></sup> <sup><a href="https://huggingface.co/datasets/GD-ML/AndroidCode" target="_blank">[Dataset]</a></sup></li>
+                            <li><strong>训练：Render-Aware RL</strong>：先做 SFT 冷启动格式/布局跟随，再用“渲染结果”作为 reward 信号，约束视觉语义保真与 action consistency。<sup><a href="https://arxiv.org/abs/2602.09856" target="_blank">[来源]</a></sup></li>
+                            <li><strong>结果（可追溯口径）</strong>：论文报告 Code2World‑8B 在 next‑UI prediction 上表现强，并宣称可提升下游导航成功率（例如提升 Gemini‑2.5‑Flash 在 AndroidWorld navigation 上 +9.5%）。<sup><a href="https://arxiv.org/abs/2602.09856" target="_blank">[来源]</a></sup></li>
+                        </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2602.09856" target="_blank">论文</a>（Abstract：动机、AndroidCode、Render‑Aware RL 与指标口径；Fig.1：code→render 的 world model 示意）；<a href="https://amap-ml.github.io/Code2World" target="_blank">Project</a>（项目入口）；<a href="https://github.com/AMAP-ML/Code2World" target="_blank">GitHub</a>（代码）；<a href="https://huggingface.co/GD-ML/Code2World" target="_blank">HF Model</a>（权重）；<a href="https://huggingface.co/datasets/GD-ML/AndroidCode" target="_blank">HF Dataset</a>（数据集）。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">Code2World 代表了“世界模型”在 GUI 领域的一条很务实路线：用<strong>可执行/可渲染的中间表示</strong>（HTML）替代“纯文本想象”或“像素涂鸦”。这对工程落地特别关键：它天然支持结构约束、可编辑、可对齐 action 语义。建议后续把它当作“可控预测器”接入代理系统的回归测试：预测正确率、关键控件一致性、以及高风险动作（支付/删除）前的预演可靠性。</p>
+                </div>
+            </div>
+
+            <div class="paper-card">
+                <div class="paper-header">
+                    <div>
+                        <div class="paper-title"><a href="https://arxiv.org/abs/2602.09878" target="_blank">MVISTA-4D: View-Consistent 4D World Model with Test-Time Action Inference for Robotic Manipulation</a></div>
+                        <div class="paper-meta">
+                            <span>📅 2026-02-10</span>
+                            <span>📄 <a href="https://arxiv.org/abs/2602.09878" target="_blank">arXiv:2602.09878</a></span>
+                            <span class="paper-tag unknown">Project/Code 未公开/未知</span>
+                            <span class="paper-tag unknown">参数未公开/未知</span>
+                            <span class="paper-tag unknown">数据集未公开/未知</span>
+                            <span class="paper-tag new">NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="paper-figure">
+                    <img src="assets/papers/arxiv-2602.09878-fig1.webp" alt="arXiv:2602.09878 Figure 1" loading="lazy">
+                    <figcaption><strong>论文主图</strong>：Figure 1（来源：论文 Fig.1）</figcaption>
+                </figure>
+
+                <div class="dual-view">
+                    <div class="layman-view">
+                        <div class="view-title">🟢 通俗解读</div>
+                        <p>机器人“想象未来再行动”常见问题是：想象得像，但不一定<strong>几何上真实</strong>；而且“从想象到动作”的反推也可能一对多很难。MVISTA‑4D 的方向是：从单视角 RGBD 出发，先想象出其它视角并融合成更完整的 3D，再用“测试时优化”反向求出最匹配的动作轨迹。</p>
+                    </div>
+                    <div class="pro-view">
+                        <div class="view-title">🔴 专业解析</div>
+                        <ul style="padding-left: 1rem; margin: 0;">
+                            <li><strong>多视角 + 跨模态一致的 4D 预测</strong>：给定单视角 RGBD，生成任意视角的未来 RGBD，并通过 cross-view / cross-modality feature fusion 强化 RGB‑Depth 一致与几何对齐。<sup><a href="https://arxiv.org/abs/2602.09878" target="_blank">[来源]</a></sup></li>
+                            <li><strong>动作推断：test-time action optimization</strong>：将整段动作轨迹表示为低维 latent code，通过对生成模型反向传播优化该 latent，使其与预测未来匹配，并用 residual inverse dynamics 将先验转成可执行动作。<sup><a href="https://arxiv.org/abs/2602.09878" target="_blank">[来源]</a></sup></li>
+                            <li><strong>结果（可追溯口径）</strong>：作者报告在 4D 场景生成与下游 manipulation 上取得强表现，并提供消融分析关键设计选择。<sup><a href="https://arxiv.org/abs/2602.09878" target="_blank">[来源]</a></sup></li>
+                        </ul>
+                        <div class="source-note">
+                            <strong>来源定位</strong>：<a href="https://arxiv.org/abs/2602.09878" target="_blank">论文</a>（Abstract：多视角 RGBD world model、test-time action optimization 与 residual inverse dynamics 的方法定义与结论口径）。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commentary">
+                    <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                    <p style="margin:0;">这篇更偏“具身/操作”，但它给交互世界模型一个很强的系统信号：<strong>动作不是逐步 token，而是轨迹级结构</strong>。用 test-time optimization 反推动作 latent 的做法，也提醒我们：world model 不一定要显式输出动作序列，反而可以把动作当成“可搜索的潜变量”，用规划/优化闭环来对齐未来。这条路线的工程代价（反向优化的延迟预算）会是落地关键。</p>
+                </div>
+            </div>
 
             <div class="paper-card">
                 <div class="paper-header">

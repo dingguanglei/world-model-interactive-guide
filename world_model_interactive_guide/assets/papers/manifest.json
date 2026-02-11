@@ -91,17 +91,32 @@
   },
   "2602.01801": {
     "file": "arxiv-2602.01801-fig1.webp",
-    "mode": "image-jpeg-area399360",
-    "page": 1
+    "mode": "skip-exists",
+    "page": -1
   },
   "2602.02214": {
     "file": "arxiv-2602.02214-fig1.webp",
-    "mode": "image-jpeg-area386650",
-    "page": 1
+    "mode": "skip-exists",
+    "page": -1
   },
   "2602.03747": {
     "file": "arxiv-2602.03747-fig1.webp",
-    "mode": "image-png-area15949516",
+    "mode": "skip-exists",
+    "page": -1
+  },
+  "2602.09856": {
+    "file": "arxiv-2602.09856-fig1.webp",
+    "mode": "image-jpeg-area2592000",
     "page": 0
+  },
+  "2602.09878": {
+    "file": "arxiv-2602.09878-fig1.webp",
+    "mode": "page-render",
+    "page": 0
+  },
+  "2602.10104": {
+    "file": "arxiv-2602.10104-fig1.webp",
+    "mode": "image-jpeg-area276800",
+    "page": 1
   }
 }
