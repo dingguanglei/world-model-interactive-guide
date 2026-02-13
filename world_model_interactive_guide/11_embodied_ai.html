@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11. 具身智能调研 - World Model Guide</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0 2rem;
+        }
+
+        .pillar-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .pillar-card h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1rem;
+        }
+
+        .todo-block {
+            background: #f8fafc;
+            border-left: 4px solid #0ea5e9;
+            border-radius: 0.5rem;
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+        }
+
+        .todo-block li {
+            margin-bottom: 0.45rem;
+        }
+
+        .phase-table td:first-child {
+            white-space: nowrap;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="aurora-bg">
+        <div class="aurora-blob aurora-blob-1"></div>
+        <div class="aurora-blob aurora-blob-2"></div>
+        <div class="aurora-blob aurora-blob-3"></div>
+        <div class="aurora-blob aurora-blob-4"></div>
+    </div>
+    <nav class="sidebar">
+        <a href="index.html" class="brand">🚀 World Model Guide</a>
+        <ul class="nav-links">
+            <li class="nav-item"><a href="index.html" class="nav-link">00. 概览 (Overview)</a></li>
+            <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景 (Landscape)</a></li>
+            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品深度 (Deep Dive)</a></li>
+            <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构 (Architecture)</a></li>
+            <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据工程 (Data Bible)</a></li>
+            <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线 (Roadmap)</a></li>
+            <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
+            <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">07. 论文追踪 (Papers)</a></li>
+            <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">08. 评测基准 (Benchmarks)</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">09. 社区动态 (Community)</a></li>
+            <li class="nav-item"><a href="09_update_log.html" class="nav-link">10. 更新日志 (Updates)</a></li>
+            <li class="nav-item"><a href="11_embodied_ai.html" class="nav-link active">11. 具身智能 (Embodied AI)</a></li>
+            <li class="nav-item"><a href="references.html" class="nav-link">附录：参考文献 (Refs)</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <h1>11. 具身智能调研框架 (Embodied AI Research Blueprint)</h1>
+        <p>本章按本项目现有调研方式，先给出「具身智能」新增调研的内容框架与执行清单，便于后续像公司调研、论文追踪一样持续更新。</p>
+
+        <div class="last-updated">
+            ⏰ <strong>最后更新时间</strong>: 2026-02-13 | 状态：v0.1（框架版）
+        </div>
+
+        <section>
+            <h2>🎯 为什么要新增“具身智能”专题</h2>
+            <ul>
+                <li>World Model 正从“生成像素/视频”走向“驱动行动”，具身任务是检验世界模型可控性与物理一致性的主战场。</li>
+                <li>该领域可与本指南已有章节直接耦合：<strong>架构</strong>（策略+世界模型）、<strong>数据</strong>（仿真与真实融合）、<strong>评测</strong>（长程任务成功率）。</li>
+                <li>对于产品侧，具身智能可落地在仓储、巡检、家用服务、工业协作等高价值场景。</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>🧭 建议新增的五大调研支柱</h2>
+            <div class="pillar-grid">
+                <div class="pillar-card">
+                    <h3>1) 技术栈地图</h3>
+                    <p>覆盖 VLA/VLM-Robot、世界模型规划、模仿学习、强化学习、分层控制与安全约束。</p>
+                </div>
+                <div class="pillar-card">
+                    <h3>2) 数据与仿真</h3>
+                    <p>梳理真实机器人数据、合成数据、数字孪生仿真平台、Sim2Real 闭环与数据清洗规范。</p>
+                </div>
+                <div class="pillar-card">
+                    <h3>3) 公司与产品</h3>
+                    <p>跟踪 Figure、1X、Agility、Tesla、Physical Intelligence、智元/宇树等公司路线与商业化节奏。</p>
+                </div>
+                <div class="pillar-card">
+                    <h3>4) 评测体系</h3>
+                    <p>引入任务成功率、恢复能力、泛化能力、时延/能耗、安全事故率等具身 KPI。</p>
+                </div>
+                <div class="pillar-card">
+                    <h3>5) 基础设施与供应链</h3>
+                    <p>关注执行器、传感器、边缘算力、实时系统、中间件（如 ROS2）与部署运维能力。</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>📝 首批可执行新增内容（建议直接开工）</h2>
+            <div class="todo-block">
+                <ul>
+                    <li><strong>新增页面 A：具身智能行业全景</strong>（市场地图、关键玩家、场景成熟度）。</li>
+                    <li><strong>新增页面 B：VLA 技术架构拆解</strong>（感知-记忆-规划-控制数据流）。</li>
+                    <li><strong>新增页面 C：数据工程</strong>（仿真平台选型、采集协议、回放/标注工具链）。</li>
+                    <li><strong>新增页面 D：评测与 Benchmark</strong>（任务集定义、评测 protocol、复现脚本）。</li>
+                    <li><strong>新增页面 E：公司调研子栏目</strong>（每家公司统一模板：融资、团队、产品、里程碑、风险）。</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>🚀 分阶段推进建议（4周）</h2>
+            <table class="phase-table">
+                <tr>
+                    <th>阶段</th>
+                    <th>目标</th>
+                    <th>交付物</th>
+                </tr>
+                <tr>
+                    <td>Week 1</td>
+                    <td>完成术语对齐 + 框架搭建</td>
+                    <td>章节目录、指标字典、公司名单 v1</td>
+                </tr>
+                <tr>
+                    <td>Week 2</td>
+                    <td>补齐论文与产品证据链</td>
+                    <td>20 篇核心论文卡片 + 10 家公司卡片</td>
+                </tr>
+                <tr>
+                    <td>Week 3</td>
+                    <td>建立评测框架</td>
+                    <td>任务定义模板、评测表格、风险清单</td>
+                </tr>
+                <tr>
+                    <td>Week 4</td>
+                    <td>形成可持续更新机制</td>
+                    <td>周更节奏、更新日志规范、优先级看板</td>
+                </tr>
+            </table>
+        </section>
+
+        <nav class="chapter-nav">
+            <a href="09_update_log.html" class="chapter-nav-link prev">
+                <span class="chapter-nav-label">← 上一章</span>
+                <span class="chapter-nav-title">10. 更新日志 (Updates)</span>
+            </a>
+            <a href="references.html" class="chapter-nav-link next">
+                <span class="chapter-nav-label">附录 →</span>
+                <span class="chapter-nav-title">参考文献 (Refs)</span>
+            </a>
+        </nav>
+    </main>
+</body>
+
+</html>
