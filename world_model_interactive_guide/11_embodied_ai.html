@@ -27,6 +27,26 @@
             font-size: 1rem;
         }
 
+        .focus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0 1.5rem;
+        }
+
+        .focus-card {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1rem;
+        }
+
+        .focus-card h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1rem;
+            color: #0f766e;
+        }
+
         .todo-block {
             background: #f8fafc;
             border-left: 4px solid #0ea5e9;
@@ -42,6 +62,12 @@
         .phase-table td:first-child {
             white-space: nowrap;
             font-weight: 700;
+        }
+
+        .metric-table td:first-child {
+            white-space: nowrap;
+            font-weight: 700;
+            width: 20%;
         }
     </style>
 </head>
@@ -74,18 +100,18 @@
 
     <main class="main-content">
         <h1>11. 具身智能调研框架 (Embodied AI Research Blueprint)</h1>
-        <p>本章按本项目现有调研方式，先给出「具身智能」新增调研的内容框架与执行清单，便于后续像公司调研、论文追踪一样持续更新。</p>
+        <p>本章按项目已有的“行业→产品→架构→数据→评测→更新日志”路径，新增具身智能专题。当前版本重点补齐四个核心：<strong>数据采集方法、数据合成方法、仿真环境、强化学习进展</strong>。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-02-13 | 状态：v0.1（框架版）
+            ⏰ <strong>最后更新时间</strong>: 2026-02-13 | 状态：v0.2（重点增强版）
         </div>
 
         <section>
             <h2>🎯 为什么要新增“具身智能”专题</h2>
             <ul>
                 <li>World Model 正从“生成像素/视频”走向“驱动行动”，具身任务是检验世界模型可控性与物理一致性的主战场。</li>
-                <li>该领域可与本指南已有章节直接耦合：<strong>架构</strong>（策略+世界模型）、<strong>数据</strong>（仿真与真实融合）、<strong>评测</strong>（长程任务成功率）。</li>
-                <li>对于产品侧，具身智能可落地在仓储、巡检、家用服务、工业协作等高价值场景。</li>
+                <li>该领域与本指南已建章节强耦合：<strong>架构</strong>（策略+世界模型）、<strong>数据</strong>（仿真与真实融合）、<strong>评测</strong>（长程任务成功率）。</li>
+                <li>产品落地方向明确：仓储、分拣、巡检、工位协作、家庭服务，且都依赖可持续的数据和训练飞轮。</li>
             </ul>
         </section>
 
@@ -116,14 +142,95 @@
         </section>
 
         <section>
-            <h2>📝 首批可执行新增内容（建议直接开工）</h2>
+            <h2>🔥 重点增强：四个必须持续跟踪的方向</h2>
+            <div class="focus-grid">
+                <article class="focus-card">
+                    <h3>A. 数据采集方法（Real-world Collection）</h3>
+                    <ul>
+                        <li><strong>遥操作采集</strong>：VR/力反馈手柄/主从臂，优点是高质量动作标签，缺点是成本高、吞吐受限。</li>
+                        <li><strong>示教回放</strong>：记录末端轨迹、抓取状态、触觉/力矩，便于做行为克隆和离线 RL。</li>
+                        <li><strong>在线自采</strong>：在安全约束下边执行边采集，形成失败数据，提升恢复策略。</li>
+                        <li><strong>多模态对齐</strong>：视频、深度、IMU、关节状态、语言指令统一时间戳与坐标系。</li>
+                    </ul>
+                </article>
+
+                <article class="focus-card">
+                    <h3>B. 数据合成方法（Synthetic Data）</h3>
+                    <ul>
+                        <li><strong>域随机化</strong>：光照、纹理、摩擦、质量、相机参数随机化，提升泛化。</li>
+                        <li><strong>程序化场景生成</strong>：自动生成货架/桌面/障碍布局，覆盖长尾情况。</li>
+                        <li><strong>模型辅助标注</strong>：用 VLM/追踪模型补齐动作描述、物体状态、失败原因标签。</li>
+                        <li><strong>反事实数据扩增</strong>：同一任务生成成功/失败对照轨迹，增强策略判别能力。</li>
+                    </ul>
+                </article>
+
+                <article class="focus-card">
+                    <h3>C. 仿真环境（Simulation Stack）</h3>
+                    <ul>
+                        <li><strong>物理精度层级</strong>：快速近似仿真用于大规模训练，高精仿真用于策略验证。</li>
+                        <li><strong>环境基线</strong>：Isaac 系列、MuJoCo、PyBullet、Habitat、ManiSkill 等按任务类型选型。</li>
+                        <li><strong>数字孪生</strong>：按真实工位建模，统一 CAD/传感器/控制接口，支持 A/B 策略回放。</li>
+                        <li><strong>Sim2Real 闭环</strong>：仿真训练→小流量实机验证→误差归因→参数回灌再训练。</li>
+                    </ul>
+                </article>
+
+                <article class="focus-card">
+                    <h3>D. 强化学习进展（RL Progress）</h3>
+                    <ul>
+                        <li><strong>离线 RL + BC 融合</strong>：先模仿学习起步，再用离线 RL 做策略改进。</li>
+                        <li><strong>世界模型 RL</strong>：在 latent dynamics 中做 rollout，降低真实交互成本。</li>
+                        <li><strong>层级 RL</strong>：高层任务规划 + 低层控制器分工，提升长任务稳定性。</li>
+                        <li><strong>安全 RL</strong>：在奖励中显式加入碰撞、能耗、关节过载惩罚，满足部署约束。</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section>
+            <h2>🧪 推荐评测面板（对齐本项目“可追溯”风格）</h2>
+            <table class="metric-table">
+                <tr>
+                    <th>维度</th>
+                    <th>核心指标</th>
+                    <th>调研关注点</th>
+                </tr>
+                <tr>
+                    <td>任务成功</td>
+                    <td>Success Rate、完成时长、步骤效率</td>
+                    <td>是否覆盖长程任务与组合指令，不只看短 demo</td>
+                </tr>
+                <tr>
+                    <td>鲁棒恢复</td>
+                    <td>Recovery Rate、失败后重试成功率</td>
+                    <td>是否有“失败可恢复”机制，而不是一次失败即终止</td>
+                </tr>
+                <tr>
+                    <td>泛化能力</td>
+                    <td>新场景/新物体/新视角性能下降幅度</td>
+                    <td>是否真实评测 OOD，而非同分布重复测试</td>
+                </tr>
+                <tr>
+                    <td>系统效率</td>
+                    <td>决策时延、控制频率、能耗</td>
+                    <td>是否满足真实部署的实时性与电池预算</td>
+                </tr>
+                <tr>
+                    <td>安全性</td>
+                    <td>碰撞率、超力矩次数、危险动作占比</td>
+                    <td>是否有硬约束与审计日志，支持上线验收</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>📝 首批可执行新增内容（建议按顺序开工）</h2>
             <div class="todo-block">
                 <ul>
-                    <li><strong>新增页面 A：具身智能行业全景</strong>（市场地图、关键玩家、场景成熟度）。</li>
-                    <li><strong>新增页面 B：VLA 技术架构拆解</strong>（感知-记忆-规划-控制数据流）。</li>
-                    <li><strong>新增页面 C：数据工程</strong>（仿真平台选型、采集协议、回放/标注工具链）。</li>
-                    <li><strong>新增页面 D：评测与 Benchmark</strong>（任务集定义、评测 protocol、复现脚本）。</li>
-                    <li><strong>新增页面 E：公司调研子栏目</strong>（每家公司统一模板：融资、团队、产品、里程碑、风险）。</li>
+                    <li><strong>新增页面 A：数据采集手册</strong>（遥操作协议、传感器同步、数据质量评分）。</li>
+                    <li><strong>新增页面 B：数据合成手册</strong>（域随机化模板、程序化场景脚本、自动标注流程）。</li>
+                    <li><strong>新增页面 C：仿真环境地图</strong>（引擎对比、任务适配性、Sim2Real 风险清单）。</li>
+                    <li><strong>新增页面 D：RL 进展追踪</strong>（离线RL/在线RL/世界模型RL 每周增量）。</li>
+                    <li><strong>新增页面 E：公司调研子栏目</strong>（统一模板：融资、团队、产品、数据飞轮、部署现状）。</li>
                 </ul>
             </div>
         </section>
@@ -138,23 +245,23 @@
                 </tr>
                 <tr>
                     <td>Week 1</td>
-                    <td>完成术语对齐 + 框架搭建</td>
-                    <td>章节目录、指标字典、公司名单 v1</td>
+                    <td>搭好数据与仿真调研骨架</td>
+                    <td>数据采集字段字典 + 仿真平台选型表</td>
                 </tr>
                 <tr>
                     <td>Week 2</td>
-                    <td>补齐论文与产品证据链</td>
-                    <td>20 篇核心论文卡片 + 10 家公司卡片</td>
+                    <td>补齐数据合成与 RL 证据链</td>
+                    <td>合成数据 pipeline 草图 + RL 论文/项目卡片 15 条</td>
                 </tr>
                 <tr>
                     <td>Week 3</td>
-                    <td>建立评测框架</td>
-                    <td>任务定义模板、评测表格、风险清单</td>
+                    <td>建立统一评测面板</td>
+                    <td>Success/Recovery/Latency/Safety 指标模板</td>
                 </tr>
                 <tr>
                     <td>Week 4</td>
-                    <td>形成可持续更新机制</td>
-                    <td>周更节奏、更新日志规范、优先级看板</td>
+                    <td>形成持续更新机制</td>
+                    <td>周更节奏、优先级看板、更新日志规范</td>
                 </tr>
             </table>
         </section>
