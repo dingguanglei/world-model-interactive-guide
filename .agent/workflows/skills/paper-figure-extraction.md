@@ -69,13 +69,8 @@ uv pip install pymupdf pillow
 ---
 
 ### legacy 处理规则（强制）
-- 默认禁止对 `world_model_interactive_guide/legacy/` 执行该技能。
-- 仅当用户明确要求“修复/补齐 legacy 论文图”时，才可显式指定：
-```bash
-.venv/bin/python scripts/paper_figures.py \
-  --html world_model_interactive_guide/legacy/07_paper_tracker.html \
-  --out-dir world_model_interactive_guide/legacy/assets/papers
-```
+- 后续常规更新中，该技能仅作用于主站 `world_model_interactive_guide/07_paper_tracker.html`。
+- `world_model_interactive_guide/legacy/` 目录不扫描、不改写、不补图。
 
 ---
 

@@ -15,9 +15,9 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
 - **规范来源（最高优先级）**：`.agent/workflows/antigravity-content-guide.md`
 - **可追溯性**：任何关键结论/数字/主张必须有**可点击权威来源**（论文优先 arXiv/PDF/Project Page，其次官方 GitHub/官方博客/官方发布）。
 - **范围约束**：
-  - 主站更新对象：`index.html` + `01~10` + `references.html`
+  - 主站更新对象：`index.html` + `01~10` + `11_edge_chip.html` + `references.html`
   - 历史世界模型内容在 `legacy/` 目录，只做归档浏览，不做日更维护
-  - 搜索/批量替换/批量改写时默认排除 `legacy/` 目录（除非用户明确要求）
+  - 后续常规更新一律忽略 `legacy/`（不扫描、不改写、不做批量替换）
 - **更新型章节页页头**：所有更新型页面顶部必须包含：
 
 ```html
@@ -46,14 +46,15 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
 2) `01_industry.html` 行业全景  
 3) `02_product.html` 产品调研  
 4) `03_architecture.html` 技术架构方案  
-5) `04_data.html` 数据工程（采集与合成）  
-6) `05_roadmap.html` 落地路线（含仿真环境）  
-7) `06_companies.html` 公司调研  
-8) `07_paper_tracker.html` 论文追踪  
-9) `10_benchmarks.html` 评测基准  
-10) `08_community.html` 社区讨论  
-11) `09_update_log.html` 更新日志  
-12) `references.html` 参考资料
+5) `11_edge_chip.html` 端侧芯片调研  
+6) `04_data.html` 数据工程（采集与合成）  
+7) `05_roadmap.html` 落地路线（含仿真环境）  
+8) `06_companies.html` 公司调研  
+9) `07_paper_tracker.html` 论文追踪  
+10) `10_benchmarks.html` 评测基准  
+11) `08_community.html` 社区讨论  
+12) `09_update_log.html` 更新日志  
+13) `references.html` 参考资料
 
 ---
 
@@ -137,6 +138,7 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
 
 - 当前主站中，重点章节映射如下：
   - `02_product.html`：产品调研
+  - `11_edge_chip.html`：端侧芯片调研
   - `04_data.html`：数据工程（采集 + 合成）
   - `05_roadmap.html`：落地路线 + 仿真环境（Sim2Real）
   - `06_companies.html`：公司调研
@@ -178,7 +180,7 @@ uv pip install pymupdf pillow
 
 - 搜索并清理错误/过期链接（尤其是官方博客的旧路径）
 - 校验本地资源引用是否存在（`assets/...`）
-- 扫描与修复默认只针对主站页面，不覆盖 `legacy/`
+- 扫描与修复只针对主站页面，常规流程不覆盖 `legacy/`
 
 ### 6.2 规范合规
 
@@ -248,7 +250,7 @@ git push -u origin <branch-name>
 □ 更新型页面顶部 last-updated 模块齐全且日期正确
 □ 各页面不再内联定义 `.last-updated { ... }`（样式由 `css/style.css` 统一管理）
 □ `最后更新时间` 仅在对应章节内容实质更新时刷新；纯样式/排版统一不刷新（只更新更新日志页）
-□ 未误改 `legacy/`（除非用户明确要求）
+□ 未触达 `legacy/`（强制）
 □ 本地 assets 引用无缺失，新增图片已入库且 manifest 更新
 □ git status 干净；commit 信息清晰；已 push 到指定分支
 ```

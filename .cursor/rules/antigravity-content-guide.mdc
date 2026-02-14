@@ -5,6 +5,7 @@ globs:
   - "world_model_interactive_guide/index.html"
   - "world_model_interactive_guide/0*.html"
   - "world_model_interactive_guide/10_benchmarks.html"
+  - "world_model_interactive_guide/11_edge_chip.html"
   - "world_model_interactive_guide/references.html"
 alwaysApply: true
 ---
@@ -30,7 +31,7 @@ alwaysApply: true
 - **单领域维护（新增强制）**：
   - 主站唯一领域为具身智能（`world_model_interactive_guide/index.html`）。
   - 历史世界模型内容归档在 `world_model_interactive_guide/legacy/`，不作为主站日更对象。
-  - 未明确指定更新范围时，默认按具身智能章节顺序更新。
-  - 默认排除 `legacy/` 目录：除非用户明确要求“修复/更新 legacy”，否则禁止修改归档内容。
-  - 主站关键章节（必须保留）：行业全景、公司调研、产品调研、落地路线、技术架构方案、仿真环境、数据工程、论文追踪、评测基准、社区讨论。
-  - 具身智能内容优先覆盖：数据工程（采集/合成）、仿真环境、落地路线、公司与产品调研。
+  - 后续所有常规更新按具身智能章节顺序执行。
+  - **强制忽略 `legacy/` 目录**：不扫描、不改写、不做批量替换。
+  - 主站关键章节（必须保留）：行业全景、公司调研、产品调研、落地路线、技术架构方案、端侧芯片调研、仿真环境、数据工程、论文追踪、评测基准、社区讨论。
+  - 具身智能内容优先覆盖：数据工程（采集/合成）、仿真环境、技术架构与端侧芯片、落地路线、公司与产品调研。

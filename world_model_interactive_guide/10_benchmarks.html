@@ -22,6 +22,7 @@
             <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景 (Landscape)</a></li>
             <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品调研 (Product Research)</a></li>
             <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构方案 (Architecture)</a></li>
+            <li class="nav-item"><a href="11_edge_chip.html" class="nav-link">03.5 端侧芯片调研 (Edge Chips)</a></li>
             <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据工程 (Data Engineering)</a></li>
             <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线（含仿真环境） (Roadmap)</a></li>
             <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
@@ -149,7 +150,7 @@
                 </div>
                 <div class="media-card">
                     <h4>🧠 AntiGravity's Commentary</h4>
-                    <p>RoboCasa 的价值在“场景复杂度”，但上线前仍需加入真实传感器噪声与控制延迟的外部回归测试。</p>
+                    <p>RoboCasa 的价值在“场景复杂度”，实际部署中通常会补充真实传感器噪声与控制延迟的外部回归测试。</p>
                 </div>
             </div>
 
@@ -165,7 +166,7 @@
                     <ul>
                         <li><strong>What it measures</strong>：操作任务成功率、轨迹质量、策略稳定性。</li>
                         <li><strong>How to use</strong>：使用官方环境和脚本固定评测配置，记录 success、episode length 与失败类别。</li>
-                        <li><strong>Pitfalls</strong>：仿真评测易忽略实机延迟与接触误差；必须配套 Sim2Real 回流验证。</li>
+                        <li><strong>Pitfalls</strong>：仿真评测易忽略实机延迟与接触误差；通常需要配套 Sim2Real 回流验证。</li>
                     </ul>
                     <ul class="source-loc">
                         <li>来源定位：<a href="https://maniskill.readthedocs.io/" target="_blank">Docs</a> / <a href="https://github.com/haosulab/ManiSkill" target="_blank">GitHub Repo</a></li>
