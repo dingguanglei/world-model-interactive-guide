@@ -44,14 +44,14 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
 
 1) `index.html` 概览  
 2) `01_industry.html` 行业全景  
-3) `02_product.html` 产品与系统  
-4) `03_architecture.html` 技术架构  
-5) `04_data.html` 数据采集与合成  
-6) `05_roadmap.html` 仿真环境  
-7) `06_companies.html` 强化学习进展  
+3) `02_product.html` 产品调研  
+4) `03_architecture.html` 技术架构方案  
+5) `04_data.html` 数据工程（采集与合成）  
+6) `05_roadmap.html` 落地路线（含仿真环境）  
+7) `06_companies.html` 公司调研  
 8) `07_paper_tracker.html` 论文追踪  
 9) `10_benchmarks.html` 评测基准  
-10) `08_community.html` 社区动态  
+10) `08_community.html` 社区讨论  
 11) `09_update_log.html` 更新日志  
 12) `references.html` 参考资料
 
@@ -118,7 +118,7 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
 - 必须写清：What it measures / How to use / Pitfalls / 判定者（模型/人/传统算法）
 - 必须给权威链接（论文/项目页/仓库/数据集）
 
-### 4.3 `08_community.html`（社区动态）
+### 4.3 `08_community.html`（社区讨论）
 
 - 每条必须：平台来源标识 + 原文引用块 + 原帖链接（尽可能）
 - 三段结构（🟢→🔴→🧠）上下排列
@@ -136,9 +136,10 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
 ### 4.5 主站章节映射（具身智能）
 
 - 当前主站中，重点章节映射如下：
-  - `04_data.html`：数据采集 + 数据合成
-  - `05_roadmap.html`：仿真环境与 Sim2Real
-  - `06_companies.html`：强化学习进展
+  - `02_product.html`：产品调研
+  - `04_data.html`：数据工程（采集 + 合成）
+  - `05_roadmap.html`：落地路线 + 仿真环境（Sim2Real）
+  - `06_companies.html`：公司调研
 - 上述章节新增关键结论必须遵守可追溯性（论文/官方项目页/官方仓库可点击链接）。
 - 主站统一写入 `09_update_log.html`；`legacy/` 目录不参与日更日志。
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>05. 仿真环境 - Embodied AI Guide</title>
+    <title>05. 落地路线（含仿真环境） - Embodied AI Guide</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
@@ -22,14 +22,14 @@
         <ul class="nav-links">
             <li class="nav-item"><a href="index.html" class="nav-link">00. 概览 (Overview)</a></li>
             <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景 (Landscape)</a></li>
-            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品与系统 (Products)</a></li>
-            <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构 (Architecture)</a></li>
-            <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据采集与合成 (Data)</a></li>
-            <li class="nav-item"><a href="05_roadmap.html" class="nav-link active">05. 仿真环境 (Simulation)</a></li>
-            <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 强化学习进展 (RL Progress)</a></li>
+            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品调研 (Product Research)</a></li>
+            <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构方案 (Architecture)</a></li>
+            <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据工程 (Data Engineering)</a></li>
+            <li class="nav-item"><a href="05_roadmap.html" class="nav-link active">05. 落地路线（含仿真环境） (Roadmap)</a></li>
+            <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
             <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">07. 论文追踪 (Papers)</a></li>
             <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">08. 评测基准 (Benchmarks)</a></li>
-            <li class="nav-item"><a href="08_community.html" class="nav-link">09. 社区动态 (Community)</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">09. 社区讨论 (Community)</a></li>
             <li class="nav-item"><a href="09_update_log.html" class="nav-link">10. 更新日志 (Updates)</a></li>
             <li class="nav-item"><a href="references.html" class="nav-link">附录：参考资料</a></li>
             <li class="nav-item"><a href="legacy/index.html" class="nav-link">Legacy 归档</a></li>
@@ -37,15 +37,45 @@
     </nav>
 
     <main class="main-content">
-        <h1>05. 仿真环境与 Sim2Real 闭环 (Simulation)</h1>
-        <p>仿真不是“可选项”，而是具身智能迭代速度的核心杠杆。关键问题不是“有没有仿真”，而是“仿真是否与真实部署形成持续回流闭环”。</p>
+        <h1>05. 落地路线（含仿真环境） (Roadmap)</h1>
+        <p>本章聚焦“从实验到部署”的落地路径：里程碑分解、仿真环境选型、Sim2Real 回流机制与上线风险控制。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-02-14 | 本页内容将每日更新「仿真平台选型、数字孪生与 Sim2Real 工程实践」。
+            ⏰ <strong>最后更新时间</strong>: 2026-02-14 | 本页内容将每日更新「落地里程碑、仿真平台选型与 Sim2Real 工程实践」。
         </div>
 
         <section>
-            <h2>5.1 平台选型速览</h2>
+            <h2>5.1 落地路线里程碑（Roadmap Milestones）</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>阶段</th>
+                        <th>目标</th>
+                        <th>关键验收指标</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>P0 试点验证</strong></td>
+                        <td>在单场景跑通任务闭环</td>
+                        <td>成功率、恢复率、基础安全指标达标</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P1 小规模部署</strong></td>
+                        <td>扩展到多班次、多工位稳定运行</td>
+                        <td>延迟稳定、故障可回放、版本可回归</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P2 规模化商业化</strong></td>
+                        <td>跨场景复制并形成运营指标闭环</td>
+                        <td>单位任务成本下降、可用性和安全持续达标</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>5.2 仿真平台选型速览</h2>
             <table>
                 <thead>
                     <tr>
@@ -85,7 +115,7 @@
         </section>
 
         <section>
-            <h2>5.2 可视化：Sim2Real 最小闭环</h2>
+            <h2>5.3 可视化：Sim2Real 最小闭环</h2>
             <pre class="mermaid">
 flowchart LR
     A[数字孪生建模] --> B[并行仿真采样]
@@ -99,7 +129,7 @@ flowchart LR
         </section>
 
         <section>
-            <h2>5.3 典型风险清单</h2>
+            <h2>5.4 典型风险清单</h2>
             <ul>
                 <li><strong>接触建模偏差</strong>：抓取与插入类任务最敏感。</li>
                 <li><strong>传感器噪声缺失</strong>：仿真输入过于“干净”，导致实机泛化失败。</li>
@@ -116,11 +146,11 @@ flowchart LR
         <nav class="chapter-nav">
             <a href="04_data.html" class="chapter-nav-link prev">
                 <span class="chapter-nav-label">← 上一章</span>
-                <span class="chapter-nav-title">04. 数据采集与合成 (Data)</span>
+                <span class="chapter-nav-title">04. 数据工程 (Data Engineering)</span>
             </a>
             <a href="06_companies.html" class="chapter-nav-link next">
                 <span class="chapter-nav-label">下一章 →</span>
-                <span class="chapter-nav-title">06. 强化学习进展 (RL Progress)</span>
+                <span class="chapter-nav-title">06. 公司调研 (Companies)</span>
             </a>
         </nav>
     </main>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>06. 强化学习进展 - Embodied AI Guide</title>
+    <title>06. 公司调研 - Embodied AI Guide</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -20,14 +20,14 @@
         <ul class="nav-links">
             <li class="nav-item"><a href="index.html" class="nav-link">00. 概览 (Overview)</a></li>
             <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景 (Landscape)</a></li>
-            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品与系统 (Products)</a></li>
-            <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构 (Architecture)</a></li>
-            <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据采集与合成 (Data)</a></li>
-            <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 仿真环境 (Simulation)</a></li>
-            <li class="nav-item"><a href="06_companies.html" class="nav-link active">06. 强化学习进展 (RL Progress)</a></li>
+            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品调研 (Product Research)</a></li>
+            <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构方案 (Architecture)</a></li>
+            <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据工程 (Data Engineering)</a></li>
+            <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线（含仿真环境） (Roadmap)</a></li>
+            <li class="nav-item"><a href="06_companies.html" class="nav-link active">06. 公司调研 (Companies)</a></li>
             <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">07. 论文追踪 (Papers)</a></li>
             <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">08. 评测基准 (Benchmarks)</a></li>
-            <li class="nav-item"><a href="08_community.html" class="nav-link">09. 社区动态 (Community)</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">09. 社区讨论 (Community)</a></li>
             <li class="nav-item"><a href="09_update_log.html" class="nav-link">10. 更新日志 (Updates)</a></li>
             <li class="nav-item"><a href="references.html" class="nav-link">附录：参考资料</a></li>
             <li class="nav-item"><a href="legacy/index.html" class="nav-link">Legacy 归档</a></li>
@@ -35,78 +35,101 @@
     </nav>
 
     <main class="main-content">
-        <h1>06. 强化学习进展 (RL Progress)</h1>
-        <p>具身智能的 RL 研究正在从“单算法比榜”转向“系统组合”：离线数据 + 世界模型 rollout + 在线安全微调。</p>
+        <h1>06. 公司调研 (Companies)</h1>
+        <p>本章聚焦“公司层面的可落地能力”：产品化路线、部署信号、生态位置与可追溯官方证据。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-02-14 | 本页内容将每日更新「离线RL、世界模型RL、层级RL与安全RL的进展」。
+            ⏰ <strong>最后更新时间</strong>: 2026-02-14 | 本页内容将每日更新「具身智能核心公司、产品路线与商业化信号」。
         </div>
 
         <section>
-            <h2>6.1 进展主线</h2>
+            <h2>6.1 公司分层与生态角色</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>路线</th>
-                        <th>核心价值</th>
-                        <th>代表工作</th>
+                        <th>公司/机构</th>
+                        <th>定位</th>
+                        <th>代表公开信号</th>
+                        <th>可追溯来源</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>世界模型 RL</strong></td>
-                        <td>在 latent dynamics 中 rollout，降低真实交互成本</td>
-                        <td><a href="https://arxiv.org/abs/2301.04104" target="_blank">DreamerV3</a></td>
+                        <td><strong>Figure</strong></td>
+                        <td>人形机器人产品公司</td>
+                        <td>发布 Helix、与制造业场景联合验证</td>
+                        <td><a href="https://www.figure.ai/news/helix" target="_blank">Helix</a> / <a href="https://www.figure.ai/news/bmw-manufacturing" target="_blank">BMW Manufacturing</a></td>
                     </tr>
                     <tr>
-                        <td><strong>离线 RL + 模仿学习</strong></td>
-                        <td>利用历史轨迹启动策略，降低在线探索风险</td>
-                        <td><a href="https://arxiv.org/abs/2303.04137" target="_blank">Diffusion Policy</a></td>
+                        <td><strong>1X</strong></td>
+                        <td>面向通用场景的人形机器人公司</td>
+                        <td>发布 NEO 产品页面与演示材料</td>
+                        <td><a href="https://www.1x.tech/neo" target="_blank">1X NEO</a></td>
                     </tr>
                     <tr>
-                        <td><strong>视频模型到策略</strong></td>
-                        <td>统一建模 action/future/value，降低策略建模碎片化</td>
-                        <td><a href="https://arxiv.org/abs/2601.16163" target="_blank">Cosmos Policy</a></td>
+                        <td><strong>Agility Robotics</strong></td>
+                        <td>人形物流与工业场景部署公司</td>
+                        <td>Digit 产品化与物流场景推进</td>
+                        <td><a href="https://www.agilityrobotics.com/" target="_blank">Agility 官网</a> / <a href="https://www.agilityrobotics.com/digit" target="_blank">Digit</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>NVIDIA</strong></td>
+                        <td>模型 + 仿真 + 计算平台生态方</td>
+                        <td>发布 GR00T 并与 Isaac 生态联动</td>
+                        <td><a href="https://developer.nvidia.com/blog/introducing-project-gr00t-foundation-model-for-humanoid-robots/" target="_blank">Project GR00T</a> / <a href="https://developer.nvidia.com/isaac/sim" target="_blank">Isaac Sim</a></td>
                     </tr>
                 </tbody>
             </table>
         </section>
 
         <section>
-            <h2>6.2 三段式解读（代表工作）</h2>
-            <div class="media-card">
-                <h4><a href="https://arxiv.org/abs/2301.04104" target="_blank">DreamerV3</a></h4>
-                <p><strong>🟢 通俗解读</strong>：先在“想象的世界”练习，再去真实世界少量验证，省时省钱。</p>
-                <p><strong>🔴 专业解读</strong>：通过学习 latent dynamics 并在模型内 rollout，提升样本效率；统一超参配置降低迁移成本。来源定位：Abstract / Method / Experiments。</p>
-                <p><strong>🧠 Commentary</strong>：适合作为基座，但真实部署仍需补强安全约束和延迟鲁棒。</p>
-            </div>
-
-            <div class="media-card">
-                <h4><a href="https://arxiv.org/abs/2303.04137" target="_blank">Diffusion Policy</a></h4>
-                <p><strong>🟢 通俗解读</strong>：把复杂动作当“逐步生成”的问题来解，动作更平滑。</p>
-                <p><strong>🔴 专业解读</strong>：用扩散模型表达多峰动作分布，改善高维操作任务的稳定性。来源定位：Abstract / Robot manipulation experiments。</p>
-                <p><strong>🧠 Commentary</strong>：非常适合“多解问题”，但实时部署要关注推理时延。</p>
+            <h2>6.2 公司调研模板（执行版）</h2>
+            <div class="media-grid">
+                <div class="media-card">
+                    <h4>① 基础画像</h4>
+                    <ul>
+                        <li>成立时间、总部、官网、核心产品线</li>
+                        <li>目标场景：工业 / 物流 / 家庭 / 特种</li>
+                        <li>公开演示与官方文档入口</li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>② 技术与系统能力</h4>
+                    <ul>
+                        <li>模型路线：VLA / Planner / Controller</li>
+                        <li>数据路线：采集、合成、回流机制</li>
+                        <li>安全与恢复策略（是否有可追溯证据）</li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>③ 商业化与部署信号</h4>
+                    <ul>
+                        <li>试点客户与部署场景</li>
+                        <li>合作伙伴与生态绑定关系</li>
+                        <li>官方新闻、权威媒体、监管披露</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
         <section>
-            <h2>6.3 安全 RL 与部署约束</h2>
+            <h2>6.3 当前阶段的横向观察</h2>
             <ul>
-                <li>将碰撞惩罚、力矩上限、能耗约束显式加入 reward 设计。</li>
-                <li>在评测中加入“恢复能力”与“危险动作占比”而非只看成功率。</li>
-                <li>上线前执行回归测试：策略版本变化是否导致安全指标劣化。</li>
+                <li><strong>产品公司</strong>正从单 demo 走向场景化验证，关注点转向稳定性与恢复能力。</li>
+                <li><strong>平台公司</strong>通过“模型 + 仿真 + 算力”绑定生态，争夺标准接口位置。</li>
+                <li><strong>调研建议</strong>：优先记录“可部署证据”而非单次演示效果。</li>
             </ul>
         </section>
 
         <div class="commentary">
             <div class="commentary-title">🧠 AntiGravity's Commentary</div>
-            <p>RL 在具身场景的真正价值，不是追求 benchmark 单点 SOTA，而是建立“可持续优化且可审计”的策略演进机制。没有安全回归，RL 成果很难长期落地。</p>
+            <p>公司调研最容易被“故事密度”误导。真正决定竞争力的不是叙事，而是是否持续公开可追溯的部署证据：谁在什么场景跑了多久、失败如何恢复、指标如何回归。</p>
         </div>
 
         <nav class="chapter-nav">
             <a href="05_roadmap.html" class="chapter-nav-link prev">
                 <span class="chapter-nav-label">← 上一章</span>
-                <span class="chapter-nav-title">05. 仿真环境 (Simulation)</span>
+                <span class="chapter-nav-title">05. 落地路线（含仿真环境） (Roadmap)</span>
             </a>
             <a href="07_paper_tracker.html" class="chapter-nav-link next">
                 <span class="chapter-nav-label">下一章 →</span>

@@ -72,7 +72,8 @@ description: AntiGravity 高质量内容撰写规范指南
 - 主站更新日志：`world_model_interactive_guide/09_update_log.html`
 - 若任务未明确指定范围：默认按具身智能主站章节执行更新。
 - 默认执行策略：搜索、批量替换、自动化写入时一律排除 `legacy/`，除非用户明确要求处理归档内容。
-- 主站调研优先级：**数据采集方法、数据合成方法、仿真环境、强化学习进展**（核心对应 `04_data.html`、`05_roadmap.html`、`06_companies.html`）。
+- 主站关键章节（必须保留）：**行业全景、公司调研、产品调研、落地路线、技术架构方案、仿真环境、数据工程、论文追踪、评测基准、社区讨论**。
+- 主站调研优先级：**数据工程（采集/合成）、仿真环境、落地路线、公司与产品调研**（核心对应 `02_product.html`、`04_data.html`、`05_roadmap.html`、`06_companies.html`）。
 
 ---
 
@@ -255,7 +256,7 @@ description: AntiGravity 高质量内容撰写规范指南
 
 ---
 
-## 五、社区动态规范 (Community Tracker Standards)
+## 五、社区讨论规范 (Community Tracker Standards)
 
 ### 5.1 监控平台
 | 平台 | 监控内容 |
@@ -292,16 +293,18 @@ description: AntiGravity 高质量内容撰写规范指南
 #### 6.1.1 主站更新顺序（强制）
 - **00. 概览**（`index.html`）
 - **01. 行业全景**（`01_industry.html`）
-- **02. 产品与系统**（`02_product.html`）
-- **03. 技术架构**（`03_architecture.html`）
-- **04. 数据采集与合成**（`04_data.html`）
-- **05. 仿真环境**（`05_roadmap.html`）
-- **06. 强化学习进展**（`06_companies.html`）
+- **02. 产品调研**（`02_product.html`）
+- **03. 技术架构方案**（`03_architecture.html`）
+- **04. 数据工程（采集与合成）**（`04_data.html`）
+- **05. 落地路线（含仿真环境）**（`05_roadmap.html`）
+- **06. 公司调研**（`06_companies.html`）
 - **07. 论文追踪**（`07_paper_tracker.html`）
 - **08. 评测基准**（`10_benchmarks.html`）
-- **09. 社区动态**（`08_community.html`）
+- **09. 社区讨论**（`08_community.html`）
 - **10. 更新日志**（`09_update_log.html`）
 - **附录**（`references.html`）
+
+> 说明：`05_roadmap.html` 必须显式覆盖“落地路线 + 仿真环境（平台选型 / Sim2Real）”两部分内容，避免缺失任一关键章节维度。
 
 #### 6.1.2 Legacy 约束（强制）
 - `legacy/` 目录仅用于历史归档与回溯，不作为主站日更对象。
@@ -401,14 +404,14 @@ description: AntiGravity 高质量内容撰写规范指南
   - `last-updated` 的样式必须由全局样式表 `world_model_interactive_guide/css/style.css` 中的 `.last-updated` 统一管理
   - 各章节页面 **禁止** 在内联 `<style>` 中重复定义 `.last-updated { ... }`（否则会导致跨章节样式不一致）
 - 其中「XXXXXX」必须写清本页追踪范围，例如：
-  - `产品与系统`: “追踪具身智能产品发布、系统能力边界与部署进展”
+  - `产品调研`: “追踪具身智能产品发布、系统能力边界与部署进展”
   - `技术架构`: “追踪业界主流技术路线、工程架构与 AI Infra 落地进展”
   - `数据工程`: “追踪机器人多模态数据的采集/合成/标注与数据 Infra 方案”
-  - `论文追踪/社区动态`: 按各自页面定位填写
+  - `论文追踪/社区讨论`: 按各自页面定位填写
 
 ---
 
-## 六点一、产品与系统规范 (Embodied Product/System Standards)
+## 六点一、产品调研规范 (Product Research Standards)
 
 > **目标**: 系统追踪并深挖具身产品与系统能力边界，避免只停留在短演示视频层面。
 
@@ -510,7 +513,7 @@ description: AntiGravity 高质量内容撰写规范指南
 □ 日期标注格式统一 (YYYY-MM-DD)
 ```
 
-### 社区动态检查
+### 社区讨论检查
 ```
 □ 每条讨论都有平台来源标识
 □ 原文使用引用块格式
@@ -528,14 +531,14 @@ description: AntiGravity 高质量内容撰写规范指南
 主站（具身智能）:
 00. 概览 (index.html)
 01. 行业全景 (Landscape)
-02. 产品与系统 (Products)
-03. 技术架构 (Architecture)
-04. 数据采集与合成 (Data)
-05. 仿真环境 (Simulation)
-06. 强化学习进展 (RL Progress)
+02. 产品调研 (Product Research)
+03. 技术架构方案 (Architecture)
+04. 数据工程 (Data Engineering)
+05. 落地路线（含仿真环境） (Roadmap)
+06. 公司调研 (Companies)
 07. 论文追踪 (Papers)
 08. 评测基准 (Benchmarks)
-09. 社区动态 (Community)
+09. 社区讨论 (Community)
 10. 更新日志 (09_update_log.html)
 附录. 参考文献 (Refs)
 
@@ -617,11 +620,15 @@ Legacy. 世界模型历史内容 (legacy/)
 
 ---
 
-**版本**: 2.5  
+**版本**: 2.6  
 **最后更新**: 2026-02-14  
 **作者**: 丁光磊
 
 ### Changelog
+- **v2.6 (2026-02-14)**:
+  - 调整: 主站章节强制清单对齐“行业全景、公司调研、产品调研、落地路线、技术架构方案、仿真环境、数据工程、论文追踪、评测基准、社区讨论”
+  - 变更: 更新顺序与导航结构口径统一改为产品调研/数据工程/公司调研/社区讨论
+  - 约束: `05_roadmap.html` 必须显式覆盖“落地路线 + 仿真环境（Sim2Real）”
 - **v2.5 (2026-02-14)**:
   - 新增: 默认执行策略统一排除 `legacy/`（搜索/批量替换/自动写入），仅在明确指令下处理归档内容
   - 优化: 社区监控关键词与平台口径改为具身智能导向（EmbodiedAI/RobotLearning/robotics）
