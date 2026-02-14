@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>01. 行业全景 - World Model Guide</title>
+    <title>01. 行业全景 - Embodied AI Guide</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -16,276 +16,113 @@
         <div class="aurora-blob aurora-blob-4"></div>
     </div>
     <nav class="sidebar">
-        <a href="world_model_home.html" class="brand">🚀 World Model Guide</a>
+        <a href="index.html" class="brand">🦾 Embodied AI Guide</a>
         <ul class="nav-links">
-            <li class="nav-item"><a href="world_model_home.html" class="nav-link">00. 概览 (Overview)</a></li>
+            <li class="nav-item"><a href="index.html" class="nav-link">00. 概览 (Overview)</a></li>
             <li class="nav-item"><a href="01_industry.html" class="nav-link active">01. 行业全景 (Landscape)</a></li>
-            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品深度 (Deep Dive)</a></li>
+            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品与系统 (Products)</a></li>
             <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构 (Architecture)</a></li>
-            <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据工程 (Data Bible)</a></li>
-            <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线 (Roadmap)</a></li>
-            <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
+            <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据采集与合成 (Data)</a></li>
+            <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 仿真环境 (Simulation)</a></li>
+            <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 强化学习进展 (RL Progress)</a></li>
             <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">07. 论文追踪 (Papers)</a></li>
             <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">08. 评测基准 (Benchmarks)</a></li>
             <li class="nav-item"><a href="08_community.html" class="nav-link">09. 社区动态 (Community)</a></li>
             <li class="nav-item"><a href="09_update_log.html" class="nav-link">10. 更新日志 (Updates)</a></li>
-            <li class="nav-item"><a href="references.html" class="nav-link">附录：参考文献 (Refs)</a></li>
+            <li class="nav-item"><a href="references.html" class="nav-link">附录：参考资料</a></li>
+            <li class="nav-item"><a href="legacy/index.html" class="nav-link">Legacy 归档</a></li>
         </ul>
-        <div class="domain-switch-sidebar">
-            <a href="embodied_intelligence/index.html" class="domain-switch-btn" aria-label="切换到具身智能领域">🦾 切换到具身智能领域</a>
-        </div>
     </nav>
 
     <main class="main-content">
-        <h1>01. 行业全景与赛道分层 (Industry Landscape)</h1>
+        <h1>01. 具身智能行业全景 (Landscape)</h1>
+        <p>具身智能正在从“单任务机械臂”走向“通用机器人智能体”。这一趋势由三股力量共同推动：<strong>多模态基础模型</strong>、<strong>可扩展数据流水线</strong>、<strong>仿真-实机闭环</strong>。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-01-31 | 本页内容将每日更新「世界模型赛道格局、关键里程碑与行业信号」。
+            ⏰ <strong>最后更新时间</strong>: 2026-02-14 | 本页内容将每日更新「具身智能产业格局、关键玩家与商业化信号」。
         </div>
 
         <blockquote>
-            <strong>核心观点</strong>：2025-2026 年是世界模型的分水岭。市场正在从"生成好看的视频"（Sora Moment）转向"生成可玩的世界"（Genie Moment）。这一转变的背后，是算力从
-            Rendering（渲染）向 Neural Simulation（神经模拟）的迁移。
+            <strong>关键行业信号</strong>：NVIDIA 在 GTC 2024 发布 <a href="https://developer.nvidia.com/blog/introducing-project-gr00t-foundation-model-for-humanoid-robots/" target="_blank">Project GR00T</a>，并与 <a href="https://developer.nvidia.com/isaac/sim" target="_blank">Isaac Sim</a> 组合推进 humanoid 基础模型与仿真数据生态，显示“模型 + 仿真 + 计算平台”正在一体化。<sup><a href="https://developer.nvidia.com/blog/introducing-project-gr00t-foundation-model-for-humanoid-robots/" target="_blank">[来源]</a></sup>
         </blockquote>
 
         <section>
-            <h2>1. 核心概念辨析：不仅仅是"视频"</h2>
-            <p>在深入赛道之前，必须厘清三个极易混淆的概念。它们的工程目标和商业价值完全不同。</p>
-
+            <h2>1) 赛道分层：从单点自动化到通用具身智能</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>维度</th>
-                        <th>1. 基础视频生成 (Video Gen)</th>
-                        <th>2. 可控视频生产力 (Controllable Video)</th>
-                        <th>3. 交互世界模型 (Interactive World Model)</th>
+                        <th>层级</th>
+                        <th>能力特征</th>
+                        <th>典型形态</th>
+                        <th>代表信号</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>交互性</strong></td>
-                        <td><strong>无</strong> (Passive)</td>
-                        <td><strong>弱</strong> (Directive)</td>
-                        <td><strong>强</strong> (Real-time Active)</td>
+                        <td><strong>L1 任务自动化</strong></td>
+                        <td>固定工位、重复任务、规则驱动</td>
+                        <td>工业机械臂 + 视觉定位</td>
+                        <td><a href="https://www.universal-robots.com/" target="_blank">Universal Robots</a></td>
                     </tr>
                     <tr>
-                        <td><strong>输入</strong></td>
-                        <td>Text / Image Prompt</td>
-                        <td>Reference / Script / Camera</td>
-                        <td><strong>Action (WASD)</strong> / Event</td>
+                        <td><strong>L2 场景化智能</strong></td>
+                        <td>可迁移到同类场景，需人工配置</td>
+                        <td>仓储、拣选、巡检系统</td>
+                        <td><a href="https://www.agilityrobotics.com/" target="_blank">Agility Robotics</a></td>
                     </tr>
                     <tr>
-                        <td><strong>延迟</strong></td>
-                        <td>分钟级 (5s需1-3min)</td>
-                        <td>准实时 (5s需10s)</td>
-                        <td><strong>实时流式（几十毫秒级，体验依赖端到端系统）</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>核心指标</strong></td>
-                        <td>清晰度, 物理一致性</td>
-                        <td>角色一致性, 镜头控制</td>
-                        <td><strong>Latency, Playability, Memory</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>终局形态</strong></td>
-                        <td>影视特效/素材</td>
-                        <td>互动影游</td>
-                        <td><strong>下一代游戏引擎 (Neural Engine)</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>代表作</strong></td>
-                        <td><a href="https://openai.com/sora" target="_blank">Sora 2</a></td>
-                        <td><a href="https://www.vidu.studio/" target="_blank">Vidu Q2</a>, <a
-                                href="https://pixverse.ai/" target="_blank">PixVerse</a></td>
-                        <td><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/"
-                                target="_blank">Genie 3</a>, <a href="https://arxiv.org/abs/2508.13009"
-                                target="_blank">Matrix-Game 2.0</a></td>
+                        <td><strong>L3 通用具身智能</strong></td>
+                        <td>语言指令到动作执行，跨任务泛化</td>
+                        <td>人形机器人 / 通用移动操作平台</td>
+                        <td><a href="https://www.figure.ai/news/helix" target="_blank">Figure Helix</a>、<a href="https://www.deepmind.com/blog/rt-2-new-model-translates-vision-and-language-into-action" target="_blank">RT-2</a></td>
                     </tr>
                 </tbody>
             </table>
         </section>
 
-        <div class="commentary">
-            <div class="commentary-title">🧠 ANTIGRAVITY'S COMMENTARY</div>
-            <p>很多人误以为 Sora 和 Genie 3 是"同类产品"，这是最致命的认知误区。Sora 是<strong>电影级素材生成器</strong>，它的目标是做出"好看的视频"供剪辑师使用；而 Genie 3
-                是<strong>神经游戏引擎</strong>，它的目标是让你"进入视频里玩"。二者的技术路线、数据需求、商业化路径完全不同。如果你的业务需求是"生成 10 秒特效素材"，Sora
-                是最优解；如果你想做"能玩的 AI 游戏"，Sora 从第一行代码就是错的。</p>
-        </div>
-
         <section>
-            <h2>2. 2026 Q1 关键技术规格对比 (Technical Specs)</h2>
-            <p>以下数据基于 2025 Q3-Q4 的公开论文与技术报告整理，直观展示了 L1 与 L3 的技术鸿沟。</p>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>指标</th>
-                        <th>OpenAI Sora 2</th>
-                        <th>Google Genie 3</th>
-                        <th>Matrix-Game 2.0</th>
-                        <th>备注</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>类型</strong></td>
-                        <td>Video Gen</td>
-                        <td>General World Model</td>
-                        <td>Interactive World Model</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><strong>帧率</strong></td>
-                        <td>N/A (非实时)</td>
-                        <td><strong><a
-                                    href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/"
-                                    target="_blank">24 FPS</a></strong></td>
-                        <td><strong><a href="https://arxiv.org/abs/2508.13009" target="_blank">25 FPS</a></strong></td>
-                        <td>24 FPS 是"可玩"及格线</td>
-                    </tr>
-                    <tr>
-                        <td><strong>生成耗时</strong></td>
-                        <td>~60s+</td>
-                        <td><strong><a
-                                    href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/"
-                                    target="_blank">~41.7ms/帧（由 24 FPS 换算，\(1/24 \approx 41.7\)ms）</a></strong></td>
-                        <td><strong><a href="https://arxiv.org/abs/2508.13009" target="_blank">&lt; 40ms</a></strong>
-                        </td>
-                        <td>实时交互必须 &lt; 50ms</td>
-                    </tr>
-                    <tr>
-                        <td><strong>分辨率</strong></td>
-                        <td>Up to 1080p</td>
-                        <td><strong><a
-                                    href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/"
-                                    target="_blank">720p</a></strong></td>
-                        <td>High Fidelity</td>
-                        <td>实时模型通常牺牲分辨率</td>
-                    </tr>
-                    <tr>
-                        <td><strong>一致性窗口</strong></td>
-                        <td>5-10s</td>
-                        <td><strong><a
-                                    href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/"
-                                    target="_blank">a few minutes（并提到 visual memory up to one minute ago）</a></strong></td>
-                        <td><strong>Minute-level</strong></td>
-                        <td>>1分钟不崩是前沿</td>
-                    </tr>
-                    <tr>
-                        <td><strong>交互方式</strong></td>
-                        <td>Text</td>
-                        <td><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">Text prompt + real-time navigation</a>（控制细节未披露）</td>
-                        <td><strong>Keyboard + Mouse</strong></td>
-                        <td>键鼠注入最接近游戏</td>
-                    </tr>
-                    <tr>
-                        <td><strong>数据源</strong></td>
-                        <td>YouTube</td>
-                        <td>未披露（官方博客未公开训练数据来源/规模）</td>
-                        <td><strong><a href="https://arxiv.org/abs/2508.13009" target="_blank">UE5 + GTA5</a></strong>
-                        </td>
-                        <td>需要精确 Action Label</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p style="font-size: 0.9rem; color: var(--text-secondary);">
-                <strong>数据来源</strong>:
-                Genie 3 - <a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/"
-                    target="_blank">DeepMind Blog (2025-08)</a>;
-                Matrix-Game 2.0 - <a href="https://arxiv.org/abs/2508.13009" target="_blank">arXiv:2508.13009</a>;
-                Sora 2 - <a href="https://openai.com/sora" target="_blank">OpenAI Product Page</a>.
-            </p>
+            <h2>2) 关键玩家与生态位置</h2>
+            <div class="media-grid">
+                <div class="media-card">
+                    <h4>🧠 基座模型与平台</h4>
+                    <ul>
+                        <li><a href="https://developer.nvidia.com/blog/introducing-project-gr00t-foundation-model-for-humanoid-robots/" target="_blank">NVIDIA GR00T</a></li>
+                        <li><a href="https://deepmind.google/discover/blog/rt-2-new-model-translates-vision-and-language-into-action/" target="_blank">DeepMind RT-2</a></li>
+                        <li><a href="https://openvla.github.io/" target="_blank">OpenVLA</a></li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🤖 机器人产品公司</h4>
+                    <ul>
+                        <li><a href="https://www.figure.ai/" target="_blank">Figure</a></li>
+                        <li><a href="https://www.1x.tech/" target="_blank">1X</a></li>
+                        <li><a href="https://www.agilityrobotics.com/" target="_blank">Agility</a></li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🧪 仿真与开发工具链</h4>
+                    <ul>
+                        <li><a href="https://developer.nvidia.com/isaac/sim" target="_blank">Isaac Sim</a></li>
+                        <li><a href="https://mujoco.readthedocs.io/" target="_blank">MuJoCo</a></li>
+                        <li><a href="https://aihabitat.org/" target="_blank">Habitat</a></li>
+                    </ul>
+                </div>
+            </div>
         </section>
 
         <div class="commentary">
-            <div class="commentary-title">🧠 ANTIGRAVITY'S COMMENTARY</div>
-            <p><strong>帧率是生死线，分辨率是奢侈品。</strong>从这张表可以看出，Genie 3 和 Matrix-Game 2.0 都选择了 720p/25fps，而非
-                1080p/5s。这不是技术落后，而是深思熟虑的工程决策：人眼对"卡顿"的容忍度远低于对"糊"的容忍度。一个流畅但模糊的游戏是可玩的，一个清晰但卡成 PPT
-                的"游戏"只是幻灯片。记住这个公式：<strong>Latency &lt; 50ms OR Die</strong>。未来谁能在保持 24fps 的同时把分辨率拉到 1080p，谁就是下一个王者。</p>
-        </div>
-
-        <p>全球游戏市场在 2025 年预计达到 <strong><a
-                    href="https://newzoo.com/resources/blog/games-market-estimates-and-forecasts-2024"
-                    target="_blank">$188B</a> - <a
-                    href="https://www.mordorintelligence.com/industry-reports/global-gaming-market"
-                    target="_blank">$269B</a></strong> 规模 (来源: Newzoo, Mordor
-            Intelligence)。世界模型正在切入其中最核心的"引擎与内容生产"环节。</p>
-
-        <h3>3.1 巨头阵营 (The Giants)</h3>
-        <ul>
-            <li><strong><a href="https://deepmind.google/" target="_blank">Google DeepMind</a></strong>: 全栈布局。从
-                Genie 到 <a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/"
-                    target="_blank">Genie 3</a>，目标是 AGI 训练场。</li>
-            <li><strong><a href="https://www.nvidia.com/en-us/ai/" target="_blank">Nvidia</a></strong>: <a
-                    href="https://developer.nvidia.com/cosmos" target="_blank">Cosmos</a> 平台，结合 Omniverse，主攻
-                Physical AI 物理仿真底座。</li>
-            <li><strong><a href="https://ai.meta.com/" target="_blank">Meta</a></strong>: 重注 <a
-                    href="https://ai.meta.com/blog/v-jepa-yann-lecun-ai-model-video-joint-embedding-predictive-architecture/"
-                    target="_blank">V-JEPA</a>，强调非生成式的"特征预测"，理解力强但生成克制。</li>
-        </ul>
-
-        <h3>3.2 独角兽与新星 (Emerging Players)</h3>
-        <ul>
-            <li><strong><a href="https://www.world-labs.co/" target="_blank">World Labs (李飞飞)</a></strong>: 主打
-                <strong>Marble</strong>。侧重于生成静态且空间一致的 3D 世界，是连接 GenAI 与 3D 工作流的桥梁。
-            </li>
-            <li><strong><a href="https://www.kunlun.com/" target="_blank">Skywork AI (昆仑万维)</a></strong>: 主打
-                <strong><a href="https://arxiv.org/abs/2508.13009" target="_blank">Matrix-Game
-                        2.0</a></strong>。开源、工程化极强，给出了 UE 训练的参考答案。
-            </li>
-            <li><strong>Iconic</strong>: 主打 AI-Native Game Engine。愿景 "Living, adaptive worlds"。</li>
-        </ul>
-        </section>
-
-        <section>
-            <h2>4. 2025-2026 关键里程碑复盘</h2>
-            <ul>
-                <li><strong>2025-08-05 (Genie Moment)</strong>: <a href="https://deepmind.google/"
-                        target="_blank">DeepMind</a> 发布 <a
-                        href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/"
-                        target="_blank">Genie 3</a>。从"动图"跨越到"可玩关卡"。</li>
-                <li><strong>2025-08-18 (Open Source)</strong>: <a href="https://arxiv.org/abs/2508.13009"
-                        target="_blank">Matrix-Game 2.0</a> 开源。打破垄断，中小团队有了参考。</li>
-                <li><strong>2025-10-21 (Efficiency)</strong>: <a href="https://www.shengshu.com/"
-                        target="_blank">ShengShu</a> 发布 <a href="https://arxiv.org/abs/2512.16093"
-                        target="_blank">TurboDiffusion</a>。证明蒸馏可实现 <strong>100-200x 加速</strong>。</li>
-                <li><strong>2025-11-14 (3D Structure)</strong>: <a href="https://www.world-labs.co/"
-                        target="_blank">World Labs</a> 发布 Marble。将"视频生成"拉回"3D 结构生成"。</li>
-            </ul>
-        </section>
-
-        <div class="commentary">
-            <div class="commentary-title">🛑 深度思考：你该押注哪条线？</div>
-            <p>通过上述分析，赛道的<strong>分叉点</strong>已经非常清晰：</p>
-            <ol>
-                <li><strong>如果你想做内容 (Content)</strong>：
-                    <ul>
-                        <li>首选 <strong><a href="https://openai.com/sora" target="_blank">Sora 2</a> / <a
-                                    href="https://www.vidu.studio/" target="_blank">Vidu</a> / <a
-                                    href="https://pixverse.ai/" target="_blank">PixVerse</a></strong>。利用 API 做"素材工厂"，结合
-                            Unity/UE 组装。优点是确定性高。</li>
-                    </ul>
-                </li>
-                <li><strong>如果你想做平台 (Platform)</strong>：
-                    <ul>
-                        <li>首选复现 <strong><a
-                                    href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/"
-                                    target="_blank">Genie 3</a> / <a href="https://arxiv.org/abs/2508.13009"
-                                    target="_blank">Matrix-Game 2.0</a></strong>。采集 UE 数据 -> 训练 Action-DiT ->
-                            搭建云流媒体。优点是旦跑通就是下一代 Roblox。难点是 Latency 和 Data Pipeline。</li>
-                    </ul>
-                </li>
-            </ol>
+            <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+            <p>行业竞争已经不再是“单一机器人硬件参数”的比较，而是“模型-数据-仿真-部署”的系统工程能力竞争。未来 12~24 个月，谁能把<strong>数据飞轮</strong>和<strong>失败恢复能力</strong>做扎实，谁就更有机会形成商业闭环。</p>
         </div>
 
         <nav class="chapter-nav">
-            <a href="world_model_home.html" class="chapter-nav-link prev">
+            <a href="index.html" class="chapter-nav-link prev">
                 <span class="chapter-nav-label">← 上一章</span>
                 <span class="chapter-nav-title">00. 概览 (Overview)</span>
             </a>
             <a href="02_product.html" class="chapter-nav-link next">
                 <span class="chapter-nav-label">下一章 →</span>
-                <span class="chapter-nav-title">02. 产品深度 (Deep Dive)</span>
+                <span class="chapter-nav-title">02. 产品与系统 (Products)</span>
             </a>
         </nav>
     </main>

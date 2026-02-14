@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10. 更新日志 - World Model Guide</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .log-entry {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--card-shadow);
+        }
+
+        .log-date {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .log-category {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .cat-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .cat-tag.papers {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .cat-tag.company {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .cat-tag.product {
+            background: #ede9fe;
+            color: #7c3aed;
+        }
+
+        .cat-tag.tech {
+            background: #ffedd5;
+            color: #ea580c;
+        }
+
+        .cat-tag.community {
+            background: #fce7f3;
+            color: #db2777;
+        }
+
+        .cat-tag.market {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .cat-tag.policy {
+            background: #e0e7ff;
+            color: #4338ca;
+        }
+
+        .log-content ul {
+            padding-left: 1.5rem;
+            margin: 0;
+        }
+
+        .log-content li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .log-content a {
+            color: var(--accent);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            background: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="aurora-bg">
+        <div class="aurora-blob aurora-blob-1"></div>
+        <div class="aurora-blob aurora-blob-2"></div>
+        <div class="aurora-blob aurora-blob-3"></div>
+        <div class="aurora-blob aurora-blob-4"></div>
+    </div>
+    <nav class="sidebar">
+        <a href="world_model_home.html" class="brand">🚀 World Model Guide</a>
+        <ul class="nav-links">
+            <li class="nav-item"><a href="world_model_home.html" class="nav-link">00. 概览 (Overview)</a></li>
+            <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景 (Landscape)</a></li>
+            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品深度 (Deep Dive)</a></li>
+            <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构 (Architecture)</a></li>
+            <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据工程 (Data Bible)</a></li>
+            <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线 (Roadmap)</a></li>
+            <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
+            <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">07. 论文追踪 (Papers)</a></li>
+            <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">08. 评测基准 (Benchmarks)</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">09. 社区动态 (Community)</a></li>
+            <li class="nav-item"><a href="09_update_log.html" class="nav-link active">10. 更新日志 (Updates)</a></li>
+            <li class="nav-item"><a href="references.html" class="nav-link">附录：参考文献 (Refs)</a></li>
+        </ul>
+        <div class="domain-switch-sidebar">
+            <a href="../index.html" class="domain-switch-btn" aria-label="切换到具身智能领域">🦾 切换到具身智能领域</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h1>10. 更新日志 (Update Log)</h1>
+        <p>本页记录所有内容更新的日期、类别和简要描述。每次调研更新后，都会在此同步记录变更内容。</p>
+
+        <div class="last-updated">
+            ⏰ <strong>最后更新时间</strong>: 2026-02-14 | 本页内容将每日更新「记录世界模型领域各章节的内容变更与可追溯链接」。
+        </div>
+
+        <section>
+            <h2>📊 更新统计</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">总更新天数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">81</div>
+                    <div class="stat-label">总更新条目</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">27</div>
+                    <div class="stat-label">论文</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">9</div>
+                    <div class="stat-label">公司</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">社区讨论</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>📋 更新记录</h2>
+
+            <div class="filter-bar">
+                <span style="color: var(--text-secondary); font-weight: 600;">筛选:</span>
+                <button class="filter-btn active">全部</button>
+                <button class="filter-btn">📄 论文</button>
+                <button class="filter-btn">🏢 公司</button>
+                <button class="filter-btn">🚀 产品</button>
+                <button class="filter-btn">⚙️ 技术</button>
+                <button class="filter-btn">💬 社区</button>
+                <button class="filter-btn">📈 市场</button>
+            </div>
+
+            <div class="log-entry" data-category="tech product">
+                <div class="log-date">📅 2026-02-14</div>
+                <div class="log-category">
+                    <span class="cat-tag tech">⚙️ 技术</span>
+                    <span class="cat-tag product">🚀 产品</span>
+                </div>
+                <div class="log-content">
+                    <h4>站点拆分：世界模型与具身智能独立维护</h4>
+                    <ul>
+                        <li><strong>[UPDATE]</strong> 世界模型域删除“11. 具身智能”章节入口，避免两个领域内容混编；世界模型保持 00-10 + 附录结构。</li>
+                        <li><strong>[NEW]</strong> 新增独立具身智能领域：<a href="../index.html" target="_blank">主站 index.html</a>，并提供独立更新日志 <a href="../09_update_log.html" target="_blank">09_update_log.html</a>。</li>
+                        <li><strong>[NEW]</strong> 世界模型与具身智能页面均新增大按钮切换（手机与 Web 统一可用），实现双域独立更新、互相跳转。</li>
+                        <li><strong>[RULE]</strong> 站点默认入口调整为具身智能；若后续任务未明确指定更新领域，默认与优先更新具身智能域。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2026-02-11 -->
+            <div class="log-entry">
+                <div class="log-date">📅 2026-02-11</div>
+                <div class="log-category">
+                    <span class="cat-tag papers">📄 论文</span>
+                    <span class="cat-tag company">🏢 公司</span>
+                    <span class="cat-tag product">🚀 产品</span>
+                    <span class="cat-tag tech">⚙️ 技术</span>
+                </div>
+                <div class="log-content">
+                    <ul>
+                        <li><strong>[SCAN]</strong> 按“每日例行完整更新”流程完成 01-10 逐章复核：除本次新增 Loopit 的产品/公司调研外，其余章节未发现可追溯的高价值新增产品/公司/社区要点，因此未对 <a href="01_industry.html" target="_blank">01</a>/<a href="03_architecture.html" target="_blank">03</a>/<a href="04_data.html" target="_blank">04</a>/<a href="05_roadmap.html" target="_blank">05</a>/<a href="10_benchmarks.html" target="_blank">08</a>/<a href="08_community.html" target="_blank">09</a> 做内容灌水式更新（宁缺毋滥）。</li>
+                        <li><strong>[NEW]</strong> 产品深度（<a href="02_product.html#loopit" target="_blank">02 - Loopit</a>）：新增 Loopit（SeedLeap）条目，聚焦 “playables + 一键 Remix” 的互动内容形态，并补齐官网/商店页/隐私与条款入口。<sup><a href="https://www.loopit.me/" target="_blank">[官网]</a></sup> <sup><a href="https://apps.apple.com/us/app/loopit-make-playables/id6755859360" target="_blank">[App Store]</a></sup> <sup><a href="https://play.google.com/store/apps/details?id=com.seedleap.loopitapp&hl=en-US" target="_blank">[Google Play]</a></sup></li>
+                        <li><strong>[NEW]</strong> 公司调研（<a href="06_companies.html#seedleap-loopit" target="_blank">06 - SeedLeap / Loopit</a>）：新增 SeedLeap 公司卡片，梳理产品入口、Remix/UGC 机制，以及公开条款/隐私与 Google Play 数据安全声明的可追溯口径。<sup><a href="https://app.loopit.me/privacy" target="_blank">[Privacy]</a></sup> <sup><a href="https://app.loopit.me/terms" target="_blank">[Terms]</a></sup> <sup><a href="https://play.google.com/store/apps/datasafety?id=com.seedleap.loopitapp" target="_blank">[Data safety]</a></sup></li>
+                        <li><strong>[FIX]</strong> Loopit 定位澄清：明确本仓库调研对象为 SeedLeap 的 <strong>AI 互动游戏/可玩内容 APP</strong>（<a href="02_product.html#loopit" target="_blank">02</a>/<a href="06_companies.html#seedleap-loopit" target="_blank">06</a>），并补充“同名应用避混淆”说明。<sup><a href="https://apps.apple.com/us/app/loopit-make-playables/id6755859360" target="_blank">[App Store]</a></sup></li>
+                        <li><strong>[NEW]</strong> 论文追踪（<a href="07_paper_tracker.html#month-2026-02" target="_blank">07 - 2026-02</a>）新增 3 篇高价值论文卡片（含三段解读、来源定位与主图）：latent actions 可迁移对齐、GUI world model、以及多视角 4D world model + test-time 动作推断。</li>
+                        <li><strong>[NEW]</strong> <a href="https://arxiv.org/abs/2602.10104" target="_blank">Olaf-World (arXiv:2602.10104)</a>：提出 Seq∆‑REPA 对齐 latent action 的“控制效果”，提升跨上下文 zero-shot action transfer 与少量标注适配。<sup><a href="https://arxiv.org/abs/2602.10104" target="_blank">[来源]</a></sup></li>
+                        <li><strong>[NEW]</strong> <a href="https://arxiv.org/abs/2602.09856" target="_blank">Code2World (arXiv:2602.09856)</a>：以可渲染代码生成构建 GUI world model，发布 AndroidCode 数据集与开源代码/权重。<sup><a href="https://arxiv.org/abs/2602.09856" target="_blank">[来源]</a></sup> <sup><a href="https://github.com/AMAP-ML/Code2World" target="_blank">[GitHub]</a></sup> <sup><a href="https://huggingface.co/datasets/GD-ML/AndroidCode" target="_blank">[Dataset]</a></sup></li>
+                        <li><strong>[NEW]</strong> <a href="https://arxiv.org/abs/2602.09878" target="_blank">MVISTA-4D (arXiv:2602.09878)</a>：多视角/跨模态一致的 4D 生成式世界模型，并通过 test-time 反向优化推断动作轨迹 latent。<sup><a href="https://arxiv.org/abs/2602.09878" target="_blank">[来源]</a></sup></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2026-02-09 -->
+            <div class="log-entry">
+                <div class="log-date">📅 2026-02-09</div>
+                <div class="log-category">
+                    <span class="cat-tag papers">📄 论文</span>
+                    <span class="cat-tag tech">⚙️ 技术</span>
+                </div>
+                <div class="log-content">
+                    <ul>
+                        <li><strong>[SCAN]</strong> 按“每日例行完整更新”流程完成 01-10 逐章复核：未发现可追溯的高价值新增产品/公司/社区要点，因此未对 <a href="01_industry.html" target="_blank">01</a>/<a href="02_product.html" target="_blank">02</a>/<a href="03_architecture.html" target="_blank">03</a>/<a href="04_data.html" target="_blank">04</a>/<a href="05_roadmap.html" target="_blank">05</a>/<a href="06_companies.html" target="_blank">06</a>/<a href="10_benchmarks.html" target="_blank">08</a>/<a href="08_community.html" target="_blank">09</a> 做内容灌水式更新（宁缺毋滥）。</li>
+                        <li><strong>[NEW]</strong> 新增 <a href="07_paper_tracker.html#month-2026-02" target="_blank">2026-02 论文组</a>：补齐 3 篇与“交互视频/世界模型/推理加速”强相关的新论文，并按 AntiGravity 规范提供三段解读与可追溯链接。</li>
+                        <li><strong>[NEW]</strong> <a href="https://arxiv.org/abs/2602.03747" target="_blank">LIVE (arXiv:2602.03747)</a>：用 cycle-consistency 约束长时误差累积，强调无需 teacher-based distillation，面向 long-horizon interactive video world modeling。<sup><a href="https://arxiv.org/abs/2602.03747" target="_blank">[来源]</a></sup></li>
+                        <li><strong>[NEW]</strong> <a href="https://arxiv.org/abs/2602.02214" target="_blank">Causal Forcing (arXiv:2602.02214)</a>：针对“双向 teacher → 因果 student”的架构鸿沟，提出用 AR teacher 做 ODE 初始化并报告多项指标提升；提供项目页与代码入口。<sup><a href="https://arxiv.org/abs/2602.02214" target="_blank">[来源]</a></sup> <sup><a href="https://thuml.github.io/CausalForcing.github.io/" target="_blank">[Project]</a></sup></li>
+                        <li><strong>[NEW]</strong> <a href="https://arxiv.org/abs/2602.01801" target="_blank">TempCache/AnnSA/AnnCA (arXiv:2602.01801)</a>：training-free 的 KV cache 压缩 + ANN 稀疏注意力，主打长 rollout 下 5×–10× 加速与“近常数”峰值显存。<sup><a href="https://arxiv.org/abs/2602.01801" target="_blank">[来源]</a></sup></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2026-02-02 -->
+            <div class="log-entry">
+                <div class="log-date">📅 2026-02-02</div>
+                <div class="log-category">
+                    <span class="cat-tag tech">⚙️ 技术</span>
+                </div>
+                <div class="log-content">
+                    <ul>
+                        <li><strong>[FIX]</strong> 修复 <a href="04_data.html#physgame" target="_blank">04 数据工程 - PhysGame</a> 的 Mermaid 流程图语法错误（Mermaid v11 对节点文案括号更敏感），避免页面渲染报 <code>Syntax error in text</code>。<sup><a
+                                    href="https://arxiv.org/abs/2601.16471" target="_blank">[来源]</a></sup></li>
+                        <li><strong>[UPDATE]</strong> 统一各章节顶部 <code>last-updated</code> 提示条样式（迁移到全局 <code>css/style.css</code>），并修复 <a href="05_roadmap.html" target="_blank">05 落地路线</a> 的样式不一致问题（仅样式统一，不改变各章节“最后更新时间”的内容口径：只有章节内容实际更新才刷新日期）。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2026-01-31 -->
+            <div class="log-entry">
+                <div class="log-date">📅 2026-01-31</div>
+                <div class="log-category">
+                    <span class="cat-tag tech">⚙️ 技术</span>
+                </div>
+                <div class="log-content">
+                    <ul>
+                        <li><strong>[SCAN]</strong> 按“每日例行完整更新”流程扫描 arXiv/官方来源：未发现可追溯的高价值新增论文/产品/社区要点，因此未对 <a href="02_product.html" target="_blank">02</a>/<a href="03_architecture.html" target="_blank">03</a>/<a href="04_data.html" target="_blank">04</a>/<a href="06_companies.html" target="_blank">06</a>/<a href="07_paper_tracker.html" target="_blank">07</a>/<a href="08_community.html" target="_blank">09</a>/<a href="10_benchmarks.html" target="_blank">08</a> 做内容灌水式更新（宁缺毋滥）</li>
+                        <li><strong>[UPDATE]</strong> 补齐 <a href="01_industry.html" target="_blank">01 行业全景</a> 顶部 <code>last-updated</code> 模块（按 AntiGravity 规范，包含每日更新范围文案）</li>
+                        <li><strong>[UPDATE]</strong> 补齐 <a href="05_roadmap.html" target="_blank">05 落地路线</a> 顶部 <code>last-updated</code> 模块（按 AntiGravity 规范，包含每日更新范围文案）</li>
+                        <li><strong>[UPDATE]</strong> 补齐本页（<a href="09_update_log.html" target="_blank">10 更新日志</a>）顶部 <code>last-updated</code> 模块，并同步更新统计面板</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2026-01-30 -->
+            <div class="log-entry">
+                <div class="log-date">📅 2026-01-30</div>
+                <div class="log-category">
+                    <span class="cat-tag product">🚀 产品</span>
+                    <span class="cat-tag tech">⚙️ 技术</span>
+                    <span class="cat-tag papers">📄 论文</span>
+                </div>
+                <div class="log-content">
+                    <h4>产品深度 (02_product.html)</h4>
+                    <ul>
+                        <li><strong>[UPDATE]</strong> 更新 <a href="02_product.html#genie3">Genie 3</a>：以 <a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">DeepMind 官方博客</a>为准，修正关键引用为“text prompt → real time 24 FPS → 720p → few minutes 一致性”，并移除未披露的毫秒级延迟口径</li>
+                    </ul>
+
+                    <h4>技术架构 (03_architecture.html)</h4>
+                    <ul>
+                        <li><strong>[UPDATE]</strong> 更新 <a href="03_architecture.html">Genie 3 相关表述</a>：明确“官方未披露 tokenizer/动作表示等细节”，并把 tokenizer 拆解改为“以 <a href="https://arxiv.org/abs/2212.05199" target="_blank">MAGVIT (arXiv:2212.05199)</a> 为代表的可追溯示例”</li>
+                    </ul>
+
+                    <h4>论文追踪 (07_paper_tracker.html)</h4>
+                    <ul>
+                        <li><strong>[UPDATE]</strong> 更新 <a href="07_paper_tracker.html#paper-genie3">Genie 3 (DeepMind Blog)</a>：补充官方“several minutes largely consistent + visual memory up to one minute ago”的新口径，并统一为博客规范链接（博文显示 dateModified: 2026-01-29）</li>
+                    </ul>
+
+                    <h4>附录：参考文献 (references.html)</h4>
+                    <ul>
+                        <li><strong>[UPDATE]</strong> 更新 <a href="references.html">Genie 3 专栏</a>：删除未证实的 tokenizer/latent-action 断言，改为“已披露 vs 未披露”清单，并同步官方引用</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2026-01-26 -->
+            <div class="log-entry">
+                <div class="log-date">📅 2026-01-26</div>
+                <div class="log-category">
+                    <span class="cat-tag papers">📄 论文</span>
+                    <span class="cat-tag community">💬 社区</span>
+                    <span class="cat-tag tech">⚙️ 技术</span>
+                </div>
+                <div class="log-content">
+                    <h4>论文追踪 (07_paper_tracker.html)</h4>
+                    <ul>
+                        <li><strong>[NEW]</strong> 新增 <a href="https://arxiv.org/abs/2601.16296" target="_blank">Memory‑V2V (arXiv:2601.16296)</a>：外部视频记忆 + 检索条件化，动态 tokenizer 与 token compressor（约 30% 加速）解决多轮视频编辑的跨轮次一致性</li>
+                        <li><strong>[NEW]</strong> 新增 <a href="https://arxiv.org/abs/2601.16163" target="_blank">Cosmos Policy (arXiv:2601.16163)</a>：把 action / future state / value 编码为 latent frames，单阶段微调预训练视频模型并用 best-of-N + value 做规划，给出 LIBERO/RoboCasa/真实世界成功率</li>
+                        <li><strong>[NEW]</strong> 新增 <a href="https://arxiv.org/abs/2601.16914" target="_blank">LoL (arXiv:2601.16914)</a>：系统分析超长流式生成的 sink-collapse，提出 multi-head RoPE jitter（训练无关）以抑制崩溃，并展示 12 小时连续生成</li>
+                        <li><strong>[NEW]</strong> 新增 <a href="https://arxiv.org/abs/2601.16471" target="_blank">Order from Chaos / PhysGame (arXiv:2601.16471)</a>：从 gameplay glitch 构建物理常识 QA 数据集（PhysGame 140,057；GameBench 880），提升物理推理与泛视频理解</li>
+                        <li><strong>[NEW]</strong> 新增 <a href="https://arxiv.org/abs/2506.08009" target="_blank">Self Forcing (arXiv:2506.08009)</a>：训练期做带 KV cache 的自回归自滚动（self-rollout）+ 视频级整体损失，缓解 exposure bias，实现流式生成与更稳定的长 rollout</li>
+                        <li><strong>[NEW]</strong> 新增 <a href="https://arxiv.org/abs/2412.07772" target="_blank">CausVid (arXiv:2412.07772)</a>：把慢双向视频扩散蒸馏成快因果流式生成（video-DMD、ODE 初始化、非对称蒸馏），实现低初始延迟与持续帧率</li>
+                        <li><strong>[UPDATE]</strong> 论文追踪页面结构升级：新增“按年月折叠 + 二级导航”（默认展开最近 3 个月），修复公式渲染（MathJax），并为每篇论文补充 <strong>来源定位</strong> 与 <strong>🧠 AntiGravity's Commentary</strong></li>
+                        <li><strong>[UPDATE]</strong> 为 arXiv 论文卡片新增“论文主图（Figure 1/首页主图）”展示：主图提取后以本地资源形式存放在 <code>assets/papers/</code>，并在卡片中标注来源定位</li>
+                        <li><strong>[UPDATE]</strong> 按 arXiv 官方 published date 校准论文日期展示（用于更准确的年月折叠与浏览）</li>
+                        <li><strong>[UPDATE]</strong> Benchmarks 升级为独立一级章节 <a href="10_benchmarks.html" target="_blank">10_benchmarks.html</a>：沉淀业界常用的评测基准与评测方法（包含使用方式、评测重点与引用链接），保持与论文追踪一致的三段解读风格</li>
+                        <li><strong>[UPDATE]</strong> Benchmarks 聚焦到“视频生成/世界模型”评测：移除视频理解类基准（如 MVBench），避免评测口径跑偏</li>
+                    </ul>
+
+                    <h4>核心技术架构 (03_architecture.html)</h4>
+                    <ul>
+                        <li><strong>[UPDATE]</strong> 新增两条“最新增量架构信号”：LoL 的 sink-collapse→RoPE jitter 修复链路；Memory‑V2V/Cosmos Policy 的“统一序列建模/显式状态”模式总结（含流程图）</li>
+                    </ul>
+
+                    <h4>数据工程 (04_data.html)</h4>
+                    <ul>
+                        <li><strong>[UPDATE]</strong> 新增 PhysGame 数据工程案例：用 gameplay glitch + metadata 做 meta-guided QA 自动构造，作为物理常识反例监督源（含流程图）</li>
+                    </ul>
+
+                    <h4>社区动态 (08_community.html)</h4>
+                    <ul>
+                        <li><strong>[NEW]</strong> 新增 Cosmos Policy 相关讨论条目：围绕“无架构改动的统一扩散序列建模 + 规划入口”总结社区关注点（采样数 N、延迟预算、OOD 失败模式）</li>
+                        <li><strong>[UPDATE]</strong> 社区动态页面结构升级：🟢/🔴 改为上下排列，并为每条讨论补充 <strong>🧠 AntiGravity's Commentary</strong></li>
+                    </ul>
+
+                    <h4>技术/规范</h4>
+                    <ul>
+                        <li><strong>[UPDATE]</strong> 更新 <code>.agent/workflows/antigravity-content-guide.md</code>：按 01-08 章节逐页更新、无高价值内容可跳过；07/08 强制三段垂直结构（🟢→🔴→🧠）、引用需标注论文章节/图表、建议提供“问题&因果逻辑图”</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2026-01-24 -->
+            <div class="log-entry">
+                <div class="log-date">📅 2026-01-24</div>
+                <div class="log-category">
+                    <span class="cat-tag papers">📄 论文</span>
+                </div>
+                <div class="log-content">
+                    <h4>论文追踪 (07_paper_tracker.html)</h4>
+                    <ul>
+                        <li><strong>[NEW]</strong> 新增 <a href="https://arxiv.org/abs/2601.15281" target="_blank">StableWorld (arXiv:2601.15281)</a>：用 ORB+RANSAC 的“动态逐出机制”在滑窗内保留干净参考帧，抑制长期 drift；补充 VBench-Long 量化结果与流程 SVG</li>
+                        <li><strong>[NEW]</strong> 新增 <a href="https://arxiv.org/abs/2601.12719" target="_blank">S2DiT (arXiv:2601.12719)</a>：移动端流式视频生成的 Sandwich DiT（LCHA+SSA+预算搜索）与 2-in-1 蒸馏（cached KD + self-forcing），补充结构 SVG</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2026-01-23 -->
+            <div class="log-entry">
+                <div class="log-date">📅 2026-01-23</div>
+                <div class="log-category">
+                    <span class="cat-tag papers">📄 论文</span>
+                    <span class="cat-tag tech">⚙️ 技术</span>
+                </div>
+                <div class="log-content">
+                    <h4>论文追踪 (07_paper_tracker.html)</h4>
+                    <ul>
+                        <li><strong>[UPDATE]</strong> LongLive：补齐 <a href="https://arxiv.org/abs/2509.22622" target="_blank">arXiv:2509.22622</a> / <a href="https://github.com/NVlabs/LongLive" target="_blank">GitHub</a> 链接，并把“🔴 专业解析”升级为可复现的机制拆解（KV-recache、Streaming Long Tuning、Frame Sink）+ SVG 流程图</li>
+                        <li><strong>[UPDATE]</strong> WAN 2.1/2.2：补齐 <a href="https://arxiv.org/abs/2503.20314" target="_blank">arXiv:2503.20314</a> / GitHub 链接，并把“🔴 专业解析”升级为逐条优化点（MoE、美学数据与标签、VAE 压缩与缓存等）+ SVG 结构图</li>
+                        <li><strong>[FIX]</strong> 修正原“4D Geometric Control”条目引用错误：替换为 <a href="https://arxiv.org/abs/2601.05138" target="_blank">VerseCrafter (arXiv:2601.05138)</a>，并补充 4D 控制表示、GeoAdapter 注入与数据引擎细节 + SVG 链路图</li>
+                        <li><strong>[UPDATE]</strong> TurboDiffusion / Matrix-Game 2.0：强化“🔴 专业解析”为系统级加速栈/数据管线/蒸馏范式的可复现拆解，并增加 SVG 全链路示意图</li>
+                    </ul>
+
+                    <h4>附录：深度论文解析 (references.html)</h4>
+                    <ul>
+                        <li><strong>[UPDATE]</strong> 补齐 LongLive 与 WAN 2.1/2.2 专栏的官方链接（arXiv/Project/GitHub）</li>
+                    </ul>
+
+                    <h4>技术/规范</h4>
+                    <ul>
+                        <li><strong>[UPDATE]</strong> 强化 <code>.agent/workflows/antigravity-content-guide.md</code>：新增“🔴 专业解析深度要求（必须可复现 + 重要论文必须配图）”规则，用于指导后续更新</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2026-01-21 -->
+            <div class="log-entry">
+                <div class="log-date">📅 2026-01-21</div>
+                <div class="log-category">
+                    <span class="cat-tag company">🏢 公司</span>
+                    <span class="cat-tag product">🚀 产品</span>
+                    <span class="cat-tag tech">⚙️ 技术</span>
+                </div>
+                <div class="log-content">
+                    <h4>产品深度 (02_product.html)</h4>
+                    <ul>
+                        <li><strong>[ADD]</strong> <a href="02_product.html#magi1">Sand.ai - Magi-1</a>：开源自回归 chunk 流式生成路线与部署要点</li>
+                        <li><strong>[ADD]</strong> <a href="02_product.html#moki">美图 - MOKI</a>：脚本→分镜→素材→剪辑→配乐/字幕的工作流拆解</li>
+                        <li><strong>[ADD]</strong> <a href="02_product.html#kling">快手 - 可灵 AI (Kling)</a>：能力层（续写/口型/多元素）视角解读</li>
+                        <li><strong>[ADD]</strong> <a href="02_product.html#jimeng">抖音/字节 - 即梦 AI</a>：工具+社区+同款复用的创作闭环</li>
+                        <li><strong>[ADD]</strong> <a href="02_product.html#huiwa">阿里 - 绘蛙</a>：电商“图+文案+模特资产”生产线</li>
+                        <li><strong>[ADD]</strong> <a href="02_product.html#hailuo">MiniMax - 海螺视频</a>：模型/规格/成本/闲时无限生成的产品化策略</li>
+                        <li><strong>[FIX]</strong> <a href="02_product.html">修复 Vidu/TurboDiffusion 段落的 blockquote/HTML 结构</a></li>
+                    </ul>
+
+                    <h4>公司调研 (06_companies.html)</h4>
+                    <ul>
+                        <li><strong>[ADD]</strong> <a href="06_companies.html#sandai">Sand.ai（三呆科技）</a>：Magi-1 开源与推理栈（论文/代码/权重）</li>
+                        <li><strong>[ADD]</strong> <a href="06_companies.html#meitu-moki">美图 - MOKI</a>：短片创作工作流与成本可控定位</li>
+                        <li><strong>[ADD]</strong> <a href="06_companies.html#kuaishou-kling">快手 - 可灵 AI</a>：视频生成能力模块化（续写/口型/多元素）</li>
+                        <li><strong>[ADD]</strong> <a href="06_companies.html#bytedance-jimeng">字节/抖音 - 即梦 AI</a>：创作社区与同款复用机制</li>
+                        <li><strong>[ADD]</strong> <a href="06_companies.html#alibaba-huiwa">阿里 - 绘蛙</a>：电商营销内容创作平台</li>
+                        <li><strong>[ADD]</strong> <a href="06_companies.html#minimax-hailuo">MiniMax - 海螺视频</a>：规格/成本梯度与闲时无限生成策略</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2026-01-20 -->
+            <div class="log-entry">
+                <div class="log-date">📅 2026-01-20</div>
+                <div class="log-category">
+                    <span class="cat-tag papers">📄 论文</span>
+                    <span class="cat-tag community">💬 社区</span>
+                    <span class="cat-tag tech">⚙️ 技术</span>
+                </div>
+                <div class="log-content">
+                    <h4>论文追踪 (07_paper_tracker.html)</h4>
+                    <ul>
+                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">LongLive: Real-time Interactive Long Video Generation</a>（已补齐：<a href="https://arxiv.org/abs/2509.22622" target="_blank">arXiv:2509.22622</a> / <a href="https://nvlabs.github.io/LongLive/" target="_blank">Project</a> / <a href="https://github.com/NVlabs/LongLive" target="_blank">GitHub</a>）</li>
+                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">Wan 2.2</a>（已补齐：<a href="https://arxiv.org/abs/2503.20314" target="_blank">Wan paper</a> / <a href="https://github.com/Wan-Video/Wan2.2" target="_blank">GitHub</a>）</li>
+                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">Wan 2.1</a>（已补齐：<a href="https://arxiv.org/abs/2503.20314" target="_blank">Wan paper</a> / <a href="https://github.com/Wan-Video/Wan2.1" target="_blank">GitHub</a>）</li>
+                    </ul>
+
+                    <h4>社区动态 (08_community.html)</h4>
+                    <ul>
+                        <li><strong>[NEW]</strong> <a href="08_community.html">社区综合（多帖汇总）</a> - LongLive/实时交互长视频：讨论焦点从画质转向 latency/drift/state 可恢复性</li>
+                        <li><strong>[NEW]</strong> <a href="08_community.html">X/Twitter 热议</a> - WAN 2.1 vs 2.2：版本差异是否体现为“可交互门槛”的系统优化</li>
+                    </ul>
+
+                    <h4>附录：深度论文解析 (references.html)</h4>
+                    <ul>
+                        <li><strong>[UPDATE]</strong> 新增 <a href="references.html">LongLive 专栏</a>：按 Streaming / State / Action Injection / Drift 抑制 / 延迟评测拆解</li>
+                        <li><strong>[UPDATE]</strong> 新增 <a href="references.html">WAN 2.1/2.2 对比专栏</a>：给出版本对比的系统指标框架与落地判据</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2026-01-17 -->
+            <div class="log-entry">
+                <div class="log-date">📅 2026-01-17 (初版发布)</div>
+                <div class="log-category">
+                    <span class="cat-tag papers">📄 论文</span>
+                    <span class="cat-tag company">🏢 公司</span>
+                    <span class="cat-tag community">💬 社区</span>
+                    <span class="cat-tag tech">⚙️ 技术</span>
+                </div>
+                <div class="log-content">
+                    <h4>论文追踪 (07_paper_tracker.html)</h4>
+                    <ul>
+                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">arXiv:2601.05232</a> - 4D Geometric
+                            Control for Video World Models (2026-01-09)</li>
+                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">ChronoDreamer</a> -
+                            Action-Conditioned World Model for Robotic Planning (2025-12-23)</li>
+                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">arXiv:2512.16093</a> -
+                            TurboDiffusion: 100-200x Speedup (2025-12-20)</li>
+                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">RELIC</a> - Interactive Video World
+                            Model with Long-Horizon Memory (2025-12-15)</li>
+                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">WorldGym</a> - World Model as
+                            Environment for Policy Evaluation (2025-09-19)</li>
+                        <li><strong>[NEW]</strong> <a href="07_paper_tracker.html">arXiv:2508.13009</a> - Matrix-Game
+                            2.0 Open Source (2025-08-18)</li>
+                    </ul>
+
+                    <h4>公司调研 (06_companies.html)</h4>
+                    <ul>
+                        <li><strong>[NEW]</strong> <a href="06_companies.html#shengshu">生数科技 (ShengShu)</a> - 完整
+                            Profile: 融资历程 (天使轮→A轮), 核心团队 (罗怡航/唐家渝/朱军/鲍凡), 产品 (Vidu 2.0)</li>
+                        <li><strong>[NEW]</strong> <a href="06_companies.html#aisphere">爱诗科技 (AISphere)</a> - 完整
+                            Profile: 融资历程 (A1-A5→B→B+), 团队 (王长虎), 产品 (PixVerse V5.5)</li>
+                    </ul>
+
+                    <h4>社区动态 (08_community.html)</h4>
+                    <ul>
+                        <li><strong>[NEW]</strong> <a href="08_community.html">X/Twitter 热议</a> - Genie 3 是否真正理解因果关系的讨论
+                        </li>
+                        <li><strong>[NEW]</strong> <a href="08_community.html">r/MachineLearning</a> - Matrix-Game 2.0
+                            数据管线才是核心护城河</li>
+                        <li><strong>[NEW]</strong> <a href="08_community.html">Medium 博客</a> - 2025 年从视频生成到世界模型的转变</li>
+                        <li><strong>[NEW]</strong> <a href="08_community.html">HuggingFace Forums</a> - RTX 4090 跑通
+                            Matrix-Game 2.0 的经验</li>
+                    </ul>
+
+                    <h4>技术/规范</h4>
+                    <ul>
+                        <li><strong>[NEW]</strong> 创建 <a
+                                href="https://github.com/dingguanglei/world-model-interactive-guide/blob/main/.agent/workflows/antigravity-content-guide.md"
+                                target="_blank">AntiGravity 内容撰写规范指南</a></li>
+                        <li><strong>[FIX]</strong> YouTube iframe Error 153 → 改用可点击缩略图方案</li>
+                        <li><strong>[FIX]</strong> Mermaid Gantt 图表标签重叠 → 简化英文标签 + 显式配置</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Template for future updates -->
+            <!--
+            <div class="log-entry">
+                <div class="log-date">📅 YYYY-MM-DD</div>
+                <div class="log-category">
+                    <span class="cat-tag papers">📄 论文</span>
+                </div>
+                <div class="log-content">
+                    <ul>
+                        <li><strong>[NEW/UPDATE/FIX]</strong> <a href="page.html">描述</a></li>
+                    </ul>
+                </div>
+            </div>
+            -->
+        </section>
+
+        <div class="commentary">
+            <div class="commentary-title">📝 如何使用更新日志</div>
+            <ul>
+                <li><strong>快速定位变更</strong>: 按日期查看每天更新了什么内容</li>
+                <li><strong>追踪特定类别</strong>: 使用筛选按钮只看论文/公司等特定类型的更新</li>
+                <li><strong>跳转到详情</strong>: 点击条目链接直接跳转到具体更新位置</li>
+                <li><strong>验证时效性</strong>: 根据日期判断信息是否足够新</li>
+            </ul>
+        </div>
+
+        <nav class="chapter-nav">
+            <a href="08_community.html" class="chapter-nav-link prev">
+                <span class="chapter-nav-label">← 上一章</span>
+                <span class="chapter-nav-title">09. 社区动态 (Community)</span>
+            </a>
+            <a href="references.html" class="chapter-nav-link next">
+                <span class="chapter-nav-label">下一章 →</span>
+                <span class="chapter-nav-title">附录：参考文献 (Refs)</span>
+            </a>
+        </nav>
+    </main>
+</body>
+
+</html>

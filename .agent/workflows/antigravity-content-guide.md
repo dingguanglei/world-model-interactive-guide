@@ -64,17 +64,13 @@ description: AntiGravity 高质量内容撰写规范指南
 - 使用独特的视觉样式（如粉色背景卡片）与正文区分
 - 可以辛辣、可以犀利，但不能混入事实陈述
 
-### 1.4 双领域独立维护原则 (Dual-Domain Maintenance)
-> **"世界模型与具身智能是两个独立研究域：结构独立、日志独立、更新决策独立。"**
+### 1.4 单领域主站与 Legacy 原则 (Single-Domain + Legacy)
+> **"主站只维护具身智能；世界模型历史内容统一进入 legacy，只读归档。"**
 
-- 站点采用双领域结构：
-  - **默认入口（具身智能）**：`world_model_interactive_guide/index.html`（默认跳转）
-  - **具身智能领域页**：`world_model_interactive_guide/embodied_intelligence/index.html`
-  - **世界模型领域页**：`world_model_interactive_guide/world_model_home.html`
-- 更新日志必须分离：
-  - 世界模型：`world_model_interactive_guide/09_update_log.html`
-  - 具身智能：`world_model_interactive_guide/embodied_intelligence/update_log.html`
-- 若任务未明确指定更新领域：**默认并优先更新具身智能领域**。
+- 主站唯一领域：**具身智能**（`world_model_interactive_guide/index.html`）
+- 历史世界模型内容：`world_model_interactive_guide/legacy/`（归档，不纳入主站日更）
+- 主站更新日志：`world_model_interactive_guide/09_update_log.html`
+- 若任务未明确指定范围：默认按具身智能主站章节执行更新。
 
 ---
 
@@ -286,39 +282,32 @@ description: AntiGravity 高质量内容撰写规范指南
 
 ## 六、全面更新规范 (Comprehensive Update Protocol)
 
-> **核心原则**: 不仅仅是论文需要更新。任何与“世界模型 / 具身智能”相关的内容有变化时，都必须及时更新，并记录在对应领域更新日志中。
+> **核心原则**: 不仅仅是论文需要更新。任何与具身智能主站相关的内容有变化时，都必须及时更新，并记录在主站更新日志中。
 
 ### 6.1 更新范围 (Update Scope)
-每次调研更新必须先判定领域，再按该领域的章节顺序扫描；只在“确有高价值增量信息”时更新对应页面。
+每次调研更新按具身智能主站章节顺序扫描；只在“确有高价值增量信息”时更新对应页面。
 
-#### 6.1.1 领域判定（强制）
-- 若任务明确写了领域（世界模型 / 具身智能）：按用户指定执行。
-- 若任务未明确写领域：**默认并优先更新具身智能领域**。
+#### 6.1.1 主站更新顺序（强制）
+- **00. 概览**（`index.html`）
+- **01. 行业全景**（`01_industry.html`）
+- **02. 产品与系统**（`02_product.html`）
+- **03. 技术架构**（`03_architecture.html`）
+- **04. 数据采集与合成**（`04_data.html`）
+- **05. 仿真环境**（`05_roadmap.html`）
+- **06. 强化学习进展**（`06_companies.html`）
+- **07. 论文追踪**（`07_paper_tracker.html`）
+- **08. 评测基准**（`10_benchmarks.html`）
+- **09. 社区动态**（`08_community.html`）
+- **10. 更新日志**（`09_update_log.html`）
+- **附录**（`references.html`）
 
-#### 6.1.2 世界模型领域更新顺序（强制）
-- `world_model_home.html`（仅在概览内容实质变化时更新）
-- **01. 行业全景与赛道分层**
-- **02. 主流产品深度解析**
-- **03. 核心技术架构与关键论文**
-- **04. 深度数据工程：合成数据与自动标注**
-- **05. 落地路线图与商业化**
-- **06. 核心公司深度调研**
-- **07. 最新论文追踪**
-- **08. 评测基准与评测方法（Benchmarks）**
-- **09. 社区动态与非官方讨论**
-- **10. 更新日志（`09_update_log.html`）**
+#### 6.1.2 Legacy 约束（强制）
+- `legacy/` 目录仅用于历史归档与回溯，不作为主站日更对象。
+- 若必须修复 legacy 页面（例如失效链接/渲染崩溃），需在主站更新日志注明“归档修复”。
 
-#### 6.1.3 具身智能领域更新顺序（强制）
-- `embodied_intelligence/index.html`（先更新本页四大主模块）
-  - `#data-collection`
-  - `#data-synthesis`
-  - `#simulation`
-  - `#rl-progress`
-- `embodied_intelligence/update_log.html`
-
-#### 6.1.4 质量优先（强制）
+#### 6.1.3 质量优先（强制）
 - 若某页面当天**没有高价值、可追溯**的新信息：**允许不更新该页面**（宁缺毋滥）。
-- 允许“只更新部分页面”，但必须在**对应领域更新日志**记录本次覆盖范围。
+- 允许“只更新部分页面”，但必须在 `09_update_log.html` 记录本次覆盖范围。
 
 每次调研更新的类别清单（用于日志打标）：
 
@@ -334,13 +323,8 @@ description: AntiGravity 高质量内容撰写规范指南
 
 ### 6.2 更新流程 (Update Workflow)
 ```
-0. 先做领域判定：
-   - 任务明确写了领域 → 按指定领域执行
-   - 任务未明确写领域 → 默认并优先更新具身智能
-
-1. 按选定领域执行多维度搜索:
-   - 世界模型：site:arxiv.org world model interactive video [年份]
-   - 具身智能：site:arxiv.org embodied intelligence robotics policy learning [年份]
+1. 按具身智能主站执行多维度搜索:
+   - site:arxiv.org embodied intelligence robotics policy learning [年份]
    - [公司名] funding valuation announcement [年份]
    - [产品名] new version release
    
@@ -352,17 +336,16 @@ description: AntiGravity 高质量内容撰写规范指南
    - 若“无高价值增量” → 跳过该页面
    - 若“有高价值增量” → 更新对应页面（按日期从新到旧），并标注更新时间/引用来源
    
-4. 同步更新日志（按领域）:
+4. 同步更新日志 (`09_update_log.html`):
    - 记录日期、更新类别、简要描述
    - 链接到具体更新位置
 ```
 
 ### 6.3 更新日志规范 (Update Log Standards)
-**必须按领域维护独立更新日志页面**，记录对应领域内容变更。
+**必须维护主站更新日志页面** (`09_update_log.html`)，记录具身智能主站内容变更。
 
-#### 6.3.1 日志页面映射（强制）
-- 世界模型：`09_update_log.html`
-- 具身智能：`embodied_intelligence/update_log.html`
+#### 6.3.1 Legacy 记录规范（强制）
+- 与 legacy 目录相关的修复/迁移，也要在 `09_update_log.html` 中单独标注“Legacy”类别或说明。
 
 #### 日志条目格式:
 ```html
@@ -500,8 +483,8 @@ description: AntiGravity 高质量内容撰写规范指南
 □ 没有任何占位符文本
 □ 没有任何无效/空链接
 □ 最后更新时间已刷新
-□ 已按规则判定更新领域（未指定时默认并优先具身智能）
-□ 更新内容已写入对应领域更新日志（世界模型 / 具身智能）
+□ 更新内容已写入主站更新日志（09_update_log.html）
+□ 若涉及 legacy 修复，已在更新日志中明确标注
 ```
 
 ### 公司调研检查
@@ -539,29 +522,22 @@ description: AntiGravity 高质量内容撰写规范指南
 
 ### 8.1 标准章节结构
 ```
-站点默认入口: index.html（默认进入具身智能）
-
-具身智能领域:
-00. 领域总览 (embodied_intelligence/index.html)
-01. 数据采集方法
-02. 数据合成方法
-03. 仿真环境
-04. 强化学习进展
-05. 更新日志 (embodied_intelligence/update_log.html)
-
-世界模型领域:
-00. 概览 (world_model_home.html)
+主站（具身智能）:
+00. 概览 (index.html)
 01. 行业全景 (Landscape)
-02. 产品深度 (Deep Dive)
+02. 产品与系统 (Products)
 03. 技术架构 (Architecture)
-04. 数据工程 (Data Bible)
-05. 落地路线 (Roadmap)
-06. 公司调研 (Companies)
+04. 数据采集与合成 (Data)
+05. 仿真环境 (Simulation)
+06. 强化学习进展 (RL Progress)
 07. 论文追踪 (Papers)
 08. 评测基准 (Benchmarks)
 09. 社区动态 (Community)
 10. 更新日志 (09_update_log.html)
 附录. 参考文献 (Refs)
+
+历史归档:
+Legacy. 世界模型历史内容 (legacy/)
 ```
 
 ### 8.2 侧边栏更新
@@ -638,11 +614,14 @@ description: AntiGravity 高质量内容撰写规范指南
 
 ---
 
-**版本**: 2.3  
+**版本**: 2.4  
 **最后更新**: 2026-02-14  
 **作者**: 丁光磊
 
 ### Changelog
+- **v2.4 (2026-02-14)**:
+  - 重构: 规则由“双领域”切换为“具身智能单领域主站 + legacy 历史归档”
+  - 变更: 更新顺序、更新日志规范、导航结构全部对齐主站章节
 - **v2.3 (2026-02-14)**:
   - 新增: 双领域独立维护原则（世界模型 / 具身智能）
   - 新增: 默认入口与默认更新优先级（未指定时优先具身智能）
