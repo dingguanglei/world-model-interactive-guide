@@ -13,13 +13,18 @@
 
 站点已拆分为两个独立领域，并通过页面内的大按钮双向切换：
 
-- **世界模型（World Model）**：`/index.html`（原 00-10 + 附录结构）
+- **默认入口（具身智能）**：`/index.html`（会默认进入具身智能领域）
 - **具身智能（Embodied Intelligence）**：`/embodied_intelligence/index.html`（独立导航与独立更新日志）
+- **世界模型（World Model）**：`/world_model_home.html`（原 00-10 + 附录结构）
 
 更新日志也已拆分，互不干扰：
 
 - 世界模型更新日志：`/09_update_log.html`
 - 具身智能更新日志：`/embodied_intelligence/update_log.html`
+
+### 默认更新策略
+
+- 若未明确指定更新领域，默认并优先更新 **具身智能** 领域内容。
 
 ## 技能库 (Skills)
 
