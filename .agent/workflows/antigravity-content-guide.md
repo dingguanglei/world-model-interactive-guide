@@ -72,6 +72,7 @@ description: AntiGravity 高质量内容撰写规范指南
 - 主站更新日志：`world_model_interactive_guide/09_update_log.html`
 - 若任务未明确指定范围：默认按具身智能主站章节执行更新。
 - 默认执行策略：搜索、批量替换、自动化写入时一律排除 `legacy/`，除非用户明确要求处理归档内容。
+- 主站调研优先级：**数据采集方法、数据合成方法、仿真环境、强化学习进展**（核心对应 `04_data.html`、`05_roadmap.html`、`06_companies.html`）。
 
 ---
 
