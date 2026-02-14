@@ -106,7 +106,7 @@
         </section>
 
         <section>
-            <h2>4.3 工程化数据流水线模板</h2>
+            <h2>4.3 工程化数据流水线示意</h2>
             <pre class="mermaid">
 flowchart LR
     A[任务定义] --> B[真实采集/遥操作]
@@ -121,11 +121,11 @@ flowchart LR
         </section>
 
         <section>
-            <h2>4.4 数据质量门禁（上线前必须量化）</h2>
+            <h2>4.4 数据质量评估维度（量化视角）</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>门禁项</th>
+                        <th>评估项</th>
                         <th>检查目标</th>
                         <th>典型失败信号</th>
                     </tr>
@@ -237,11 +237,11 @@ flowchart LR
         </section>
 
         <section>
-            <h2>4.6 选型建议：按阶段组合平台</h2>
+            <h2>4.6 选型观察：按阶段组合平台</h2>
             <ul>
                 <li><strong>P0 快速验证</strong>：PyBullet / ManiSkill + 小规模真实采集，尽快验证任务可行性。</li>
                 <li><strong>P1 策略迭代</strong>：Isaac Lab 或 MuJoCo + 失败样本回流，建立数据回归体系。</li>
-                <li><strong>P2 系统联调</strong>：Gazebo/ROS 联调 + 真实场景回放，验证部署稳定性与安全门禁。</li>
+                <li><strong>P2 系统联调</strong>：Gazebo/ROS 联调 + 真实场景回放，验证部署稳定性与安全评估指标。</li>
                 <li><strong>P3 规模化</strong>：主平台 + 备用平台双轨回归，避免单一仿真栈导致系统性偏差。</li>
             </ul>
         </section>

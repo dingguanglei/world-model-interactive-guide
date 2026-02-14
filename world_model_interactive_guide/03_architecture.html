@@ -144,17 +144,17 @@ flowchart LR
         </section>
 
         <section>
-            <h2>3.5 上线前架构审查清单（工程必做）</h2>
+            <h2>3.5 部署阶段关键架构要素</h2>
             <ol>
                 <li><strong>接口审计</strong>：明确感知输出、规划输入、控制输出的 schema 与频率。</li>
                 <li><strong>时延预算</strong>：拆解感知/推理/控制端耗时，验证闭环是否满足任务要求。</li>
-                <li><strong>安全回路</strong>：碰撞检测、力矩阈值、急停链路必须独立可测。</li>
-                <li><strong>回放回归</strong>：新增策略前必须通过历史失败样本回放与对照回归。</li>
+                <li><strong>安全回路</strong>：碰撞检测、力矩阈值、急停链路通常与主策略独立验证。</li>
+                <li><strong>回放回归</strong>：策略迭代通常会引入历史失败样本回放与对照回归。</li>
             </ol>
         </section>
 
         <section>
-            <h2>3.6 端到端时延预算（Latency Budget）拆解模板</h2>
+            <h2>3.6 端到端时延预算（Latency Budget）拆解视角</h2>
             <table>
                 <thead>
                     <tr>
@@ -198,7 +198,7 @@ flowchart LR
         </section>
 
         <section>
-            <h2>3.7 训练-部署偏差（Train-Serve Gap）治理</h2>
+            <h2>3.7 训练-部署偏差（Train-Serve Gap）的典型治理路径</h2>
             <div class="media-grid">
                 <div class="media-card">
                     <h4>常见偏差</h4>
@@ -217,10 +217,10 @@ flowchart LR
                     </ul>
                 </div>
                 <div class="media-card">
-                    <h4>上线门禁</h4>
+                    <h4>版本评估关注项</h4>
                     <ul>
                         <li>不仅看成功率，还要看恢复率与安全事件率</li>
-                        <li>新版本必须通过“旧任务回归 + 新任务扩展”双测</li>
+                        <li>新版本通常需要通过“旧任务回归 + 新任务扩展”双测</li>
                         <li>保留可回滚策略与模型版本审计链</li>
                     </ul>
                 </div>

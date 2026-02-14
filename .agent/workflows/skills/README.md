@@ -21,7 +21,7 @@ description: AntiGravity Skills 索引（可自动发现/导航）
 - **适用范围**：
   - 主站（具身智能）：`world_model_interactive_guide/index.html` + `01~10` + `11_edge_chip.html` + `09_update_log.html` + `references.html`
   - 历史归档（只读）：`world_model_interactive_guide/legacy/`
-  - 默认规则：自动扫描与批量修改操作应排除 `legacy/`，仅在明确要求时处理归档页
+  - 强制规则：后续常规更新一律忽略 `legacy/`（不扫描、不改写、不批量替换）
   - 关键章节清单：行业全景、公司调研、产品调研、落地路线、技术架构方案、端侧芯片调研、仿真环境、数据工程、论文追踪、评测基准、社区讨论
 
 ### 2) 论文主图自动提取与嵌入（Paper Figure Extraction）
