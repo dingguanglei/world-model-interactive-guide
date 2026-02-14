@@ -55,56 +55,128 @@
         </section>
 
         <section>
-            <h2>2) 代表性端侧芯片路线（官方入口）</h2>
+            <h2>2) 主流端侧芯片参数对比（公开口径）</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>路线</th>
-                        <th>代表产品/平台</th>
-                        <th>典型定位</th>
-                        <th>主要生态入口</th>
+                        <th>平台</th>
+                        <th>代表产品/芯片</th>
+                        <th>官方算力口径</th>
+                        <th>功耗/能效口径</th>
+                        <th>典型软件生态</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td><strong>NVIDIA Jetson</strong></td>
-                        <td><a href="https://developer.nvidia.com/embedded/jetson-modules" target="_blank">Jetson Modules</a> / <a href="https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/" target="_blank">Jetson Orin</a></td>
-                        <td>中高算力端侧推理与机器人主控</td>
+                        <td><a href="https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/" target="_blank">Jetson AGX Orin</a></td>
+                        <td>最高 <strong>275 TOPS</strong></td>
+                        <td>官方给出可配置 <strong>15W-60W</strong></td>
                         <td><a href="https://developer.nvidia.com/isaac/ros" target="_blank">Isaac ROS</a></td>
                     </tr>
                     <tr>
                         <td><strong>Qualcomm Robotics</strong></td>
-                        <td><a href="https://www.thundercomm.com/product/qualcomm-robotics-rb5-development-kit/" target="_blank">RB5 Dev Kit</a> / <a href="https://www.thundercomm.com/product/qualcomm-robotics-rb6-development-kit/" target="_blank">RB6 Dev Kit</a></td>
-                        <td>低功耗视觉与边缘 AI 机器人平台</td>
+                        <td><a href="https://www.thundercomm.com/product/qualcomm-robotics-rb5-development-kit/" target="_blank">RB5 Dev Kit (QRB5165)</a></td>
+                        <td>页面披露约 <strong>15 TOPS</strong></td>
+                        <td>强调边缘端高能效 AI（页面未给同口径整机 TDP）</td>
                         <td><a href="https://www.qualcomm.com/internet-of-things" target="_blank">Qualcomm IoT</a></td>
                     </tr>
                     <tr>
                         <td><strong>Hailo</strong></td>
                         <td><a href="https://hailo.ai/products/ai-accelerators/hailo-8-ai-accelerator/" target="_blank">Hailo-8</a></td>
-                        <td>作为协处理加速器补强视觉推理</td>
+                        <td>官方页面披露 <strong>26 TOPS</strong></td>
+                        <td>强调边缘端高能效（具体功耗取决于模型与板级实现）</td>
                         <td><a href="https://github.com/hailo-ai/hailo_model_zoo" target="_blank">Hailo Model Zoo</a></td>
                     </tr>
                     <tr>
                         <td><strong>Google Coral</strong></td>
                         <td><a href="https://developers.google.com/coral" target="_blank">Coral Edge TPU</a></td>
-                        <td>超低功耗推理与轻量端侧任务</td>
+                        <td>单 Edge TPU 约 <strong>4 TOPS</strong></td>
+                        <td>官方文档披露约 <strong>2 TOPS/W</strong></td>
                         <td><a href="https://github.com/google-coral/edgetpu" target="_blank">Edge TPU GitHub</a></td>
                     </tr>
                     <tr>
                         <td><strong>MCU + AI 协同</strong></td>
                         <td><a href="https://www.st.com/en/microcontrollers-microprocessors/stm32n6-series.html" target="_blank">STM32N6</a></td>
-                        <td>低功耗控制、安全隔离与端侧感知补充</td>
+                        <td>官方页面披露 NPU 最高 <strong>600 GOPS @ 1GHz</strong></td>
+                        <td>面向低功耗边缘场景（功耗随频率与工作负载变化）</td>
                         <td><a href="https://ai.google.dev/edge/litert/microcontrollers/overview" target="_blank">TFLite Micro</a></td>
                     </tr>
                 </tbody>
             </table>
             <p style="font-size: 0.92rem; color: var(--text-secondary);">
-                注：TOPS、INT8/FP16 等为厂商口径，跨平台横向对比需统一模型、算子与延迟指标后再判断。
+                参数来源：<a href="https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/" target="_blank">NVIDIA Jetson Orin</a>、
+                <a href="https://www.thundercomm.com/product/qualcomm-robotics-rb5-development-kit/" target="_blank">Thundercomm RB5</a>、
+                <a href="https://hailo.ai/products/ai-accelerators/hailo-8-ai-accelerator/" target="_blank">Hailo-8</a>、
+                <a href="https://coral.ai/docs/edgetpu/benchmarks/" target="_blank">Coral Edge TPU Benchmarks</a>、
+                <a href="https://www.st.com/en/microcontrollers-microprocessors/stm32n6-series.html" target="_blank">STM32N6</a>。
             </p>
         </section>
 
         <section>
-            <h2>3) 选型中的“六维约束”</h2>
+            <h2>3) 运行模型 Benchmark（公开可核对）</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>平台</th>
+                        <th>Benchmark / 模型</th>
+                        <th>场景与指标</th>
+                        <th>公开结果</th>
+                        <th>来源</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Jetson Orin (Orin_TRT)</strong></td>
+                        <td>MLPerf Inference v4.1 Closed / GPT-J-99</td>
+                        <td>Offline（Samples/s）</td>
+                        <td><strong>0.934398 samples/s</strong></td>
+                        <td><a href="https://raw.githubusercontent.com/mlcommons/inference_results_v4.1/main/closed/NVIDIA/results/Orin_TRT/gptj-99/Offline/performance/run_1/mlperf_log_summary.txt" target="_blank">mlperf_log_summary.txt</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Jetson Orin (Orin_TRT)</strong></td>
+                        <td>MLPerf Inference v4.1 Closed / Stable Diffusion XL</td>
+                        <td>Offline（Samples/s）</td>
+                        <td><strong>0.101697 samples/s</strong></td>
+                        <td><a href="https://raw.githubusercontent.com/mlcommons/inference_results_v4.1/main/closed/NVIDIA/results/Orin_TRT/stable-diffusion-xl/Offline/performance/run_1/mlperf_log_summary.txt" target="_blank">mlperf_log_summary.txt</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hailo-8</strong></td>
+                        <td>Hailo Model Zoo / resnet_v1_50 HEF</td>
+                        <td>FPS / Latency / Power（示例输出）</td>
+                        <td><strong>FPS 1328.83</strong>；<strong>2.93646 ms</strong>；<strong>3.19395 W(avg)</strong></td>
+                        <td><a href="https://raw.githubusercontent.com/hailo-ai/hailo_model_zoo/master/docs/BENCHMARKS.rst" target="_blank">Hailo BENCHMARKS.rst</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Coral Edge TPU</strong></td>
+                        <td>Coral 官方表 / MobileNet v2 (224x224)</td>
+                        <td>Dev Board with Edge TPU（ms/inf）</td>
+                        <td><strong>2.6 ms</strong>（同表中 Embedded CPU 为 122 ms）</td>
+                        <td><a href="https://coral.ai/docs/edgetpu/benchmarks/" target="_blank">Edge TPU benchmarks</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Coral Edge TPU</strong></td>
+                        <td>Coral 官方表 / MobileNet v2 SSD (224x224)</td>
+                        <td>Dev Board with Edge TPU（ms/inf）</td>
+                        <td><strong>14 ms</strong>（同表中 Embedded CPU 为 282 ms）</td>
+                        <td><a href="https://coral.ai/docs/edgetpu/benchmarks/" target="_blank">Edge TPU benchmarks</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>RB5 / STM32N6</strong></td>
+                        <td>公开产品页</td>
+                        <td>统一模型 benchmark</td>
+                        <td>公开页面以规格参数为主，未给出与上表同口径的统一模型分数</td>
+                        <td><a href="https://www.thundercomm.com/product/qualcomm-robotics-rb5-development-kit/" target="_blank">RB5</a> / <a href="https://www.st.com/en/microcontrollers-microprocessors/stm32n6-series.html" target="_blank">STM32N6</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size: 0.92rem; color: var(--text-secondary);">
+                说明：跨平台 benchmark 不能只看单一数字；至少要同时对齐<strong>模型版本、精度（INT8/FP16）、输入分辨率、batch、场景（Offline/SingleStream）</strong>后再横向比较。
+            </p>
+        </section>
+
+        <section>
+            <h2>4) 选型中的“六维约束”</h2>
             <table>
                 <thead>
                     <tr>
@@ -149,7 +221,7 @@
         </section>
 
         <section>
-            <h2>4) 推荐系统形态：主控 + 协处理 + 安全控制</h2>
+            <h2>5) 推荐系统形态：主控 + 协处理 + 安全控制</h2>
             <pre class="mermaid">
 flowchart LR
     A[传感器输入 RGBD/LiDAR/IMU] --> B[主控 SoC: VLA/规划]
@@ -163,7 +235,7 @@ flowchart LR
         </section>
 
         <section>
-            <h2>5) 采购与部署观察（落地版）</h2>
+            <h2>6) 采购与部署观察（落地版）</h2>
             <ol>
                 <li>基于目标任务定义控制周期与延迟预算，再反推芯片算力与功耗区间。</li>
                 <li>先做 72 小时稳定性压测（热、功耗、频率抖动、I/O 峰值）。</li>
