@@ -2,7 +2,10 @@
 description: AntiGravity 内容规范（强制）—引用统一规则源
 globs:
   - "**/*.md"
-  - "world_model_interactive_guide/**/*.html"
+  - "world_model_interactive_guide/index.html"
+  - "world_model_interactive_guide/0*.html"
+  - "world_model_interactive_guide/10_benchmarks.html"
+  - "world_model_interactive_guide/references.html"
 alwaysApply: true
 ---
 
@@ -28,3 +31,4 @@ alwaysApply: true
   - 主站唯一领域为具身智能（`world_model_interactive_guide/index.html`）。
   - 历史世界模型内容归档在 `world_model_interactive_guide/legacy/`，不作为主站日更对象。
   - 未明确指定更新范围时，默认按具身智能章节顺序更新。
+  - 默认排除 `legacy/` 目录：除非用户明确要求“修复/更新 legacy”，否则禁止修改归档内容。

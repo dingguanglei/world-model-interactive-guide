@@ -21,6 +21,7 @@ description: AntiGravity Skills 索引（可自动发现/导航）
 - **适用范围**：
   - 主站（具身智能）：`world_model_interactive_guide/index.html` + `01~10` + `09_update_log.html` + `references.html`
   - 历史归档（只读）：`world_model_interactive_guide/legacy/`
+  - 默认规则：自动扫描与批量修改操作应排除 `legacy/`，仅在明确要求时处理归档页
 
 ### 2) 论文主图自动提取与嵌入（Paper Figure Extraction）
 
@@ -28,6 +29,7 @@ description: AntiGravity Skills 索引（可自动发现/导航）
 - **用途**：从 `07_paper_tracker.html` 识别 arXiv 论文并下载 PDF，自动提取“论文主图”（启发式：前两页最大内嵌图，兜底渲染首页），生成本地 `webp` 与 `manifest.json`，可选幂等嵌入 HTML。
 - **核心脚本**：`scripts/paper_figures.py`
 - **产物目录**：`world_model_interactive_guide/assets/papers/`
+- **范围约束**：默认仅处理主站 `world_model_interactive_guide/07_paper_tracker.html`，不处理 `legacy/`。
 
 ---
 
