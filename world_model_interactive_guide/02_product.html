@@ -66,11 +66,11 @@
 
         <section>
             <h2>2.3 NVIDIA：Project GR00T + Isaac 平台</h2>
-            <a href="https://developer.nvidia.com/blog/introducing-project-gr00t-foundation-model-for-humanoid-robots/" target="_blank" class="video-thumbnail">
+            <a href="https://nvidianews.nvidia.com/news/nvidia-isaac-and-project-gr00t-to-help-humanoid-robots-advance-to-the-next-level" target="_blank" class="video-thumbnail">
                 <div class="play-overlay"></div>
                 <div class="video-title">NVIDIA GR00T 发布（官方博客）</div>
             </a>
-            <p>NVIDIA 明确将 GR00T 与 <a href="https://developer.nvidia.com/isaac/sim" target="_blank">Isaac Sim</a>、<a href="https://isaac-sim.github.io/IsaacLab/" target="_blank">Isaac Lab</a> 联动，核心是把模型训练、仿真数据与部署工具打通。<sup><a href="https://developer.nvidia.com/blog/introducing-project-gr00t-foundation-model-for-humanoid-robots/" target="_blank">[来源]</a></sup></p>
+            <p>NVIDIA 明确将 GR00T 与 <a href="https://developer.nvidia.com/isaac/sim" target="_blank">Isaac Sim</a>、<a href="https://isaac-sim.github.io/IsaacLab/" target="_blank">Isaac Lab</a> 联动，核心是把模型训练、仿真数据与部署工具打通。<sup><a href="https://nvidianews.nvidia.com/news/nvidia-isaac-and-project-gr00t-to-help-humanoid-robots-advance-to-the-next-level" target="_blank">[来源]</a></sup></p>
         </section>
 
         <section>
@@ -106,6 +106,50 @@
                     </tr>
                 </tbody>
             </table>
+        </section>
+
+        <section>
+            <h2>2.5 证据化对比矩阵（公开信息口径）</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>对象</th>
+                        <th>控制与系统形态</th>
+                        <th>公开部署信号</th>
+                        <th>当前公开缺口（调研重点）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Figure Helix</strong></td>
+                        <td>VLA 叙事 + 双机器人协作演示</td>
+                        <td><a href="https://www.figure.ai/news/helix" target="_blank">官方发布与演示</a></td>
+                        <td>缺少标准化对外评测口径（恢复率/安全事件统计未完整披露）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>1X NEO</strong></td>
+                        <td>面向通用场景的人形平台</td>
+                        <td><a href="https://www.1x.tech/neo" target="_blank">产品页面与演示素材</a></td>
+                        <td>公开技术细节偏少，需持续跟踪控制链路与数据闭环证据</td>
+                    </tr>
+                    <tr>
+                        <td><strong>NVIDIA GR00T</strong></td>
+                        <td>基础模型 + 仿真 + 开发平台组合</td>
+                        <td><a href="https://nvidianews.nvidia.com/news/nvidia-isaac-and-project-gr00t-to-help-humanoid-robots-advance-to-the-next-level" target="_blank">GR00T</a> + <a href="https://developer.nvidia.com/isaac/sim" target="_blank">Isaac Sim</a></td>
+                        <td>应用到具体机器人产品时的任务级 KPI 需由下游公司补齐</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>2.6 产品调研执行清单（避免泛化总结）</h2>
+            <ol>
+                <li>先收集<strong>官方一手证据</strong>：产品页、技术博客、论文、GitHub（如有）。</li>
+                <li>将演示拆解成可量化指标：任务成功率、恢复率、延迟、安全事件率。</li>
+                <li>记录“已披露 vs 未披露”：明确哪些能力有证据，哪些仍是营销叙事。</li>
+                <li>把每次新增证据链接写入 <a href="09_update_log.html">更新日志</a>，形成可审计轨迹。</li>
+            </ol>
         </section>
 
         <div class="commentary">

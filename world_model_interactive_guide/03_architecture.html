@@ -103,6 +103,55 @@ flowchart LR
             </table>
         </section>
 
+        <section>
+            <h2>3.4 架构选型对比（部署导向）</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>方案</th>
+                        <th>优势</th>
+                        <th>代价/风险</th>
+                        <th>适用阶段</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>端到端 VLA</strong></td>
+                        <td>语义到动作链路短，模块耦合低</td>
+                        <td>安全与实时控制可解释性较弱</td>
+                        <td>P0 验证与快速原型</td>
+                    </tr>
+                    <tr>
+                        <td><strong>分层规划 + 控制</strong></td>
+                        <td>可审计性强，便于安全策略兜底</td>
+                        <td>系统复杂度高，接口维护成本大</td>
+                        <td>P1/P2 稳定部署</td>
+                    </tr>
+                    <tr>
+                        <td><strong>混合架构（推荐）</strong></td>
+                        <td>高层语义泛化与低层稳定控制兼得</td>
+                        <td>需要严格定义接口与回归测试</td>
+                        <td>面向规模化上线</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size: 0.92rem; color: var(--text-secondary);">
+                参考入口：<a href="https://arxiv.org/abs/2307.15818" target="_blank">RT-2</a>、
+                <a href="https://openvla.github.io/" target="_blank">OpenVLA</a>、
+                <a href="https://arxiv.org/abs/2303.04137" target="_blank">Diffusion Policy</a>。
+            </p>
+        </section>
+
+        <section>
+            <h2>3.5 上线前架构审查清单（工程必做）</h2>
+            <ol>
+                <li><strong>接口审计</strong>：明确感知输出、规划输入、控制输出的 schema 与频率。</li>
+                <li><strong>时延预算</strong>：拆解感知/推理/控制端耗时，验证闭环是否满足任务要求。</li>
+                <li><strong>安全回路</strong>：碰撞检测、力矩阈值、急停链路必须独立可测。</li>
+                <li><strong>回放回归</strong>：新增策略前必须通过历史失败样本回放与对照回归。</li>
+            </ol>
+        </section>
+
         <div class="commentary">
             <div class="commentary-title">🧠 AntiGravity's Commentary</div>
             <p>架构设计最大的误区是“只追模型分数”。在真实部署里，缺日志、缺回放、缺安全层的系统，即使离线指标很高，也可能在现场快速失效。</p>

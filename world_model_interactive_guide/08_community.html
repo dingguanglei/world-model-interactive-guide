@@ -48,40 +48,86 @@
             <div class="card">
                 <h3>💬 议题 A：VLA 是否会统一“感知-规划-控制”栈？</h3>
                 <blockquote>
-                    社区高频观点：VLA 可以显著减少模块拼接复杂度，但在线稳定性与安全控制仍需传统控制器兜底。
+                    讨论焦点：VLA 能显著减少模块拼接复杂度，但在部署端是否能替代低层控制与安全机制，社区意见并不一致。
                 </blockquote>
                 <p><strong>讨论入口</strong>：
-                    <a href="https://x.com/search?q=OpenVLA%20robotics&src=typed_query" target="_blank">X Search: OpenVLA robotics</a> |
-                    <a href="https://www.reddit.com/search/?q=OpenVLA" target="_blank">Reddit Search: OpenVLA</a> |
-                    <a href="https://openvla.github.io/" target="_blank">OpenVLA Project</a>
+                    <a href="https://openvla.github.io/" target="_blank">OpenVLA Project</a> |
+                    <a href="https://github.com/openvla/openvla/issues" target="_blank">OpenVLA Issues</a> |
+                    <a href="https://arxiv.org/abs/2307.15818" target="_blank">RT-2 Paper</a>
                 </p>
-                <p><strong>🧠 Commentary</strong>：社区共识正在形成：VLA 是主干，但“安全层 + 低层控制”短期内不会消失。</p>
+                <div class="media-card">
+                    <h4>🟢 通俗解读</h4>
+                    <p>社区普遍认可 VLA 是“更统一的智能大脑”，但机器人“肌肉反应”仍需要专门控制器，短期不是一把梭。</p>
+                </div>
+                <div class="media-card">
+                    <h4>🔴 专业解读</h4>
+                    <ul>
+                        <li><strong>Signal</strong>：项目讨论中高频提到“VLA + controller + safety guard”组合，而非纯端到端替代。</li>
+                        <li><strong>Why</strong>：部署现场需满足实时控制频率、碰撞约束与急停机制，当前仍依赖控制工程层。</li>
+                        <li><strong>Check</strong>：评估新模型时应同时检查“语义成功率 + 低层稳定性 + 安全事件率”。</li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <p>这类讨论最容易被“统一模型叙事”带偏。工程上要坚持“双指标”：高层任务成功与低层安全稳定必须同时达标。</p>
+                </div>
             </div>
 
             <div class="card">
                 <h3>💬 议题 B：具身数据规模扩张的瓶颈在哪里？</h3>
                 <blockquote>
-                    高频争论点：真实数据昂贵、异构平台口径不统一、失败样本稀缺。
+                    讨论焦点：真实采集昂贵只是表象，真正难点是跨平台数据协议对齐与长尾失败样本密度不足。
                 </blockquote>
                 <p><strong>讨论入口</strong>：
-                    <a href="https://x.com/search?q=Open%20X-Embodiment&src=typed_query" target="_blank">X Search: Open X-Embodiment</a> |
                     <a href="https://arxiv.org/abs/2310.08864" target="_blank">Open X-Embodiment Paper</a> |
-                    <a href="https://droid-dataset.github.io/" target="_blank">DROID Dataset</a>
+                    <a href="https://robotics-transformer-x.github.io/" target="_blank">RT-X Project</a> |
+                    <a href="https://droid-dataset.github.io/" target="_blank">DROID Dataset</a> |
+                    <a href="https://github.com/huggingface/lerobot" target="_blank">Hugging Face LeRobot</a>
                 </p>
-                <p><strong>🧠 Commentary</strong>：下一阶段竞争点不是“数据总量”，而是“跨平台对齐 + 失败恢复样本密度”。</p>
+                <div class="media-card">
+                    <h4>🟢 通俗解读</h4>
+                    <p>数据问题不只是“多拍点视频”，而是要让不同机器人说同一种“动作语言”，并记录足够多失败-恢复过程。</p>
+                </div>
+                <div class="media-card">
+                    <h4>🔴 专业解读</h4>
+                    <ul>
+                        <li><strong>Signal</strong>：Open X-Embodiment 把多机构数据标准化后训练，验证了跨源数据融合价值。</li>
+                        <li><strong>Bottleneck</strong>：坐标系、控制接口、时间同步、任务标签语义都需要统一协议。</li>
+                        <li><strong>Execution</strong>：数据工程应增加失败样本标签（错误类型、恢复动作、恢复耗时）作为训练与回归输入。</li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <p>“数据总量竞赛”会很快见顶。下一轮护城河是数据治理能力：协议标准化、失败轨迹密度与数据回归体系。</p>
+                </div>
             </div>
 
             <div class="card">
                 <h3>💬 议题 C：仿真是否足够替代真实数据？</h3>
                 <blockquote>
-                    主流观点：仿真是放大器，不是替代品；Sim2Real 回流机制才是关键。
+                    讨论焦点：仿真可放大训练效率，但不能替代真实世界验证；关键是建立失败回流的 Sim2Real 闭环。
                 </blockquote>
                 <p><strong>讨论入口</strong>：
-                    <a href="https://x.com/search?q=Isaac%20Lab%20Sim2Real&src=typed_query" target="_blank">X Search: Isaac Lab Sim2Real</a> |
                     <a href="https://isaac-sim.github.io/IsaacLab/" target="_blank">Isaac Lab Docs</a> |
-                    <a href="https://maniskill.readthedocs.io/" target="_blank">ManiSkill Docs</a>
+                    <a href="https://maniskill.readthedocs.io/" target="_blank">ManiSkill Docs</a> |
+                    <a href="https://developer.nvidia.com/isaac/sim" target="_blank">Isaac Sim</a>
                 </p>
-                <p><strong>🧠 Commentary</strong>：没有“实机失败回流”的仿真体系，最终会沦为离线演示工具。</p>
+                <div class="media-card">
+                    <h4>🟢 通俗解读</h4>
+                    <p>仿真像“训练健身房”，能高强度练动作；但要上比赛（真实部署），还是要在真环境里打磨并把失败经验带回健身房再练。</p>
+                </div>
+                <div class="media-card">
+                    <h4>🔴 专业解读</h4>
+                    <ul>
+                        <li><strong>Signal</strong>：主流文档都强调仿真用于并行采样与策略迭代，不是最终性能证明。</li>
+                        <li><strong>Mechanism</strong>：需要把实机失败映射为仿真参数修正（接触、延迟、噪声、材质）。</li>
+                        <li><strong>Pitfall</strong>：若无失败回流，仿真会演变为“离线过拟合工具”，指标无法映射线上 KPI。</li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <p>这类争论的关键不在“仿真 vs 实机”，而在“是否形成闭环”。没有闭环，再强算力也只是堆 demo。</p>
+                </div>
             </div>
         </section>
 

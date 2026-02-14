@@ -28,6 +28,13 @@
             background: #d1fae5;
             color: #059669;
         }
+
+        .source-loc {
+            margin-top: 0.75rem;
+            padding-left: 1.1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 
@@ -59,14 +66,16 @@
 
     <main class="main-content">
         <h1>07. 具身智能论文追踪 (Papers)</h1>
-        <p>按“可复现价值”优先收录论文：不仅看指标，还看数据可得性、代码开源和部署意义。</p>
+        <p>按“可复现价值”优先收录论文：不仅看分数，还看工程代价、开源状态、数据可得性与部署边界。</p>
 
         <div class="last-updated">
             ⏰ <strong>最后更新时间</strong>: 2026-02-14 | 本页内容将每日更新「具身智能 VLA / 数据 / RL / 仿真相关论文」。
         </div>
 
-        <section>
-            <h2>2026-01</h2>
+        <p>判定优先级：<strong>任务定义清晰度</strong> → <strong>方法可复现性</strong> → <strong>实验覆盖与失败模式</strong> → <strong>开源状态</strong>。</p>
+
+        <details open>
+            <summary><strong>2026-01（最近论文，默认展开）</strong></summary>
             <div class="card">
                 <h3><a href="https://arxiv.org/abs/2601.16163" target="_blank">Cosmos Policy: Diffusion World Model Policy Learning</a></h3>
                 <div class="paper-meta">
@@ -74,23 +83,68 @@
                     <span>📄 arXiv:2601.16163</span>
                     <span class="paper-tag new">NEW</span>
                 </div>
-                <p><strong>🟢 通俗解读</strong>：把“看见什么、接下来怎么做、值不值得做”统一进一个模型里，减少模块拼接损耗。</p>
-                <p><strong>🔴 专业解读</strong>：将 action / future state / value 作为统一序列进行建模，在 LIBERO、RoboCasa、真实任务上报告性能。来源定位：Abstract / §3 Method / §4 Experiments。</p>
-                <p><strong>🧠 Commentary</strong>：这条路线价值在于系统简化，但部署时仍要处理在线安全约束与时延抖动。</p>
-            </div>
-        </section>
+                <div class="paper-meta">
+                    <span>💻 代码：未公开/未知</span>
+                    <span>🧱 权重：未公开/未知</span>
+                    <span>🗂️ 数据：未公开/未知</span>
+                </div>
 
-        <section>
-            <h2>2023</h2>
+                <div class="media-card">
+                    <h4>🟢 通俗解读</h4>
+                    <p>这篇工作的核心是把“动作怎么做、未来会发生什么、该不该这么做”统一在一个策略建模框架里，减少传统流水线里 planner/policy/value 分裂导致的信息损耗。</p>
+                </div>
+                <div class="media-card">
+                    <h4>🔴 专业解读</h4>
+                    <ul>
+                        <li><strong>Problem/Setup</strong>：把具身控制里的 action、future prediction、value estimation 统一到一个 diffusion 风格策略建模范式。</li>
+                        <li><strong>Method</strong>：联合建模动作与未来状态表征，目标是提升长时决策的稳定性与多步规划一致性。</li>
+                        <li><strong>Evaluation</strong>：论文报告在 LIBERO、RoboCasa 和真实机器人任务上的性能表现（详见原文实验章节）。</li>
+                        <li><strong>Limitations</strong>：公开材料尚不足以评估其在线时延预算、实时控制频率上限与故障恢复策略。</li>
+                    </ul>
+                    <ul class="source-loc">
+                        <li>来源定位：<a href="https://arxiv.org/pdf/2601.16163.pdf#page=1" target="_blank">Abstract</a> / <a href="https://arxiv.org/pdf/2601.16163.pdf#page=4" target="_blank">§3 Method</a> / <a href="https://arxiv.org/pdf/2601.16163.pdf#page=6" target="_blank">§4 Experiments</a></li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <p>如果后续公开训练细节和推理开销，这条路线对工程端的价值会非常高：它天然适合做“单模型回归基座”。但在真实部署里，安全约束与实时性仍是第一门槛。</p>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary><strong>2023（基础论文，默认收起）</strong></summary>
             <div class="card">
                 <h3><a href="https://arxiv.org/abs/2307.15818" target="_blank">RT-2: Vision-Language-Action Models Transfer Web Knowledge</a></h3>
                 <div class="paper-meta">
                     <span>📅 2023-07-28</span>
                     <span>📄 arXiv:2307.15818</span>
                 </div>
-                <p><strong>🟢 通俗解读</strong>：让机器人不仅会“看图做动作”，还会利用语言知识理解更抽象指令。</p>
-                <p><strong>🔴 专业解读</strong>：将 vision-language 模型能力迁移到机器人动作 token 输出，提升跨语义泛化能力。来源定位：Abstract / §4 Experiments。</p>
-                <p><strong>🧠 Commentary</strong>：RT-2 的价值是“语义泛化”，但工业落地仍需补充可验证的安全层与恢复策略。</p>
+                <div class="paper-meta">
+                    <span>💻 代码：未公开/未知</span>
+                    <span>🧱 权重：未公开/未知</span>
+                    <span>🗂️ 数据：未公开/未知</span>
+                </div>
+                <div class="media-card">
+                    <h4>🟢 通俗解读</h4>
+                    <p>RT-2 的关键价值是让机器人把“网络世界学到的语义知识”迁移到动作控制中，从而理解更抽象的指令，而不只是模仿固定动作。</p>
+                </div>
+                <div class="media-card">
+                    <h4>🔴 专业解读</h4>
+                    <ul>
+                        <li><strong>Problem/Setup</strong>：传统机器人策略泛化能力弱，换场景就失效。</li>
+                        <li><strong>Method</strong>：把 vision-language 模型能力迁移到 action token 输出，实现语言-视觉-动作统一建模。</li>
+                        <li><strong>Evaluation</strong>：论文给出在多类语义指令任务上的泛化提升（对比 RT-1/基线）。</li>
+                        <li><strong>Limitations</strong>：真实部署端仍需安全控制层、低层控制器和时延鲁棒机制补齐。</li>
+                    </ul>
+                    <ul class="source-loc">
+                        <li>来源定位：<a href="https://arxiv.org/pdf/2307.15818.pdf#page=1" target="_blank">Abstract</a> / <a href="https://arxiv.org/pdf/2307.15818.pdf#page=4" target="_blank">Method</a> / <a href="https://arxiv.org/pdf/2307.15818.pdf#page=6" target="_blank">Experiments</a></li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <p>RT-2 代表了“语义泛化”里程碑，但不能把它误读为“可直接上线的全栈系统”。上线仍需工程层的安全与恢复机制兜底。</p>
+                </div>
             </div>
 
             <div class="card">
@@ -99,9 +153,31 @@
                     <span>📅 2023-10-13</span>
                     <span>📄 arXiv:2310.08864</span>
                 </div>
-                <p><strong>🟢 通俗解读</strong>：多个机构把机器人数据“对齐后汇总”，用于训练更通用的策略模型。</p>
-                <p><strong>🔴 专业解读</strong>：跨数据源聚合与统一训练协议是其关键贡献，缓解单机构数据分布窄的问题。来源定位：Abstract / Dataset & Training sections。</p>
-                <p><strong>🧠 Commentary</strong>：它证明了“数据合作”对泛化的重要性，但标准化成本与协议治理同样关键。</p>
+                <div class="paper-meta">
+                    <span>💻 代码：见项目入口 <a href="https://robotics-transformer-x.github.io/" target="_blank">RT-X Project</a></span>
+                    <span>🧱 权重：部分开放/按项目发布</span>
+                    <span>🗂️ 数据：部分公开（按子数据集许可）</span>
+                </div>
+                <div class="media-card">
+                    <h4>🟢 通俗解读</h4>
+                    <p>它把“多个实验室各自的数据孤岛”连接起来，证明了跨机构数据联合训练能够显著改善策略泛化能力。</p>
+                </div>
+                <div class="media-card">
+                    <h4>🔴 专业解读</h4>
+                    <ul>
+                        <li><strong>Problem/Setup</strong>：单机构数据分布窄，模型迁移能力差。</li>
+                        <li><strong>Method</strong>：多来源机器人轨迹数据对齐后联合训练 RT-X 系列模型。</li>
+                        <li><strong>Evaluation</strong>：论文报告在跨任务、跨平台设置下的性能收益。</li>
+                        <li><strong>Limitations</strong>：数据许可、标注口径、坐标系与控制接口标准化成本高。</li>
+                    </ul>
+                    <ul class="source-loc">
+                        <li>来源定位：<a href="https://arxiv.org/pdf/2310.08864.pdf#page=1" target="_blank">Abstract</a> / <a href="https://arxiv.org/pdf/2310.08864.pdf#page=5" target="_blank">Dataset</a> / <a href="https://arxiv.org/pdf/2310.08864.pdf#page=7" target="_blank">Experiments</a></li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <p>这篇工作的战略意义大于单点分数：它说明“数据联盟”是通用具身模型可行路径。但工程上必须先解决协议治理与数据质量审计。</p>
+                </div>
             </div>
 
             <div class="card">
@@ -110,11 +186,33 @@
                     <span>📅 2023-03-07</span>
                     <span>📄 arXiv:2303.04137</span>
                 </div>
-                <p><strong>🟢 通俗解读</strong>：像生成图片一样逐步生成动作序列，动作更稳定、抖动更少。</p>
-                <p><strong>🔴 专业解读</strong>：扩散模型刻画多峰动作分布，在操作任务中提升稳健性。来源定位：Abstract / Robot manipulation experiments。</p>
-                <p><strong>🧠 Commentary</strong>：非常适合复杂操作任务，但线上推理成本需与控制频率一起评估。</p>
+                <div class="paper-meta">
+                    <span>💻 代码：<a href="https://github.com/real-stanford/diffusion_policy" target="_blank">GitHub</a></span>
+                    <span>🧱 权重：未统一公开/以复现实验为主</span>
+                    <span>🗂️ 数据：依任务数据集配置</span>
+                </div>
+                <div class="media-card">
+                    <h4>🟢 通俗解读</h4>
+                    <p>它把机器人动作看成“分步生成”的结果，能更好处理多解任务（同一目标可以有多种动作路径）。</p>
+                </div>
+                <div class="media-card">
+                    <h4>🔴 专业解读</h4>
+                    <ul>
+                        <li><strong>Problem/Setup</strong>：传统回归策略容易输出“平均动作”，导致执行不稳定。</li>
+                        <li><strong>Method</strong>：用 diffusion 建模多峰动作分布，提高复杂操作任务稳定性。</li>
+                        <li><strong>Evaluation</strong>：在多类 manipulation 任务上与行为克隆基线比较。</li>
+                        <li><strong>Limitations</strong>：部署时需重点评估推理耗时与控制频率匹配问题。</li>
+                    </ul>
+                    <ul class="source-loc">
+                        <li>来源定位：<a href="https://arxiv.org/pdf/2303.04137.pdf#page=1" target="_blank">Abstract</a> / <a href="https://arxiv.org/pdf/2303.04137.pdf#page=3" target="_blank">Method</a> / <a href="https://arxiv.org/pdf/2303.04137.pdf#page=6" target="_blank">Experiments</a></li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <p>Diffusion Policy 是“高维操作任务”里非常实用的基线，但别忽略线上系统约束：控制循环预算才是最终的生死线。</p>
+                </div>
             </div>
-        </section>
+        </details>
 
         <nav class="chapter-nav">
             <a href="06_companies.html" class="chapter-nav-link prev">

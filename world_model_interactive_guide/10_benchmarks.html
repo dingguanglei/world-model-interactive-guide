@@ -76,7 +76,7 @@
                         <td><strong>CALVIN</strong></td>
                         <td>Benchmark / Long-horizon</td>
                         <td>任务规则 + 成功率统计</td>
-                        <td><a href="https://calvin.cs.uni-freiburg.de/" target="_blank">Project</a></td>
+                        <td><a href="https://github.com/mees/calvin" target="_blank">GitHub</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -100,6 +100,82 @@
                 <li>每次训练迭代至少做一次“旧任务回归 + 新任务扩展”双测。</li>
                 <li>把安全指标纳入 gate，不允许只靠成功率推进版本。</li>
             </ol>
+        </section>
+
+        <section>
+            <h2>8.4 深度条目（可复现视角）</h2>
+
+            <div class="card">
+                <h3><a href="https://libero-project.github.io/main.html" target="_blank">LIBERO</a>（Benchmark / Task Suite）</h3>
+                <p><strong>判定者</strong>：传统算法 + 环境任务完成判定（非主观人工评审）。</p>
+                <div class="media-card">
+                    <h4>🟢 通俗解读</h4>
+                    <p>LIBERO 像“机器人期末考试题库”，通过一组标准化任务判断策略是不是只会做单题，还是能跨任务迁移。</p>
+                </div>
+                <div class="media-card">
+                    <h4>🔴 专业解读</h4>
+                    <ul>
+                        <li><strong>What it measures</strong>：跨任务泛化、长期任务成功率、策略迁移能力。</li>
+                        <li><strong>How to use</strong>：固定任务套件与随机种子，记录 Success/Completion 指标，并与统一 baseline 对照。</li>
+                        <li><strong>Pitfalls</strong>：只追平均成功率会掩盖“长尾任务失败”；建议同时看每任务分布与失败类型。</li>
+                    </ul>
+                    <ul class="source-loc">
+                        <li>来源定位：<a href="https://libero-project.github.io/main.html" target="_blank">Project Page</a> / <a href="https://github.com/Lifelong-Robot-Learning/LIBERO" target="_blank">GitHub Repo</a></li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <p>LIBERO 适合作为“跨任务回归门槛”，不适合作为唯一 KPI。真实部署还要补充恢复率与安全事件率。</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><a href="https://robocasa.ai/" target="_blank">RoboCasa</a>（Benchmark / Dataset）</h3>
+                <p><strong>判定者</strong>：环境规则 + 任务脚本自动判定。</p>
+                <div class="media-card">
+                    <h4>🟢 通俗解读</h4>
+                    <p>RoboCasa 更像“家庭场景压力测试”，它关注策略在多样家居布局下是否还能稳定完成操作。</p>
+                </div>
+                <div class="media-card">
+                    <h4>🔴 专业解读</h4>
+                    <ul>
+                        <li><strong>What it measures</strong>：多场景操作泛化、复杂交互步骤稳定性、任务组合鲁棒性。</li>
+                        <li><strong>How to use</strong>：按官方任务配置运行，记录任务完成率、平均完成时间、失败轨迹分布。</li>
+                        <li><strong>Pitfalls</strong>：若只在少量固定布局评测，容易高估泛化；需加随机布局和对象扰动回归。</li>
+                    </ul>
+                    <ul class="source-loc">
+                        <li>来源定位：<a href="https://robocasa.ai/" target="_blank">Project Page</a> / <a href="https://github.com/robocasa/robocasa" target="_blank">GitHub Repo</a></li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <p>RoboCasa 的价值在“场景复杂度”，但上线前仍需加入真实传感器噪声与控制延迟的外部回归测试。</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><a href="https://maniskill.readthedocs.io/" target="_blank">ManiSkill</a>（Benchmark / Simulator）</h3>
+                <p><strong>判定者</strong>：环境评测脚本 + 任务规则统计。</p>
+                <div class="media-card">
+                    <h4>🟢 通俗解读</h4>
+                    <p>ManiSkill 是“操作任务实验场”，适合快速对比算法迭代，尤其在抓取、放置、工具使用等任务上。</p>
+                </div>
+                <div class="media-card">
+                    <h4>🔴 专业解读</h4>
+                    <ul>
+                        <li><strong>What it measures</strong>：操作任务成功率、轨迹质量、策略稳定性。</li>
+                        <li><strong>How to use</strong>：使用官方环境和脚本固定评测配置，记录 success、episode length 与失败类别。</li>
+                        <li><strong>Pitfalls</strong>：仿真评测易忽略实机延迟与接触误差；必须配套 Sim2Real 回流验证。</li>
+                    </ul>
+                    <ul class="source-loc">
+                        <li>来源定位：<a href="https://maniskill.readthedocs.io/" target="_blank">Docs</a> / <a href="https://github.com/haosulab/ManiSkill" target="_blank">GitHub Repo</a></li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <p>ManiSkill 非常适合算法迭代，但不要把它当“上线许可”。最优实践是仿真回归 + 小流量实机验证并行。</p>
+                </div>
+            </div>
         </section>
 
         <div class="commentary">

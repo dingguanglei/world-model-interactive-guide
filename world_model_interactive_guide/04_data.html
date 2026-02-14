@@ -119,6 +119,46 @@ flowchart LR
             </pre>
         </section>
 
+        <section>
+            <h2>4.4 数据质量门禁（上线前必须量化）</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>门禁项</th>
+                        <th>检查目标</th>
+                        <th>典型失败信号</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>时间同步完整性</strong></td>
+                        <td>视觉、状态、动作时间戳对齐</td>
+                        <td>动作提前/滞后，策略学习到错误因果</td>
+                    </tr>
+                    <tr>
+                        <td><strong>覆盖率</strong></td>
+                        <td>任务、物体、视角、失败类型分布均衡</td>
+                        <td>线上长尾场景大量失败</td>
+                    </tr>
+                    <tr>
+                        <td><strong>标签一致性</strong></td>
+                        <td>动作标签、接触状态、任务阶段定义统一</td>
+                        <td>跨数据源训练出现目标漂移</td>
+                    </tr>
+                    <tr>
+                        <td><strong>版本可追溯</strong></td>
+                        <td>数据切片与训练版本一一对应</td>
+                        <td>模型回退时无法定位问题样本</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size: 0.92rem; color: var(--text-secondary);">
+                参考入口：<a href="https://droid-dataset.github.io/" target="_blank">DROID</a>、
+                <a href="https://arxiv.org/abs/2310.08864" target="_blank">Open X-Embodiment</a>、
+                <a href="https://docs.omniverse.nvidia.com/extensions/latest/ext_replicator.html" target="_blank">Omniverse Replicator</a>。
+            </p>
+        </section>
+
         <div class="commentary">
             <div class="commentary-title">🧠 AntiGravity's Commentary</div>
             <p>数据体系最容易踩坑的是“只追求规模，不追求失败样本覆盖”。具身系统上线后，决定鲁棒性的往往不是常规样本，而是**罕见失败 + 恢复轨迹**。</p>
