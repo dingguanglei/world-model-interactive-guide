@@ -4,7 +4,7 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
 
 ## Skill: Daily Comprehensive Update（每日例行完整更新）
 
-本 skill 用于把“每天例行完整更新”固化为可重复执行的操作流程与质量规则，适用于本仓库 `world_model_interactive_guide/` 的 01–10（含更新日志）内容维护。
+本 skill 用于把“每天例行完整更新”固化为可重复执行的操作流程与质量规则，适用于本仓库 `world_model_interactive_guide/` 的“双领域”内容维护（世界模型 / 具身智能）。
 
 > 核心原则：**宁缺毋滥**。如果当天没有**高价值、可追溯**的新信息，允许不更新对应章节，但必须保持规范合规（尤其是 last-updated 与引用）。
 
@@ -14,6 +14,9 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
 
 - **规范来源（最高优先级）**：`.agent/workflows/antigravity-content-guide.md`
 - **可追溯性**：任何关键结论/数字/主张必须有**可点击权威来源**（论文优先 arXiv/PDF/Project Page，其次官方 GitHub/官方博客/官方发布）。
+- **领域判定优先级**：
+  - 若任务明确指定领域 → 按指定领域执行
+  - 若任务未明确指定领域 → **默认并优先更新具身智能领域**
 - **更新型章节页页头**：所有更新型页面顶部必须包含：
 
 ```html
@@ -34,22 +37,36 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
 
 ---
 
-## 1. 每日执行顺序（强制：01 → 10）
+## 1. 每日执行顺序（强制：先判定领域，再按领域顺序）
 
-按以下顺序“逐章扫描 → 决策更新/跳过 → 记录到更新日志”：
+### 1.1 领域判定
+- 若用户任务中明确提到“世界模型”或“具身智能”，按指定领域执行。
+- 若用户任务未明确指定，默认进入**具身智能**更新流。
 
-1) `01_industry.html` 行业全景  
-2) `02_product.html` 产品深度  
-3) `03_architecture.html` 技术架构  
-4) `04_data.html` 数据工程  
-5) `05_roadmap.html` 落地路线  
-6) `06_companies.html` 公司调研  
-7) `07_paper_tracker.html` 最新论文追踪  
-8) `10_benchmarks.html` 评测基准（页面编号虽为 10，但导航为 08）  
-9) `08_community.html` 社区动态（页面编号虽为 08，但导航为 09）  
-10) `09_update_log.html` 更新日志（页面编号虽为 09，但导航为 10）
+### 1.2 具身智能领域执行顺序（默认）
+按以下顺序“逐页扫描 → 决策更新/跳过 → 记录到更新日志”：
 
-> 说明：页面编号与导航编号存在历史差异，以现有侧边栏导航为准；更新日志在 `09_update_log.html`。
+1) `embodied_intelligence/index.html#data-collection` 数据采集  
+2) `embodied_intelligence/index.html#data-synthesis` 数据合成  
+3) `embodied_intelligence/index.html#simulation` 仿真环境  
+4) `embodied_intelligence/index.html#rl-progress` 强化学习进展  
+5) `embodied_intelligence/update_log.html` 更新日志
+
+### 1.3 世界模型领域执行顺序（仅在明确指定时）
+
+1) `world_model_home.html` 领域概览  
+2) `01_industry.html` 行业全景  
+3) `02_product.html` 产品深度  
+4) `03_architecture.html` 技术架构  
+5) `04_data.html` 数据工程  
+6) `05_roadmap.html` 落地路线  
+7) `06_companies.html` 公司调研  
+8) `07_paper_tracker.html` 最新论文追踪  
+9) `10_benchmarks.html` 评测基准（页面编号虽为 10，但导航为 08）  
+10) `08_community.html` 社区动态（页面编号虽为 08，但导航为 09）  
+11) `09_update_log.html` 更新日志（页面编号虽为 09，但导航为 10）
+
+> 说明：世界模型域页面编号与导航编号存在历史差异，以现有侧边栏导航为准。
 
 ---
 
@@ -60,6 +77,7 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
 - **arXiv API**：`http://export.arxiv.org/api/query`
 - **关键词建议**：
   - `world model`, `interactive video`, `streaming video`, `neural game`, `game engine`, `long video`, `memory`
+  - `embodied intelligence`, `robot learning`, `policy learning`, `sim2real`, `manipulation`, `VLA`
 - **分类建议**：`cs.CV`, `cs.LG`, `cs.AI`（按需要扩展）
 
 ### 2.2 代码/权重/数据（GitHub / HF / ModelScope）
@@ -128,6 +146,16 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
   - 可点击跳转到具体位置（尽量用页面锚点）
 - 建议同步更新统计面板（总更新天数/条目数等），并确保数字与页面内容一致
 - 本页也属于更新型页面：需要 `last-updated` 模块
+
+### 4.5 `embodied_intelligence/index.html` / `embodied_intelligence/update_log.html`
+
+- `embodied_intelligence/index.html` 为具身智能领域主页面，默认优先维护以下四个主模块：
+  - `#data-collection`（数据采集）
+  - `#data-synthesis`（数据合成）
+  - `#simulation`（仿真环境）
+  - `#rl-progress`（强化学习进展）
+- 主页面新增关键结论必须遵守可追溯性（论文/官方项目页/官方仓库可点击链接）。
+- `embodied_intelligence/update_log.html` 必须记录具身智能领域当天变更，不与 `09_update_log.html` 混写。
 
 ---
 
@@ -217,7 +245,7 @@ git push -u origin <branch-name>
 
 - **若无高价值内容**：不新增论文/社区/产品条目，但必须：
   - 维持 last-updated 合规
-  - 更新日志记录“今日扫描，无高价值增量，未更新内容”
+  - 在对应领域更新日志记录“今日扫描，无高价值增量，未更新内容”
 - **若有高价值内容**：按规则更新相应章节，并在更新日志中记录可追溯链接
 
 ---
@@ -225,11 +253,12 @@ git push -u origin <branch-name>
 ## 10. QA Checklist（提交前逐条勾）
 
 ```text
-□ 01-10 已按顺序完成“扫描 → 更新/跳过”决策
+□ 已完成领域判定（未指定时默认并优先具身智能）
+□ 已按对应领域顺序完成“扫描 → 更新/跳过”决策
 □ 所有新增/修正的关键数字与结论均有可点击权威来源
 □ 07 每条论文：标题可跳原文 + 三段结构 + 来源定位 + 开源/权重/数据集状态
 □ 08 每条社区：原帖链接（尽可能）+ 三段结构 + Commentary 区分事实/观点
-□ 10/09 更新日志：新增当天条目，能跳转到具体更新位置
+□ 对应领域更新日志：新增当天条目，能跳转到具体更新位置
 □ 更新型页面顶部 last-updated 模块齐全且日期正确
 □ 各页面不再内联定义 `.last-updated { ... }`（样式由 `css/style.css` 统一管理）
 □ `最后更新时间` 仅在对应章节内容实质更新时刷新；纯样式/排版统一不刷新（只更新更新日志页）

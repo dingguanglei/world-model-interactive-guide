@@ -17,8 +17,10 @@ description: AntiGravity Skills 索引（可自动发现/导航）
 ### 1) 每日例行完整更新（Daily Comprehensive Update）
 
 - **文件**：`daily-comprehensive-update.md`
-- **用途**：固化本仓库“每日例行完整更新”的扫描顺序（01→10）、更新判据、07/08/10 强制结构、主图提取、更新日志规范、合并前自检、git/PR 合并流程与权限兜底。
-- **适用范围**：`world_model_interactive_guide/01~10` 全章节 + `09_update_log.html`
+- **用途**：固化本仓库“双领域（日更）更新”流程：先做领域判定（未指定时默认具身智能），再按对应领域扫描顺序执行、更新判据、结构强制项、更新日志同步、合并前自检与 git 流程。
+- **适用范围**：
+  - 具身智能域：`world_model_interactive_guide/embodied_intelligence/index.html` + `embodied_intelligence/update_log.html`
+  - 世界模型域：`world_model_interactive_guide/world_model_home.html` + `01~10` + `09_update_log.html`
 
 ### 2) 论文主图自动提取与嵌入（Paper Figure Extraction）
 
