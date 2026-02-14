@@ -52,6 +52,7 @@
             <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景 (Landscape)</a></li>
             <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品调研 (Product Research)</a></li>
             <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构方案 (Architecture)</a></li>
+            <li class="nav-item"><a href="11_edge_chip.html" class="nav-link">03.5 端侧芯片调研 (Edge Chips)</a></li>
             <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据工程 (Data Engineering)</a></li>
             <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线（含仿真环境） (Roadmap)</a></li>
             <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
@@ -108,6 +109,109 @@
                 <div class="media-card">
                     <h4>🧠 AntiGravity's Commentary</h4>
                     <p>如果后续公开训练细节和推理开销，这条路线对工程端的价值会非常高：它天然适合做“单模型回归基座”。但在真实部署里，安全约束与实时性仍是第一门槛。</p>
+                </div>
+            </div>
+        </details>
+
+        <details open>
+            <summary><strong>2024（关键开源与基准扩展）</strong></summary>
+            <div class="card">
+                <h3><a href="https://arxiv.org/abs/2406.09246" target="_blank">OpenVLA: An Open-Source Vision-Language-Action Model</a></h3>
+                <div class="paper-meta">
+                    <span>📅 2024-06-13</span>
+                    <span>📄 arXiv:2406.09246</span>
+                    <span class="paper-tag new">OPEN</span>
+                </div>
+                <div class="paper-meta">
+                    <span>💻 代码：<a href="https://github.com/openvla/openvla" target="_blank">GitHub</a></span>
+                    <span>🧱 权重：按项目发布（见项目主页）</span>
+                    <span>🗂️ 数据：训练数据组合口径见论文与项目说明</span>
+                </div>
+                <div class="media-card">
+                    <h4>🟢 通俗解读</h4>
+                    <p>OpenVLA 的意义在于把“VLA 能力”从封闭系统带到开源生态，让团队可以真实复现、微调并接入自己的机器人栈。</p>
+                </div>
+                <div class="media-card">
+                    <h4>🔴 专业解读</h4>
+                    <ul>
+                        <li><strong>Problem/Setup</strong>：闭源 VLA 难以复现、难以工程落地。</li>
+                        <li><strong>Method</strong>：提供可训练、可微调的开源 VLA 基线，强调跨任务策略泛化。</li>
+                        <li><strong>Evaluation</strong>：在标准任务与实机设置中报告性能，对比既有开源/闭源方案。</li>
+                        <li><strong>Limitations</strong>：不同硬件和控制链路下的部署性能仍需二次工程化验证。</li>
+                    </ul>
+                    <ul class="source-loc">
+                        <li>来源定位：<a href="https://arxiv.org/pdf/2406.09246.pdf#page=1" target="_blank">Abstract</a> / <a href="https://arxiv.org/pdf/2406.09246.pdf#page=4" target="_blank">Method</a> / <a href="https://arxiv.org/pdf/2406.09246.pdf#page=6" target="_blank">Experiments</a> / <a href="https://openvla.github.io/" target="_blank">Project</a></li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <p>OpenVLA 的战略价值是“可控开放”：它把具身大模型从“看得见摸不着”变成“可以上线前压测”的工程对象。</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><a href="https://arxiv.org/abs/2405.12213" target="_blank">Octo: An Open-Source Generalist Robot Policy</a></h3>
+                <div class="paper-meta">
+                    <span>📅 2024-05-20</span>
+                    <span>📄 arXiv:2405.12213</span>
+                </div>
+                <div class="paper-meta">
+                    <span>💻 代码：见 <a href="https://octo-models.github.io/" target="_blank">Project</a></span>
+                    <span>🧱 权重：项目提供公开模型</span>
+                    <span>🗂️ 数据：依项目/论文披露的数据组合</span>
+                </div>
+                <div class="media-card">
+                    <h4>🟢 通俗解读</h4>
+                    <p>Octo 试图把“一个策略只能管一个机器人”的局面打破，让同一个模型在不同任务和硬件上都能迁移。</p>
+                </div>
+                <div class="media-card">
+                    <h4>🔴 专业解读</h4>
+                    <ul>
+                        <li><strong>Problem/Setup</strong>：多机器人、多任务场景下，策略复用成本高。</li>
+                        <li><strong>Method</strong>：构建通用策略训练范式，强调跨任务和跨平台可迁移性。</li>
+                        <li><strong>Evaluation</strong>：展示在多任务设置下的泛化表现与迁移能力。</li>
+                        <li><strong>Limitations</strong>：实际部署性能对数据分布、控制接口统一程度高度敏感。</li>
+                    </ul>
+                    <ul class="source-loc">
+                        <li>来源定位：<a href="https://arxiv.org/pdf/2405.12213.pdf#page=1" target="_blank">Abstract</a> / <a href="https://arxiv.org/pdf/2405.12213.pdf#page=4" target="_blank">Method</a> / <a href="https://arxiv.org/pdf/2405.12213.pdf#page=8" target="_blank">Experiments</a></li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <p>Octo 的难点不在“能不能迁移”，而在“迁移后是否稳定可控”。工程落地必须补齐控制和安全回路。</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><a href="https://arxiv.org/abs/2406.02523" target="_blank">RoboCasa: Large-Scale Simulation of Everyday Tasks for Generalist Robots</a></h3>
+                <div class="paper-meta">
+                    <span>📅 2024-06-04</span>
+                    <span>📄 arXiv:2406.02523</span>
+                </div>
+                <div class="paper-meta">
+                    <span>💻 代码：<a href="https://github.com/robocasa/robocasa" target="_blank">GitHub</a></span>
+                    <span>🧱 权重：基准平台为主</span>
+                    <span>🗂️ 数据：场景/任务生成逻辑见项目文档</span>
+                </div>
+                <div class="media-card">
+                    <h4>🟢 通俗解读</h4>
+                    <p>RoboCasa 相当于给机器人提供了“家居场景大题库”，帮助团队把策略从简单实验室任务拉到更接近日常生活的复杂交互。</p>
+                </div>
+                <div class="media-card">
+                    <h4>🔴 专业解读</h4>
+                    <ul>
+                        <li><strong>Problem/Setup</strong>：真实家居任务复杂且高成本，数据覆盖不足。</li>
+                        <li><strong>Method</strong>：构建大规模家居任务仿真平台，支持通用策略训练与评测。</li>
+                        <li><strong>Evaluation</strong>：通过多场景任务组合评估策略泛化能力。</li>
+                        <li><strong>Limitations</strong>：仿真到实机仍有 domain gap，需配套 Sim2Real 回流。</li>
+                    </ul>
+                    <ul class="source-loc">
+                        <li>来源定位：<a href="https://arxiv.org/pdf/2406.02523.pdf#page=1" target="_blank">Abstract</a> / <a href="https://arxiv.org/pdf/2406.02523.pdf#page=4" target="_blank">Environment</a> / <a href="https://arxiv.org/pdf/2406.02523.pdf#page=7" target="_blank">Experiments</a> / <a href="https://robocasa.ai/" target="_blank">Project</a></li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <p>RoboCasa 的价值不是“更漂亮仿真图”，而是“更系统的失败分布”。这对数据工程和回归测试直接有用。</p>
                 </div>
             </div>
         </details>
@@ -210,6 +314,39 @@
                 <div class="media-card">
                     <h4>🧠 AntiGravity's Commentary</h4>
                     <p>Diffusion Policy 是“高维操作任务”里非常实用的基线，但别忽略线上系统约束：控制循环预算才是最终的生死线。</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><a href="https://arxiv.org/abs/2301.04104" target="_blank">Mastering Diverse Domains through World Models (DreamerV3)</a></h3>
+                <div class="paper-meta">
+                    <span>📅 2023-01-10</span>
+                    <span>📄 arXiv:2301.04104</span>
+                </div>
+                <div class="paper-meta">
+                    <span>💻 代码：见论文附录与社区实现</span>
+                    <span>🧱 权重：按任务配置</span>
+                    <span>🗂️ 数据：以交互轨迹与环境回放为主</span>
+                </div>
+                <div class="media-card">
+                    <h4>🟢 通俗解读</h4>
+                    <p>DreamerV3 的核心思想是“先在模型里想象练习，再去真实环境少量试错”，从而显著减少昂贵的真实交互成本。</p>
+                </div>
+                <div class="media-card">
+                    <h4>🔴 专业解读</h4>
+                    <ul>
+                        <li><strong>Problem/Setup</strong>：真实交互样本成本高，纯在线 RL 难以扩展。</li>
+                        <li><strong>Method</strong>：学习 latent world model 并在模型内 rollout 进行策略优化。</li>
+                        <li><strong>Evaluation</strong>：论文在多域任务上展示样本效率与泛化能力。</li>
+                        <li><strong>Limitations</strong>：world model 误差会累积，部署时仍需实机回流校正。</li>
+                    </ul>
+                    <ul class="source-loc">
+                        <li>来源定位：<a href="https://arxiv.org/pdf/2301.04104.pdf#page=1" target="_blank">Abstract</a> / <a href="https://arxiv.org/pdf/2301.04104.pdf#page=4" target="_blank">Method</a> / <a href="https://arxiv.org/pdf/2301.04104.pdf#page=7" target="_blank">Experiments</a></li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <p>DreamerV3 对具身的启发在于“样本效率路线”而非直接部署模板。要落地，必须把 world model 的误差监控纳入工程回归体系。</p>
                 </div>
             </div>
         </details>

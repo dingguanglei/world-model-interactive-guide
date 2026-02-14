@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03.5 端侧芯片调研 - Embodied AI Guide</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</head>
+
+<body>
+    <div class="aurora-bg">
+        <div class="aurora-blob aurora-blob-1"></div>
+        <div class="aurora-blob aurora-blob-2"></div>
+        <div class="aurora-blob aurora-blob-3"></div>
+        <div class="aurora-blob aurora-blob-4"></div>
+    </div>
+    <nav class="sidebar">
+        <a href="index.html" class="brand">🦾 Embodied AI Guide</a>
+        <ul class="nav-links">
+            <li class="nav-item"><a href="index.html" class="nav-link">00. 概览 (Overview)</a></li>
+            <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景 (Landscape)</a></li>
+            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品调研 (Product Research)</a></li>
+            <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构方案 (Architecture)</a></li>
+            <li class="nav-item"><a href="11_edge_chip.html" class="nav-link active">03.5 端侧芯片调研 (Edge Chips)</a></li>
+            <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据工程 (Data Engineering)</a></li>
+            <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线（含仿真环境） (Roadmap)</a></li>
+            <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
+            <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">07. 论文追踪 (Papers)</a></li>
+            <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">08. 评测基准 (Benchmarks)</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">09. 社区讨论 (Community)</a></li>
+            <li class="nav-item"><a href="09_update_log.html" class="nav-link">10. 更新日志 (Updates)</a></li>
+            <li class="nav-item"><a href="references.html" class="nav-link">附录：参考资料</a></li>
+            <li class="nav-item"><a href="legacy/index.html" class="nav-link">Legacy 归档</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <h1>03.5 端侧具身智能芯片深度调研 (Edge Chips)</h1>
+        <p>端侧芯片决定了具身系统的三条硬约束：<strong>实时性、功耗/热设计、软件可维护性</strong>。本章不做营销参数堆砌，而是给出部署可用的选型框架与风险清单。</p>
+
+        <div class="last-updated">
+            ⏰ <strong>最后更新时间</strong>: 2026-02-14 | 本页内容将每日更新「端侧芯片路线、软件生态与部署选型实践」。
+        </div>
+
+        <section>
+            <h2>1) 为什么“芯片环节”必须独立看</h2>
+            <ul>
+                <li><strong>控制闭环</strong>：推理时延直接影响控制稳定性与恢复能力。</li>
+                <li><strong>系统功耗</strong>：移动平台/人形平台受电池与散热约束，算力不能脱离功耗谈。</li>
+                <li><strong>软件生态</strong>：同样是算力，工具链、驱动与部署框架成熟度差异巨大。</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>2) 代表性端侧芯片路线（官方入口）</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>路线</th>
+                        <th>代表产品/平台</th>
+                        <th>典型定位</th>
+                        <th>主要生态入口</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>NVIDIA Jetson</strong></td>
+                        <td><a href="https://developer.nvidia.com/embedded/jetson-modules" target="_blank">Jetson Modules</a> / <a href="https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/" target="_blank">Jetson Orin</a></td>
+                        <td>中高算力端侧推理与机器人主控</td>
+                        <td><a href="https://developer.nvidia.com/isaac/ros" target="_blank">Isaac ROS</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Qualcomm Robotics</strong></td>
+                        <td><a href="https://www.thundercomm.com/product/qualcomm-robotics-rb5-development-kit/" target="_blank">RB5 Dev Kit</a> / <a href="https://www.thundercomm.com/product/qualcomm-robotics-rb6-development-kit/" target="_blank">RB6 Dev Kit</a></td>
+                        <td>低功耗视觉与边缘 AI 机器人平台</td>
+                        <td><a href="https://www.qualcomm.com/internet-of-things" target="_blank">Qualcomm IoT</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hailo</strong></td>
+                        <td><a href="https://hailo.ai/products/ai-accelerators/hailo-8-ai-accelerator/" target="_blank">Hailo-8</a></td>
+                        <td>作为协处理加速器补强视觉推理</td>
+                        <td><a href="https://github.com/hailo-ai/hailo_model_zoo" target="_blank">Hailo Model Zoo</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Coral</strong></td>
+                        <td><a href="https://developers.google.com/coral" target="_blank">Coral Edge TPU</a></td>
+                        <td>超低功耗推理与轻量端侧任务</td>
+                        <td><a href="https://github.com/google-coral/edgetpu" target="_blank">Edge TPU GitHub</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>MCU + AI 协同</strong></td>
+                        <td><a href="https://www.st.com/en/microcontrollers-microprocessors/stm32n6-series.html" target="_blank">STM32N6</a></td>
+                        <td>低功耗控制、安全隔离与端侧感知补充</td>
+                        <td><a href="https://ai.google.dev/edge/litert/microcontrollers/overview" target="_blank">TFLite Micro</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size: 0.92rem; color: var(--text-secondary);">
+                注：TOPS、INT8/FP16 等为厂商口径，跨平台横向对比需统一模型、算子与延迟指标后再判断。
+            </p>
+        </section>
+
+        <section>
+            <h2>3) 选型时必须看的“六维约束”</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>维度</th>
+                        <th>要问的关键问题</th>
+                        <th>常见踩坑</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>实时性</strong></td>
+                        <td>端到端推理延迟是否满足控制周期？</td>
+                        <td>只看离线吞吐，不看闭环抖动</td>
+                    </tr>
+                    <tr>
+                        <td><strong>功耗与散热</strong></td>
+                        <td>持续运行时是否会降频？热设计是否可落地？</td>
+                        <td>实验室能跑，现场高温降频导致性能崩塌</td>
+                    </tr>
+                    <tr>
+                        <td><strong>内存与带宽</strong></td>
+                        <td>多模态输入与多模型并发是否会抢内存？</td>
+                        <td>推理稳定但传感器数据堆积造成延迟尖峰</td>
+                    </tr>
+                    <tr>
+                        <td><strong>I/O 与总线</strong></td>
+                        <td>相机/LiDAR/编码器接入能力是否足够？</td>
+                        <td>算力足够但 I/O 不足，系统吞吐被总线卡死</td>
+                    </tr>
+                    <tr>
+                        <td><strong>软件栈</strong></td>
+                        <td>驱动、编译链、模型部署工具是否成熟？</td>
+                        <td>模型可跑但升级困难，维护成本不可控</td>
+                    </tr>
+                    <tr>
+                        <td><strong>供应链</strong></td>
+                        <td>生命周期、供货节奏、BOM 风险可控吗？</td>
+                        <td>试点成功但量产阶段缺货或成本失控</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>4) 推荐系统形态：主控 + 协处理 + 安全控制</h2>
+            <pre class="mermaid">
+flowchart LR
+    A[传感器输入 RGBD/LiDAR/IMU] --> B[主控 SoC: VLA/规划]
+    B --> C[协处理 NPU/加速卡: 视觉推理]
+    B --> D[实时控制 MCU: 电机与安全约束]
+    C --> B
+    D --> E[执行器与安全联锁]
+    B --> F[日志/回放/回归系统]
+            </pre>
+            <p>工程实践上，端侧平台通常不是“单芯片全包”，而是分层协同：高层决策、推理加速与安全控制各司其职。</p>
+        </section>
+
+        <section>
+            <h2>5) 采购与部署 Checklist（落地版）</h2>
+            <ol>
+                <li>基于目标任务定义控制周期与延迟预算，再反推芯片算力与功耗区间。</li>
+                <li>先做 72 小时稳定性压测（热、功耗、频率抖动、I/O 峰值）。</li>
+                <li>验证软件栈升级路径（驱动、推理框架、模型转换工具链）。</li>
+                <li>将供应链风险纳入评估：生命周期、备选方案、可替代BOM。</li>
+                <li>上线前必须跑“旧任务回归 + 新任务扩展 + 安全门禁”三套测试。</li>
+            </ol>
+        </section>
+
+        <div class="commentary">
+            <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+            <p>端侧芯片选型不是“谁 TOPS 高选谁”，而是“谁在你的任务约束下可持续稳定交付”。具身系统真正的门槛是长期运行稳定性与维护效率，而非单次峰值性能。</p>
+        </div>
+
+        <nav class="chapter-nav">
+            <a href="03_architecture.html" class="chapter-nav-link prev">
+                <span class="chapter-nav-label">← 上一章</span>
+                <span class="chapter-nav-title">03. 技术架构方案 (Architecture)</span>
+            </a>
+            <a href="04_data.html" class="chapter-nav-link next">
+                <span class="chapter-nav-label">下一章 →</span>
+                <span class="chapter-nav-title">04. 数据工程 (Data Engineering)</span>
+            </a>
+        </nav>
+    </main>
+</body>
+
+</html>

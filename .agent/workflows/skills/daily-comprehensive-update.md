@@ -46,14 +46,15 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
 2) `01_industry.html` 行业全景  
 3) `02_product.html` 产品调研  
 4) `03_architecture.html` 技术架构方案  
-5) `04_data.html` 数据工程（采集与合成）  
-6) `05_roadmap.html` 落地路线（含仿真环境）  
-7) `06_companies.html` 公司调研  
-8) `07_paper_tracker.html` 论文追踪  
-9) `10_benchmarks.html` 评测基准  
-10) `08_community.html` 社区讨论  
-11) `09_update_log.html` 更新日志  
-12) `references.html` 参考资料
+5) `11_edge_chip.html` 端侧芯片调研  
+6) `04_data.html` 数据工程（采集与合成）  
+7) `05_roadmap.html` 落地路线（含仿真环境）  
+8) `06_companies.html` 公司调研  
+9) `07_paper_tracker.html` 论文追踪  
+10) `10_benchmarks.html` 评测基准  
+11) `08_community.html` 社区讨论  
+12) `09_update_log.html` 更新日志  
+13) `references.html` 参考资料
 
 ---
 
@@ -137,6 +138,7 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
 
 - 当前主站中，重点章节映射如下：
   - `02_product.html`：产品调研
+  - `11_edge_chip.html`：端侧芯片调研
   - `04_data.html`：数据工程（采集 + 合成）
   - `05_roadmap.html`：落地路线 + 仿真环境（Sim2Real）
   - `06_companies.html`：公司调研

@@ -24,6 +24,7 @@
             <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景 (Landscape)</a></li>
             <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品调研 (Product Research)</a></li>
             <li class="nav-item"><a href="03_architecture.html" class="nav-link active">03. 技术架构方案 (Architecture)</a></li>
+            <li class="nav-item"><a href="11_edge_chip.html" class="nav-link">03.5 端侧芯片调研 (Edge Chips)</a></li>
             <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据工程 (Data Engineering)</a></li>
             <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线（含仿真环境） (Roadmap)</a></li>
             <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
@@ -152,6 +153,80 @@ flowchart LR
             </ol>
         </section>
 
+        <section>
+            <h2>3.6 端到端时延预算（Latency Budget）拆解模板</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>链路阶段</th>
+                        <th>关键问题</th>
+                        <th>观测指标</th>
+                        <th>优化抓手</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>传感器采集</strong></td>
+                        <td>多传感器时间同步是否稳定？</td>
+                        <td>采样抖动、帧丢失率</td>
+                        <td>硬件时间戳 + 驱动层同步</td>
+                    </tr>
+                    <tr>
+                        <td><strong>感知与编码</strong></td>
+                        <td>预处理是否堵塞主推理线程？</td>
+                        <td>预处理延迟分位数</td>
+                        <td>并行流水、零拷贝数据通道</td>
+                    </tr>
+                    <tr>
+                        <td><strong>模型推理</strong></td>
+                        <td>峰值延迟能否满足控制周期？</td>
+                        <td>P50/P95/P99 推理延迟</td>
+                        <td>量化、裁剪、算子融合、分层推理</td>
+                    </tr>
+                    <tr>
+                        <td><strong>控制与执行</strong></td>
+                        <td>指令下发到执行的端侧闭环是否稳定？</td>
+                        <td>控制周期漂移、超调率</td>
+                        <td>控制线程隔离 + 实时调度</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size: 0.92rem; color: var(--text-secondary);">
+                参考：<a href="https://developer.nvidia.com/isaac/ros" target="_blank">Isaac ROS</a>、
+                <a href="https://docs.ros.org/en/rolling/Tutorials/Demos/Real-Time-Programming.html" target="_blank">ROS 2 Real-Time Programming</a>。
+            </p>
+        </section>
+
+        <section>
+            <h2>3.7 训练-部署偏差（Train-Serve Gap）治理</h2>
+            <div class="media-grid">
+                <div class="media-card">
+                    <h4>常见偏差</h4>
+                    <ul>
+                        <li>训练数据“干净”，部署传感器噪声重</li>
+                        <li>离线轨迹连续，线上动作约束更强</li>
+                        <li>训练目标函数不含安全惩罚</li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>治理策略</h4>
+                    <ul>
+                        <li>在数据工程中注入失败/恢复样本并做回放回归</li>
+                        <li>部署前做分布外场景压测（光照/遮挡/接触变化）</li>
+                        <li>将安全约束独立成可测试的 runtime guard</li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>上线门禁</h4>
+                    <ul>
+                        <li>不仅看成功率，还要看恢复率与安全事件率</li>
+                        <li>新版本必须通过“旧任务回归 + 新任务扩展”双测</li>
+                        <li>保留可回滚策略与模型版本审计链</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
         <div class="commentary">
             <div class="commentary-title">🧠 AntiGravity's Commentary</div>
             <p>架构设计最大的误区是“只追模型分数”。在真实部署里，缺日志、缺回放、缺安全层的系统，即使离线指标很高，也可能在现场快速失效。</p>
@@ -162,9 +237,9 @@ flowchart LR
                 <span class="chapter-nav-label">← 上一章</span>
                 <span class="chapter-nav-title">02. 产品调研 (Product Research)</span>
             </a>
-            <a href="04_data.html" class="chapter-nav-link next">
+            <a href="11_edge_chip.html" class="chapter-nav-link next">
                 <span class="chapter-nav-label">下一章 →</span>
-                <span class="chapter-nav-title">04. 数据工程 (Data Engineering)</span>
+                <span class="chapter-nav-title">03.5 端侧芯片调研 (Edge Chips)</span>
             </a>
         </nav>
     </main>

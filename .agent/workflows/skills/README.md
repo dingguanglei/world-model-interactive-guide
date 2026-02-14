@@ -19,10 +19,10 @@ description: AntiGravity Skills 索引（可自动发现/导航）
 - **文件**：`daily-comprehensive-update.md`
 - **用途**：固化本仓库“具身智能单领域（日更）更新”流程：按主站章节顺序扫描、更新判据、结构强制项、更新日志同步、合并前自检与 git 流程。
 - **适用范围**：
-  - 主站（具身智能）：`world_model_interactive_guide/index.html` + `01~10` + `09_update_log.html` + `references.html`
+  - 主站（具身智能）：`world_model_interactive_guide/index.html` + `01~10` + `11_edge_chip.html` + `09_update_log.html` + `references.html`
   - 历史归档（只读）：`world_model_interactive_guide/legacy/`
   - 默认规则：自动扫描与批量修改操作应排除 `legacy/`，仅在明确要求时处理归档页
-  - 关键章节清单：行业全景、公司调研、产品调研、落地路线、技术架构方案、仿真环境、数据工程、论文追踪、评测基准、社区讨论
+  - 关键章节清单：行业全景、公司调研、产品调研、落地路线、技术架构方案、端侧芯片调研、仿真环境、数据工程、论文追踪、评测基准、社区讨论
 
 ### 2) 论文主图自动提取与嵌入（Paper Figure Extraction）
 
