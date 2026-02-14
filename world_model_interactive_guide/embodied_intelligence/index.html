@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>具身智能调研域 - Embodied Intelligence Guide</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .focus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0 2rem;
+        }
+
+        .focus-card {
+            background: rgba(255, 255, 255, 0.55);
+            border: 1px solid var(--border);
+            border-radius: 0.85rem;
+            padding: 1rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .focus-card h3 {
+            margin: 0 0 0.6rem;
+            font-size: 1rem;
+            color: #0f766e;
+        }
+
+        .source-list li {
+            margin-bottom: 0.4rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="aurora-bg">
+        <div class="aurora-blob aurora-blob-1"></div>
+        <div class="aurora-blob aurora-blob-2"></div>
+        <div class="aurora-blob aurora-blob-3"></div>
+        <div class="aurora-blob aurora-blob-4"></div>
+    </div>
+    <nav class="sidebar">
+        <a href="index.html" class="brand">🦾 Embodied AI Guide</a>
+        <ul class="nav-links">
+            <li class="nav-item"><a href="index.html" class="nav-link active">00. 领域总览 (Overview)</a></li>
+            <li class="nav-item"><a href="#data-collection" class="nav-link">01. 数据采集方法</a></li>
+            <li class="nav-item"><a href="#data-synthesis" class="nav-link">02. 数据合成方法</a></li>
+            <li class="nav-item"><a href="#simulation" class="nav-link">03. 仿真环境</a></li>
+            <li class="nav-item"><a href="#rl-progress" class="nav-link">04. 强化学习进展</a></li>
+            <li class="nav-item"><a href="update_log.html" class="nav-link">05. 更新日志 (Updates)</a></li>
+        </ul>
+        <div class="domain-switch-sidebar">
+            <a href="../index.html" class="domain-switch-btn world-model" aria-label="切换到世界模型领域">🚀 切换到世界模型领域</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h1>具身智能调研域（独立维护）</h1>
+        <p>本域与“世界模型”章节完全拆分，采用独立导航与独立更新日志，聚焦具身智能四个核心维度：<strong>数据采集、数据合成、仿真环境、强化学习进展</strong>。</p>
+
+        <div class="last-updated">
+            ⏰ <strong>最后更新时间</strong>: 2026-02-14 | 本页内容将每日更新「具身智能的数据采集、数据合成、仿真环境与强化学习进展」。
+        </div>
+
+        <section>
+            <h2>🎯 调研边界与执行原则</h2>
+            <ul>
+                <li>只收录<strong>可追溯</strong>信息：关键结论优先链接论文原文、官方项目页或官方仓库。</li>
+                <li>优先记录<strong>可复现</strong>信息：数据协议、仿真配置、训练设置、评测口径。</li>
+                <li>领域更新与世界模型独立，不再混入世界模型章节编号。</li>
+            </ul>
+        </section>
+
+        <section id="data-collection">
+            <h2>01. 数据采集方法（Real-World Collection）</h2>
+            <div class="focus-grid">
+                <article class="focus-card">
+                    <h3>遥操作示教（Teleoperation）</h3>
+                    <p>适合快速收集高质量动作-视觉配对轨迹，常用于行为克隆（BC）和离线策略初始化。</p>
+                </article>
+                <article class="focus-card">
+                    <h3>在岗日志采集（Fleet Logging）</h3>
+                    <p>从真实部署系统持续回流失败与恢复样本，提升策略稳健性与恢复能力。</p>
+                </article>
+                <article class="focus-card">
+                    <h3>多模态同步采集</h3>
+                    <p>统一时间戳对齐 RGB / 深度 / 关节状态 / 力矩 / 语言指令，避免训练时的跨模态漂移。</p>
+                </article>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>方法</th>
+                        <th>适用阶段</th>
+                        <th>关键风险</th>
+                        <th>参考来源</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>跨机构真实数据协作</strong></td>
+                        <td>基座策略预训练</td>
+                        <td>异构机器人/标注口径不一致</td>
+                        <td><a href="https://arxiv.org/abs/2310.08864" target="_blank">Open X-Embodiment (arXiv:2310.08864)</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>统一硬件采集协议</strong></td>
+                        <td>中规模数据持续扩展</td>
+                        <td>采集成本与设备维护</td>
+                        <td><a href="https://droid-dataset.github.io/" target="_blank">DROID Dataset</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>视觉-语言-动作联合数据</strong></td>
+                        <td>高层任务泛化</td>
+                        <td>语言指令与动作对齐误差</td>
+                        <td><a href="https://arxiv.org/abs/2307.15818" target="_blank">RT-2 (arXiv:2307.15818)</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="data-synthesis">
+            <h2>02. 数据合成方法（Synthetic Data）</h2>
+            <p>合成数据目标不是“替代真实数据”，而是补齐真实场景的长尾覆盖：罕见光照、异常碰撞、复杂障碍与极端视角。</p>
+            <ul>
+                <li><strong>域随机化</strong>：对纹理、材质、光照、动力学参数做系统扰动，以提升 Sim2Real 泛化。<sup><a href="https://arxiv.org/abs/1703.06907" target="_blank">[Tobin et al.]</a></sup></li>
+                <li><strong>程序化场景生成</strong>：批量生成可控任务组合，用于构造失败样本与恢复样本。</li>
+                <li><strong>自动标注流水线</strong>：在仿真中自动导出接触状态、位姿、关节信息，降低人工标注成本。</li>
+            </ul>
+
+            <div class="commentary">
+                <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+                <p>合成数据真正值钱的不是数量，而是“失败模式覆盖率”。如果你的合成管线没有刻意制造干扰与反例，训练出来的策略在真实环境中通常会过度乐观。</p>
+            </div>
+
+            <p><strong>官方工具入口</strong>：
+                <a href="https://docs.isaacsim.omniverse.nvidia.com/latest/" target="_blank">Isaac Sim Docs</a>，
+                <a href="https://isaac-sim.github.io/IsaacLab/" target="_blank">Isaac Lab</a>，
+                <a href="https://maniskill.readthedocs.io/" target="_blank">ManiSkill Docs</a>，
+                <a href="https://docs.omniverse.nvidia.com/extensions/latest/ext_replicator.html" target="_blank">Omniverse Replicator</a>。
+            </p>
+        </section>
+
+        <section id="simulation">
+            <h2>03. 仿真环境（Simulation Stack）</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>平台</th>
+                        <th>优势</th>
+                        <th>典型用途</th>
+                        <th>链接</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Isaac Lab / Isaac Sim</strong></td>
+                        <td>GPU 并行训练能力强，工业场景集成丰富</td>
+                        <td>大规模机器人 RL 与策略回归</td>
+                        <td><a href="https://isaac-sim.github.io/IsaacLab/" target="_blank">Isaac Lab</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>MuJoCo</strong></td>
+                        <td>动力学求解成熟，社区基准广泛</td>
+                        <td>连续控制基准与算法对比</td>
+                        <td><a href="https://mujoco.readthedocs.io/" target="_blank">MuJoCo Docs</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Habitat</strong></td>
+                        <td>3D 场景导航与具身任务生态完整</td>
+                        <td>视觉导航与语义交互任务</td>
+                        <td><a href="https://aihabitat.org/" target="_blank">Habitat</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gazebo / PyBullet</strong></td>
+                        <td>工程接入成本低、生态成熟</td>
+                        <td>控制器验证与系统联调</td>
+                        <td><a href="https://gazebosim.org/home" target="_blank">Gazebo</a> / <a href="https://pybullet.org/" target="_blank">PyBullet</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="rl-progress">
+            <h2>04. 强化学习进展（RL Progress）</h2>
+
+            <div class="card">
+                <h3><a href="https://arxiv.org/abs/2301.04104" target="_blank">DreamerV3</a>：统一配置的世界模型 RL 基线</h3>
+                <div class="focus-grid">
+                    <div class="focus-card">
+                        <h3>🟢 通俗解读</h3>
+                        <p>先在“想象中的环境”里大量试错，再把学到的策略迁回真实任务，减少昂贵的真实交互。</p>
+                    </div>
+                    <div class="focus-card">
+                        <h3>🔴 专业解读</h3>
+                        <p>通过 latent dynamics 学习环境转移并进行 imagined rollouts，核心价值是样本效率和统一训练配置。</p>
+                    </div>
+                    <div class="focus-card">
+                        <h3>🧠 Commentary</h3>
+                        <p>适合作为“世界模型 + 控制策略”评估起点，但落地时需补齐真实机器人安全约束与延迟预算。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><a href="https://arxiv.org/abs/2303.04137" target="_blank">Diffusion Policy</a>：高维动作生成策略</h3>
+                <p>在机器人操作任务中，扩散式策略对多峰动作分布更稳健，尤其适合抓取、装配等存在多解的任务。</p>
+                <p><strong>来源定位</strong>：Abstract / Method / Robot manipulation experiments。</p>
+            </div>
+
+            <div class="card">
+                <h3><a href="https://arxiv.org/abs/2601.16163" target="_blank">Cosmos Policy</a>：视频世界模型到机器人策略</h3>
+                <p>将 action / future state / value 编码为统一序列并单阶段微调视频模型，在 LIBERO、RoboCasa、真实场景中报告了可复现评测结果。</p>
+                <p><strong>来源定位</strong>：Abstract / §3 Method / §4 Experiments。</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>📌 独立更新说明</h2>
+            <ul class="source-list">
+                <li>具身智能更新记录写入：<a href="update_log.html">05. 更新日志 (Embodied)</a></li>
+                <li>世界模型更新记录写入：<a href="../09_update_log.html">10. 更新日志 (World Model)</a></li>
+            </ul>
+        </section>
+
+        <nav class="chapter-nav">
+            <div class="chapter-nav-placeholder"></div>
+            <a href="update_log.html" class="chapter-nav-link next">
+                <span class="chapter-nav-label">下一页 →</span>
+                <span class="chapter-nav-title">05. 更新日志 (Embodied)</span>
+            </a>
+        </nav>
+    </main>
+</body>
+
+</html>

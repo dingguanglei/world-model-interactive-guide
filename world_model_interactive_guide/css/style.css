@@ -307,6 +307,55 @@ video {
     gap: 0.4rem;
 }
 
+.domain-switch-sidebar {
+    margin-top: 1rem;
+}
+
+.domain-switch-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin: 1rem 0 2rem;
+}
+
+.domain-switch-row .domain-switch-btn {
+    width: auto;
+    min-width: 280px;
+}
+
+.domain-switch-btn {
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.95rem 1rem;
+    border-radius: var(--border-radius-md);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ffffff;
+    background: linear-gradient(135deg, #0f766e, #14b8a6);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 10px 24px rgba(20, 184, 166, 0.28);
+    transition: var(--transition-smooth);
+}
+
+.domain-switch-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(20, 184, 166, 0.34);
+    color: #ffffff;
+}
+
+.domain-switch-btn.world-model {
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    box-shadow: 0 10px 24px rgba(59, 130, 246, 0.25);
+}
+
+.domain-switch-btn.world-model:hover {
+    box-shadow: 0 14px 28px rgba(59, 130, 246, 0.32);
+}
+
 .nav-link {
     display: block;
     padding: 0.85rem 1.25rem;
@@ -842,6 +891,14 @@ li::marker {
         scroll-snap-align: start;
     }
 
+    .domain-switch-sidebar {
+        margin-top: 0.9rem;
+    }
+
+    .domain-switch-row .domain-switch-btn {
+        min-width: max-content;
+    }
+
     .main-content {
         margin-left: 0;
         padding: 2rem 1.5rem 3rem;
@@ -902,6 +959,11 @@ li::marker {
     .nav-link {
         padding: 0.7rem 1rem;
         font-size: 0.9rem;
+    }
+
+    .domain-switch-btn {
+        padding: 0.75rem 0.95rem;
+        font-size: 0.88rem;
     }
 
     .hero p {

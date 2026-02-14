@@ -9,6 +9,18 @@
 
 [https://dingguanglei.github.io/world-model-interactive-guide](https://dingguanglei.github.io/world-model-interactive-guide)
 
+## 双领域结构（2026-02-14 起）
+
+站点已拆分为两个独立领域，并通过页面内的大按钮双向切换：
+
+- **世界模型（World Model）**：`/index.html`（原 00-10 + 附录结构）
+- **具身智能（Embodied Intelligence）**：`/embodied_intelligence/index.html`（独立导航与独立更新日志）
+
+更新日志也已拆分，互不干扰：
+
+- 世界模型更新日志：`/09_update_log.html`
+- 具身智能更新日志：`/embodied_intelligence/update_log.html`
+
 ## 技能库 (Skills)
 
 - 论文追踪「方式 A」主图自动提取与嵌入：`.agent/workflows/skills/paper-figure-extraction.md`（脚本：`scripts/paper_figures.py`）

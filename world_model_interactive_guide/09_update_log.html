@@ -165,9 +165,11 @@
             <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">08. 评测基准 (Benchmarks)</a></li>
             <li class="nav-item"><a href="08_community.html" class="nav-link">09. 社区动态 (Community)</a></li>
             <li class="nav-item"><a href="09_update_log.html" class="nav-link active">10. 更新日志 (Updates)</a></li>
-            <li class="nav-item"><a href="11_embodied_ai.html" class="nav-link">11. 具身智能 (Embodied AI)</a></li>
             <li class="nav-item"><a href="references.html" class="nav-link">附录：参考文献 (Refs)</a></li>
         </ul>
+        <div class="domain-switch-sidebar">
+            <a href="embodied_intelligence/index.html" class="domain-switch-btn" aria-label="切换到具身智能领域">🦾 切换到具身智能领域</a>
+        </div>
     </nav>
 
     <main class="main-content">
@@ -175,7 +177,7 @@
         <p>本页记录所有内容更新的日期、类别和简要描述。每次调研更新后，都会在此同步记录变更内容。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-02-13 | 本页内容将每日更新「记录所有章节的内容变更与可追溯链接」。
+            ⏰ <strong>最后更新时间</strong>: 2026-02-14 | 本页内容将每日更新「记录世界模型领域各章节的内容变更与可追溯链接」。
         </div>
 
         <section>
@@ -218,34 +220,18 @@
                 <button class="filter-btn">📈 市场</button>
             </div>
 
-            <div class="log-entry" data-category="tech">
-                <div class="log-date">📅 2026-02-13</div>
-                <div class="log-category">
-                    <span class="cat-tag tech">⚙️ 技术</span>
-                </div>
-                <div class="log-content">
-                    <h4>具身智能专题重点增强（数据/仿真/RL）</h4>
-                    <ul>
-                        <li><strong>[UPDATE]</strong> 强化 <a href="11_embodied_ai.html" target="_blank">11. 具身智能</a> 的核心关注方向：数据采集方法、数据合成方法、仿真环境、强化学习进展。</li>
-                        <li><strong>[NEW]</strong> 新增“四大重点”卡片：细化遥操作采集、程序化合成、Sim2Real 闭环、世界模型 RL / 层级 RL / 安全 RL 等执行要点。</li>
-                        <li><strong>[NEW]</strong> 新增评测面板模板（任务成功、恢复鲁棒、泛化、时延能耗、安全），用于后续公司/论文调研横向对比。</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 2026-02-13 -->
             <div class="log-entry" data-category="tech product">
-                <div class="log-date">📅 2026-02-13</div>
+                <div class="log-date">📅 2026-02-14</div>
                 <div class="log-category">
                     <span class="cat-tag tech">⚙️ 技术</span>
                     <span class="cat-tag product">🚀 产品</span>
                 </div>
                 <div class="log-content">
-                    <h4>新增具身智能专题（11_embodied_ai.html）</h4>
+                    <h4>站点拆分：世界模型与具身智能独立维护</h4>
                     <ul>
-                        <li><strong>[NEW]</strong> 新增 <a href="11_embodied_ai.html" target="_blank">11. 具身智能 (Embodied AI)</a> 章节，定义了按本项目调研方式展开该领域的整体框架。</li>
-                        <li><strong>[NEW]</strong> 在新章节中给出五大调研支柱与首批可执行新增内容，明确技术、数据、公司、评测、基础设施覆盖范围。</li>
-                        <li><strong>[UPDATE]</strong> 全站侧边栏新增“11. 具身智能”入口，首页目录新增对应卡片，保证专题可导航访问。</li>
+                        <li><strong>[UPDATE]</strong> 世界模型域删除“11. 具身智能”章节入口，避免两个领域内容混编；世界模型保持 00-10 + 附录结构。</li>
+                        <li><strong>[NEW]</strong> 新增独立具身智能领域：<a href="embodied_intelligence/index.html" target="_blank">embodied_intelligence/index.html</a>，并提供独立更新日志 <a href="embodied_intelligence/update_log.html" target="_blank">embodied_intelligence/update_log.html</a>。</li>
+                        <li><strong>[NEW]</strong> 世界模型与具身智能页面均新增大按钮切换（手机与 Web 统一可用），实现双域独立更新、互相跳转。</li>
                     </ul>
                 </div>
             </div>
