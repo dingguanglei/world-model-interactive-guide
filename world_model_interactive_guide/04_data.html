@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>04. 深度数据工程 - World Model Guide</title>
+    <title>04. 数据工程 - Embodied AI Guide</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
@@ -18,231 +18,160 @@
         <div class="aurora-blob aurora-blob-4"></div>
     </div>
     <nav class="sidebar">
-        <a href="world_model_home.html" class="brand">🚀 World Model Guide</a>
+        <a href="index.html" class="brand">🦾 Embodied AI Guide</a>
         <ul class="nav-links">
-            <li class="nav-item"><a href="world_model_home.html" class="nav-link">00. 概览 (Overview)</a></li>
+            <li class="nav-item"><a href="index.html" class="nav-link">00. 概览 (Overview)</a></li>
             <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景 (Landscape)</a></li>
-            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品深度 (Deep Dive)</a></li>
-            <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构 (Architecture)</a></li>
-            <li class="nav-item"><a href="04_data.html" class="nav-link active">04. 数据工程 (Data Bible)</a></li>
-            <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线 (Roadmap)</a></li>
+            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品调研 (Product Research)</a></li>
+            <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构方案 (Architecture)</a></li>
+            <li class="nav-item"><a href="04_data.html" class="nav-link active">04. 数据工程 (Data Engineering)</a></li>
+            <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线（含仿真环境） (Roadmap)</a></li>
             <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
             <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">07. 论文追踪 (Papers)</a></li>
             <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">08. 评测基准 (Benchmarks)</a></li>
-            <li class="nav-item"><a href="08_community.html" class="nav-link">09. 社区动态 (Community)</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">09. 社区讨论 (Community)</a></li>
             <li class="nav-item"><a href="09_update_log.html" class="nav-link">10. 更新日志 (Updates)</a></li>
-            <li class="nav-item"><a href="references.html" class="nav-link">附录：参考文献 (Refs)</a></li>
+            <li class="nav-item"><a href="references.html" class="nav-link">附录：参考资料</a></li>
+            <li class="nav-item"><a href="legacy/index.html" class="nav-link">Legacy 归档</a></li>
         </ul>
-        <div class="domain-switch-sidebar">
-            <a href="embodied_intelligence/index.html" class="domain-switch-btn" aria-label="切换到具身智能领域">🦾 切换到具身智能领域</a>
-        </div>
     </nav>
 
     <main class="main-content">
-        <h1>04. 深度数据工程：合成数据与自动标注 (The Data Bible)</h1>
-        <blockquote>
-            <strong>"Data is the new Code."</strong> 本章将数据工程提升到战略高度，详细拆解如何构建一个"自生长"的数据闭环。
-        </blockquote>
+        <h1>04. 数据工程（采集与合成） (Data Engineering)</h1>
+        <p>具身智能的核心瓶颈之一是<strong>高质量动作数据</strong>。本章聚焦你要求的两件事：真实世界数据采集方法、可扩展数据合成方法。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-02-02 | 本页内容将每日更新「视频-动作数据的采集/合成/标注与数据 Infra 方案」。
+            ⏰ <strong>最后更新时间</strong>: 2026-02-14 | 本页内容将每日更新「真实数据采集、合成数据生成与数据质控流程」。
         </div>
 
         <section>
-            <h2>4.1 数据管线全景图 (Data Pipeline Overview)</h2>
-            <p>从 UE 引擎到 WebDataset 分片，我们需要经过三个核心阶段：<strong>采集 (Recording)</strong> -> <strong>标注
-                    (Re-captioning)</strong> -> <strong>打包 (Sharding)</strong>。</p>
+            <h2>4.1 数据采集方法（Real-World Collection）</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>方法</th>
+                        <th>优点</th>
+                        <th>挑战</th>
+                        <th>可追溯来源</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>遥操作示教</strong></td>
+                        <td>动作标签质量高，适合行为克隆初始化</td>
+                        <td>人力成本高，吞吐受限</td>
+                        <td><a href="https://droid-dataset.github.io/" target="_blank">DROID Dataset</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>跨机构联合数据</strong></td>
+                        <td>覆盖多机器人、多任务分布</td>
+                        <td>标注口径和坐标系不一致</td>
+                        <td><a href="https://arxiv.org/abs/2310.08864" target="_blank">Open X-Embodiment</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>语言-动作联合采集</strong></td>
+                        <td>支持高层指令泛化</td>
+                        <td>语言描述与动作时间对齐困难</td>
+                        <td><a href="https://arxiv.org/abs/2307.15818" target="_blank">RT-2</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
+        <section>
+            <h2>4.2 数据合成方法（Synthetic Data）</h2>
+            <ul>
+                <li><strong>域随机化</strong>：随机扰动材质、光照、摩擦、质量参数，提升 Sim2Real 泛化。<sup><a href="https://arxiv.org/abs/1703.06907" target="_blank">[Tobin et al., 2017]</a></sup></li>
+                <li><strong>程序化场景生成</strong>：批量生成任务布局和障碍组合，补齐真实数据长尾。</li>
+                <li><strong>自动标注导出</strong>：在仿真中自动导出位姿、接触、关节状态标签，降低人工标注成本。<sup><a href="https://docs.omniverse.nvidia.com/extensions/latest/ext_replicator.html" target="_blank">[Omniverse Replicator]</a></sup></li>
+            </ul>
+            <div class="media-grid">
+                <div class="media-card">
+                    <h4>Isaac Sim / Isaac Lab</h4>
+                    <p>适合大规模并行采样与 RL 数据生成。</p>
+                    <p><a href="https://developer.nvidia.com/isaac/sim" target="_blank">Isaac Sim</a> | <a href="https://isaac-sim.github.io/IsaacLab/" target="_blank">Isaac Lab</a></p>
+                </div>
+                <div class="media-card">
+                    <h4>ManiSkill</h4>
+                    <p>围绕操作任务构建的仿真与评测生态。</p>
+                    <p><a href="https://maniskill.readthedocs.io/" target="_blank">官方文档</a></p>
+                </div>
+                <div class="media-card">
+                    <h4>Habitat</h4>
+                    <p>导航和具身场景交互任务的常用平台。</p>
+                    <p><a href="https://aihabitat.org/" target="_blank">官方主页</a></p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>4.3 工程化数据流水线模板</h2>
             <pre class="mermaid">
-flowchart TD
-    subgraph UE5 [Phase 1: 虚拟仿真]
-        Engine[Unreal Engine 5]
-        Agent[RL Agent / Script]
-        Engine -->|Raw Video + Action| RawData[Raw MP4 + JSON]
-    end
-    
-    subgraph VLM [Phase 2: 语义增强 Crucial]
-        RawData -->|Sample Frames| Frames[Key Frames]
-        Frames -->|Prompt: Describe this scene| GPT4V[VLM - GPT4o / Gemini]
-        GPT4V -->|Dense Caption| Caption[Detailed Text Description]
-    end
-    
-    subgraph ETL [Phase 3: 清洗与分片]
-        RawData -->|Merge| Caption
-        Caption -->|Filter| CleanData
-        CleanData -->|WebDataset| Shards[Tar Shards 000.tar]
-    end
+flowchart LR
+    A[任务定义] --> B[真实采集/遥操作]
+    A --> C[仿真合成/域随机化]
+    B --> D[清洗与时间对齐]
+    C --> D
+    D --> E[自动标注与质检]
+    E --> F[版本化存储]
+    F --> G[训练输入打包]
+    G --> H[回归评测]
             </pre>
         </section>
 
         <section>
-            <h2>4.2 核心策略 1：VLM 自动标注 (Re-captioning)</h2>
-            <p><a href="https://openai.com/sora" target="_blank">OpenAI Sora</a> 的核心秘密在于训练数据使用了极高质量的
-                <strong>Machine-Generated Captions</strong>。我们必须复刻这一过程。</p>
-
-            <h3>为什么需要?</h3>
-            <p>UE 导出的 JSON 只有 <code>Jump</code>, <code>Run</code> 等离散动作，缺乏语义（如 "A cyberpunk city in
-                rain"）。没有文本语义，模型就无法响应 Text Prompt。</p>
-
-            <h3>自动标注脚本 (Auto-Labeling Pipeline)</h3>
-            <pre><code class="language-python"># auto_caption.py
-def generate_dense_caption(video_path):
-    """
-    使用 VLM 生成 Sora 级别的详细描述。
-    """
-    frames = sample_frames(video_path, num=5) # 抽5帧
-    
-    prompt = """
-    Describe this video clip in extreme detail. Focus on:
-    1. The environment (lighting, textures, weather).
-    2. The main character (apparel, movement).
-    3. The camera movement (pan, tilt, zoom).
-    4. The physics interactions (fluids, particles).
-    
-    Output format: A single dense paragraph.
-    """
-    
-    # 模拟调用 Gemini Vision / GPT-4V
-    caption = call_vlm_api(frames, prompt)
-    return caption
-
-# 示例输出：
-# "A first-person view navigating a dimly lit cavern. The walls are covered in 
-# bio-luminescent moss emitting a faint blue glow. The camera shakes violently 
-# as the character sprints forward, jumping over a chasm..."
-</code></pre>
-        </section>
-
-        <section>
-            <h2>4.3 核心策略 2：WebDataset 高性能分片</h2>
-            <p><strong>痛点</strong>: 100 万个 MP4 文件会导致文件系统索引崩溃（Inode Exhaustion）。<br>
-                <strong>解法</strong>: 使用
-                <code><a href="https://github.com/webdataset/webdataset" target="_blank">WebDataset</a></code> 将数据打包成
-                1GB 左右的 <code>.tar</code> 包。
+            <h2>4.4 数据质量门禁（上线前必须量化）</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>门禁项</th>
+                        <th>检查目标</th>
+                        <th>典型失败信号</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>时间同步完整性</strong></td>
+                        <td>视觉、状态、动作时间戳对齐</td>
+                        <td>动作提前/滞后，策略学习到错误因果</td>
+                    </tr>
+                    <tr>
+                        <td><strong>覆盖率</strong></td>
+                        <td>任务、物体、视角、失败类型分布均衡</td>
+                        <td>线上长尾场景大量失败</td>
+                    </tr>
+                    <tr>
+                        <td><strong>标签一致性</strong></td>
+                        <td>动作标签、接触状态、任务阶段定义统一</td>
+                        <td>跨数据源训练出现目标漂移</td>
+                    </tr>
+                    <tr>
+                        <td><strong>版本可追溯</strong></td>
+                        <td>数据切片与训练版本一一对应</td>
+                        <td>模型回退时无法定位问题样本</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size: 0.92rem; color: var(--text-secondary);">
+                参考入口：<a href="https://droid-dataset.github.io/" target="_blank">DROID</a>、
+                <a href="https://arxiv.org/abs/2310.08864" target="_blank">Open X-Embodiment</a>、
+                <a href="https://docs.omniverse.nvidia.com/extensions/latest/ext_replicator.html" target="_blank">Omniverse Replicator</a>。
             </p>
-
-            <h3>目录结构规范</h3>
-            <pre><code>dataset_optimized/
-├── shard_00000.tar   # 包含 1000 个视频 (video_0.mp4, video_0.json, video_0.txt)
-├── shard_00001.tar
-└── ...
-</code></pre>
-
-            <h3>JSON Schema (Metadata)</h3>
-            <p>每个视频伴随的 <code>.json</code> 文件必须严格定义：</p>
-            <pre><code class="language-json">{
-  "clip_id": "ue_level3_run05_001",
-  "duration": 5.0,
-  "fps": 24,
-  "resolution": [1280, 720],
-  "camera": {
-    "fov": 90,
-    "intrinsics": [ [500, 0, 640], [0, 500, 360], [0, 0, 1] ]
-  },
-  "controls": {
-    "input_type": "keyboard_mouse",
-    "action_sequence": [
-      {"frame": 0, "keys": ["W"], "mouse_delta": [0, 0]},
-      {"frame": 1, "keys": ["W", "Space"], "mouse_delta": [10, -5]}
-    ]
-  },
-  "caption": "A detailed description generated by VLM...",
-  "quality_score": 0.95
-}</code></pre>
         </section>
 
-        <section>
-            <h2>4.4 核心策略 3：基于状态机的样本平衡 (Balancing)</h2>
-            <p>在 UE 采集端，不要随机乱跑。编写一个 <strong>State Machine Bot</strong> 来保证样本多样性。</p>
-            <p><strong>建议分布</strong>:</p>
-            <ul>
-                <li><strong>Exploration (50%)</strong>: 走路、跑步、看风景。这是构建世界观的基础。</li>
-                <li><strong>Interaction (30%)</strong>: 开门、捡东西、破坏物体。学习物理规律。</li>
-                <li><strong>Idle (10%)</strong>: 站立不动，观察环境动态（云的飘动、水的流动）。</li>
-                <li><strong>Combat/Extreme (10%)</strong>: 剧烈运动、特效爆炸。防止模型在动态场景崩坏。</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>4.5 核心代码逻辑：C++ Recorder 插件更新</h2>
-            <pre><code class="language-cpp">// URecorderComponent.cpp (Enhanced)
-
-void URecorderComponent::TickComponent(...) {
-    // ... [RGB & Depth Capture 代码同上] ...
-    
-    // 获取当前 Bot 状态 (用于数据集平衡分析)
-    FString CurrentState = BotAIController->GetStateName(); // e.g., "Combat"
-    
-    // 序列化，增加语义标签
-    FString MetaJson = FString::Printf(TEXT(
-        "{\"t\": %.3f, \"state\": \"%s\", \"action\": ...}"
-    ), Timestamp, *CurrentState);
-    
-    // 只有当画面变化幅度 > 阈值 OR 处于关键交互时才保存
-    // 避免存储大量无意义的静止画面 (Dedup)
-    if (IsSignificantFrame(RGB_Data)) {
-        DiskWriter->Write(RGB_Data, MetaJson);
-    }
-}</code></pre>
-        </section>
-
-        <section>
-            <h2>4.6 避坑指南 (Best Practices)</h2>
-            <ol>
-                <li><strong>VLM 成本控制</strong>: 跑一遍 1200 小时视频的 VLM 标注非常贵。建议：<strong>关键帧标注</strong> (每 2 秒抽 1 帧做
-                    VLM)，中间帧沿用上一关键帧的 Caption (<strong>插值</strong>)。</li>
-                <li><strong>Gamma 校正陷阱</strong>: UE RenderTarget 默认是 Linear Space。导出 JPG/PNG 时务必手动做 Gamma 2.2
-                    Correction，否则视频会<strong>惨白</strong>。</li>
-                <li><strong>FOV 锁定</strong>: 训练时尽量固定 FOV (e.g., 90度)。如果 FOV 乱变，模型很难学得会空间透视。</li>
-            </ol>
-
-            <div class="commentary">
-                <div class="commentary-title">🧠 AntiGravity's Commentary</div>
-                <p><strong>严正警告：</strong> 不要用 Screen Capture！因为录屏会录到 Windows 弹窗、鼠标光标、Steam 帧数显示，这些都是"污染"。一定要用 Unreal
-                    Engine 的 <code>USceneCaptureComponent2D</code> 进行纯净的 Off-screen Rendering。</p>
-            </div>
-        </section>
-
-        <section>
-            <h2 id="physgame">4.7 最新增量：用“游戏 Glitch”做物理常识反例数据（PhysGame）</h2>
-            <p>如果你想让模型具备更强的物理常识（哪里违反物理、哪些现象不合理），传统数据要么标注贵、要么仿真不真实。<a
-                    href="https://arxiv.org/abs/2601.16471" target="_blank">Order from Chaos (arXiv:2601.16471)</a>
-                提出了一条很实用的“数据工程”路线：利用 gameplay videos 里的<strong>glitch（物理/渲染异常）</strong>作为可规模化监督源，构建 PhysGame QA 数据集。</p>
-
-            <ul>
-                <li><strong>PhysGame</strong>：140,057 条 glitch-centric QA，覆盖 5 个物理域、16 个细分类别。<sup><a href="https://arxiv.org/abs/2601.16471"
-                            target="_blank">[来源]</a></sup></li>
-                <li><strong>GameBench</strong>：880 条专家标注评测视频，用于验证“是否真的更会找物理不合理”。<sup><a href="https://arxiv.org/abs/2601.16471"
-                            target="_blank">[来源]</a></sup></li>
-                <li><strong>Meta-guided prompting</strong>：利用标题/描述等 metadata 指导 QA 生成，降低自动生成的物理胡编概率。<sup><a
-                            href="https://arxiv.org/abs/2601.16471" target="_blank">[来源]</a></sup></li>
-            </ul>
-
-            <pre class="mermaid">
-flowchart TD
-    A[Gameplay Videos] --> B[Glitch 片段挖掘/筛选]
-    A --> M[Metadata: title/description]
-    B --> P[Meta-guided Prompting]
-    M --> P
-    P --> Q[自动生成 QA 对]
-    Q --> T[Instruction Tuning: MLLM/VLM]
-    T --> E[评测: GameBench/PhysBench/MVBench]
-            </pre>
-
-            <div class="commentary">
-                <div class="commentary-title">🧠 AntiGravity's Commentary</div>
-                <p>这条路线的“工程含金量”在于把物理常识训练从“正例描述”转向“反例诊断”：glitch 让“违反物理”变成可见信号。但一定要把 domain gap 当成一等公民：游戏 glitch 的分布可能过度集中在渲染/碰撞实现细节，迁移到真实世界需要明确的失效分析与再采样策略。</p>
-            </div>
-        </section>
+        <div class="commentary">
+            <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+            <p>数据体系最容易踩坑的是“只追求规模，不追求失败样本覆盖”。具身系统上线后，决定鲁棒性的往往不是常规样本，而是**罕见失败 + 恢复轨迹**。</p>
+        </div>
 
         <nav class="chapter-nav">
             <a href="03_architecture.html" class="chapter-nav-link prev">
                 <span class="chapter-nav-label">← 上一章</span>
-                <span class="chapter-nav-title">03. 技术架构 (Architecture)</span>
+                <span class="chapter-nav-title">03. 技术架构方案 (Architecture)</span>
             </a>
             <a href="05_roadmap.html" class="chapter-nav-link next">
                 <span class="chapter-nav-label">下一章 →</span>
-                <span class="chapter-nav-title">05. 落地路线 (Roadmap)</span>
+                <span class="chapter-nav-title">05. 落地路线（含仿真环境） (Roadmap)</span>
             </a>
         </nav>
     </main>

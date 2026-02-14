@@ -1,11 +1,13 @@
 ## Skill：论文追踪「方式 A」主图自动提取与嵌入
 
 ### 目标
-- 从 `07_paper_tracker.html` 自动识别所有 `arXiv:XXXX.XXXXX` 论文条目
+- 从主站 `world_model_interactive_guide/07_paper_tracker.html` 自动识别所有 `arXiv:XXXX.XXXXX` 论文条目
 - 下载 arXiv PDF
 - 自动提取“论文主图”（默认策略：**首页/前两页面积最大内嵌图**，通常对应 Figure 1；若无可提取内嵌图，则**渲染首页整页**兜底）
 - 生成本地 `webp` 文件存入 `world_model_interactive_guide/assets/papers/`
 - 可选：自动把 `<figure class="paper-figure">` 块嵌入到每篇论文卡片里（幂等）
+
+> 适配说明（主站单领域）：本技能默认服务于“具身智能主站”论文追踪，不扫描 `legacy/`。
 
 ### 为什么这样做（对静态站最友好）
 - **不依赖外链**（规避链接失效、防盗链、跨域）
@@ -22,11 +24,12 @@
 sudo apt-get update && sudo apt-get install -y python3.12-venv
 ```
 
-2) 创建虚拟环境并安装依赖（清华源）
+2) 创建虚拟环境并安装依赖（清华源，使用 uv）
 ```bash
-python3 -m venv .venv
-.venv/bin/python -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
-.venv/bin/pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pymupdf pillow
+uv venv .venv
+source .venv/bin/activate
+.venv/bin/python -m pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+uv pip install pymupdf pillow
 ```
 
 ---
@@ -34,17 +37,25 @@ python3 -m venv .venv
 ### 一键执行（推荐）
 #### 只做提图（生成 webp + manifest）
 ```bash
-.venv/bin/python scripts/paper_figures.py
+.venv/bin/python scripts/paper_figures.py \
+  --html world_model_interactive_guide/07_paper_tracker.html \
+  --out-dir world_model_interactive_guide/assets/papers
 ```
 
 #### 提图 + 自动嵌入 HTML（幂等）
 ```bash
-.venv/bin/python scripts/paper_figures.py --embed
+.venv/bin/python scripts/paper_figures.py \
+  --html world_model_interactive_guide/07_paper_tracker.html \
+  --out-dir world_model_interactive_guide/assets/papers \
+  --embed
 ```
 
 #### 覆盖重跑
 ```bash
-.venv/bin/python scripts/paper_figures.py --overwrite --embed
+.venv/bin/python scripts/paper_figures.py \
+  --html world_model_interactive_guide/07_paper_tracker.html \
+  --out-dir world_model_interactive_guide/assets/papers \
+  --overwrite --embed
 ```
 
 ---
@@ -54,6 +65,17 @@ python3 -m venv .venv
 - `world_model_interactive_guide/assets/papers/manifest.json`
   - `mode`：`image-...` 表示直接抽取内嵌图；`page-render` 表示整页渲染兜底
   - `page`：图来自第几页（从 0 开始）
+
+---
+
+### legacy 处理规则（强制）
+- 默认禁止对 `world_model_interactive_guide/legacy/` 执行该技能。
+- 仅当用户明确要求“修复/补齐 legacy 论文图”时，才可显式指定：
+```bash
+.venv/bin/python scripts/paper_figures.py \
+  --html world_model_interactive_guide/legacy/07_paper_tracker.html \
+  --out-dir world_model_interactive_guide/legacy/assets/papers
+```
 
 ---
 

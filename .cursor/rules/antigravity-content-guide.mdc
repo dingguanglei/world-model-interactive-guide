@@ -2,7 +2,10 @@
 description: AntiGravity 内容规范（强制）—引用统一规则源
 globs:
   - "**/*.md"
-  - "world_model_interactive_guide/**/*.html"
+  - "world_model_interactive_guide/index.html"
+  - "world_model_interactive_guide/0*.html"
+  - "world_model_interactive_guide/10_benchmarks.html"
+  - "world_model_interactive_guide/references.html"
 alwaysApply: true
 ---
 
@@ -20,7 +23,14 @@ alwaysApply: true
   - 标题必须能跳转原文（优先 arXiv/PDF/官方 Project Page）。
   - 每篇论文必须包含三段垂直模块：🟢通俗解读 → 🔴专业解读 → 🧠 ntiGravity's Commentary。
   - 专业解读需拆解要点，必要时举例；重要论文建议图文并茂（可用 SVG/流程图/对比表）。
-- **社区动态（08）**：尽可能给出引用/原帖跳转链接（tweet/thread/HF discussion/博客文章等）。
+- **社区讨论（09）**：尽可能给出引用/原帖跳转链接（tweet/thread/HF discussion/博客文章等）。
 - **更新策略**：无高价值内容可不更新；禁止为了“日更”添加低价值、无引用、重复内容。
 - **最后更新时间模块**：更新型章节页顶部必须统一展示：
   - `⏰ 最后更新时间: YYYY-MM-DD | 本页内容将每日更新「XXXXXX」。`
+- **单领域维护（新增强制）**：
+  - 主站唯一领域为具身智能（`world_model_interactive_guide/index.html`）。
+  - 历史世界模型内容归档在 `world_model_interactive_guide/legacy/`，不作为主站日更对象。
+  - 未明确指定更新范围时，默认按具身智能章节顺序更新。
+  - 默认排除 `legacy/` 目录：除非用户明确要求“修复/更新 legacy”，否则禁止修改归档内容。
+  - 主站关键章节（必须保留）：行业全景、公司调研、产品调研、落地路线、技术架构方案、仿真环境、数据工程、论文追踪、评测基准、社区讨论。
+  - 具身智能内容优先覆盖：数据工程（采集/合成）、仿真环境、落地路线、公司与产品调研。

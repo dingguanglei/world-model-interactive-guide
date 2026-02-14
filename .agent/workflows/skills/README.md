@@ -17,8 +17,12 @@ description: AntiGravity Skills 索引（可自动发现/导航）
 ### 1) 每日例行完整更新（Daily Comprehensive Update）
 
 - **文件**：`daily-comprehensive-update.md`
-- **用途**：固化本仓库“每日例行完整更新”的扫描顺序（01→10）、更新判据、07/08/10 强制结构、主图提取、更新日志规范、合并前自检、git/PR 合并流程与权限兜底。
-- **适用范围**：`world_model_interactive_guide/01~10` 全章节 + `09_update_log.html`
+- **用途**：固化本仓库“具身智能单领域（日更）更新”流程：按主站章节顺序扫描、更新判据、结构强制项、更新日志同步、合并前自检与 git 流程。
+- **适用范围**：
+  - 主站（具身智能）：`world_model_interactive_guide/index.html` + `01~10` + `09_update_log.html` + `references.html`
+  - 历史归档（只读）：`world_model_interactive_guide/legacy/`
+  - 默认规则：自动扫描与批量修改操作应排除 `legacy/`，仅在明确要求时处理归档页
+  - 关键章节清单：行业全景、公司调研、产品调研、落地路线、技术架构方案、仿真环境、数据工程、论文追踪、评测基准、社区讨论
 
 ### 2) 论文主图自动提取与嵌入（Paper Figure Extraction）
 
@@ -26,6 +30,7 @@ description: AntiGravity Skills 索引（可自动发现/导航）
 - **用途**：从 `07_paper_tracker.html` 识别 arXiv 论文并下载 PDF，自动提取“论文主图”（启发式：前两页最大内嵌图，兜底渲染首页），生成本地 `webp` 与 `manifest.json`，可选幂等嵌入 HTML。
 - **核心脚本**：`scripts/paper_figures.py`
 - **产物目录**：`world_model_interactive_guide/assets/papers/`
+- **范围约束**：默认仅处理主站 `world_model_interactive_guide/07_paper_tracker.html`，不处理 `legacy/`。
 
 ---
 

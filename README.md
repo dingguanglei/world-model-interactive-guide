@@ -1,55 +1,56 @@
-# Systemic Learning Guide - World Model Guide
-# 2026 可交互视频生成与神经游戏引擎系统性学习指南
+# Systemic Learning Guide - Embodied AI Guide
+# 2026 具身智能系统性学习指南
 
-本指南旨在帮助技术负责人、研究员及产品决策者深度理解 **可交互世界模型 (Interactive World Model)** 这一新兴赛道。
+本指南旨在帮助技术负责人、研究员及产品决策者系统理解 **具身智能 (Embodied Intelligence)** 赛道，重点关注：
 
-这不仅仅是一份资讯汇总，而是基于 **“如何构建下一代神经游戏引擎”** 这一核心命题整理的实战与架构手册。
+- 数据采集方法（遥操作/多模态同步/失败样本回流）
+- 数据合成方法（域随机化/程序化场景/自动标注）
+- 仿真环境（Isaac/MuJoCo/Habitat/ManiSkill）
+- 强化学习进展（离线RL/世界模型RL/安全RL）
 
 ## 在线阅读 (Live Demo)
 
 [https://dingguanglei.github.io/world-model-interactive-guide](https://dingguanglei.github.io/world-model-interactive-guide)
 
-## 双领域结构（2026-02-14 起）
+## 当前站点结构（单领域）
 
-站点已拆分为两个独立领域，并通过页面内的大按钮双向切换：
+主站已重构为 **具身智能单领域**，不再提供领域切换：
 
-- **默认入口（具身智能）**：`/index.html`（会默认进入具身智能领域）
-- **具身智能（Embodied Intelligence）**：`/embodied_intelligence/index.html`（独立导航与独立更新日志）
-- **世界模型（World Model）**：`/world_model_home.html`（原 00-10 + 附录结构）
+- 主站入口：`/world_model_interactive_guide/index.html`
+- 章节页：`01~10` + `references.html`
+- 更新日志：`09_update_log.html`
 
-更新日志也已拆分，互不干扰：
+## Legacy 归档
 
-- 世界模型更新日志：`/09_update_log.html`
-- 具身智能更新日志：`/embodied_intelligence/update_log.html`
+重构前的世界模型相关内容已整体归档至：
 
-### 默认更新策略
+- `/world_model_interactive_guide/legacy/`
+- Legacy 首页：`/world_model_interactive_guide/legacy/index.html`
 
-- 若未明确指定更新领域，默认并优先更新 **具身智能** 领域内容。
+> 说明：legacy 用于历史回溯，不作为当前主站内容。
 
 ## 技能库 (Skills)
 
 - 论文追踪「方式 A」主图自动提取与嵌入：`.agent/workflows/skills/paper-figure-extraction.md`（脚本：`scripts/paper_figures.py`）
 
-## 核心内容
+## 主站核心内容
 
 本指南包含以下核心模块：
 
 *   **Chapter 01: 行业全景 (Landscape)**
-    *   辨析“生成视频”与“生成世界”的本质区别，洞察 2026 市场竞争格局。
-*   **Chapter 02: 产品深度 (Deep Dive)**
-    *   透过官方演示视频，反推 Genie 3 和 Matrix-Game 2.0 的技术边界。
+    *   具身智能产业格局、关键玩家与商业化路线。
+*   **Chapter 02: 产品与系统 (Products)**
+    *   Figure/1X/GR00T 等系统能力拆解与视频入口。
 *   **Chapter 03: 技术架构 (Architecture)**
-    *   拆解“听懂键盘指令”与“实时推理”的底层实现（Tokenization, Action Injection）。
-*   **Chapter 04: 数据工程 (Data Bible)**
-    *   从 0 到 1 构建高质量的 UE5 合成数据采集管线。
-*   **Chapter 05: 落地路线 (Roadmap)**
-    *   90天攻坚甘特图与阶段性交付物定义。
-*   **Chapter 06: 公司调研 (Companies)**
-    *   生数科技、爱诗科技等核心公司的全面调研。
-*   **Chapter 07: 论文追踪 (Papers)**
-    *   每日更新 arXiv/GitHub 最新论文与双视角解读。
-*   **Chapter 08: 社区动态 (Community)**
-    *   X/Twitter、Reddit 等社区的热门讨论与批判性解读。
+    *   VLA / Planner / Controller / Safety 的系统架构。
+*   **Chapter 04: 数据采集与合成 (Data)**
+    *   真实采集、合成数据、自动标注、数据质控。
+*   **Chapter 05: 仿真环境 (Simulation)**
+    *   Sim2Real 闭环、平台选型与风险清单。
+*   **Chapter 06: 强化学习进展 (RL Progress)**
+    *   离线RL、世界模型RL、层级RL与安全RL。
+*   **Chapter 07-10**
+    *   论文追踪、评测基准、社区动态、更新日志。
 
 ## 作者 (Author)
 
