@@ -174,49 +174,49 @@ flowchart LR
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>Isaac Sim / Isaac Lab</strong></td>
+                        <td><strong><a href="https://developer.nvidia.com/isaac/sim" target="_blank">Isaac Sim</a> / <a href="https://isaac-sim.github.io/IsaacLab/" target="_blank">Isaac Lab</a></strong></td>
                         <td>活跃迭代</td>
                         <td>人形、移动操作、并行策略训练</td>
                         <td>支持多相机、深度、语义标注与仿真日志导出；可与 Omniverse 数据管线协同</td>
                         <td>优势：GPU 并行与工业生态强；限制：资源开销和工程复杂度较高</td>
                     </tr>
                     <tr>
-                        <td><strong>MuJoCo</strong></td>
+                        <td><strong><a href="https://mujoco.readthedocs.io/" target="_blank">MuJoCo</a></strong></td>
                         <td>成熟稳定</td>
                         <td>控制算法、接触动力学基准</td>
                         <td>适合高频控制实验与动力学对比；视觉数据合成能力需配套外部渲染方案</td>
                         <td>优势：动力学研究生态成熟；限制：复杂视觉合成能力相对有限</td>
                     </tr>
                     <tr>
-                        <td><strong>ManiSkill</strong></td>
+                        <td><strong><a href="https://maniskill.readthedocs.io/" target="_blank">ManiSkill</a></strong></td>
                         <td>活跃迭代</td>
                         <td>操作任务（抓取/装配/工具使用）</td>
                         <td>围绕操作任务提供环境与评测接口，便于构建任务级数据回归</td>
                         <td>优势：操作任务生态完整；限制：场景覆盖需结合具体任务扩展</td>
                     </tr>
                     <tr>
-                        <td><strong>Habitat</strong></td>
+                        <td><strong><a href="https://aihabitat.org/" target="_blank">Habitat</a></strong></td>
                         <td>活跃迭代</td>
                         <td>具身导航、场景交互</td>
                         <td>3D 场景和导航任务成熟，适合多房间/多场景轨迹数据生成</td>
                         <td>优势：导航任务丰富；限制：高精度操作任务支持相对弱</td>
                     </tr>
                     <tr>
-                        <td><strong>Gazebo</strong></td>
+                        <td><strong><a href="https://gazebosim.org/" target="_blank">Gazebo</a></strong></td>
                         <td>长期维护</td>
                         <td>ROS 系统联调、控制验证</td>
                         <td>与 ROS 生态衔接紧密，适合系统级联调与传感器仿真</td>
                         <td>优势：工程联调成本低；限制：大规模并行训练能力一般</td>
                     </tr>
                     <tr>
-                        <td><strong>PyBullet</strong></td>
+                        <td><strong><a href="https://pybullet.org/wordpress/" target="_blank">PyBullet</a></strong></td>
                         <td>长期可用</td>
                         <td>快速原型、教学与轻量实验</td>
                         <td>上手快、脚本化友好，便于快速生成训练样本</td>
                         <td>优势：开发效率高；限制：高保真复杂场景需额外验证</td>
                     </tr>
                     <tr>
-                        <td><strong>Webots</strong></td>
+                        <td><strong><a href="https://cyberbotics.com/" target="_blank">Webots</a></strong></td>
                         <td>长期维护</td>
                         <td>教育与中小规模机器人实验</td>
                         <td>多机器人原型验证友好，支持常见传感器模拟</td>

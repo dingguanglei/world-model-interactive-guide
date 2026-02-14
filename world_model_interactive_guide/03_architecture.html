@@ -47,11 +47,99 @@
 
         <section>
             <h2>3.1 主流路线：VLM+Policy 到 VLA</h2>
-            <ul>
-                <li><strong>RT-2 路线</strong>：将视觉-语言知识迁移到机器人动作输出，强调从互联网语义到机器人执行的跨域泛化。<sup><a href="https://deepmind.google/discover/blog/rt-2-new-model-translates-vision-and-language-into-action/" target="_blank">[DeepMind Blog]</a></sup> <sup><a href="https://arxiv.org/abs/2307.15818" target="_blank">[arXiv:2307.15818]</a></sup></li>
-                <li><strong>OpenVLA 路线</strong>：开源 VLA 模型，面向通用机器人控制接口，强调可复现与可微调。<sup><a href="https://openvla.github.io/" target="_blank">[Project]</a></sup> <sup><a href="https://github.com/openvla/openvla" target="_blank">[GitHub]</a></sup></li>
-                <li><strong>Octo 路线</strong>：跨机器人数据联合训练，强调在多任务和多硬件上的迁移。<sup><a href="https://octo-models.github.io/" target="_blank">[Project]</a></sup></li>
-            </ul>
+            <p>从工程实现看，主流方案可以归纳为三类：<strong>VLM+Policy 两段式</strong>、<strong>VLA 一体化动作 token</strong>、<strong>分层混合架构</strong>。它们的核心区别就在“动作如何表征”和“动作如何落到控制器”。</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>路线</th>
+                        <th>动作如何表征</th>
+                        <th>输入如何送入模型</th>
+                        <th>模型如何输出</th>
+                        <th>动作如何执行</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>路线 A：VLM + Policy（两段式）</strong></td>
+                        <td>连续动作向量（常见为末端位姿增量、夹爪开合、关节速度）</td>
+                        <td>VLM 先读视觉+语言生成子目标；Policy 再读视觉/状态+子目标</td>
+                        <td>Policy 输出动作 chunk（未来 N 步连续控制量）</td>
+                        <td>由低层控制器（PID/MPC/阻抗）以高频闭环执行，并叠加安全约束</td>
+                    </tr>
+                    <tr>
+                        <td><strong>路线 B：VLA（一体化）</strong></td>
+                        <td>离散化动作 token 或量化后的动作码本</td>
+                        <td>把图像、状态、文本统一成 token 序列输入 Transformer</td>
+                        <td>自回归生成动作 token 序列，再反量化为控制命令</td>
+                        <td>按 chunk 下发到控制器，运行时由 safety layer 做限幅/急停</td>
+                    </tr>
+                    <tr>
+                        <td><strong>路线 C：分层混合（VLA + Planner + Controller）</strong></td>
+                        <td>高层是语义子目标/waypoint，低层是连续控制量</td>
+                        <td>高层模型处理长时语义，低层模块处理接触与实时控制</td>
+                        <td>高层输出子任务序列，低层输出关节/力矩/速度命令</td>
+                        <td>高层低频更新，低层高频执行</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <pre class="mermaid">
+flowchart LR
+    I[📷视觉 + 🧭本体状态 + 💬语言指令] --> A1[路线A: VLM 语义理解]
+    A1 --> A2[子目标/文本计划]
+    A2 --> A3[Policy 连续动作 chunk]
+    A3 --> E[控制器执行 + 安全层]
+
+    I --> B1[路线B: VLA 统一 token]
+    B1 --> B2[动作 token 序列]
+    B2 --> B3[反量化为连续控制]
+    B3 --> E
+
+    I --> C1[路线C: 高层 VLA/Planner]
+    C1 --> C2[子任务与 waypoint]
+    C2 --> C3[低层 Controller/MPC]
+    C3 --> E
+            </pre>
+
+            <div class="media-grid">
+                <div class="media-card">
+                    <h4>🧩 路线 A：VLM + Policy（两段式）</h4>
+                    <ul>
+                        <li><strong>动作表征</strong>：以连续控制为主，适合末端位姿增量与抓取控制。</li>
+                        <li><strong>输入方式</strong>：VLM 负责“看懂和拆任务”，Policy 负责“把子目标变动作”。</li>
+                        <li><strong>输出方式</strong>：Policy 常输出短时动作块（action chunk），降低单步抖动。</li>
+                        <li><strong>执行链路</strong>：控制器负责高频闭环与执行稳定性，VLM 不直接驱电机。</li>
+                    </ul>
+                </div>
+
+                <div class="media-card">
+                    <h4>🧠 路线 B：VLA（一体化动作 token）</h4>
+                    <ul>
+                        <li><strong>动作表征</strong>：将动作离散化为 token，和文本 token 一起做序列建模。</li>
+                        <li><strong>输入方式</strong>：视觉 patch/token + 机器人状态 token + 文本 token 统一拼接。</li>
+                        <li><strong>输出方式</strong>：模型自回归输出动作 token，再映射回连续动作空间。</li>
+                        <li><strong>执行链路</strong>：通常按短窗口下发动作，并由 runtime safety guard 兜底。</li>
+                    </ul>
+                </div>
+
+                <div class="media-card">
+                    <h4>⚙️ 路线 C：分层混合（部署常见）</h4>
+                    <ul>
+                        <li><strong>动作表征</strong>：高层语义动作 + 低层连续控制并存。</li>
+                        <li><strong>输入方式</strong>：高层看长时上下文，低层看实时接触与动力学状态。</li>
+                        <li><strong>输出方式</strong>：高层给目标，低层给可执行控制信号。</li>
+                        <li><strong>执行链路</strong>：优势是可审计、可回放、可替换模块，利于线上迭代。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p style="font-size: 0.92rem; color: var(--text-secondary);">
+                参考：<a href="https://arxiv.org/abs/2307.15818" target="_blank">RT-2</a>、
+                <a href="https://openvla.github.io/" target="_blank">OpenVLA</a>、
+                <a href="https://arxiv.org/abs/2303.04137" target="_blank">Diffusion Policy</a>、
+                <a href="https://octo-models.github.io/" target="_blank">Octo</a>。
+            </p>
         </section>
 
         <section>
