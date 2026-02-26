@@ -179,6 +179,33 @@
             </div>
         </section>
 
+        <section>
+            <h2>8.5 最新增补：SPOC（Safety-Aware Planning）</h2>
+            <div class="card">
+                <h3><a href="https://arxiv.org/abs/2602.21595" target="_blank">SPOC: Safety-Aware Planning Under Partial Observability And Physical Constraints</a>（Benchmark / Protocol）</h3>
+                <p><strong>判定者</strong>：传统算法 + 环境约束规则（基于 goal-condition 与 constraint 违规情况在线统计）。</p>
+                <div class="media-card">
+                    <h4>🟢 通俗解读</h4>
+                    <p>SPOC 不是只看“任务有没有完成”，而是同时看“过程中有没有做出危险动作”。它更接近真实家庭部署里“安全优先”的评测口径。</p>
+                </div>
+                <div class="media-card">
+                    <h4>🔴 专业解读</h4>
+                    <ul>
+                        <li><strong>What it measures</strong>：部分可观测条件下的规划可行性、安全约束满足率、逐步计划一致性。</li>
+                        <li><strong>How to use</strong>：按论文定义的 household hazard 场景运行 step-by-step planning，记录 goal 达成、约束违规和在线状态指标。</li>
+                        <li><strong>Pitfalls</strong>：仅优化最终成功率会掩盖“先违规后完成”的危险轨迹；必须把 constraint violation 作为硬门槛。</li>
+                    </ul>
+                    <ul class="source-loc">
+                        <li>来源定位：<a href="https://arxiv.org/pdf/2602.21595.pdf#page=1" target="_blank">Abstract</a> / <a href="https://arxiv.org/abs/2602.21595" target="_blank">arXiv Entry</a></li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <p>SPOC 更适合作为“上线前安全回归集”而不是营销榜单。建议在 CI 中把“违规率=0”设为阻断条件，再看成功率与时延折中。</p>
+                </div>
+            </div>
+        </section>
+
         <div class="commentary">
             <div class="commentary-title">🧠 AntiGravity's Commentary</div>
             <p>具身评测最常见误用是“只报成功率”。如果没有恢复能力和安全指标，分数再高也不具备部署意义。</p>

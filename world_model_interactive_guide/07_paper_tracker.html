@@ -74,6 +74,79 @@
         </div>
 
         <details open>
+            <summary><strong>2026-02（最新增补，默认展开）</strong></summary>
+            <div class="card">
+                <h3><a href="https://arxiv.org/abs/2602.21723" target="_blank">LessMimic: Long-Horizon Humanoid Interaction with Unified Distance Field Representations</a></h3>
+                <div class="paper-meta">
+                    <span>📅 2026-02-25</span>
+                    <span>📄 arXiv:2602.21723</span>
+                    <span class="paper-tag new">NEW</span>
+                </div>
+                <div class="paper-meta">
+                    <span>💻 代码：未公开/未知（以 arXiv 页面为准）</span>
+                    <span>🧱 权重：未公开/未知</span>
+                    <span>🗂️ 数据：未公开/未知</span>
+                </div>
+                <div class="media-card">
+                    <h4>🟢 通俗解读</h4>
+                    <p>这篇工作想解决“人形机器人做长任务时，动作策略对特定物体形状过拟合”的问题。核心思路是改用距离场（Distance Field）作为统一几何线索，让策略更容易跨对象复用技能。</p>
+                </div>
+                <div class="media-card">
+                    <h4>🔴 专业解读</h4>
+                    <ul>
+                        <li><strong>Problem/Setup</strong>：现有方法常依赖参考动作或特定任务奖励，导致策略难以在统一框架中完成多技能长时组合。</li>
+                        <li><strong>Method</strong>：以距离场（表面距离/梯度等）作为几何条件，训练单一全身策略，减少对对象几何模板的耦合。</li>
+                        <li><strong>Why it works</strong>：距离场提供连续、可微的几何关系，便于策略在接触与运动阶段共享表示。</li>
+                        <li><strong>Evaluation</strong>：论文报告覆盖长时交互与多种家居风险场景（如火源/液体/污染）下的规划与执行评估。</li>
+                        <li><strong>Limitations</strong>：公开摘要尚不能判断其实时控制频率、算力预算与实机安全兜底策略。</li>
+                    </ul>
+                    <ul class="source-loc">
+                        <li>来源定位：<a href="https://arxiv.org/pdf/2602.21723.pdf#page=1" target="_blank">Abstract</a> / <a href="https://arxiv.org/abs/2602.21723" target="_blank">arXiv Entry</a></li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <p>如果后续开源训练细节，LessMimic 值得优先验证两件事：一是“几何泛化是否真的减少重采样数据成本”，二是“统一策略是否会在罕见接触场景下出现不可控长尾失败”。</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><a href="https://arxiv.org/abs/2602.21157" target="_blank">HALO: A Unified Vision-Language-Action Model for Embodied Multimodal Chain-of-Thought Reasoning</a></h3>
+                <div class="paper-meta">
+                    <span>📅 2026-02-24</span>
+                    <span>📄 arXiv:2602.21157</span>
+                    <span class="paper-tag new">NEW</span>
+                </div>
+                <div class="paper-meta">
+                    <span>💻 代码：未公开/未知（以 arXiv 页面为准）</span>
+                    <span>🧱 权重：未公开/未知</span>
+                    <span>🗂️ 数据：未公开/未知</span>
+                </div>
+                <div class="media-card">
+                    <h4>🟢 通俗解读</h4>
+                    <p>HALO 试图把“文字推理 + 视觉前瞻 + 动作预测”放到同一条链路中，避免 VLA 在长任务里只会“看到就做”，却无法持续推演未来状态。</p>
+                </div>
+                <div class="media-card">
+                    <h4>🔴 专业解读</h4>
+                    <ul>
+                        <li><strong>Problem/Setup</strong>：传统 VLA 在长时任务和分布外场景中容易失效，关键瓶颈是缺乏统一多模态推理机制。</li>
+                        <li><strong>Method</strong>：构建 embodied multimodal chain-of-thought（EM-CoT）流程，串联文本任务分解、视觉前瞻与动作生成。</li>
+                        <li><strong>Why it works</strong>：先显式推理再行动，可降低策略在多步任务中的短视决策与中途漂移。</li>
+                        <li><strong>Evaluation</strong>：论文以长时操作与 OOD 场景为重点，评估 reasoning + action 的联合效果。</li>
+                        <li><strong>Limitations</strong>：若无严格延迟预算控制，推理链路变长可能牺牲实时性；摘要未给出完整部署开销。</li>
+                    </ul>
+                    <ul class="source-loc">
+                        <li>来源定位：<a href="https://arxiv.org/pdf/2602.21157.pdf#page=1" target="_blank">Abstract</a> / <a href="https://arxiv.org/abs/2602.21157" target="_blank">arXiv Entry</a></li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <p>HALO 的工程关键不在“有没有 CoT”，而在“多一步推理是否换来更高成功率而非更高时延”。建议把它和纯策略模型在同一延迟预算下做 A/B 对照。</p>
+                </div>
+            </div>
+        </details>
+
+        <details open>
             <summary><strong>2026-01（最近论文，默认展开）</strong></summary>
             <div class="card">
                 <h3><a href="https://arxiv.org/abs/2601.16163" target="_blank">Cosmos Policy: Diffusion World Model Policy Learning</a></h3>
