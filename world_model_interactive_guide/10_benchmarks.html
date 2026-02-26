@@ -40,7 +40,7 @@
         <p>评测目标不是“营销分数”，而是为工程迭代提供可复现回归标准：测什么、怎么测、谁来判定、指标怎么解释。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-02-14 | 本页内容将每日更新「具身任务评测基准、指标口径与复现入口」。
+            ⏰ <strong>最后更新时间</strong>: 2026-02-26 | 本页内容将每日更新「具身任务评测基准、指标口径与复现入口」。
         </div>
 
         <section>
@@ -177,6 +177,80 @@
                     <p>ManiSkill 非常适合算法迭代，但不要把它当“上线许可”。最优实践是仿真回归 + 小流量实机验证并行。</p>
                 </div>
             </div>
+        </section>
+
+        <section>
+            <h2>8.5 最新增补：SPOC（Safety-Aware Planning）</h2>
+            <div class="card">
+                <h3><a href="https://arxiv.org/abs/2602.21595" target="_blank">SPOC: Safety-Aware Planning Under Partial Observability And Physical Constraints</a>（Benchmark / Protocol）</h3>
+                <p><strong>判定者</strong>：传统算法 + 环境约束规则（基于 goal-condition 与 constraint 违规情况在线统计）。</p>
+                <div class="media-card">
+                    <h4>🟢 通俗解读</h4>
+                    <p>SPOC 不是只看“任务有没有完成”，而是同时看“过程中有没有做出危险动作”。它更接近真实家庭部署里“安全优先”的评测口径。</p>
+                </div>
+                <div class="media-card">
+                    <h4>🔴 专业解读</h4>
+                    <ul>
+                        <li><strong>Type / Judge</strong>：Benchmark + Protocol；判定者为传统算法与环境约束规则（非主观人工、非LLM裁判）。</li>
+                        <li><strong>What it measures</strong>：
+                            <br>① 可行性：部分可观测条件下计划是否可执行；
+                            <br>② 安全性：是否触发火灾/液体/损坏/污染等约束违规；
+                            <br>③ 一致性：step-by-step planning 是否在中途偏离目标条件。</li>
+                        <li><strong>How to use（最小复现路径）</strong>：固定 hazard 场景集合与随机种子 → 运行逐步规划 → 记录 goal success、constraint violation、平均规划步数与 replanning 频次。</li>
+                        <li><strong>核心对照实验建议</strong>：同一任务上对比“高成功率但高违规”的 planner 与“中等成功率低违规”的 planner，验证安全门槛对上线决策的影响。</li>
+                        <li><strong>Pitfalls</strong>：仅优化最终成功率会掩盖“先违规后完成”的危险轨迹；必须把 constraint violation 作为硬门槛。</li>
+                        <li><strong>部署含义</strong>：SPOC 更像“上线前 safety regression”而非 leaderboard KPI，适合放进每周回归流水线。</li>
+                    </ul>
+                    <ul class="source-loc">
+                        <li>来源定位：<a href="https://arxiv.org/pdf/2602.21595.pdf#page=1" target="_blank">Abstract</a> / <a href="https://arxiv.org/abs/2602.21595" target="_blank">arXiv Entry</a></li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <p>SPOC 更适合作为“上线前安全回归集”而不是营销榜单。建议在 CI 中把“违规率=0”设为阻断条件，再看成功率与时延折中。</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>8.6 安全评测落地模板（建议直接用于回归）</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>维度</th>
+                        <th>建议阈值</th>
+                        <th>用途</th>
+                        <th>常见误区</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Goal Success Rate</td>
+                        <td>按场景分层设定（如 ≥70%）</td>
+                        <td>衡量任务完成能力</td>
+                        <td>只看均值，不看场景分布</td>
+                    </tr>
+                    <tr>
+                        <td>Constraint Violation</td>
+                        <td><strong>必须为 0 或极低（强 gate）</strong></td>
+                        <td>衡量安全底线</td>
+                        <td>把安全事件当“可接受探索噪声”</td>
+                    </tr>
+                    <tr>
+                        <td>Replanning Frequency</td>
+                        <td>持续下降或稳定在目标区间</td>
+                        <td>衡量规划稳定性与观测鲁棒性</td>
+                        <td>忽略中途反复重规划造成的时延抖动</td>
+                    </tr>
+                    <tr>
+                        <td>End-to-End Latency</td>
+                        <td>满足控制回路预算（如 ≤50ms/step）</td>
+                        <td>衡量实时部署可行性</td>
+                        <td>离线指标好看但线上超时</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>建议顺序：先过安全门槛（Violation）→ 再看成功率（Success）→ 最后优化效率（Latency/Replanning）。</p>
         </section>
 
         <div class="commentary">
