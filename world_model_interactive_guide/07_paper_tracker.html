@@ -94,11 +94,14 @@
                 <div class="media-card">
                     <h4>🔴 专业解读</h4>
                     <ul>
-                        <li><strong>Problem/Setup</strong>：现有方法常依赖参考动作或特定任务奖励，导致策略难以在统一框架中完成多技能长时组合。</li>
-                        <li><strong>Method</strong>：以距离场（表面距离/梯度等）作为几何条件，训练单一全身策略，减少对对象几何模板的耦合。</li>
-                        <li><strong>Why it works</strong>：距离场提供连续、可微的几何关系，便于策略在接触与运动阶段共享表示。</li>
-                        <li><strong>Evaluation</strong>：论文报告覆盖长时交互与多种家居风险场景（如火源/液体/污染）下的规划与执行评估。</li>
-                        <li><strong>Limitations</strong>：公开摘要尚不能判断其实时控制频率、算力预算与实机安全兜底策略。</li>
+                        <li><strong>Problem/Setup</strong>：现有方法常依赖 reference motion 或 task-specific reward，导致策略对对象几何和任务模板耦合过强，难以统一支持长时、多技能交互。</li>
+                        <li><strong>Method</strong>：以 Distance Field 作为统一交互表示，把表面距离、梯度、接触相关几何信号注入 whole-body policy，目标是“参考动作可选而非必需”的训练与推理范式。</li>
+                        <li><strong>核心优化点 1（表示层）</strong>：从“对象 ID/模板特征”转向“连续几何场”后，策略学习的是几何关系而不是具体物体纹理，理论上能提升跨对象泛化。</li>
+                        <li><strong>核心优化点 2（控制层）</strong>：统一全身策略减少了“抓取策略/移动策略/避障策略”割裂训练带来的切换误差，更适合长时连续任务。</li>
+                        <li><strong>核心优化点 3（规划层）</strong>：在长链路任务里，把几何线索直接喂给策略可降低“中途重规划”次数，对稳定性有潜在正收益。</li>
+                        <li><strong>Evaluation</strong>：论文强调 long-horizon interaction 与多类 household risk setting 的评测；建议重点查看其安全约束与成功率是否同时提升。</li>
+                        <li><strong>工程代价与边界</strong>：DF 表示通常带来额外几何计算与感知前处理开销；若系统算力受限，可能需要降低场分辨率或做异步更新。</li>
+                        <li><strong>可复现实验建议</strong>：做三组对照：① 纯对象特征条件，② DF 条件，③ 混合条件；在同延迟预算下比较成功率、恢复率与安全违规率。</li>
                     </ul>
                     <ul class="source-loc">
                         <li>来源定位：<a href="https://arxiv.org/pdf/2602.21723.pdf#page=1" target="_blank">Abstract</a> / <a href="https://arxiv.org/abs/2602.21723" target="_blank">arXiv Entry</a></li>
@@ -129,11 +132,18 @@
                 <div class="media-card">
                     <h4>🔴 专业解读</h4>
                     <ul>
-                        <li><strong>Problem/Setup</strong>：传统 VLA 在长时任务和分布外场景中容易失效，关键瓶颈是缺乏统一多模态推理机制。</li>
-                        <li><strong>Method</strong>：构建 embodied multimodal chain-of-thought（EM-CoT）流程，串联文本任务分解、视觉前瞻与动作生成。</li>
-                        <li><strong>Why it works</strong>：先显式推理再行动，可降低策略在多步任务中的短视决策与中途漂移。</li>
-                        <li><strong>Evaluation</strong>：论文以长时操作与 OOD 场景为重点，评估 reasoning + action 的联合效果。</li>
-                        <li><strong>Limitations</strong>：若无严格延迟预算控制，推理链路变长可能牺牲实时性；摘要未给出完整部署开销。</li>
+                        <li><strong>Problem/Setup</strong>：传统 VLA 在 long-horizon 与 OOD 任务中常见 failure pattern 是“短期动作合理、全局目标偏离”，本质是缺乏显式中间推理状态。</li>
+                        <li><strong>Method</strong>：提出 EM-CoT（text reasoning → visual foresight → action prediction）串行链路，把“任务意图、未来视觉状态、动作”纳入同一推理轨迹。</li>
+                        <li><strong>系统链路拆解（输入→模块→输出）</strong>：
+                            <br>输入：语言指令 + 当前观测；
+                            <br>模块 A：文本任务分解（子目标/约束）；
+                            <br>模块 B：视觉前瞻（预测中间状态）；
+                            <br>模块 C：动作解码（输出执行动作）；
+                            <br>输出：可执行动作序列与中间推理痕迹。</li>
+                        <li><strong>Why it works</strong>：把“先想后做”显式化后，模型在每一步都可被约束检查（例如目标一致性/安全条件），减少漂移累积。</li>
+                        <li><strong>Evaluation</strong>：论文聚焦 long-horizon 与 OOD 评测；建议优先看 ablation：去掉文本推理或去掉视觉前瞻时性能回落幅度。</li>
+                        <li><strong>工程代价与边界</strong>：多阶段推理会拉长端到端时延；若控制回路要求高频（如 >20Hz），需要异步规划或低频高层+高频低层分层部署。</li>
+                        <li><strong>可复现实验建议</strong>：在固定延迟预算下，对比“纯 VLA”与“EM-CoT VLA”的 success rate、recovery rate、平均决策时延三指标，避免只看成功率。</li>
                     </ul>
                     <ul class="source-loc">
                         <li>来源定位：<a href="https://arxiv.org/pdf/2602.21157.pdf#page=1" target="_blank">Abstract</a> / <a href="https://arxiv.org/abs/2602.21157" target="_blank">arXiv Entry</a></li>
