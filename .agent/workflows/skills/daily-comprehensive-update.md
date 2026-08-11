@@ -4,7 +4,7 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
 
 ## Skill: Daily Comprehensive Update（每日例行完整更新）
 
-本 skill 用于把“每天例行完整更新”固化为可重复执行的操作流程与质量规则，适用于本仓库 `world_model_interactive_guide/` 的“具身智能单领域”主站维护。
+本 skill 用于把“每天例行完整更新”固化为可重复执行的操作流程与质量规则，适用于本仓库 `world_model_interactive_guide/` 的“具身智能单领域”主站维护。自动入口为 `scripts/daily_update.sh`，默认按 Asia/Shanghai 每天执行一次。
 
 > 核心原则：**宁缺毋滥**。如果当天没有**高价值、可追溯**的新信息，允许不更新对应章节，但必须保持规范合规（尤其是 last-updated 与引用）。
 
@@ -15,7 +15,8 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
 - **规范来源（最高优先级）**：`.agent/workflows/antigravity-content-guide.md`
 - **可追溯性**：任何关键结论/数字/主张必须有**可点击权威来源**（论文优先 arXiv/PDF/Project Page，其次官方 GitHub/官方博客/官方发布）。
 - **范围约束**：
-  - 主站更新对象：`index.html` + `01~10` + `11_edge_chip.html` + `references.html`
+  - 主站更新对象：`index.html`、`01_industry.html`、`04_data.html`、`13_world_models.html`、`12_real_world_rl.html`、`07_paper_tracker.html`、`08_community.html`、`09_update_log.html`、`10_benchmarks.html`、`references.html`
+  - `02_product.html`、`03_architecture.html`、`05_roadmap.html`、`06_companies.html`、`11_edge_chip.html` 为资料/备用页；公司与芯片的日更结论优先回写 `01_industry.html`
   - 历史世界模型内容在 `legacy/` 目录，只做归档浏览，不做日更维护
   - 后续常规更新一律忽略 `legacy/`（不扫描、不改写、不做批量替换）
 - **更新型章节页页头**：所有更新型页面顶部必须包含：
@@ -43,18 +44,15 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
 按以下顺序“逐页扫描 → 决策更新/跳过 → 记录到更新日志”：
 
 1) `index.html` 概览  
-2) `01_industry.html` 行业全景  
-3) `02_product.html` 产品调研  
-4) `03_architecture.html` 技术架构方案  
-5) `11_edge_chip.html` 端侧芯片调研  
-6) `04_data.html` 数据工程（采集与合成）  
-7) `05_roadmap.html` 落地路线（含仿真环境）  
-8) `06_companies.html` 公司调研  
-9) `07_paper_tracker.html` 论文追踪  
-10) `10_benchmarks.html` 评测基准  
-11) `08_community.html` 社区讨论  
-12) `09_update_log.html` 更新日志  
-13) `references.html` 参考资料
+2) `01_industry.html` 行业全景（产品、公司、端上芯片）
+3) `04_data.html` 数据工程（采集与合成）
+4) `13_world_models.html` 模型（VLA / WAM）
+5) `12_real_world_rl.html` 强化学习（Real-World RL）
+6) `07_paper_tracker.html` 论文与技术报告追踪
+7) `10_benchmarks.html` 评测基准
+8) `08_community.html` 社区讨论
+9) `09_update_log.html` 更新日志
+10) `references.html` 参考资料
 
 ---
 
@@ -66,6 +64,9 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
 - **关键词建议**：
   - `embodied intelligence`, `robot learning`, `policy learning`, `sim2real`, `manipulation`, `VLA`
 - **分类建议**：`cs.CV`, `cs.LG`, `cs.AI`（按需要扩展）
+- **时效硬门槛**：先查最近 24 小时，再查最近 7 天，最后才补最近 30 天；条目按原始发布时间/版本更新时间倒序。旧条目只有在出现新版本、纠错或新的实机证据时才更新。
+- **来源类型**：明确标注 `Paper`、`Preprint`、`Technical Report`、`Official Model Report` 或 `Project/System Report`；技术报告和官方材料不得写成“已发表论文”。
+- **机构归属**：记录作者机构、发布公司或实验室；不确定时写“待核实”，不得猜测。
 
 ### 2.2 代码/权重/数据（GitHub / HF / ModelScope）
 
@@ -82,6 +83,8 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
 
 - X/Twitter、Reddit、HF Discussions、技术博客（Substack/Medium）
 - 社区引用尽量提供原帖链接；观点必须与事实分离（观点只写在 Commentary）
+- 每日检查 GitHub Releases/Issues/Discussions、Hugging Face Discussions、官方论坛、项目公告和公开技术博客；X/Reddit 仅作线索，性能/版本等事实必须回溯一手来源。
+- 记录平台、作者/机构、发布时间、原帖链接和事实边界；无原帖、无作者或纯转述的内容不进入主站。
 
 ---
 
@@ -98,11 +101,14 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
 
 ## 4. 章节级硬性规则（重点）
 
-### 4.1 `07_paper_tracker.html`（论文追踪）
+### 4.1 `07_paper_tracker.html`（论文与技术报告追踪）
 
 - **排序**：按发布日期从新到旧
 - **年月折叠**：`<details>`，默认展开最近 3 个月
 - **标题**：必须可点击跳转原文（优先 arXiv/PDF/Project Page）
+- **来源类型**：卡片中必须标注 Paper/Preprint/Technical Report/Official Model Report/Project Report。
+- **时效字段**：必须写发布日期或版本日期；有更新日期时同时记录 `released` 与 `updated`，不能只写抓取日期。
+- **机构归属**：标注作者机构、发布公司或实验室；不确定时写“机构待核实”。
 - **必须三段垂直结构**：
   - 🟢 通俗解读
   - 🔴 专业解读（可复现：逐条贡献/机制/指标/代价/失败模式）
@@ -124,6 +130,8 @@ description: AntiGravity「每日例行完整更新」固化流程（可重复�
 - 每条必须：平台来源标识 + 原文引用块 + 原帖链接（尽可能）
 - 三段结构（🟢→🔴→🧠）上下排列
 - Commentary 必须提醒“观点≠事实”，避免 hype
+- 每条新增讨论必须标注平台、作者/机构、发布时间、原帖链接，以及“事实 / 作者观点 / 本站判断”边界。
+- 社区内容不能替代论文或官方技术报告；版本、性能、发布时间等事实必须补原始仓库、公告或论文链接。
 
 ### 4.4 `09_update_log.html`（更新日志）
 
@@ -206,6 +214,19 @@ uv pip install pymupdf pillow
 git push -u origin <branch-name>
 ```
 
+### 7.3 每日自动执行与发布
+
+- 使用 `scripts/daily_update.sh` 作为自动入口；它调用非交互式 Codex，执行本 skill 的时效性扫描、页面更新、QA、提交和当前非 `main` 分支推送。
+- 推荐每天 `09:00 Asia/Shanghai` 运行：
+
+```cron
+CRON_TZ=Asia/Shanghai
+0 9 * * * /workspace/dgl/projects/world-model-interactive-guide/scripts/daily_update.sh >> /workspace/dgl/projects/world-model-interactive-guide/.daily-update.log 2>&1
+```
+
+- 发布链路：日更分支推送 → CI/人工检查 → 合并 `main` → `.github/workflows/static.yml` 自动发布 GitHub Pages。
+- 默认不自动合并 `main`，不绕过来源、QA 或 review；无人值守合并必须由维护者另行配置分支保护和机器人权限。
+
 ---
 
 ## 8. PR / Review / 合并（自动化与兜底）
@@ -254,4 +275,3 @@ git push -u origin <branch-name>
 □ 本地 assets 引用无缺失，新增图片已入库且 manifest 更新
 □ git status 干净；commit 信息清晰；已 push 到指定分支
 ```
-

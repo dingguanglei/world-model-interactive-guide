@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>07. 论文追踪 - Embodied AI Guide</title>
+    <title>07. 论文与技术报告追踪 - Embodied AI Guide</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
         .paper-meta {
@@ -48,30 +48,37 @@
     <nav class="sidebar">
         <a href="index.html" class="brand">🦾 Embodied AI Guide</a>
         <ul class="nav-links">
-            <li class="nav-item"><a href="index.html" class="nav-link">00. 概览 (Overview)</a></li>
-            <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景 (Landscape)</a></li>
-            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品调研 (Product Research)</a></li>
-            <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构方案 (Architecture)</a></li>
-            <li class="nav-item"><a href="11_edge_chip.html" class="nav-link">03.5 端侧芯片调研 (Edge Chips)</a></li>
-            <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据工程 (Data Engineering)</a></li>
-            <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线（含仿真环境） (Roadmap)</a></li>
-            <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
-            <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link active">07. 论文追踪 (Papers)</a></li>
-            <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">08. 评测基准 (Benchmarks)</a></li>
-            <li class="nav-item"><a href="08_community.html" class="nav-link">09. 社区讨论 (Community)</a></li>
-            <li class="nav-item"><a href="09_update_log.html" class="nav-link">10. 更新日志 (Updates)</a></li>
-            <li class="nav-item"><a href="references.html" class="nav-link">附录：参考资料</a></li>
+            <li class="nav-item"><a href="index.html" class="nav-link">00. 前沿雷达</a></li>
+            <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景（含产品）</a></li>
+            <li class="nav-item"><a href="04_data.html" class="nav-link">02. 数据工程（Ego / UMI）</a></li>
+            <li class="nav-item"><a href="13_world_models.html" class="nav-link">03. 模型（VLA / WAM）</a></li>
+            <li class="nav-item"><a href="12_real_world_rl.html" class="nav-link">04. 强化学习（Real-World RL）</a></li>
+            <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link active">论文追踪</a></li>
+            <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">评测基准</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">社区讨论</a></li>
+            <li class="nav-item"><a href="09_update_log.html" class="nav-link">更新日志</a></li>
+            <li class="nav-item"><a href="references.html" class="nav-link">参考资料</a></li>
             <li class="nav-item"><a href="legacy/index.html" class="nav-link">Legacy 归档</a></li>
         </ul>
     </nav>
 
     <main class="main-content">
-        <h1>07. 具身智能论文追踪 (Papers)</h1>
-        <p>按“可复现价值”优先收录论文：不仅看分数，还看工程代价、开源状态、数据可得性与部署边界。</p>
+        <h1>07. 论文与技术报告追踪</h1>
+        <p>收录对象不只限于已发表论文：凡是公开、可核验、对模型或系统实现有技术细节的论文、arXiv 预印本、technical report、官方模型报告与开源项目报告，均按同一套证据字段追踪。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-02-26 | 本页内容将每日更新「具身智能 VLA / 数据 / RL / 仿真相关论文」。
+            ⏰ <strong>最后更新时间</strong>: 2026-08-11 | 本页内容将每日更新「具身智能 VLA / WAM / 数据 / RL / 端侧部署论文与公开技术报告」。
         </div>
+
+        <section>
+            <h2>收录口径：先标来源类型，再谈结论</h2>
+            <div class="media-grid">
+                <div class="media-card"><h4>📄 Paper / Preprint</h4><p>标注会议或期刊状态；仅有 arXiv 的条目标为预印本，不写成“已发表”。</p></div>
+                <div class="media-card"><h4>🧪 Technical Report</h4><p>收录公开技术报告，例如 <a href="https://arxiv.org/abs/2503.14734" target="_blank">GR00T N1 Technical Report</a> 与 <a href="https://arxiv.org/abs/2605.12090" target="_blank">WAM survey</a>，重点提取数据、训练目标、动作接口和实机证据。</p></div>
+                <div class="media-card"><h4>🏢 Official Model Report</h4><p>公司官方发布但未必经过同行评审的材料，例如 <a href="https://deepmind.google/en/models/gemini-robotics/gemini-robotics/" target="_blank">Gemini Robotics</a>；单独标注“官方材料”，不与论文证据混写。</p></div>
+                <div class="media-card"><h4>💻 Project / System Report</h4><p>项目主页、代码仓库、模型卡和 benchmark 报告可作为工程证据，例如 <a href="https://openwam.stanford.edu/" target="_blank">OpenWAM</a>；必须记录版本、代码和权重可得性。</p></div>
+            </div>
+        </section>
 
         <details open>
             <summary><strong>2026-02（最新增补，默认展开）</strong></summary>
@@ -108,7 +115,7 @@
                     </ul>
                 </div>
                 <div class="media-card">
-                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <h4>🧠 AI 评论</h4>
                     <p>如果后续开源训练细节，LessMimic 值得优先验证两件事：一是“几何泛化是否真的减少重采样数据成本”，二是“统一策略是否会在罕见接触场景下出现不可控长尾失败”。</p>
                 </div>
             </div>
@@ -150,7 +157,7 @@
                     </ul>
                 </div>
                 <div class="media-card">
-                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <h4>🧠 AI 评论</h4>
                     <p>HALO 的工程关键不在“有没有 CoT”，而在“多一步推理是否换来更高成功率而非更高时延”。建议把它和纯策略模型在同一延迟预算下做 A/B 对照。</p>
                 </div>
             </div>
@@ -188,7 +195,7 @@
                     </ul>
                 </div>
                 <div class="media-card">
-                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <h4>🧠 AI 评论</h4>
                     <p>如果后续公开训练细节和推理开销，这条路线对工程端的价值会非常高：它天然适合做“单模型回归基座”。但在真实部署里，安全约束与实时性仍是第一门槛。</p>
                 </div>
             </div>
@@ -225,7 +232,7 @@
                     </ul>
                 </div>
                 <div class="media-card">
-                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <h4>🧠 AI 评论</h4>
                     <p>OpenVLA 的战略价值是“可控开放”：它把具身大模型从“看得见摸不着”变成“可以上线前压测”的工程对象。</p>
                 </div>
             </div>
@@ -258,7 +265,7 @@
                     </ul>
                 </div>
                 <div class="media-card">
-                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <h4>🧠 AI 评论</h4>
                     <p>Octo 的难点不在“能不能迁移”，而在“迁移后是否稳定可控”。工程落地通常需要补齐控制和安全回路。</p>
                 </div>
             </div>
@@ -291,7 +298,7 @@
                     </ul>
                 </div>
                 <div class="media-card">
-                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <h4>🧠 AI 评论</h4>
                     <p>RoboCasa 的价值不是“更漂亮仿真图”，而是“更系统的失败分布”。这对数据工程和回归测试直接有用。</p>
                 </div>
             </div>
@@ -327,7 +334,7 @@
                     </ul>
                 </div>
                 <div class="media-card">
-                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <h4>🧠 AI 评论</h4>
                     <p>RT-2 代表了“语义泛化”里程碑，但不能把它误读为“可直接上线的全栈系统”。上线仍需工程层的安全与恢复机制兜底。</p>
                 </div>
             </div>
@@ -360,7 +367,7 @@
                     </ul>
                 </div>
                 <div class="media-card">
-                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <h4>🧠 AI 评论</h4>
                     <p>这篇工作的战略意义大于单点分数：它说明“数据联盟”是通用具身模型可行路径。但工程上通常需要先解决协议治理与数据质量审计。</p>
                 </div>
             </div>
@@ -393,7 +400,7 @@
                     </ul>
                 </div>
                 <div class="media-card">
-                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <h4>🧠 AI 评论</h4>
                     <p>Diffusion Policy 是“高维操作任务”里非常实用的基线，但别忽略线上系统约束：控制循环预算才是最终的生死线。</p>
                 </div>
             </div>
@@ -426,7 +433,7 @@
                     </ul>
                 </div>
                 <div class="media-card">
-                    <h4>🧠 AntiGravity's Commentary</h4>
+                    <h4>🧠 AI 评论</h4>
                     <p>DreamerV3 对具身的启发在于“样本效率路线”而非直接可部署方案。要落地，通常需要把 world model 的误差监控纳入工程回归体系。</p>
                 </div>
             </div>

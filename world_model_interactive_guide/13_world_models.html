@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03. 模型：VLA / WAM - 具身智能前沿雷达</title><link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="aurora-bg"><div class="aurora-blob aurora-blob-1"></div><div class="aurora-blob aurora-blob-2"></div></div>
+    <nav class="sidebar"><a href="index.html" class="brand">F/ FRONTIER</a><ul class="nav-links">
+            <li class="nav-item"><a href="index.html" class="nav-link">00. 前沿雷达</a></li>
+            <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景（含产品）</a></li>
+            <li class="nav-item"><a href="04_data.html" class="nav-link">02. 数据工程（Ego / UMI）</a></li>
+            <li class="nav-item"><a href="13_world_models.html" class="nav-link active">03. 模型（VLA / WAM）</a></li>
+            <li class="nav-item"><a href="12_real_world_rl.html" class="nav-link">04. 强化学习（Real-World RL）</a></li>
+            <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">论文追踪</a></li>
+            <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">评测基准</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">社区讨论</a></li>
+            <li class="nav-item"><a href="09_update_log.html" class="nav-link">更新日志</a></li>
+            <li class="nav-item"><a href="references.html" class="nav-link">参考资料</a></li>
+            <li class="nav-item"><a href="legacy/index.html" class="nav-link">Legacy 归档</a></li>
+    </ul></nav>
+    <main class="main-content">
+        <p class="eyebrow">03 / MODELS</p><h1>VLA / WAM，<br>具体看它如何出动作。</h1>
+        <p>本章只比较两类模型：VLA 直接预测动作；WAM 同时预测未来状态并把预测用于动作生成。世界模型、视频模型和动作模型只在它们进入机器人策略时收录。</p>
+        <div class="last-updated">⏰ <strong>最后更新时间</strong>: 2026-08-11 | <a href="09_update_log.html">查看更新日志</a>；本页内容将每日更新「VLA/WAM 结构、训练目标、动作接口与实机证据」。</div>
+
+        <section><h2>1) 只看四个接口差异</h2><table><thead><tr><th>接口</th><th>VLA</th><th>WAM</th></tr></thead><tbody>
+            <tr><td><strong>输入</strong></td><td>图像/视频 + 语言 + robot state</td><td>图像/视频 + 语言 + state + action history</td></tr>
+            <tr><td><strong>训练目标</strong></td><td>行为克隆 / action token likelihood / diffusion action</td><td>未来视觉或 latent state prediction + action generation</td></tr>
+            <tr><td><strong>输出</strong></td><td>action chunk、末端轨迹或关节动作</td><td>未来 state/video 与动作；可做 rollout 或 action ranking</td></tr>
+            <tr><td><strong>关键失败</strong></td><td>语义正确但物理动作错误</td><td>视频看起来合理但接触动力学错误；rollout 越长误差越大</td></tr>
+        </tbody></table></section>
+
+        <section><h2>2) 具体方案</h2><div class="media-grid">
+            <div class="media-card"><h4><a href="https://deepmind.google/en/models/gemini-robotics/gemini-robotics/" target="_blank">Gemini Robotics</a> / VLA <small>Google DeepMind</small></h4><p>追踪点：跨机器人形态、embodied reasoning、On-Device 推理。评估时要看真实任务成功率与端到端时延，不只看语言跟随。</p></div>
+            <div class="media-card"><h4><a href="https://arxiv.org/abs/2602.15922" target="_blank">DreamZero</a> / WAM <small>NVIDIA GEAR Lab</small></h4><p>以视频扩散 backbone 联合预测视频与动作；论文报告 14B 模型 7Hz 闭环控制和真实机器人跨任务泛化。重点核对 action conditioning、推理延迟和 embodiment adaptation。</p></div>
+            <div class="media-card"><h4><a href="https://openwam.stanford.edu/" target="_blank">OpenWAM</a> / Joint WAM <small>Stanford University</small></h4><p>提供联合视觉动态与可执行控制的开源框架、消融和 benchmark。重点看 world loss 是否真正改善 action loss，而不是只提升视频指标。</p></div>
+            <div class="media-card"><h4><a href="https://arxiv.org/abs/2606.05979" target="_blank">WLA-0</a> / World-Language-Action <small>上海交通大学 DENG Lab</small></h4><p>把文本子任务、subgoal image 和 robot action 放进同一 autoregressive 链路；重点看 world expert 如何影响 action expert，以及推理时是否可关闭。</p></div>
+        </div></section>
+
+        <section><h2>3) 实机审计字段</h2><ul><li><strong>动作接口：</strong>chunk 长度、控制频率、末端/关节空间、是否 action horizon replan。</li><li><strong>世界预测：</strong>预测对象是 RGB、depth、latent、object state 还是 contact state；是否有 action-conditioned ablation。</li><li><strong>部署：</strong>单步 latency、闭环 Hz、显存、量化、失败恢复和人工接管。</li><li><strong>证据：</strong>必须区分 simulation、offline replay、real-robot rollout；没有实机数据就不写成“已具备物理泛化”。</li></ul></section>
+        <div class="commentary"><div class="commentary-title">🧠 AI 评论</div><p><strong>判断</strong>：WAM 的核心不是“能生成视频”，而是未来状态预测是否改变了动作选择。若 world branch 只做展示或训练辅助，却没有 action-conditioned、real-robot、closed-loop 证据，就仍应按视频模型而不是可部署 WAM 记录。</p></div>
+        <nav class="chapter-nav"><a href="04_data.html" class="chapter-nav-link prev"><span class="chapter-nav-label">← 上一条主线</span><span class="chapter-nav-title">02. 数据工程 / Data</span></a><a href="12_real_world_rl.html" class="chapter-nav-link next"><span class="chapter-nav-label">下一条主线 →</span><span class="chapter-nav-title">04. 强化学习 / Real-World RL</span></a></nav>
+    </main>
+</body></html>

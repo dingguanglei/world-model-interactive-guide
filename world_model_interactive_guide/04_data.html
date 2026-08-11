@@ -20,19 +20,16 @@
     <nav class="sidebar">
         <a href="index.html" class="brand">🦾 Embodied AI Guide</a>
         <ul class="nav-links">
-            <li class="nav-item"><a href="index.html" class="nav-link">00. 概览 (Overview)</a></li>
-            <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景 (Landscape)</a></li>
-            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品调研 (Product Research)</a></li>
-            <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构方案 (Architecture)</a></li>
-            <li class="nav-item"><a href="11_edge_chip.html" class="nav-link">03.5 端侧芯片调研 (Edge Chips)</a></li>
-            <li class="nav-item"><a href="04_data.html" class="nav-link active">04. 数据工程 (Data Engineering)</a></li>
-            <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线（含仿真环境） (Roadmap)</a></li>
-            <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
-            <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">07. 论文追踪 (Papers)</a></li>
-            <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">08. 评测基准 (Benchmarks)</a></li>
-            <li class="nav-item"><a href="08_community.html" class="nav-link">09. 社区讨论 (Community)</a></li>
-            <li class="nav-item"><a href="09_update_log.html" class="nav-link">10. 更新日志 (Updates)</a></li>
-            <li class="nav-item"><a href="references.html" class="nav-link">附录：参考资料</a></li>
+            <li class="nav-item"><a href="index.html" class="nav-link">00. 前沿雷达</a></li>
+            <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景（含产品）</a></li>
+            <li class="nav-item"><a href="04_data.html" class="nav-link active">02. 数据工程（Ego / UMI）</a></li>
+            <li class="nav-item"><a href="13_world_models.html" class="nav-link">03. 模型（VLA / WAM）</a></li>
+            <li class="nav-item"><a href="12_real_world_rl.html" class="nav-link">04. 强化学习（Real-World RL）</a></li>
+            <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">论文追踪</a></li>
+            <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">评测基准</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">社区讨论</a></li>
+            <li class="nav-item"><a href="09_update_log.html" class="nav-link">更新日志</a></li>
+            <li class="nav-item"><a href="references.html" class="nav-link">参考资料</a></li>
             <li class="nav-item"><a href="legacy/index.html" class="nav-link">Legacy 归档</a></li>
         </ul>
     </nav>
@@ -42,7 +39,7 @@
         <p>具身智能的核心瓶颈之一是<strong>高质量动作数据</strong>。本章聚焦你要求的两件事：真实世界数据采集方法、可扩展数据合成方法。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-02-26 | 本页内容将每日更新「真实数据采集、合成数据生成与数据质控流程」。
+            ⏰ <strong>最后更新时间</strong>: 2026-08-11 | 本页内容将每日更新「真实数据采集、Ego/UMI 数据、合成数据生成与数据质控流程」。
         </div>
 
         <section>
@@ -80,7 +77,26 @@
         </section>
 
         <section>
-            <h2>4.2 数据合成方法（Synthetic Data）</h2>
+            <h2>4.2 人类视角与通用操作数据（Ego / UMI）</h2>
+            <p>这两类数据不能混为“视频数据”：Ego 数据提供人类第一视角、手-物交互与过程语义，UMI 则通过手持 gripper 把人的操作轨迹转成可迁移的机器人示范。前者更适合表征学习、意图理解与世界模型预训练，后者更接近可直接训练策略的 action data。</p>
+            <table>
+                <thead><tr><th>数据路线</th><th>数据形态</th><th>适合训练什么</th><th>关键边界</th><th>权威入口</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Ego4D</strong></td><td>第一视角长视频、语音/叙述、多任务标注；官方当前介绍为 3,600+ 小时、926 名 camera wearers、74 个地点</td><td>视觉表征、手-物交互、动作/意图理解、长时记忆</td><td>不是机器人 action trajectory；需要手部/物体跟踪、时序对齐和动作抽取</td><td><a href="https://ego4d-data.org/docs/" target="_blank">官方文档</a> · <a href="https://arxiv.org/abs/2110.07058" target="_blank">论文</a></td></tr>
+                    <tr><td><strong>Ego-Exo4D v2</strong></td><td>同步第一/第三视角视频、音频、IMU、眼动、SLAM、3D body/hand pose、步骤与熟练度标注</td><td>跨视角对齐、技能分解、程序理解、从人类示范学习</td><td>大部分是人类技能活动，不等于机器人可执行动作；需建立 embodiment/action interface</td><td><a href="https://docs.ego-exo4d-data.org/" target="_blank">官方文档</a> · <a href="https://docs.ego-exo4d-data.org/challenge/" target="_blank">2026 Challenge</a></td></tr>
+                    <tr><td><strong>UMI</strong></td><td>手持 GoPro + 3D printed gripper + relative trajectory；采集时不依赖完整机器人本体</td><td>模仿学习、Diffusion Policy、动态/双臂/长时操作策略</td><td>仍需处理视角、末端执行器、动作延迟与机器人 embodiment gap；不是纯视频预训练</td><td><a href="https://umi-gripper.github.io/" target="_blank">官方项目</a> · <a href="https://arxiv.org/abs/2402.10329" target="_blank">论文</a></td></tr>
+                    <tr><td><strong>UMI Community / FastUMI</strong></td><td>可共享的 UMI-style 数据与更大规模操作示范集合</td><td>跨平台策略预训练、数据混合、硬件无关 policy learning</td><td>格式、许可、传感器和动作定义并不完全统一，训练前必须做 schema registry 和质量审计</td><td><a href="https://umi-data.github.io/" target="_blank">UMI Data Community</a> · <a href="https://proceedings.mlr.press/v305/zhaxizhuoma25a.html" target="_blank">FastUMI</a></td></tr>
+                </tbody>
+            </table>
+            <div class="media-grid">
+                <div class="media-card"><h4>🟢 通俗解读</h4><p>Ego 数据像“人戴着相机做事的第一视角录像”；UMI 更像“人拿着一个通用手柄替机器人演示动作”。一个教模型理解人怎么做，一个直接提供更像机器人动作的数据。</p></div>
+                <div class="media-card"><h4>🔴 专业解析</h4><p>Ego → state/action 需要从视频恢复手、物体、阶段和接触；UMI 已把操作过程编码为相对轨迹，并通过推理时延匹配和硬件无关接口降低迁移成本。两者组合时，应把 Ego 用作 representation/world-model pretraining，把 UMI/真实机器人轨迹用作 policy/action head 对齐。</p></div>
+                <div class="media-card"><h4>🧠 AI 评论</h4><p><strong>判断</strong>：Ego 数据量大但离控制远，UMI 数据量相对小但离动作近。真正的数据飞轮不是二选一，而是“Ego 学会看与理解 → UMI/遥操作学会做 → 实机失败回流校正”。</p></div>
+            </div>
+        </section>
+
+        <section>
+            <h2>4.3 数据合成方法（Synthetic Data）</h2>
             <ul>
                 <li><strong>域随机化</strong>：随机扰动材质、光照、摩擦、质量参数，提升 Sim2Real 泛化。<sup><a href="https://arxiv.org/abs/1703.06907" target="_blank">[Tobin et al., 2017]</a></sup></li>
                 <li><strong>程序化场景生成</strong>：批量生成任务布局和障碍组合，补齐真实数据长尾。</li>
@@ -106,7 +122,7 @@
         </section>
 
         <section>
-            <h2>4.3 工程化数据流水线示意</h2>
+            <h2>4.4 工程化数据流水线示意</h2>
             <pre class="mermaid">
 flowchart LR
     A[任务定义] --> B[真实采集/遥操作]
@@ -121,7 +137,7 @@ flowchart LR
         </section>
 
         <section>
-            <h2>4.4 数据质量评估维度（量化视角）</h2>
+            <h2>4.5 数据质量评估维度（量化视角）</h2>
             <table>
                 <thead>
                     <tr>
@@ -161,7 +177,7 @@ flowchart LR
         </section>
 
         <section>
-            <h2>4.5 仿真环境支持矩阵（数据工程视角）</h2>
+            <h2>4.6 仿真环境支持矩阵（数据工程视角）</h2>
             <table>
                 <thead>
                     <tr>
@@ -237,7 +253,7 @@ flowchart LR
         </section>
 
         <section>
-            <h2>4.6 选型观察：按阶段组合平台</h2>
+            <h2>4.7 选型观察：按阶段组合平台</h2>
             <ul>
                 <li><strong>P0 快速验证</strong>：PyBullet / ManiSkill + 小规模真实采集，尽快验证任务可行性。</li>
                 <li><strong>P1 策略迭代</strong>：Isaac Lab 或 MuJoCo + 失败样本回流，建立数据回归体系。</li>
@@ -247,18 +263,18 @@ flowchart LR
         </section>
 
         <div class="commentary">
-            <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+            <div class="commentary-title">🧠 AI 评论</div>
             <p>数据体系最容易踩坑的是“只追求规模，不追求失败样本覆盖”。具身系统上线后，决定鲁棒性的往往不是常规样本，而是**罕见失败 + 恢复轨迹**。</p>
         </div>
 
         <nav class="chapter-nav">
-            <a href="11_edge_chip.html" class="chapter-nav-link prev">
+            <a href="01_industry.html" class="chapter-nav-link prev">
                 <span class="chapter-nav-label">← 上一章</span>
-                <span class="chapter-nav-title">03.5 端侧芯片调研 (Edge Chips)</span>
+                <span class="chapter-nav-title">01. 行业全景（含产品）</span>
             </a>
-            <a href="05_roadmap.html" class="chapter-nav-link next">
+            <a href="13_world_models.html" class="chapter-nav-link next">
                 <span class="chapter-nav-label">下一章 →</span>
-                <span class="chapter-nav-title">05. 落地路线（含仿真环境） (Roadmap)</span>
+                <span class="chapter-nav-title">03. 模型 / VLA-WAM</span>
             </a>
         </nav>
     </main>

@@ -1,23 +1,25 @@
-# Systemic Learning Guide - Embodied AI Guide
-# 2026 具身智能系统性学习指南
+# FRONTIER / 具身智能前沿雷达
+# 2026 Embodied Intelligence Frontier Radar
 
-本指南旨在帮助技术负责人、研究员及产品决策者系统理解 **具身智能 (Embodied Intelligence)** 赛道，重点关注：
+本项目面向技术负责人、研究员及产品决策者，持续追踪 **具身智能 (Embodied Intelligence)** 最前沿的四条主线：
 
-- 数据采集方法（遥操作/多模态同步/失败样本回流）
-- 数据合成方法（域随机化/程序化场景/自动标注）
-- 仿真环境（Isaac/MuJoCo/Habitat/ManiSkill）
-- 强化学习进展（离线RL/世界模型RL/安全RL）
+- 行业全景：产品与公司放在同一产业链中比较
+- 数据工程：Ego4D、Ego-Exo4D、UMI 与真实机器人数据闭环
+- 模型：VLA、WAM、世界模型与动作条件预测
+- 强化学习：CQL、IQL、Residual RL、在线反馈与安全约束
+- 行业全景内含：基座模型、机器人本体、系统集成，以及 Jetson Thor、Hailo-10H 等端侧部署约束
 
 ## 在线阅读 (Live Demo)
 
 [https://dingguanglei.github.io/world-model-interactive-guide](https://dingguanglei.github.io/world-model-interactive-guide)
 
-## 当前站点结构（单领域）
+## 当前站点结构（前沿雷达）
 
-主站已重构为 **具身智能单领域**，不再提供领域切换：
+主站已重构为 **浅色编辑式前沿雷达**，首页负责快速扫描，章节页负责深度调研：
 
 - 主站入口：`/world_model_interactive_guide/index.html`
-- 章节页：`01~10` + `references.html`
+- 章节页：`01_industry`（含产品、公司、端上芯片）、`04_data`、`13_world_models`、`12_real_world_rl`；其余为论文、评测、社区、日志与参考资料
+- 旧的 `02_product.html`、`03_architecture.html`、`05_roadmap.html` 保留为备用页面，不进入当前主导航
 - 更新日志：`09_update_log.html`
 
 ## Legacy 归档
@@ -39,18 +41,12 @@
 
 *   **Chapter 01: 行业全景 (Landscape)**
     *   具身智能产业格局、关键玩家与商业化路线。
-*   **Chapter 02: 产品与系统 (Products)**
-    *   Figure/1X/GR00T 等系统能力拆解与视频入口。
-*   **Chapter 03: 技术架构 (Architecture)**
-    *   VLA / Planner / Controller / Safety 的系统架构。
-*   **Chapter 04: 数据采集与合成 (Data)**
-    *   真实采集、合成数据、自动标注、数据质控。
-*   **Chapter 05: 仿真环境 (Simulation)**
-    *   Sim2Real 闭环、平台选型与风险清单。
-*   **Chapter 06: 强化学习进展 (RL Progress)**
-    *   离线RL、世界模型RL、层级RL与安全RL。
-*   **Chapter 07-10**
-    *   论文追踪、评测基准、社区动态、更新日志。
+*   **Chapter 02: 数据工程 (Data)**
+    *   Ego4D / Ego-Exo4D / UMI、真实采集、合成数据、自动标注与数据质控。
+*   **Chapter 04: 强化学习进展 (Real-World RL)**
+    *   真实机器人反馈、在线适应、离线回放与安全 RL。
+*   **Chapter 03 / 辅助页**
+    *   模型（VLA / WAM），以及论文、arXiv 预印本、技术报告、官方模型报告、评测、社区与更新日志。
 
 ## 作者 (Author)
 
