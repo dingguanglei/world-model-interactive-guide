@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04. 强化学习：Real-World RL - 具身智能前沿雷达</title><link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="aurora-bg"><div class="aurora-blob aurora-blob-1"></div><div class="aurora-blob aurora-blob-2"></div></div>
+    <nav class="sidebar"><a href="index.html" class="brand">F/ FRONTIER</a><ul class="nav-links">
+            <li class="nav-item"><a href="index.html" class="nav-link">00. 前沿雷达</a></li>
+            <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景（含产品）</a></li>
+            <li class="nav-item"><a href="04_data.html" class="nav-link">02. 数据工程（Ego / UMI）</a></li>
+            <li class="nav-item"><a href="13_world_models.html" class="nav-link">03. 模型（VLA / WAM）</a></li>
+            <li class="nav-item"><a href="12_real_world_rl.html" class="nav-link active">04. 强化学习（Real-World RL）</a></li>
+            <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">论文追踪</a></li>
+            <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">评测基准</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">社区讨论</a></li>
+            <li class="nav-item"><a href="09_update_log.html" class="nav-link">更新日志</a></li>
+            <li class="nav-item"><a href="references.html" class="nav-link">参考资料</a></li>
+            <li class="nav-item"><a href="legacy/index.html" class="nav-link">Legacy 归档</a></li>
+    </ul></nav>
+    <main class="main-content"><p class="eyebrow">04 / REAL-WORLD RL</p><h1>强化学习，<br>只写真实可执行的方法。</h1>
+        <p>本章不做 RL 教科书，只记录机器人真实数据如何进入 value/policy 更新，以及探索、回滚和安全边界如何落到控制回路。</p>
+        <div class="last-updated">⏰ <strong>最后更新时间</strong>: 2026-08-11 | <a href="09_update_log.html">查看更新日志</a>；本页内容将每日更新「真实机器人强化学习算法、数据接口与安全约束」。</div>
+        <section><h2>1) 算法 → 数据 → 实机约束</h2><table><thead><tr><th>方法</th><th>具体更新机制</th><th>真实机器人用法</th><th>主要风险</th></tr></thead><tbody>
+            <tr><td><a href="https://arxiv.org/abs/2006.04779" target="_blank"><strong>CQL</strong></a><br><small>UC Berkeley / Google Research</small></td><td>对数据集外动作施加保守 Q 惩罚，避免 critic 对 OOD action 过估计</td><td>用遥操作/UMI/历史 rollout 做 offline pretrain，再小流量在线微调</td><td>数据覆盖不足时过度保守；奖励和 Q 标定仍需实机验证</td></tr>
+            <tr><td><a href="https://arxiv.org/abs/2110.06169" target="_blank"><strong>IQL</strong></a><br><small>UC Berkeley</small></td><td>用 value expectile 拟合数据内高价值动作，再 advantage-weighted BC 提取 policy</td><td>适合先从固定示范集学，再接真实交互 fine-tune</td><td>行为数据质量决定上限；未覆盖动作不能靠算法凭空补齐</td></tr>
+            <tr><td><a href="https://arxiv.org/abs/1812.03201" target="_blank"><strong>Residual RL</strong></a><br><small>UC Berkeley / Google Research</small></td><td>固定 controller 输出 base action，RL 只学习 residual action：a = a_base + a_res</td><td>把接触、摩擦、个体差异交给 residual；基础控制器保留稳定性</td><td>残差幅度、频率和安全投影必须限幅，否则会破坏 base controller</td></tr>
+            <tr><td><a href="https://arxiv.org/abs/2604.07945" target="_blank"><strong>Incremental Residual RL</strong></a><br><small>Kyushu University</small></td><td>增量更新 residual，不依赖 replay buffer 或大 batch 更新</td><td>适合边缘设备和环境变化明显的在线适应；论文包含真实环境实验</td><td>更新信号必须低噪，且需要策略冻结/回滚机制</td></tr>
+            <tr><td><strong>Safe RL / CBF</strong></td><td>将动作送入 control barrier function、QP projection 或 safety shield 后再执行</td><td>把碰撞、关节限位、速度/力矩约束放进每个控制周期</td><td>安全层可能改变探索分布；需要单独测可达性和性能损失</td></tr>
+        </tbody></table></section>
+        <section><h2>2) 实际训练链路</h2><div class="rl-flow" aria-label="真实机器人强化学习训练链路"><div><b>A</b><span>UMI / 遥操作<br>实机 rollout</span></div><i>→</i><div><b>B</b><span>状态动作<br>对齐</span></div><i>→</i><div><b>C</b><span>Offline<br>CQL / IQL</span></div><i>→</i><div><b>D</b><span>Residual /<br>Safe Policy</span></div><i>→</i><div><b>E</b><span>小流量<br>真实交互</span></div><i>→</i><div><b>F</b><span>成功 / 失败 /<br>接管 / 碰撞</span></div><i>↺</i><div><b>B</b><span>回流再训练</span></div></div><p>审计时必须同时记录：episode return、成功/恢复率、人工接管率、碰撞/急停、动作延迟、策略版本和回滚点。</p></section>
+        <section><h2>3) 只接受这类实机证据</h2><ul><li>报告真实机器人交互步数或部署时长，而非只给仿真 episode。</li><li>说明 reward 来源：任务成功、进度、接触/力、人工偏好还是规则函数。</li><li>说明策略更新频率、数据是否进入 replay buffer、旧策略如何回滚。</li><li>将 real-robot success、recovery、intervention、safety violation 分开统计。</li></ul></section>
+        <div class="commentary"><div class="commentary-title">🧠 AI 评论</div><p><strong>判断</strong>：真实 RL 的工程核心是“可控地改变一点点”，不是让机器人无约束地探索。优先级应是 offline 初始化 → residual 微调 → safety projection → 小流量实机验证 → 失败回滚。</p></div>
+        <nav class="chapter-nav"><a href="13_world_models.html" class="chapter-nav-link prev"><span class="chapter-nav-label">← 上一条主线</span><span class="chapter-nav-title">03. 模型 / VLA-WAM</span></a><a href="06_companies.html" class="chapter-nav-link next"><span class="chapter-nav-label">下一条主线 →</span><span class="chapter-nav-title">05. 公司 / Companies</span></a></nav>
+    </main>
+</body></html>

@@ -20,19 +20,16 @@
     <nav class="sidebar">
         <a href="index.html" class="brand">🦾 Embodied AI Guide</a>
         <ul class="nav-links">
-            <li class="nav-item"><a href="index.html" class="nav-link">00. 概览 (Overview)</a></li>
-            <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景 (Landscape)</a></li>
-            <li class="nav-item"><a href="02_product.html" class="nav-link">02. 产品调研 (Product Research)</a></li>
-            <li class="nav-item"><a href="03_architecture.html" class="nav-link">03. 技术架构方案 (Architecture)</a></li>
-            <li class="nav-item"><a href="11_edge_chip.html" class="nav-link active">03.5 端侧芯片调研 (Edge Chips)</a></li>
-            <li class="nav-item"><a href="04_data.html" class="nav-link">04. 数据工程 (Data Engineering)</a></li>
-            <li class="nav-item"><a href="05_roadmap.html" class="nav-link">05. 落地路线（含仿真环境） (Roadmap)</a></li>
-            <li class="nav-item"><a href="06_companies.html" class="nav-link">06. 公司调研 (Companies)</a></li>
-            <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">07. 论文追踪 (Papers)</a></li>
-            <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">08. 评测基准 (Benchmarks)</a></li>
-            <li class="nav-item"><a href="08_community.html" class="nav-link">09. 社区讨论 (Community)</a></li>
-            <li class="nav-item"><a href="09_update_log.html" class="nav-link">10. 更新日志 (Updates)</a></li>
-            <li class="nav-item"><a href="references.html" class="nav-link">附录：参考资料</a></li>
+            <li class="nav-item"><a href="index.html" class="nav-link">00. 前沿雷达</a></li>
+            <li class="nav-item"><a href="01_industry.html" class="nav-link">01. 行业全景（含产品）</a></li>
+            <li class="nav-item"><a href="04_data.html" class="nav-link">02. 数据工程（Ego / UMI）</a></li>
+            <li class="nav-item"><a href="13_world_models.html" class="nav-link">03. 模型（VLA / WAM）</a></li>
+            <li class="nav-item"><a href="12_real_world_rl.html" class="nav-link">04. 强化学习（Real-World RL）</a></li>
+            <li class="nav-item"><a href="07_paper_tracker.html" class="nav-link">论文追踪</a></li>
+            <li class="nav-item"><a href="10_benchmarks.html" class="nav-link">评测基准</a></li>
+            <li class="nav-item"><a href="08_community.html" class="nav-link">社区讨论</a></li>
+            <li class="nav-item"><a href="09_update_log.html" class="nav-link">更新日志</a></li>
+            <li class="nav-item"><a href="references.html" class="nav-link">参考资料</a></li>
             <li class="nav-item"><a href="legacy/index.html" class="nav-link">Legacy 归档</a></li>
         </ul>
     </nav>
@@ -42,7 +39,7 @@
         <p>端侧芯片决定了具身系统的三条硬约束：<strong>实时性、功耗/热设计、软件可维护性</strong>。本章不做营销参数堆砌，而是给出部署可用的选型框架与风险清单。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-02-26 | 本页内容将每日更新「端侧芯片路线、软件生态与部署选型实践」。
+            ⏰ <strong>最后更新时间</strong>: 2026-08-11 | 本页优先追踪可购买/可开发平台，以及真实机器人部署所需的内存、时延、功耗与软件栈。
         </div>
 
         <section>
@@ -69,10 +66,10 @@
                 <tbody>
                     <tr>
                         <td><strong>NVIDIA Jetson</strong></td>
-                        <td><a href="https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/" target="_blank">Jetson AGX Orin</a></td>
-                        <td>最高 <strong>275 TOPS</strong></td>
-                        <td>官方给出可配置 <strong>15W-60W</strong></td>
-                        <td><a href="https://developer.nvidia.com/isaac/ros" target="_blank">Isaac ROS</a></td>
+                        <td><a href="https://www.nvidia.com/en-gb/autonomous-machines/embedded-systems/jetson-thor/" target="_blank">Jetson Thor T5000</a></td>
+                        <td>最高 <strong>2,070 FP4 TFLOPS</strong></td>
+                        <td><strong>40-130W</strong>；128GB 内存；273GB/s 带宽</td>
+                        <td><a href="https://developer.nvidia.com/blog/introducing-nvidia-jetson-thor-the-ultimate-platform-for-physical-ai/" target="_blank">JetPack 7 / Isaac / CUDA 13</a></td>
                     </tr>
                     <tr>
                         <td><strong>Qualcomm Robotics</strong></td>
@@ -83,9 +80,9 @@
                     </tr>
                     <tr>
                         <td><strong>Hailo</strong></td>
-                        <td><a href="https://hailo.ai/products/ai-accelerators/hailo-8-ai-accelerator/" target="_blank">Hailo-8</a></td>
-                        <td>官方页面披露 <strong>26 TOPS</strong></td>
-                        <td>强调边缘端高能效（具体功耗取决于模型与板级实现）</td>
+                        <td><a href="https://hailo.ai/products/ai-accelerators/hailo-10h-ai-accelerator/" target="_blank">Hailo-10H</a></td>
+                        <td><strong>40 TOPS INT4 / 20 TOPS INT8</strong></td>
+                        <td>典型 <strong>2.5W</strong>；支持 LPDDR4/4X</td>
                         <td><a href="https://github.com/hailo-ai/hailo_model_zoo" target="_blank">Hailo Model Zoo</a></td>
                     </tr>
                     <tr>
@@ -105,9 +102,9 @@
                 </tbody>
             </table>
             <p style="font-size: 0.92rem; color: var(--text-secondary);">
-                参数来源：<a href="https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/" target="_blank">NVIDIA Jetson Orin</a>、
+                参数来源：<a href="https://www.nvidia.com/en-gb/autonomous-machines/embedded-systems/jetson-thor/" target="_blank">NVIDIA Jetson Thor</a>、
                 <a href="https://www.thundercomm.com/product/qualcomm-robotics-rb5-development-kit/" target="_blank">Thundercomm RB5</a>、
-                <a href="https://hailo.ai/products/ai-accelerators/hailo-8-ai-accelerator/" target="_blank">Hailo-8</a>、
+                <a href="https://hailo.ai/products/ai-accelerators/hailo-10h-ai-accelerator/" target="_blank">Hailo-10H</a>、
                 <a href="https://coral.ai/docs/edgetpu/benchmarks/" target="_blank">Coral Edge TPU Benchmarks</a>、
                 <a href="https://www.st.com/en/microcontrollers-microprocessors/stm32n6-series.html" target="_blank">STM32N6</a>。
             </p>
@@ -246,18 +243,18 @@ flowchart LR
         </section>
 
         <div class="commentary">
-            <div class="commentary-title">🧠 AntiGravity's Commentary</div>
+            <div class="commentary-title">🧠 AI 评论</div>
             <p>端侧芯片选型不是“谁 TOPS 高选谁”，而是“谁在你的任务约束下可持续稳定交付”。具身系统真正的门槛是长期运行稳定性与维护效率，而非单次峰值性能。</p>
         </div>
 
         <nav class="chapter-nav">
-            <a href="03_architecture.html" class="chapter-nav-link prev">
+            <a href="06_companies.html" class="chapter-nav-link prev">
                 <span class="chapter-nav-label">← 上一章</span>
-                <span class="chapter-nav-title">03. 技术架构方案 (Architecture)</span>
+                <span class="chapter-nav-title">05. 公司 / Companies</span>
             </a>
             <a href="04_data.html" class="chapter-nav-link next">
                 <span class="chapter-nav-label">下一章 →</span>
-                <span class="chapter-nav-title">04. 数据工程 (Data Engineering)</span>
+                <span class="chapter-nav-title">论文追踪 / Papers</span>
             </a>
         </nav>
     </main>

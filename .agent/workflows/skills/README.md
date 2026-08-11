@@ -17,11 +17,13 @@ description: AntiGravity Skills 索引（可自动发现/导航）
 ### 1) 每日例行完整更新（Daily Comprehensive Update）
 
 - **文件**：`daily-comprehensive-update.md`
-- **用途**：固化本仓库“具身智能单领域（日更）更新”流程：按主站章节顺序扫描、更新判据、结构强制项、更新日志同步、合并前自检与 git 流程。
+- **用途**：固化本仓库“具身智能单领域（日更）更新”流程：按主站章节顺序扫描论文、arXiv、Technical Report、官方模型报告与社区讨论，执行来源/时效校验、页面更新、更新日志同步、QA、分支推送与发布链路。
+- **自动入口**：`scripts/daily_update.sh`；推荐每天 `09:00 Asia/Shanghai` 运行，先推送非 `main` 日更分支，再经 review 合并后由 GitHub Pages 发布。
 - **适用范围**：
   - 主站（具身智能）：`world_model_interactive_guide/index.html` + `01~10` + `11_edge_chip.html` + `09_update_log.html` + `references.html`
   - 历史归档（只读）：`world_model_interactive_guide/legacy/`
   - 强制规则：后续常规更新一律忽略 `legacy/`（不扫描、不改写、不批量替换）
+  - 时效规则：优先最近 24 小时、再查最近 7 天；每条记录显式标注来源类型、发布日期/版本日期、发布机构和原始链接
   - 关键章节清单：行业全景、公司调研、产品调研、落地路线、技术架构方案、端侧芯片调研、仿真环境、数据工程、论文追踪、评测基准、社区讨论
 
 ### 2) 论文主图自动提取与嵌入（Paper Figure Extraction）
@@ -39,4 +41,3 @@ description: AntiGravity Skills 索引（可自动发现/导航）
 - **命名**：使用 `kebab-case`（如 `daily-comprehensive-update.md`）
 - **结构**：目标 → 依赖 → 步骤 → 输出 → 边界/注意事项 → QA checklist
 - **引用**：涉及数字/结论/产品能力时，必须附权威链接（arXiv/PDF/Project/GitHub/官方博客）
-
