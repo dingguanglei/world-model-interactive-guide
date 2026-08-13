@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT="/workspace/dgl/projects/world-model-interactive-guide"
 LOCK_DIR="$ROOT/.daily-update.lock"
 RUN_DIR="$ROOT/.daily-update-runs"
+CODEX_BIN="${CODEX_BIN:-/home/hx/.nvm/versions/node/v20.19.6/bin/codex}"
 
 cd "$ROOT"
 branch="$(git branch --show-current)"
@@ -19,6 +20,10 @@ trap 'rmdir "$LOCK_DIR"' EXIT
 
 mkdir -p "$RUN_DIR"
 run_id="$(date +%Y%m%d-%H%M%S)"
+if [[ ! -x "$CODEX_BIN" ]]; then
+  echo "Codex CLI is not executable: $CODEX_BIN" >&2
+  exit 5
+fi
 prompt=$(cat <<'EOF'
 执行本仓库 .agent/workflows/skills/daily-comprehensive-update.md 的每日更新流程。
 
@@ -30,7 +35,7 @@ prompt=$(cat <<'EOF'
 EOF
 )
 
-codex exec --search --cd "$ROOT" --sandbox workspace-write --ask-for-approval never \
+"$CODEX_BIN" exec --search --cd "$ROOT" --sandbox workspace-write --ask-for-approval never \
   --output-last-message "$RUN_DIR/$run_id.codex.txt" "$prompt"
 
 git diff --check

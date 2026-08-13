@@ -22,7 +22,7 @@
     <main class="main-content">
         <p class="eyebrow">03 / MODELS</p><h1>VLA / WAM，<br>具体看它如何出动作。</h1>
         <p>本章只比较两类模型：VLA 直接预测动作；WAM 同时预测未来状态并把预测用于动作生成。世界模型、视频模型和动作模型只在它们进入机器人策略时收录。</p>
-        <div class="last-updated">⏰ <strong>最后更新时间</strong>: 2026-08-11 | <a href="09_update_log.html">查看更新日志</a>；本页内容将每日更新「VLA/WAM 结构、训练目标、动作接口与实机证据」。</div>
+        <div class="last-updated">⏰ <strong>最后更新时间</strong>: 2026-08-13 | <a href="09_update_log.html">查看更新日志</a>；本页内容将每日更新「VLA/WAM 结构、训练目标、动作接口与实机证据」。</div>
 
         <section><h2>1) 只看四个接口差异</h2><table><thead><tr><th>接口</th><th>VLA</th><th>WAM</th></tr></thead><tbody>
             <tr><td><strong>输入</strong></td><td>图像/视频 + 语言 + robot state</td><td>图像/视频 + 语言 + state + action history</td></tr>
@@ -36,6 +36,7 @@
             <div class="media-card"><h4><a href="https://arxiv.org/abs/2602.15922" target="_blank">DreamZero</a> / WAM <small>NVIDIA GEAR Lab</small></h4><p>以视频扩散 backbone 联合预测视频与动作；论文报告 14B 模型 7Hz 闭环控制和真实机器人跨任务泛化。重点核对 action conditioning、推理延迟和 embodiment adaptation。</p></div>
             <div class="media-card"><h4><a href="https://openwam.stanford.edu/" target="_blank">OpenWAM</a> / Joint WAM <small>Stanford University</small></h4><p>提供联合视觉动态与可执行控制的开源框架、消融和 benchmark。重点看 world loss 是否真正改善 action loss，而不是只提升视频指标。</p></div>
             <div class="media-card"><h4><a href="https://arxiv.org/abs/2606.05979" target="_blank">WLA-0</a> / World-Language-Action <small>上海交通大学 DENG Lab</small></h4><p>把文本子任务、subgoal image 和 robot action 放进同一 autoregressive 链路；重点看 world expert 如何影响 action expert，以及推理时是否可关闭。</p></div>
+            <div class="media-card"><h4><a href="https://arxiv.org/abs/2608.06375" target="_blank">ω-0</a> / Latent Predictive WAM <small>MARS Lab/NTU · PKU · BAAI · HKUST(GZ)</small></h4><p>2026-08-06 预印本：用 compact future-observation embedding 而非未来视频重建，与 diffusion 全身动作生成联训；作者报告 ω-HOME 40+ 小时真实家庭数据和 11 个真实家庭任务。审计重点是 action-latent 到控制器的接口、sim replay 依赖和逐任务安全/恢复统计。</p></div>
         </div></section>
 
         <section><h2>3) 实机审计字段</h2><ul><li><strong>动作接口：</strong>chunk 长度、控制频率、末端/关节空间、是否 action horizon replan。</li><li><strong>世界预测：</strong>预测对象是 RGB、depth、latent、object state 还是 contact state；是否有 action-conditioned ablation。</li><li><strong>部署：</strong>单步 latency、闭环 Hz、显存、量化、失败恢复和人工接管。</li><li><strong>证据：</strong>必须区分 simulation、offline replay、real-robot rollout；没有实机数据就不写成“已具备物理泛化”。</li></ul></section>

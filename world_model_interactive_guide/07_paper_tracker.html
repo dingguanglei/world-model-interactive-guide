@@ -67,7 +67,7 @@
         <p>收录对象不只限于已发表论文：凡是公开、可核验、对模型或系统实现有技术细节的论文、arXiv 预印本、technical report、官方模型报告与开源项目报告，均按同一套证据字段追踪。</p>
 
         <div class="last-updated">
-            ⏰ <strong>最后更新时间</strong>: 2026-08-11 | 本页内容将每日更新「具身智能 VLA / WAM / 数据 / RL / 端侧部署论文与公开技术报告」。
+            ⏰ <strong>最后更新时间</strong>: 2026-08-13 | 本页内容将每日更新「具身智能 VLA / WAM / 数据 / RL / 端侧部署论文与公开技术报告」。
         </div>
 
         <section>
@@ -79,6 +79,46 @@
                 <div class="media-card"><h4>💻 Project / System Report</h4><p>项目主页、代码仓库、模型卡和 benchmark 报告可作为工程证据，例如 <a href="https://openwam.stanford.edu/" target="_blank">OpenWAM</a>；必须记录版本、代码和权重可得性。</p></div>
             </div>
         </section>
+
+        <details open>
+            <summary><strong>2026-08（最新增补，默认展开）</strong></summary>
+            <div class="card" id="omega-0">
+                <h3><a href="https://arxiv.org/abs/2608.06375" target="_blank">ω-0: A Latent Predictive World Action Model for Concurrent Humanoid Loco-Manipulation</a></h3>
+                <div class="paper-meta">
+                    <span>📅 released: 2026-08-06</span>
+                    <span>🔄 updated: 2026-08-09</span>
+                    <span>📄 Preprint · arXiv:2608.06375</span>
+                    <span class="paper-tag new">NEW</span>
+                </div>
+                <div class="paper-meta">
+                    <span>🏫 机构：MARS Lab / NTU、PKU、BAAI、HKUST(GZ)</span>
+                    <span>💻 代码：未公开/未知（以 arXiv 页面为准）</span>
+                    <span>🧱 权重：未公开/未知</span>
+                    <span>🗂️ 数据：ω-HOME；公开状态待核实</span>
+                </div>
+                <div class="media-card">
+                    <h4>🟢 通俗解读</h4>
+                    <p>ω-0 不把“边走边操作”拆成走路模型和抓取模型：它从当前视觉、语言和本体状态直接给出能被控制器执行的全身动作表示，同时预测一个压缩的未来状态，帮助动作不只顾眼前一步。</p>
+                </div>
+                <div class="media-card">
+                    <h4>🔴 专业解读</h4>
+                    <ul>
+                        <li><strong>Problem / Setup</strong>：目标是 humanoid concurrent loco-manipulation；输入包括语言、第一/第三视角 RGB、第三视角 depth 和机器人 proprioception。</li>
+                        <li><strong>Method</strong>：以 compact future-observation embedding 做预测目标，而非重建未来视频；该 latent foresight 与 diffusion whole-body action generation 联训，输出 controller-compatible whole-body action latents。</li>
+                        <li><strong>Real-world evidence</strong>：作者报告 ω-HOME 含 40+ 小时同步多视角、SMPL、机器人状态和动作 latent 的家庭环境数据，并在 11 个家庭任务做真实机器人实验。</li>
+                        <li><strong>Boundary</strong>：论文也使用 controller-based simulation replay 将人类/公开视频运动先验落到动作 latent；因此不能把结果解读成“完全不依赖仿真”的训练路线。</li>
+                        <li><strong>Reproduction gate</strong>：需先核对 action-latent 的控制器接口、训练数据/权重是否发布，以及 11 项实机任务的成功、恢复和安全事件的逐任务统计。</li>
+                    </ul>
+                    <ul class="source-loc">
+                        <li>来源定位：<a href="https://arxiv.org/abs/2608.06375" target="_blank">Abstract（方法、ω-HOME、11 项实机任务）</a> / <a href="https://arxiv.org/html/2608.06375" target="_blank">arXiv HTML 首页（作者机构）</a></li>
+                    </ul>
+                </div>
+                <div class="media-card">
+                    <h4>🧠 AI 评论</h4>
+                    <p><strong>判断</strong>：它值得进入“真实世界 WAM”追踪，不是因为用了 world model 这个名字，而是因为预测分支被压成动作学习的 latent 目标并进入全身控制。下一步真正该审的是公开控制接口和失败恢复统计，而不是只看总成功率。</p>
+                </div>
+            </div>
+        </details>
 
         <details open>
             <summary><strong>2026-02（最新增补，默认展开）</strong></summary>
