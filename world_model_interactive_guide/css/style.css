@@ -978,6 +978,16 @@ li::marker {
         padding: 2rem 1.5rem 3rem;
     }
 
+    /* Keep dense research tables readable: the section becomes a deliberate horizontal viewport instead of collapsing four columns into unreadable character stacks. */
+    .main-content section:has(> table) {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .main-content section > table {
+        min-width: 820px;
+    }
+
     .module-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
